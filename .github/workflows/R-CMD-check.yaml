@@ -20,10 +20,10 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: 'release', python: '3.8'}
-          - {os: macos-latest, r: 'release', python: '3.8'}
-          - {os: ubuntu-16.04, r: '3.6', python: '3.7', rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-          - {os: ubuntu-16.04, r: 'release', python: '3.8', rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+          - {name: win-release,   os: windows-latest, r: 'release', python: '3.8'}
+          - {name: mac-release,   os: macos-latest,   r: 'release', python: '3.8'}
+          - {name: linux-prev,    os: ubuntu-16.04,   r: '3.6',     python: '3.7', rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+          - {name: linux-release, os: ubuntu-16.04,   r: 'release', python: '3.8', rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -48,8 +48,7 @@ jobs:
         if: runner.os != 'Windows'
         uses: actions/cache@v1
         with:
-          path: |
-            ${{ env.R_LIBS_USER }}
+          path: ${{ env.R_LIBS_USER }}
           key: ${{ matrix.config.name }}
           restore-keys: ${{ matrix.config.name }}
 

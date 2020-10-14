@@ -18,3 +18,8 @@ automatically find an appropriate \code{conda} binary. See \strong{Finding Conda
 \description{
 Needs to be run after installing the anndata R package.
 }
+\examples{
+\dontrun{
+install_anndata()
+}
+}
