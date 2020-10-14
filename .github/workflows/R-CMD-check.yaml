@@ -30,36 +30,36 @@ jobs:
       RSPM: ${{ matrix.config.rspm }}
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - uses: r-lib/actions/setup-r@master
-      with:
-        r-version: ${{ matrix.config.r }}
+      - uses: r-lib/actions/setup-r@master
+        with:
+          r-version: ${{ matrix.config.r }}
 
-    - uses: r-lib/actions/setup-pandoc@master
+      - uses: r-lib/actions/setup-pandoc@master
 
-    - name: Query dependencies
-      run: |
-        install.packages('remotes')
-        saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-      shell: Rscript {0}
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+        shell: Rscript {0}
 
-    - name: Cache R packages
-      if: runner.os != 'Windows'
-      uses: actions/cache@v1
-      with:
-        path: |
-          ${{ env.R_LIBS_USER }}
-          pip
-        key: ${{ matrix.config.name }}
-        restore-keys: ${{ matrix.config.name }}
+      - name: Cache R packages
+        if: runner.os != 'Windows'
+        uses: actions/cache@v1
+        with:
+          path: |
+            ${{ env.R_LIBS_USER }}
+            pip
+          key: ${{ matrix.config.name }}
+          restore-keys: ${{ matrix.config.name }}
 
-    - name: Install system dependencies
-      if: runner.os == 'Linux'
-      run: |
-          Rscript -e "remotes::install_github('r-hub/sysreqs')"
-          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
-          sudo -s eval "$sysreqs"
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        run: |
+            Rscript -e "remotes::install_github('r-hub/sysreqs')"
+            sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
+            sudo -s eval "$sysreqs"
 
       - name: Install dependencies
         run: |
@@ -67,29 +67,29 @@ jobs:
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.config.python }}
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.config.python }}
 
-    - name: Install package
-      run: |
-        pip install -U .
-          - name: Install dependencies
+      - name: Install package
         run: |
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("rcmdcheck")
+          pip install -U .
+            - name: Install dependencies
+          run: |
+            remotes::install_deps(dependencies = TRUE)
+            remotes::install_cran("rcmdcheck")
+          shell: Rscript {0}
+
+      - name: Check
+        env:
+          _R_CHECK_CRAN_INCOMING_REMOTE_: false
+        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 
-    - name: Check
-      env:
-        _R_CHECK_CRAN_INCOMING_REMOTE_: false
-      run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
-      shell: Rscript {0}
-
-    - name: Upload check results
-      if: failure()
-      uses: actions/upload-artifact@master
-      with:
-        name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-        path: check
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          path: check
