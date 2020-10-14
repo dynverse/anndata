@@ -29,6 +29,8 @@ Authors@R:
 Description: Provides a scalable way of keeping track of data
     and learned annotations.
 License: MIT + file LICENSE
+URL: https://github.com/rcannood/anndata
+BugReports: https://github.com/rcannood/anndata/issues
 Depends: 
     R (>= 3.5.0)
 Imports:
