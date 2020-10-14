@@ -13,42 +13,31 @@ read_loom(
   obsm_names = NULL,
   var_names = "Gene",
   varm_names = NULL,
-  dtype = "float32"
+  dtype = "float32",
+  ...
 )
 }
 \arguments{
-\item{filename}{filename}
+\item{filename}{The filename.}
 
-\item{sparse}{sparse}
+\item{sparse}{Whether to read the data matrix as sparse.}
 
-\item{cleanup}{cleanup}
+\item{cleanup}{Whether to collapse all obs/var fields that only store one unique value into \code{.uns['loom-.']}.}
 
-\item{X_name}{X_name}
+\item{X_name}{Loompy key with which the data matrix \code{AnnData.X} is initialized.}
 
-\item{obs_names}{obs_names}
+\item{obs_names}{Loompy key where the observation/cell names are stored.}
 
-\item{obsm_names}{obsm_names}
+\item{obsm_names}{Loompy keys which will be constructed into variable matrices}
 
-\item{var_names}{var_names}
+\item{var_names}{Loompy key where the variable/gene names are stored.}
 
-\item{varm_names}{varm_names}
-
-\item{dtype}{dtype}
+\item{...}{Arguments to loompy.connect}
 }
 \description{
-Read `.loom`-formatted hdf5 file.
+Read \code{.loom}-formatted hdf5 file.
 }
 \details{
 This reads the whole file into memory. Beware that you have to explicitly state when you want to read the file as
-sparse data. Parameters
-----------
-filename The filename.
-sparse Whether to read the data matrix as sparse.
-cleanup Whether to collapse all obs/var fields that only store one unique value into `.uns['loom-.']`.
-X_name Loompy key with which the data matrix `~anndata.AnnData.X` is initialized.
-obs_names Loompy key where the observation/cell names are stored.
-obsm_names Loompy keys which will be constructed into observation matrices
-var_names Loompy key where the variable/gene names are stored.
-obsm_names Loompy keys which will be constructed into variable matrices
-**kwargs: Arguments to loompy.connect
+sparse data.
 }

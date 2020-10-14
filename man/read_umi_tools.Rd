@@ -7,15 +7,10 @@
 read_umi_tools(filename, dtype = "float32")
 }
 \arguments{
-\item{filename}{filename}
+\item{filename}{File name to read from.}
 
-\item{dtype}{dtype}
+\item{dtype}{Numpy data type.}
 }
 \description{
 Read a gzipped condensed count matrix from umi_tools.
-}
-\details{
-Parameters
-----------
-filename File name to read from.
 }

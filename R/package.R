@@ -28,8 +28,12 @@ python_anndata <- NULL
 #   script <- paste0("R/", fun, ".R")
 #   if (file.exists(script)) file.remove(script)
 #   scaffolder::scaffold_py_function_wrapper(paste0("python_anndata$", fun), file_name = script)
-#   readr::read_lines(script) %>%
-#     gsub(":class:", "", ., fixed = TRUE) %>%
-#     gsub(":attr:", "", ., fixed = TRUE) %>%
-#     readr::write_lines(script)
+#   if (file.exists(script)) {
+#     readr::read_lines(script) %>%
+#       gsub(":class:", "", ., fixed = TRUE) %>%
+#       gsub(":attr:", "", ., fixed = TRUE) %>%
+#       gsub(":doc:", "", ., fixed = TRUE) %>%
+#       gsub("python_function_result <- ", "", ., fixed = TRUE) %>%
+#       readr::write_lines(script)
+#   }
 # }

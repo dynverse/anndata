@@ -7,19 +7,16 @@
 read_excel(filename, sheet, dtype = "float32")
 }
 \arguments{
-\item{filename}{filename}
+\item{filename}{File name to read from.}
 
-\item{sheet}{sheet}
+\item{sheet}{Name of sheet in Excel file.}
 
-\item{dtype}{dtype}
+\item{dtype}{Numpy data type.}
 }
 \description{
-Read `.xlsx` (Excel) file.
+Read \code{.xlsx} (Excel) file.
 }
 \details{
 Assumes that the first columns stores the row names and the first row the
-column names. Parameters
-----------
-filename File name to read from.
-sheet Name of sheet in Excel file.
+column names.
 }

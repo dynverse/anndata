@@ -12,22 +12,19 @@ read_text(
 )
 }
 \arguments{
-\item{filename}{filename}
+\item{filename}{Data file, filename or stream.}
 
-\item{delimiter}{delimiter}
+\item{delimiter}{Delimiter that separates data within text file.
+If \code{NULL}, will split at arbitrary number of white spaces, which is different
+from enforcing splitting at single white space \code{' '}.}
 
-\item{first_column_names}{first_column_names}
+\item{first_column_names}{Assume the first column stores row names.}
 
-\item{dtype}{dtype}
+\item{dtype}{Numpy data type.}
 }
 \description{
-Read `.txt`, `.tab`, `.data` (text) file.
+Read \code{.txt}, \code{.tab}, \code{.data} (text) file.
 }
 \details{
-Same as :func:`~anndata.read_csv` but with default delimiter `NULL`. Parameters
-----------
-filename Data file, filename or stream.
-delimiter Delimiter that separates data within text file. If `NULL`, will split at arbitrary number of white spaces, which is different from enforcing splitting at single white space `' '`.
-first_column_names Assume the first column stores row names.
-dtype Numpy data type.
+Same as \code{\link[=read_csv]{read_csv()}} but with default delimiter \code{NULL}.
 }

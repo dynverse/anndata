@@ -3,37 +3,21 @@
 #' @description An annotated data matrix.
 #'
 #' @details `~anndata.AnnData` stores a data matrix `X` together with annotations
-#' of observations `obs` (`obsm`, `obsp`),
-#' variables `var` (`varm`, `varp`),
-#' and unstructured annotations `uns`. .. figure:: https://falexwolf.de/img/scanpy/anndata.svg :width: 350px An `~anndata.AnnData` object `adata` can be sliced like a
-#' `~pandas.DataFrame`,
-#' for instance `adata_subset = adata[:, list_of_variable_names]`.
-#' `~anndata.AnnData`’s basic structure is similar to R’s ExpressionSet
-#' [Huber15]_. If setting an `.h5ad`-formatted HDF5 backing file `.filename`,
+#' of observations `obs` (`obsm`, `obsp`), variables `var` (`varm`, `varp`),
+#' and unstructured annotations `uns`.
+#'
+#' An `~anndata.AnnData` object `adata` can be sliced like a `pandas.DataFrame`,
+#' for instance `adata_subset = adata[:, list_of_variable_names]`.`~anndata.AnnData`’s
+#' basic structure is similar to R’s ExpressionSet [Huber15]_.
+#'
+#' If setting an `.h5ad`-formatted HDF5 backing file `.filename`,
 #' data remains on the disk but is automatically loaded into memory if needed.
-#' See this `blog post`_ for more details. .. _blog post: http://falexwolf.de/blog/171223_AnnData_indexing_views_HDF5-backing/ Parameters
-#' ----------
-#' X A #observations × #variables data matrix. A view of the data is used if the data type matches, otherwise, a copy is made.
-#' obs Key-indexed one-dimensional observations annotation of length #observations.
-#' var Key-indexed one-dimensional variables annotation of length #variables.
-#' uns Key-indexed unstructured annotation.
-#' obsm Key-indexed multi-dimensional observations annotation of length #observations. If passing a `~numpy.ndarray`, it needs to have a structured datatype.
-#' varm Key-indexed multi-dimensional variables annotation of length #variables. If passing a `~numpy.ndarray`, it needs to have a structured datatype.
-#' layers Key-indexed multi-dimensional arrays aligned to dimensions of `X`.
-#' dtype Data type used for storage.
-#' shape Shape list (#observations, #variables). Can only be provided if `X` is `NULL`.
-#' filename Name of backing file. See `h5py.File`.
-#' filemode Open mode of backing file. See `h5py.File`. See Also
-#' --------
-#' read_h5ad
-#' read_csv
-#' read_excel
-#' read_hdf
-#' read_loom
-#' read_zarr
-#' read_mtx
-#' read_text
-#' read_umi_tools Notes
+#' See this [blog post](http://falexwolf.de/blog/171223_AnnData_indexing_views_HDF5-backing/) for more details.
+#'
+#' @seealso [read_h5ad()] [read_csv()] [read_excel()] [read_hdf()] [read_loom()] [read_zarr()] [read_mtx()] [read_text()] [read_umi_tools()]
+#'
+#' @details
+#' Notes
 #' -----
 #' `~anndata.AnnData` stores observations (samples) of variables/features
 #' in the rows of a matrix.
@@ -71,18 +55,17 @@
 #' consistent handling of :mod:`scipy.sparse` matrices and :mod:`numpy` arrays. .. _statsmodels: http://www.statsmodels.org/stable/index.html
 #' .. _scikit-learn: http://scikit-learn.org/
 #'
-#' @param X X
-#' @param obs obs
-#' @param var var
-#' @param uns uns
-#' @param obsm obsm
-#' @param varm varm
-#' @param layers layers
-#' @param raw raw
-#' @param dtype dtype
-#' @param shape shape
-#' @param filename filename
-#' @param filemode filemode
+#' @param X A #observations × #variables data matrix. A view of the data is used if the data type matches, otherwise, a copy is made.
+#' @param obs Key-indexed one-dimensional observations annotation of length #observations.
+#' @param var Key-indexed one-dimensional variables annotation of length #variables.
+#' @param uns Key-indexed unstructured annotation.
+#' @param obsm Key-indexed multi-dimensional observations annotation of length #observations. If passing a `~numpy.ndarray`, it needs to have a structured datatype.
+#' @param varm Key-indexed multi-dimensional variables annotation of length #variables. If passing a `~numpy.ndarray`, it needs to have a structured datatype.
+#' @param layers Key-indexed multi-dimensional arrays aligned to dimensions of `X`.
+#' @param dtype Data type used for storage.
+#' @param shape Shape list (#observations, #variables). Can only be provided if `X` is `NULL`.
+#' @param filename Name of backing file. See `h5py.File`.
+#' @param filemode Open mode of backing file. See `h5py.File`. See Also
 #' @param asview asview
 #'
 #' @section of observations `obs` (`obsm`, `obsp`),:
@@ -105,7 +88,7 @@
 #'
 #' @export
 AnnData <- function(X = NULL, obs = NULL, var = NULL, uns = NULL, obsm = NULL, varm = NULL, layers = NULL, raw = NULL, dtype = "float32", shape = NULL, filename = NULL, filemode = NULL, asview = FALSE) {
-  python_function_result <- python_anndata$AnnData(
+  python_anndata$AnnData(
     X = X,
     obs = obs,
     var = var,

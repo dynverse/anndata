@@ -7,16 +7,10 @@
 read_mtx(filename, dtype = "float32")
 }
 \arguments{
-\item{filename}{filename}
+\item{filename}{The filename.}
 
-\item{dtype}{dtype}
+\item{dtype}{Numpy data type.}
 }
 \description{
-Read `.mtx` file.
-}
-\details{
-Parameters
-----------
-filename The filename.
-dtype Numpy data type.
+Read \code{.mtx} file.
 }

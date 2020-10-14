@@ -2,17 +2,12 @@
 #'
 #' @description Read `.mtx` file.
 #'
-#' @details Parameters
-#' ----------
-#' filename The filename.
-#' dtype Numpy data type.
-#'
-#' @param filename filename
-#' @param dtype dtype
+#' @param filename The filename.
+#' @param dtype Numpy data type.
 #'
 #' @export
 read_mtx <- function(filename, dtype = "float32") {
-  python_function_result <- python_anndata$read_mtx(
+  python_anndata$read_mtx(
     filename = filename,
     dtype = dtype
   )

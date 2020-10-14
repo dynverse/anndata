@@ -15,7 +15,7 @@
 #'
 #' @export
 read <- function(filename, backed = NULL) {
-  python_function_result <- python_anndata$read(
+  python_anndata$read(
     filename = filename,
     backed = backed
   )

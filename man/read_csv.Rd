@@ -12,22 +12,17 @@ read_csv(
 )
 }
 \arguments{
-\item{filename}{filename}
+\item{filename}{Data file.}
 
-\item{delimiter}{delimiter}
+\item{delimiter}{Delimiter that separates data within text file. If \code{NULL}, will split at arbitrary number of white spaces, which is different from enforcing splitting at single white space \code{' '}.}
 
-\item{first_column_names}{first_column_names}
+\item{first_column_names}{Assume the first column stores row names.}
 
-\item{dtype}{dtype}
+\item{dtype}{Numpy data type.}
 }
 \description{
-Read `.csv` file.
+Read \code{.csv} file.
 }
 \details{
-Same as :func:`~anndata.read_text` but with default delimiter `','`. Parameters
-----------
-filename Data file.
-delimiter Delimiter that separates data within text file. If `NULL`, will split at arbitrary number of white spaces, which is different from enforcing splitting at single white space `' '`.
-first_column_names Assume the first column stores row names.
-dtype Numpy data type.
+Same as \code{\link[=read_text]{read_text()}} but with default delimiter \code{','}.
 }

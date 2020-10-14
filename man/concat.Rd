@@ -4,98 +4,136 @@
 \alias{concat}
 \title{concat}
 \usage{
-concat(adatas)
+concat(
+  adatas,
+  axis = 0L,
+  join = "inner",
+  merge = NULL,
+  uns_merge = NULL,
+  label = NULL,
+  keys = NULL,
+  index_unique = NULL,
+  fill_value = NULL,
+  pairwise = FALSE
+)
 }
 \arguments{
-\item{adatas}{adatas}
+\item{adatas}{The objects to be concatenated. If a Mapping is passed, keys are used for the \code{keys} argument and values are concatenated.}
+
+\item{axis}{Which axis to concatenate along.}
+
+\item{join}{How to align values when concatenating. If "outer", the union of the other axis is taken. If "inner", the intersection. See \code{concatenation} for more.}
+
+\item{merge}{How elements not aligned to the axis being concatenated along are selected. Currently implemented strategies include: * \code{NULL}: No elements are kept. * \code{"same"}: Elements that are the same in each of the objects. * \code{"unique"}: Elements for which there is only one possible value. * \code{"first"}: The first element seen at each from each position. * \code{"only"}: Elements that show up in only one of the objects.}
+
+\item{uns_merge}{How the elements of \code{.uns} are selected. Uses the same set of strategies as the \code{merge} argument, except applied recursively.}
+
+\item{label}{Column in axis annotation (i.e. \code{.obs} or \code{.var}) to place batch information in. If it's NULL, no column is added.}
+
+\item{keys}{Names for each object being added. These values are used for column values for \code{label} or appended to the index if \code{index_unique} is not \code{NULL}. Defaults to incrementing integer labels.}
+
+\item{index_unique}{Whether to make the index unique by using the keys. If provided, this is the delimeter between "{orig_idx}{index_unique}{key}". When \code{NULL}, the original indices are kept.}
+
+\item{fill_value}{When \code{join="outer"}, this is the value that will be used to fill the introduced indices. By default, sparse arrays are padded with zeros, while dense arrays and DataFrames are padded with missing values.}
+
+\item{pairwise}{Whether pairwise elements along the concatenated dimension should be included. This is FALSE by default, since the resulting arrays are often not meaningful.}
 }
 \description{
 Concatenates AnnData objects along an axis.
 }
 \details{
-See the :doc:`concatenation` section in the docs for a more in-depth description. .. warning:: This function is marked as experimental for the `0.7` release series, and will supercede the :meth:`AnnData.concatenate() <anndata.AnnData.concatenate>` method in future releases. Params
-------
-adatas The objects to be concatenated. If a Mapping is passed, keys are used for the `keys` argument and values are concatenated.
-axis Which axis to concatenate along.
-join How to align values when concatenating. If "outer", the union of the other axis is taken. If "inner", the intersection. See :doc:`concatenation` for more.
-merge How elements not aligned to the axis being concatenated along are selected. Currently implemented strategies include: * `NULL`: No elements are kept. * `"same"`: Elements that are the same in each of the objects. * `"unique"`: Elements for which there is only one possible value. * `"first"`: The first element seen at each from each position. * `"only"`: Elements that show up in only one of the objects.
-uns_merge How the elements of `.uns` are selected. Uses the same set of strategies as the `merge` argument, except applied recursively.
-label Column in axis annotation (i.e. `.obs` or `.var`) to place batch information in. If it's NULL, no column is added.
-keys Names for each object being added. These values are used for column values for `label` or appended to the index if `index_unique` is not `NULL`. Defaults to incrementing integer labels.
-index_unique Whether to make the index unique by using the keys. If provided, this is the delimeter between "{orig_idx}{index_unique}{key}". When `NULL`, the original indices are kept.
-fill_value When `join="outer"`, this is the value that will be used to fill the introduced indices. By default, sparse arrays are padded with zeros, while dense arrays and DataFrames are padded with missing values.
-pairwise Whether pairwise elements along the concatenated dimension should be included. This is FALSE by default, since the resulting arrays are often not meaningful. Notes
------ .. warning:: If you use `join='outer'` this fills 0s for sparse data when variables are absent in a batch. Use this with care. Dense data is filled with `NaN`. Examples
--------- Preparing example objects >>> import anndata as ad, pandas as pd, numpy as np
->>> from scipy import sparse
->>> a = ad.AnnData(
-... X=sparse.csr_matrix(np.array([[0, 1], [2, 3]])),
-... obs=pd.DataFrame({"group": ["a", "b"]}, index=["s1", "s2"]),
-... var=pd.DataFrame(index=["var1", "var2"]),
-... varm={"ones": np.ones((2, 5)), "rand": np.random.randn(2, 3), "zeros": np.zeros((2, 5))},
-... uns={"a": 1, "b": 2, "c": {"c.a": 3, "c.b": 4}},
-... )
->>> b = ad.AnnData(
-... X=sparse.csr_matrix(np.array([[4, 5, 6], [7, 8, 9]])),
-... obs=pd.DataFrame({"group": ["b", "c"], "measure": [1.2, 4.3]}, index=["s3", "s4"]),
-... var=pd.DataFrame(index=["var1", "var2", "var3"]),
-... varm={"ones": np.ones((3, 5)), "rand": np.random.randn(3, 5)},
-... uns={"a": 1, "b": 3, "c": {"c.b": 4}},
-... )
->>> c = ad.AnnData(
-... X=sparse.csr_matrix(np.array([[10, 11], [12, 13]])),
-... obs=pd.DataFrame({"group": ["a", "b"]}, index=["s1", "s2"]),
-... var=pd.DataFrame(index=["var3", "var4"]),
-... uns={"a": 1, "b": 4, "c": {"c.a": 3, "c.b": 4, "c.c": 5}},
-... ) Concatenating along different axes >>> ad.concat([a, b]).to_df() var1 var2
-s1 0.0 1.0
-s2 2.0 3.0
-s3 4.0 5.0
-s4 7.0 8.0
->>> ad.concat([a, c], axis=1).to_df() var1 var2 var3 var4
-s1 0.0 1.0 10.0 11.0
-s2 2.0 3.0 12.0 13.0 Inner and outer joins >>> inner = ad.concat([a, b]) # Joining on intersection of variables
->>> inner
-AnnData object with n_obs × n_vars = 4 × 2 obs: 'group'
->>> (inner.obs_names, inner.var_names) # doctest: +NORMALIZE_WHITESPACE
-(Index(['s1', 's2', 's3', 's4'], dtype='object'),
-Index(['var1', 'var2'], dtype='object'))
->>> outer = ad.concat([a, b], join="outer") # Joining on union of variables
->>> outer
-AnnData object with n_obs × n_vars = 4 × 3 obs: 'group', 'measure'
->>> outer.var_names
-Index(['var1', 'var2', 'var3'], dtype='object')
->>> outer.to_df() # Sparse arrays are padded with zeroes by default var1 var2 var3
-s1 0.0 1.0 0.0
-s2 2.0 3.0 0.0
-s3 4.0 5.0 6.0
-s4 7.0 8.0 9.0 Keeping track of source objects >>> ad.concat({"a": a, "b": b}, label="batch").obs group batch
-s1 a a
-s2 b a
-s3 b b
-s4 c b
->>> ad.concat([a, b], label="batch", keys=["a", "b"]).obs # Equivalent to previous group batch
-s1 a a
-s2 b a
-s3 b b
-s4 c b
->>> ad.concat({"a": a, "b": b}, index_unique="-").obs group
-s1-a a
-s2-a b
-s3-b b
-s4-b c Combining values not aligned to axis of concatenation >>> ad.concat([a, b], merge="same")
-AnnData object with n_obs × n_vars = 4 × 2 obs: 'group' varm: 'ones'
->>> ad.concat([a, b], merge="unique")
-AnnData object with n_obs × n_vars = 4 × 2 obs: 'group' varm: 'ones', 'zeros'
->>> ad.concat([a, b], merge="first")
-AnnData object with n_obs × n_vars = 4 × 2 obs: 'group' varm: 'ones', 'rand', 'zeros'
->>> ad.concat([a, b], merge="only")
-AnnData object with n_obs × n_vars = 4 × 2 obs: 'group' varm: 'zeros' The same merge strategies can be used for elements in `.uns` >>> dict(ad.concat([a, b, c], uns_merge="same").uns)
-{'a': 1, 'c': {'c.b': 4}}
->>> dict(ad.concat([a, b, c], uns_merge="unique").uns)
-{'a': 1, 'c': {'c.a': 3, 'c.b': 4, 'c.c': 5}}
->>> dict(ad.concat([a, b, c], uns_merge="only").uns)
-{'c': {'c.c': 5}}
->>> dict(ad.concat([a, b, c], uns_merge="first").uns)
-{'a': 1, 'b': 2, 'c': {'c.a': 3, 'c.b': 4, 'c.c': 5}}
+See the \code{concatenation} section in the docs for a more in-depth description.
+
+warning: This function is marked as experimental for the \code{0.7} release series, and will supercede the \code{\link[=AnnData.concatenate]{AnnData.concatenate()}} method in future releases.
+
+warning: If you use \code{join='outer'} this fills 0s for sparse data when variables are absent in a batch. Use this with care. Dense data is filled with \code{NaN}.
+}
+\examples{
+library(Matrix)
+
+# Preparing example objects
+a <- AnnData(
+  X = Matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE, sparse = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  varm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  ),
+  uns = list(
+    a = 1,
+    b = 2,
+    c = list(
+      c.a = 3,
+      c.b = 4
+    )
+  )
+)
+
+b <- AnnData(
+  X = Matrix(c(4, 5, 6, 7, 8, 9), nrow = 2, byrow = TRUE, sparse = TRUE),
+  obs = data.frame(group = c("b", "c"), row.names = c("s3", "s4")),
+  var = data.frame(type = c(1L, 2L, 3L), row.names = c("var1", "var2", "var3")),
+  varm = list(
+    ones = matrix(rep(1L, 15), nrow = 3),
+    rand = matrix(rnorm(15), nrow = 3)
+  ),
+  uns = list(
+    a = 1,
+    b = 3,
+    c = list(
+      c.a = 3
+    )
+  )
+)
+
+c <- AnnData(
+  X = Matrix(c(10, 11, 12, 13), nrow = 2, byrow = TRUE, sparse = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(3L, 4L), row.names = c("var3", "var4")),
+  uns = list(
+    a = 1,
+    b = 4,
+    c = list(
+      c.a = 3,
+      c.b = 4,
+      c.c = 5
+    )
+  )
+)
+
+# Concatenating along different axes
+concat(list(a, b))$to_df()
+
+concat(list(a, c), axis = 1L)$to_df()
+
+# Inner and outer joins
+inner <- concat(list(a, b))
+inner
+inner$obs_names
+inner$var_names
+
+outer <- concat(list(a, b), join = "outer")
+outer
+outer$var_names
+outer$to_df()
+
+# Keeping track of source objects
+concat(list(a = a, b = b), label = "batch")$obs
+concat(list(a, b), label = "batch", keys = c("a", "b"))$obs
+concat(list(a = a, b = b), index_unique = "-")$obs
+
+# Combining values not aligned to axis of concatenation
+concat(list(a, b), merge = "same")
+concat(list(a, b), merge = "unique")
+concat(list(a, b), merge = "first")
+concat(list(a, b), merge = "only")
+
+# The same merge strategies can be used for elements in .uns
+concat(list(a, b, c), uns_merge = "same")$uns
+concat(list(a, b, c), uns_merge = "unique")$uns
+concat(list(a, b, c), uns_merge = "first")$uns
+concat(list(a, b, c), uns_merge = "only")$uns
+
 }

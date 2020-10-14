@@ -7,16 +7,13 @@
 read_hdf(filename, key)
 }
 \arguments{
-\item{filename}{filename}
+\item{filename}{Filename of data file.}
 
-\item{key}{key}
+\item{key}{Name of dataset in the file.}
 }
 \description{
-Read `.h5` (hdf5) file.
+Read \code{.h5} (hdf5) file.
 }
 \details{
-Note: Also looks for fields `row_names` and `col_names`. Parameters
-----------
-filename Filename of data file.
-key Name of dataset in the file.
+Note: Also looks for fields \code{row_names} and \code{col_names}.
 }

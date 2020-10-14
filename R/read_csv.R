@@ -2,21 +2,16 @@
 #'
 #' @description Read `.csv` file.
 #'
-#' @details Same as :func:`~anndata.read_text` but with default delimiter `','`. Parameters
-#' ----------
-#' filename Data file.
-#' delimiter Delimiter that separates data within text file. If `NULL`, will split at arbitrary number of white spaces, which is different from enforcing splitting at single white space `' '`.
-#' first_column_names Assume the first column stores row names.
-#' dtype Numpy data type.
+#' @details Same as [read_text()] but with default delimiter `','`.
 #'
-#' @param filename filename
-#' @param delimiter delimiter
-#' @param first_column_names first_column_names
-#' @param dtype dtype
+#' @param filename Data file.
+#' @param delimiter Delimiter that separates data within text file. If `NULL`, will split at arbitrary number of white spaces, which is different from enforcing splitting at single white space `' '`.
+#' @param first_column_names Assume the first column stores row names.
+#' @param dtype Numpy data type.
 #'
 #' @export
 read_csv <- function(filename, delimiter = ",", first_column_names = NULL, dtype = "float32") {
-  python_function_result <- python_anndata$read_csv(
+  python_anndata$read_csv(
     filename = filename,
     delimiter = delimiter,
     first_column_names = first_column_names,
