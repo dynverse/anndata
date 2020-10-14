@@ -8,6 +8,11 @@
 #' @param key Name of dataset in the file.
 #'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' ad <- read_hdf("file.h5")
+#' }
 read_hdf <- function(filename, key) {
   python_anndata$read_hdf(
     filename = filename,

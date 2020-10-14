@@ -10,12 +10,12 @@ read_h5ad(filename, backed = NULL)
 \item{filename}{File name of data file.}
 
 \item{backed}{If \code{'r'}, load \code{~anndata.AnnData} in \code{backed} mode instead of fully loading it into memory (\code{memory} mode). If you want to modify backed attributes of the AnnData object, you need to choose \code{'r+'}.}
-
-\item{as_sparse}{If an array was saved as dense, passing its name here will read it as a sparse_matrix, by chunk of size \code{chunk_size}.}
 }
 \description{
 Read \code{.h5ad}-formatted hdf5 file.
 }
 \examples{
+\dontrun{
 ad <- read_h5ad("example_formats/pbmc_1k_protein_v3_processed.h5ad")
+}
 }

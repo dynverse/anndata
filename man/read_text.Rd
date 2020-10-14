@@ -28,3 +28,8 @@ Read \code{.txt}, \code{.tab}, \code{.data} (text) file.
 \details{
 Same as \code{\link[=read_csv]{read_csv()}} but with default delimiter \code{NULL}.
 }
+\examples{
+\dontrun{
+ad <- read_text("matrix.tab")
+}
+}

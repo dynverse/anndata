@@ -6,6 +6,11 @@
 #' @param dtype Numpy data type.
 #'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' ad <- read_mtx("matrix.mtx")
+#' }
 read_mtx <- function(filename, dtype = "float32") {
   python_anndata$read_mtx(
     filename = filename,

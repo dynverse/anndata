@@ -12,10 +12,16 @@
 #' @param obs_names Loompy key where the observation/cell names are stored.
 #' @param obsm_names Loompy keys which will be constructed into observation matrices
 #' @param var_names Loompy key where the variable/gene names are stored.
-#' @param obsm_names Loompy keys which will be constructed into variable matrices
+#' @param varm_names Loompy keys which will be constructed into variable matrices
+#' @param dtype Numpy data type.
 #' @param ... Arguments to loompy.connect
 #'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' ad <- read_loom("dataset.loom")
+#' }
 read_loom <- function(
   filename,
   sparse = TRUE,

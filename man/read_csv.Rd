@@ -26,3 +26,8 @@ Read \code{.csv} file.
 \details{
 Same as \code{\link[=read_text]{read_text()}} but with default delimiter \code{','}.
 }
+\examples{
+\dontrun{
+ad <- read_csv("matrix.csv")
+}
+}

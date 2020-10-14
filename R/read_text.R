@@ -12,6 +12,11 @@
 #' @param dtype Numpy data type.
 #'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' ad <- read_text("matrix.tab")
+#' }
 read_text <- function(filename, delimiter = NULL, first_column_names = NULL, dtype = "float32") {
   python_anndata$read_text(
     filename = filename,

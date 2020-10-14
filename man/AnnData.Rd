@@ -35,6 +35,8 @@ AnnData(
 
 \item{layers}{Key-indexed multi-dimensional arrays aligned to dimensions of \code{X}.}
 
+\item{raw}{undocumented agument}
+
 \item{dtype}{Data type used for storage.}
 
 \item{shape}{Shape list (#observations, #variables). Can only be provided if \code{X} is \code{NULL}.}
@@ -55,14 +57,14 @@ and unstructured annotations \code{uns}.
 
 An \code{AnnData} object \code{adata} can be sliced like a data frame,
 for instance \code{adata_subset <- adata[, list_of_variable_names]}.\code{AnnData}’s
-basic structure is similar to R’s ExpressionSet \link{Huber15}.
+basic structure is similar to R's ExpressionSet.
 
 If setting an \code{h5ad}-formatted HDF5 backing file \code{filename},
 data remains on the disk but is automatically loaded into memory if needed.
 See this \href{http://falexwolf.de/blog/171223_AnnData_indexing_views_HDF5-backing/}{blog post} for more details.
 
 \code{AnnData} stores observations (samples) of variables/features in the rows of a matrix.
-This is the convention of the modern classics of statistics \link{Hastie09} and machine learning \link{Murphy12},
+This is the convention of the modern classics of statistic and machine learning,
 the convention of dataframes both in R and Python and the established statistics
 and machine learning packages in Python (statsmodels, scikit-learn).
 
@@ -150,7 +152,7 @@ consistent handling of \code{scipy.sparse} matrices and \code{numpy} arrays.
    \code{uns_keys()} \tab List keys of unstructured annotation. \cr
    \code{var_keys()} \tab List keys of variable annotation \code{var}. \cr
    \verb{var_names_make_unique([join])} \tab Makes the index unique by appending a number string to each duplicate index element: ‘1’, ‘2’, etc. \cr
-   \verb{var_vector(k, *[, layer])} \tab Convenience function for returning a 1 dimensional ndarray of values from X, layers\link{k}, or obs. \cr
+   \verb{var_vector(k, *[, layer])} \tab Convenience function for returning a 1 dimensional ndarray of values from \code{X}, \code{layers[k]}, or \code{obs}. \cr
    \code{varm_keys()} \tab List keys of variable annotation varm. \cr
    \verb{write([filename, compression, ...])} \tab Write \code{h5ad}-formatted hdf5 file. \cr
    \code{write_csvs(dirname[, skip_data, sep])} \tab Write annotation to \code{csv} files. \cr

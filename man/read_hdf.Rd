@@ -17,3 +17,8 @@ Read \code{.h5} (hdf5) file.
 \details{
 Note: Also looks for fields \code{row_names} and \code{col_names}.
 }
+\examples{
+\dontrun{
+ad <- read_hdf("file.h5")
+}
+}

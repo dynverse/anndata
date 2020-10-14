@@ -10,6 +10,11 @@
 #' @param dtype Numpy data type.
 #'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' ad <- read_csv("matrix.csv")
+#' }
 read_csv <- function(filename, delimiter = ",", first_column_names = NULL, dtype = "float32") {
   python_anndata$read_csv(
     filename = filename,

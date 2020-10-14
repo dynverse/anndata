@@ -20,3 +20,8 @@ Read \code{.xlsx} (Excel) file.
 Assumes that the first columns stores the row names and the first row the
 column names.
 }
+\examples{
+\dontrun{
+ad <- read_excel("spreadsheet.xls")
+}
+}

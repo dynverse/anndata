@@ -10,6 +10,11 @@
 #' @param dtype Numpy data type.
 #'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' ad <- read_excel("spreadsheet.xls")
+#' }
 read_excel <- function(filename, sheet, dtype = "float32") {
   python_anndata$read_excel(
     filename = filename,

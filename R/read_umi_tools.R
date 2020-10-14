@@ -6,6 +6,11 @@
 #' @param dtype Numpy data type.
 #'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' ad <- read_umi_tools("...")
+#' }
 read_umi_tools <- function(filename, dtype = "float32") {
   python_anndata$read_umi_tools(
     filename = filename,

@@ -4,7 +4,7 @@
 #'
 #' @details See the `concatenation` section in the docs for a more in-depth description.
 #'
-#' warning: This function is marked as experimental for the `0.7` release series, and will supercede the [AnnData.concatenate()] method in future releases.
+#' warning: This function is marked as experimental for the `0.7` release series, and will supercede the `AnnData$concatenate()` method in future releases.
 #'
 #' warning: If you use `join='outer'` this fills 0s for sparse data when variables are absent in a batch. Use this with care. Dense data is filled with `NaN`.
 #'
@@ -20,11 +20,9 @@
 #' @param pairwise Whether pairwise elements along the concatenated dimension should be included. This is FALSE by default, since the resulting arrays are often not meaningful.
 #'
 #' @examples
-#' library(Matrix)
-#'
 #' # Preparing example objects
 #' a <- AnnData(
-#'   X = Matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE, sparse = TRUE),
+#'   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
 #'   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
 #'   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
 #'   varm = list(
@@ -43,7 +41,7 @@
 #' )
 #'
 #' b <- AnnData(
-#'   X = Matrix(c(4, 5, 6, 7, 8, 9), nrow = 2, byrow = TRUE, sparse = TRUE),
+#'   X = matrix(c(4, 5, 6, 7, 8, 9), nrow = 2, byrow = TRUE),
 #'   obs = data.frame(group = c("b", "c"), row.names = c("s3", "s4")),
 #'   var = data.frame(type = c(1L, 2L, 3L), row.names = c("var1", "var2", "var3")),
 #'   varm = list(
@@ -60,7 +58,7 @@
 #' )
 #'
 #' c <- AnnData(
-#'   X = Matrix(c(10, 11, 12, 13), nrow = 2, byrow = TRUE, sparse = TRUE),
+#'   X = matrix(c(10, 11, 12, 13), nrow = 2, byrow = TRUE),
 #'   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
 #'   var = data.frame(type = c(3L, 4L), row.names = c("var3", "var4")),
 #'   uns = list(

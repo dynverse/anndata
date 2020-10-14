@@ -8,7 +8,7 @@
 #'
 #' An `AnnData` object `adata` can be sliced like a data frame,
 #' for instance `adata_subset <- adata[, list_of_variable_names]`.`AnnData`’s
-#' basic structure is similar to R’s ExpressionSet [Huber15].
+#' basic structure is similar to R's ExpressionSet.
 #'
 #' If setting an `h5ad`-formatted HDF5 backing file `filename`,
 #' data remains on the disk but is automatically loaded into memory if needed.
@@ -26,12 +26,13 @@
 #' @param filename Name of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
 #' @param filemode Open mode of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
 #' @param asview asview
+#' @param raw undocumented agument
 #'
 #' @seealso [read_h5ad()] [read_csv()] [read_excel()] [read_hdf()] [read_loom()] [read_zarr()] [read_mtx()] [read_text()] [read_umi_tools()]
 #'
 #' @details
 #' `AnnData` stores observations (samples) of variables/features in the rows of a matrix.
-#' This is the convention of the modern classics of statistics [Hastie09] and machine learning [Murphy12],
+#' This is the convention of the modern classics of statistic and machine learning,
 #' the convention of dataframes both in R and Python and the established statistics
 #' and machine learning packages in Python (statsmodels, scikit-learn).
 #'
@@ -122,7 +123,7 @@
 #' | `uns_keys()` | List keys of unstructured annotation. |
 #' | `var_keys()` | List keys of variable annotation `var`. |
 #' | `var_names_make_unique([join])` | Makes the index unique by appending a number string to each duplicate index element: ‘1’, ‘2’, etc. |
-#' | `var_vector(k, *[, layer])` | Convenience function for returning a 1 dimensional ndarray of values from X, layers[k], or obs. |
+#' | `var_vector(k, *[, layer])` | Convenience function for returning a 1 dimensional ndarray of values from `X`, `layers[k]`, or `obs`. |
 #' | `varm_keys()` | List keys of variable annotation varm. |
 #' | `write([filename, compression, ...])` | Write `h5ad`-formatted hdf5 file. |
 #' | `write_csvs(dirname[, skip_data, sep])` | Write annotation to `csv` files. |

@@ -29,7 +29,10 @@
 #' write(ad, "output.h5ad")
 write <- function(anndata, filename, compression = NULL, compression_opts = NULL, as_dense = NULL, force_dense = FALSE) {
   anndata$write(
-    store = store,
-    chunks = chunks
+    filename = filename,
+    compression = compression,
+    compression_opts = compression_opts,
+    as_dense = as_dense,
+    force_dense = force_dense
   )
 }

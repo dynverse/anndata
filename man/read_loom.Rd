@@ -28,9 +28,13 @@ read_loom(
 
 \item{obs_names}{Loompy key where the observation/cell names are stored.}
 
-\item{obsm_names}{Loompy keys which will be constructed into variable matrices}
+\item{obsm_names}{Loompy keys which will be constructed into observation matrices}
 
 \item{var_names}{Loompy key where the variable/gene names are stored.}
+
+\item{varm_names}{Loompy keys which will be constructed into variable matrices}
+
+\item{dtype}{Numpy data type.}
 
 \item{...}{Arguments to loompy.connect}
 }
@@ -40,4 +44,9 @@ Read \code{.loom}-formatted hdf5 file.
 \details{
 This reads the whole file into memory. Beware that you have to explicitly state when you want to read the file as
 sparse data.
+}
+\examples{
+\dontrun{
+ad <- read_loom("dataset.loom")
+}
 }

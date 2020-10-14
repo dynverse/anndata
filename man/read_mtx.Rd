@@ -14,3 +14,8 @@ read_mtx(filename, dtype = "float32")
 \description{
 Read \code{.mtx} file.
 }
+\examples{
+\dontrun{
+ad <- read_mtx("matrix.mtx")
+}
+}
