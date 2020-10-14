@@ -3,3 +3,5 @@
 ^LICENSE\.md$
 ^example_formats$
 ^\.github$
+^CRAN-RELEASE$
+^cran-comments\.md$
