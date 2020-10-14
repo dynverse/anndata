@@ -39,9 +39,9 @@ AnnData(
 
 \item{shape}{Shape list (#observations, #variables). Can only be provided if \code{X} is \code{NULL}.}
 
-\item{filename}{Name of backing file. See \code{h5py.File}.}
+\item{filename}{Name of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
 
-\item{filemode}{Open mode of backing file. See \code{h5py.File}. See Also}
+\item{filemode}{Open mode of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
 
 \item{asview}{asview}
 }
@@ -49,87 +49,137 @@ AnnData(
 An annotated data matrix.
 }
 \details{
-\code{~anndata.AnnData} stores a data matrix \code{X} together with annotations
+\code{AnnData} stores a data matrix \code{X} together with annotations
 of observations \code{obs} (\code{obsm}, \code{obsp}), variables \code{var} (\code{varm}, \code{varp}),
 and unstructured annotations \code{uns}.
 
-An \code{~anndata.AnnData} object \code{adata} can be sliced like a \code{pandas.DataFrame},
-for instance \verb{adata_subset = adata[:, list_of_variable_names]}.\code{~anndata.AnnData}’s
-basic structure is similar to R’s ExpressionSet \link{Huber15}_.
+An \code{AnnData} object \code{adata} can be sliced like a data frame,
+for instance \code{adata_subset <- adata[, list_of_variable_names]}.\code{AnnData}’s
+basic structure is similar to R’s ExpressionSet \link{Huber15}.
 
-If setting an \code{.h5ad}-formatted HDF5 backing file \code{.filename},
+If setting an \code{h5ad}-formatted HDF5 backing file \code{filename},
 data remains on the disk but is automatically loaded into memory if needed.
 See this \href{http://falexwolf.de/blog/171223_AnnData_indexing_views_HDF5-backing/}{blog post} for more details.
 
-\subsection{Notes}{
-
-\code{~anndata.AnnData} stores observations (samples) of variables/features
-in the rows of a matrix.
-This is the convention of the modern classics of statistics \link{Hastie09}_
-and machine learning \link{Murphy12}\emph{,
+\code{AnnData} stores observations (samples) of variables/features in the rows of a matrix.
+This is the convention of the modern classics of statistics \link{Hastie09} and machine learning \link{Murphy12},
 the convention of dataframes both in R and Python and the established statistics
-and machine learning packages in Python (statsmodels}, scikit-learn_). Single dimensional annotations of the observation and variables are stored
-in the \code{obs} and \code{var} attributes as \code{~pandas.DataFrame}\ s.
+and machine learning packages in Python (statsmodels, scikit-learn).
+
+Single dimensional annotations of the observation and variables are stored
+in the \code{obs} and \code{var} attributes as data frames.
 This is intended for metrics calculated over their axes.
 Multi-dimensional annotations are stored in \code{obsm} and \code{varm},
 which are aligned to the objects observation and variable dimensions respectively.
 Square matrices representing graphs are stored in \code{obsp} and \code{varp},
 with both of their own dimensions aligned to their associated axis.
 Additional measurements across both observations and variables are stored in
-\code{layers}. Indexing into an AnnData object can be performed by relative position
-with numeric indices (like pandas’ :meth:\code{~pandas.DataFrame.iloc}),
-or by labels (like :meth:\code{~pandas.DataFrame.loc}).
+\code{layers}.
+
+Indexing into an AnnData object can be performed by relative position
+with numeric indices,  or by labels.
 To avoid ambiguity with numeric indexing into observations or variables,
-indexes of the AnnData object are converted to strings by the constructor. Subsetting an AnnData object by indexing into it will also subset its elements
+indexes of the AnnData object are converted to strings by the constructor.
+
+Subsetting an AnnData object by indexing into it will also subset its elements
 according to the dimensions they were aligned to.
-This means an operation like \verb{adata[list_of_obs, :]} will also subset \code{obs},
-\code{obsm}, and \code{layers}. Subsetting an AnnData object returns a view into the original object,
+This means an operation like \code{adata[list_of_obs, ]} will also subset \code{obs},
+\code{obsm}, and \code{layers}.
+
+Subsetting an AnnData object returns a view into the original object,
 meaning very little additional memory is used upon subsetting.
 This is achieved lazily, meaning that the constituent arrays are subset on access.
 Copying a view causes an equivalent “real” AnnData object to be generated.
 Attempting to modify a view (at any attribute except X) is handled
 in a copy-on-modify manner, meaning the object is initialized in place.
-Here’s an example:: batch1 = adata[adata.obs\link{"batch"} == "batch1", :] batch1.obs\link{"value"} = 0 # This makes batch1 a “real” AnnData object At the end of this snippet: \code{adata} was not modified,
-and \code{batch1} is its own AnnData object with its own data. Similar to Bioconductor’s \code{ExpressionSet} and :mod:\code{scipy.sparse} matrices,
+Here’s an example\preformatted{batch1 <- adata[adata$obs["batch"] == "batch1", ]
+batch1$obs["value"] = 0 # This makes batch1 a “real” AnnData object
+}
+
+At the end of this snippet: \code{adata} was not modified,
+and \code{batch1} is its own AnnData object with its own data.
+
+Similar to Bioconductor’s \code{ExpressionSet} and \code{scipy.sparse} matrices,
 subsetting an AnnData object retains the dimensionality of its constituent arrays.
-Therefore, unlike with the classes exposed by :mod:\code{pandas}, :mod:\code{numpy},
+Therefore, unlike with the classes exposed by \code{pandas}, \code{numpy},
 and \code{xarray}, there is no concept of a one dimensional AnnData object.
 AnnDatas always have two inherent dimensions, \code{obs} and \code{var}.
 Additionally, maintaining the dimensionality of the AnnData object allows for
-consistent handling of :mod:\code{scipy.sparse} matrices and :mod:\code{numpy} arrays. .. _statsmodels: http://www.statsmodels.org/stable/index.html
-.. _scikit-learn: http://scikit-learn.org/
+consistent handling of \code{scipy.sparse} matrices and \code{numpy} arrays.
+}
+\section{Attributes}{
+\tabular{ll}{
+   Attribute \tab Description \cr
+   \code{T} \tab Transpose whole object. \cr
+   \code{X} \tab Data matrix of shape \code{n_obs} × \code{n_vars} \cr
+   \code{filename} \tab Change to backing mode by setting the filename of a \code{.h5ad} file. \cr
+   \code{is_view} \tab \code{TRUE} if object is view of another AnnData object, \code{FALSE} otherwise. \cr
+   \code{isbacked} \tab \code{TRUE} if object is backed on disk, \code{FALSE} otherwise. \cr
+   \code{layers} \tab Dictionary-like object with values of the same dimensions as X. \cr
+   \code{n_obs} \tab Number of observations. \cr
+   \code{n_vars} \tab Number of variables/features. \cr
+   \code{obs} \tab One-dimensional annotation of observations (data frame). \cr
+   \code{obs_names} \tab Names of observations (alias for \verb{$obs$index}). \cr
+   \code{obsm} \tab Multi-dimensional annotation of observations (mutable structured ndarray). \cr
+   \code{obsp} \tab Pairwise annotation of observations, a mutable mapping with array-like values. \cr
+   \code{raw} \tab Store raw version of X and var as \verb{$raw$X}^ and \verb{$raw$var}. \cr
+   \code{shape} \tab Shape of data matrix (n_obs, n_vars). \cr
+   \code{uns} \tab Unstructured annotation (ordered dictionary). \cr
+   \code{var} \tab One-dimensional annotation of variables/ features (data frame). \cr
+   \code{var_names} \tab Names of variables (alias for \verb{$var$index}). \cr
+   \code{varm} \tab Multi-dimensional annotation of variables/features (mutable structured ndarray). \cr
+   \code{varp} \tab Pairwise annotation of observations, a mutable mapping with array-like values. \cr
 }
 }
-\section{of observations \code{obs} (\code{obsm}, \code{obsp}),}{
 
-variables \code{var} (\code{varm}, \code{varp}), and unstructured annotations \code{uns}.
+\section{Methods}{
+\tabular{ll}{
+   Method \tab Description \cr
+   \verb{chunk_X([select, replace])} \tab Return a chunk of the data matrix \code{X} with random or specified indices. \cr
+   \verb{chunked_X([chunk_size])} \tab Return an iterator over the rows of the data matrix \code{X}. \cr
+   \code{concatenate(adatas[, join, batch_key, ...])} \tab Concatenate along the observations axis. \cr
+   \verb{copy([filename])} \tab Full copy, optionally on disk. \cr
+   \code{obs_keys()} \tab List keys of observation annotation \code{o}bs. \cr
+   \verb{obs_names_make_unique([join])} \tab Makes the index unique by appending a number string to each duplicate index element: ‘1’, ‘2’, etc. \cr
+   \verb{obs_vector(k, *[, layer])} \tab Convenience function for returning a 1 dimensional ndarray of values from \code{X}, \code{layers[k]}, or \code{obs}. \cr
+   \code{obsm_keys()} \tab List keys of observation annotation \code{obsm}. \cr
+   \code{rename_categories(key, categories)} \tab Rename categories of annotation key in \code{obs}, \code{var}, and \code{uns}. \cr
+   \verb{strings_to_categoricals([df])} \tab Transform string annotations to categoricals. \cr
+   \verb{to_df([layer])} \tab Generate shallow data frame. \cr
+   \code{transpose()} \tab Transpose whole object. \cr
+   \code{uns_keys()} \tab List keys of unstructured annotation. \cr
+   \code{var_keys()} \tab List keys of variable annotation \code{var}. \cr
+   \verb{var_names_make_unique([join])} \tab Makes the index unique by appending a number string to each duplicate index element: ‘1’, ‘2’, etc. \cr
+   \verb{var_vector(k, *[, layer])} \tab Convenience function for returning a 1 dimensional ndarray of values from X, layers\link{k}, or obs. \cr
+   \code{varm_keys()} \tab List keys of variable annotation varm. \cr
+   \verb{write([filename, compression, ...])} \tab Write \code{h5ad}-formatted hdf5 file. \cr
+   \code{write_csvs(dirname[, skip_data, sep])} \tab Write annotation to \code{csv} files. \cr
+   \verb{write_h5ad([filename, compression, ...])} \tab Write \code{h5ad}-formatted hdf5 file. \cr
+   \verb{write_loom(filename[, write_obsm_varm]} \tab Write \code{loom}-formatted hdf5 file. \cr
+   \code{write_zarr(store[, chunks])} \tab Write a hierarchical Zarr array store. \cr
+}
 }
 
-\section{variables \code{var} (\code{varm}, \code{varp}),}{
+\examples{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  varm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  ),
+  uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
+)
 
-and unstructured annotations \code{uns}.
+ad$X
+ad$to_df()
+ad$uns
+
+# and many more...
+
 }
-
-\section{An \code{~anndata.AnnData} object \code{adata} can be sliced like a}{
-
-\code{~pandas.DataFrame}, for instance \verb{adata_subset = adata[:, list_of_variable_names]}. \code{~anndata.AnnData}’s basic structure is similar to R’s ExpressionSet \link{Huber15}\emph{. If setting an \code{.h5ad}-formatted HDF5 backing file \code{.filename}, data remains on the disk but is automatically loaded into memory if needed. See this \verb{blog post}} for more details.
-}
-
-\section{in the \code{obs} and \code{var} attributes as \code{~pandas.DataFrame}\ s.}{
-
-This is intended for metrics calculated over their axes. Multi-dimensional annotations are stored in \code{obsm} and \code{varm}, which are aligned to the objects observation and variable dimensions respectively. Square matrices representing graphs are stored in \code{obsp} and \code{varp}, with both of their own dimensions aligned to their associated axis. Additional measurements across both observations and variables are stored in \code{layers}.
-}
-
-\section{Square matrices representing graphs are stored in \code{obsp} and \code{varp},}{
-
-with both of their own dimensions aligned to their associated axis. Additional measurements across both observations and variables are stored in \code{layers}.
-}
-
-\section{At the end of this snippet}{
- \code{adata} was not modified,:
-and \code{batch1} is its own AnnData object with its own data.
-}
-
 \seealso{
 \code{\link[=read_h5ad]{read_h5ad()}} \code{\link[=read_csv]{read_csv()}} \code{\link[=read_excel]{read_excel()}} \code{\link[=read_hdf]{read_hdf()}} \code{\link[=read_loom]{read_loom()}} \code{\link[=read_zarr]{read_zarr()}} \code{\link[=read_mtx]{read_mtx()}} \code{\link[=read_text]{read_text()}} \code{\link[=read_umi_tools]{read_umi_tools()}}
 }
