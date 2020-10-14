@@ -1,0 +1,45 @@
+Package: anndata
+Type: Package
+Title: Annotated Data
+Version: 0.7.4
+Authors@R: c(
+    person(
+      "Philipp", "Angerer",
+      email = "phil.angerer@gmail.com",
+      role = "aut",
+      comment = c(ORCID = "0000-0002-0369-2888", github = "flying-sheep")
+    ),
+    person(
+      "Alex", "Wolf",
+      email = "f.alex.wolf@gmx.de",
+      role = "aut",
+      comment = c(ORCID = "0000-0002-8760-7838", github = "falexwolf")
+    ),
+    person(
+      "Isaac", "Virshup",
+      role = "aut",
+      comment = c(github = "ivirshup")
+    ),
+    person(
+      "Sergei", "Rybakov",
+      role = "aut",
+      comment = c(github = "Koncopd")
+    ),
+    person(
+      "Robrecht", "Cannoodt", 
+      email = "rcannood@gmail.com", 
+      role = c("aut", "ctb", "cre", "cph"),
+      comment = c(ORCID = "0000-0003-3641-729X", github = "rcannood")
+    )
+  )
+Description: Provides a scalable way of keeping track of data and learned annotations.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends: 
+    R (>= 3.5.0)
+Imports:
+    reticulate
+RoxygenNote: 7.1.1
+Suggests: 
+    testthat
