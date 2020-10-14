@@ -19,7 +19,10 @@
 #' @param fill_value When `join="outer"`, this is the value that will be used to fill the introduced indices. By default, sparse arrays are padded with zeros, while dense arrays and DataFrames are padded with missing values.
 #' @param pairwise Whether pairwise elements along the concatenated dimension should be included. This is FALSE by default, since the resulting arrays are often not meaningful.
 #'
+#' @export
+#'
 #' @examples
+#' \dontrun{
 #' # Preparing example objects
 #' a <- AnnData(
 #'   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
@@ -104,8 +107,7 @@
 #' concat(list(a, b, c), uns_merge = "unique")$uns
 #' concat(list(a, b, c), uns_merge = "first")$uns
 #' concat(list(a, b, c), uns_merge = "only")$uns
-#'
-#' @export
+#' }
 concat <- function(
   adatas,
   axis = 0L,

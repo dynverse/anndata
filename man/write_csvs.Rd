@@ -19,6 +19,7 @@ write_csvs(anndata, dirname, skip_data = TRUE, sep = ",")
 It is not possible to recover the full AnnData from these files. Use \code{\link[=write_h5ad]{write_h5ad()}} for this.
 }
 \examples{
+\dontrun{
 ad <- AnnData(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
@@ -34,4 +35,5 @@ ad <- AnnData(
 write_csvs(ad, "output")
 
 unlink("output", recursive = TRUE)
+}
 }

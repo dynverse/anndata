@@ -10,6 +10,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' ad <- AnnData(
 #'   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
 #'   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
@@ -25,6 +26,7 @@
 #' write_csvs(ad, "output")
 #'
 #' unlink("output", recursive = TRUE)
+#' }
 write_csvs <- function(anndata, dirname, skip_data = TRUE, sep = ",") {
   anndata$write_csvs(
     dirname = dirname,

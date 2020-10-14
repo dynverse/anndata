@@ -163,6 +163,7 @@ consistent handling of \code{scipy.sparse} matrices and \code{numpy} arrays.
 }
 
 \examples{
+\dontrun{
 ad <- AnnData(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
@@ -180,6 +181,7 @@ ad$to_df()
 ad$uns
 
 # and many more...
+}
 
 }
 \seealso{

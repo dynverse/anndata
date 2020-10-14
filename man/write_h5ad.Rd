@@ -29,6 +29,7 @@ Generally, if you have sparse data that are stored as a dense matrix, you can
 dramatically improve performance and reduce disk space by converting to a csr_matrix:
 }
 \examples{
+\dontrun{
 ad <- AnnData(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
@@ -44,4 +45,5 @@ ad <- AnnData(
 write_h5ad(ad, "output.h5ad")
 
 file.remove("output.h5ad")
+}
 }

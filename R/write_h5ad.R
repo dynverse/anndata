@@ -13,6 +13,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' ad <- AnnData(
 #'   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
 #'   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
@@ -28,6 +29,7 @@
 #' write_h5ad(ad, "output.h5ad")
 #'
 #' file.remove("output.h5ad")
+#' }
 write_h5ad <- function(anndata, filename, compression = NULL, compression_opts = NULL, as_dense = list()) {
   anndata$write(
     filename = filename,

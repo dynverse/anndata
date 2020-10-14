@@ -17,6 +17,7 @@ write_loom(anndata, filename, write_obsm_varm = FALSE)
 Write .loom-formatted hdf5 file.
 }
 \examples{
+\dontrun{
 ad <- AnnData(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
@@ -32,4 +33,5 @@ ad <- AnnData(
 write_loom(ad, "output.loom")
 
 file.remove("output.loom")
+}
 }

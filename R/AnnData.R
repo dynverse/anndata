@@ -132,6 +132,7 @@
 #' | `write_zarr(store[, chunks])` | Write a hierarchical Zarr array store. |
 #'
 #' @examples
+#' \dontrun{
 #' ad <- AnnData(
 #'   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
 #'   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
@@ -149,6 +150,7 @@
 #' ad$uns
 #'
 #' # and many more...
+#' }
 #'
 #' @export
 AnnData <- function(

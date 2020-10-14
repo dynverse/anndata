@@ -49,6 +49,7 @@ warning: This function is marked as experimental for the \code{0.7} release seri
 warning: If you use \code{join='outer'} this fills 0s for sparse data when variables are absent in a batch. Use this with care. Dense data is filled with \code{NaN}.
 }
 \examples{
+\dontrun{
 # Preparing example objects
 a <- AnnData(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
@@ -133,5 +134,5 @@ concat(list(a, b, c), uns_merge = "same")$uns
 concat(list(a, b, c), uns_merge = "unique")$uns
 concat(list(a, b, c), uns_merge = "first")$uns
 concat(list(a, b, c), uns_merge = "only")$uns
-
+}
 }
