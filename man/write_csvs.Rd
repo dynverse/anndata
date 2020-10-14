@@ -16,7 +16,7 @@ write_csvs(anndata, dirname, skip_data = TRUE, sep = ",")
 \item{sep}{Separator for the data}
 }
 \description{
-It is not possible to recover the full AnnData from these files. Use write() for this.
+It is not possible to recover the full AnnData from these files. Use \code{\link[=write_h5ad]{write_h5ad()}} for this.
 }
 \examples{
 ad <- AnnData(
@@ -32,4 +32,6 @@ ad <- AnnData(
 )
 
 write_csvs(ad, "output")
+
+unlink("output", recursive = TRUE)
 }

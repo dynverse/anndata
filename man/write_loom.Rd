@@ -30,4 +30,6 @@ ad <- AnnData(
 )
 
 write_loom(ad, "output.loom")
+
+file.remove("output.loom")
 }

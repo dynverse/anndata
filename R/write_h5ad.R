@@ -9,7 +9,6 @@
 #'   Options are `"gzip"`, `"lzf"` or `NULL`.
 #' @param compression_opts See the h5py [filter pipeline](http://docs.h5py.org/en/latest/high/dataset.html#dataset-compression).
 #' @param as_dense Sparse in AnnData object to write as dense. Currently only supports `"X"` and `"raw/X"`.
-#' @param force_dense Write sparse data as a dense matrix. Defaults to `TRUE` if object is backed, otherwise to `FALSE`.
 #'
 #' @export
 #'
@@ -26,13 +25,15 @@
 #'   uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
 #' )
 #'
-#' write(ad, "output.h5ad")
-write <- function(anndata, filename, compression = NULL, compression_opts = NULL, as_dense = NULL, force_dense = FALSE) {
+#' write_h5ad(ad, "output.h5ad")
+#'
+#' file.remove("output.h5ad")
+write_h5ad <- function(anndata, filename, compression = NULL, compression_opts = NULL, as_dense = list()) {
   anndata$write(
     filename = filename,
     compression = compression,
     compression_opts = compression_opts,
-    as_dense = as_dense,
-    force_dense = force_dense
+    as_dense = as_dense
   )
 }
+

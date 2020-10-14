@@ -1,6 +1,6 @@
 #' Write annotation to .csv files.
 #'
-#' It is not possible to recover the full AnnData from these files. Use write() for this.
+#' It is not possible to recover the full AnnData from these files. Use [write_h5ad()] for this.
 #'
 #' @param anndata An [AnnData()] object
 #' @param dirname Name of the directory to which to export.
@@ -23,6 +23,8 @@
 #' )
 #'
 #' write_csvs(ad, "output")
+#'
+#' unlink("output", recursive = TRUE)
 write_csvs <- function(anndata, dirname, skip_data = TRUE, sep = ",") {
   anndata$write_csvs(
     dirname = dirname,

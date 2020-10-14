@@ -183,5 +183,5 @@ ad$uns
 
 }
 \seealso{
-\code{\link[=read_h5ad]{read_h5ad()}} \code{\link[=read_csv]{read_csv()}} \code{\link[=read_excel]{read_excel()}} \code{\link[=read_hdf]{read_hdf()}} \code{\link[=read_loom]{read_loom()}} \code{\link[=read_zarr]{read_zarr()}} \code{\link[=read_mtx]{read_mtx()}} \code{\link[=read_text]{read_text()}} \code{\link[=read_umi_tools]{read_umi_tools()}}
+\code{\link[=read_h5ad]{read_h5ad()}} \code{\link[=read_csv]{read_csv()}} \code{\link[=read_excel]{read_excel()}} \code{\link[=read_hdf]{read_hdf()}} \code{\link[=read_loom]{read_loom()}} \code{\link[=read_mtx]{read_mtx()}} \code{\link[=read_text]{read_text()}} \code{\link[=read_umi_tools]{read_umi_tools()}} \code{\link[=write_h5ad]{write_h5ad()}} \code{\link[=write_csvs]{write_csvs()}} \code{\link[=write_loom]{write_loom()}}
 }

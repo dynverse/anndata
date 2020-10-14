@@ -20,6 +20,8 @@
 #' )
 #'
 #' write_loom(ad, "output.loom")
+#'
+#' file.remove("output.loom")
 write_loom <- function(anndata, filename, write_obsm_varm = FALSE) {
   anndata$write_loom(
     filename = filename,

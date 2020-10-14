@@ -28,7 +28,7 @@
 #' @param asview asview
 #' @param raw undocumented agument
 #'
-#' @seealso [read_h5ad()] [read_csv()] [read_excel()] [read_hdf()] [read_loom()] [read_zarr()] [read_mtx()] [read_text()] [read_umi_tools()]
+#' @seealso [read_h5ad()] [read_csv()] [read_excel()] [read_hdf()] [read_loom()] [read_mtx()] [read_text()] [read_umi_tools()] [write_h5ad()] [write_csvs()] [write_loom()]
 #'
 #' @details
 #' `AnnData` stores observations (samples) of variables/features in the rows of a matrix.
