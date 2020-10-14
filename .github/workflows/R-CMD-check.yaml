@@ -40,8 +40,8 @@ jobs:
 
       - name: Query dependencies
         run: |
-          install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+          install.packages('devtools')
+          saveRDS(devtools::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
         shell: Rscript {0}
 
       - name: Cache R packages
@@ -50,7 +50,6 @@ jobs:
         with:
           path: |
             ${{ env.R_LIBS_USER }}
-            pip
           key: ${{ matrix.config.name }}
           restore-keys: ${{ matrix.config.name }}
 
@@ -61,25 +60,18 @@ jobs:
             sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
             sudo -s eval "$sysreqs"
 
-      - name: Install dependencies
-        run: |
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("rcmdcheck")
-        shell: Rscript {0}
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.config.python }}
 
-      - name: Install package
+      - name: Install dependencies
         run: |
-          pip install -U .
-            - name: Install dependencies
-          run: |
-            remotes::install_deps(dependencies = TRUE)
-            remotes::install_cran("rcmdcheck")
-          shell: Rscript {0}
+          devtools::install_deps(dependencies = TRUE)
+          devtools::install_cran(c("rcmdcheck", "devtools"))
+          devtools::install(".")
+          anndata::install_anndata()
+        shell: Rscript {0}
 
       - name: Check
         env:
