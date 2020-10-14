@@ -4,7 +4,7 @@
 \alias{read_h5ad}
 \title{read_h5ad}
 \usage{
-read_h5ad(filename, backed = NULL, as_sparse = c())
+read_h5ad(filename, backed = NULL)
 }
 \arguments{
 \item{filename}{File name of data file.}
@@ -15,4 +15,7 @@ read_h5ad(filename, backed = NULL, as_sparse = c())
 }
 \description{
 Read \code{.h5ad}-formatted hdf5 file.
+}
+\examples{
+ad <- read_h5ad("example_formats/pbmc_1k_protein_v3_processed.h5ad")
 }

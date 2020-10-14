@@ -7,14 +7,15 @@
 #' @param as_sparse If an array was saved as dense, passing its name here will read it as a sparse_matrix, by chunk of size `chunk_size`.
 #'
 #' @export
+#'
+#' @examples
+#' ad <- read_h5ad("example_formats/pbmc_1k_protein_v3_processed.h5ad")
 read_h5ad <- function(
   filename,
-  backed = NULL,
-  as_sparse = c()
+  backed = NULL
 ) {
   python_anndata$read_h5ad(
     filename = filename,
-    backed = backed,
-    as_sparse = as_sparse
+    backed = backed
   )
 }
