@@ -26,7 +26,7 @@
 #' @param filename Name of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
 #' @param filemode Open mode of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
 #' @param asview asview
-#' @param raw undocumented agument
+#' @param raw undocumented argument
 #'
 #' @seealso [read_h5ad()] [read_csv()] [read_excel()] [read_hdf()] [read_loom()] [read_mtx()] [read_text()] [read_umi_tools()] [write_h5ad()] [write_csvs()] [write_loom()]
 #'

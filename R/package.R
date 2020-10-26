@@ -9,10 +9,12 @@ NULL
 
 # global reference to umap (will be initialized in .onLoad)
 python_anndata <- NULL
+python_builtins <- NULL
 .onLoad <- function(libname, pkgname) {
   try(
     {
       python_anndata <<- reticulate::import("anndata", delay_load = TRUE)
+      python_builtins <<- reticulate::import_builtins()
     },
     silent = TRUE
   )
