@@ -500,7 +500,7 @@ AnnData <- R6::R6Class(
     #'
     #' @examples
     #' \dontrun{
-    #' ad <- AnnData(
+    #' ad <- AnnData$new(
     #'   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
     #'   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
     #'   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
@@ -538,7 +538,7 @@ AnnData <- R6::R6Class(
     #'
     #' @examples
     #' \dontrun{
-    #' ad <- AnnData(
+    #' ad <- AnnData$new(
     #'   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
     #'   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
     #'   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
@@ -563,7 +563,7 @@ AnnData <- R6::R6Class(
       )
     },
 
-    #' Write .loom-formatted hdf5 file.
+    #' @description Write .loom-formatted hdf5 file.
     #'
     #' @param anndata An [AnnData()] object
     #' @param filename The filename.
@@ -571,7 +571,7 @@ AnnData <- R6::R6Class(
     #'
     #' @examples
     #' \dontrun{
-    #' ad <- AnnData(
+    #' ad <- AnnData$new(
     #'   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
     #'   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
     #'   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
@@ -619,3 +619,9 @@ dim.anndata._core.anndata.AnnData <- function(x) {
 dim.AnnData <- function(x) {
   x$shape()
 }
+
+# TODO: does this need to be implemented?
+# #' @export
+# r_to_py.AnnData <- function(x, convert = FALSE) {
+#   reticulate::r_to_py(x$.__enclos_env__$private$.anndata)
+# }

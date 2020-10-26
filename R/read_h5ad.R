@@ -15,8 +15,10 @@ read_h5ad <- function(
   filename,
   backed = NULL
 ) {
-  python_anndata$read_h5ad(
+  ad <- AnnData$new()
+  ad$.__enclos_env__$private$.anndata <- python_anndata$read_h5ad(
     filename = filename,
     backed = backed
   )
+  ad
 }

@@ -34,6 +34,9 @@ BugReports: https://github.com/rcannood/anndata/issues
 Depends: 
     R (>= 3.5.0)
 Imports:
+    assertthat,
+    methods,
+    R6,
     reticulate
 Suggests: 
     testthat

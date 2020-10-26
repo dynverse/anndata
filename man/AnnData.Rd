@@ -131,7 +131,7 @@ ad$var_names
 ## ------------------------------------------------
 
 \dontrun{
-ad <- AnnData(
+ad <- AnnData$new(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
@@ -153,7 +153,7 @@ unlink("output", recursive = TRUE)
 ## ------------------------------------------------
 
 \dontrun{
-ad <- AnnData(
+ad <- AnnData$new(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
@@ -169,15 +169,13 @@ write_h5ad(ad, "output.h5ad")
 
 file.remove("output.h5ad")
 }
-Write .loom-formatted hdf5 file.
-
 
 ## ------------------------------------------------
 ## Method `AnnData$write_loom`
 ## ------------------------------------------------
 
 \dontrun{
-ad <- AnnData(
+ad <- AnnData$new(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
@@ -652,7 +650,7 @@ It is not possible to recover the full AnnData from these files. Use \code{\link
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{\dontrun{
-ad <- AnnData(
+ad <- AnnData$new(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
@@ -710,7 +708,7 @@ Options are \code{"gzip"}, \code{"lzf"} or \code{NULL}.}
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{\dontrun{
-ad <- AnnData(
+ad <- AnnData$new(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
@@ -726,8 +724,6 @@ write_h5ad(ad, "output.h5ad")
 
 file.remove("output.h5ad")
 }
-Write .loom-formatted hdf5 file.
-
 }
 \if{html}{\out{</div>}}
 
@@ -738,6 +734,7 @@ Write .loom-formatted hdf5 file.
 \if{html}{\out{<a id="method-write_loom"></a>}}
 \if{latex}{\out{\hypertarget{method-write_loom}{}}}
 \subsection{Method \code{write_loom()}}{
+Write .loom-formatted hdf5 file.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AnnData$write_loom(filename, write_obsm_varm = FALSE)}\if{html}{\out{</div>}}
 }
@@ -756,7 +753,7 @@ Write .loom-formatted hdf5 file.
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{\dontrun{
-ad <- AnnData(
+ad <- AnnData$new(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),

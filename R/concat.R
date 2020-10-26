@@ -21,6 +21,8 @@
 #'
 #' @export
 #'
+#' @importFrom methods is
+#'
 #' @examples
 #' \dontrun{
 #' # Preparing example objects
@@ -120,8 +122,21 @@ concat <- function(
   fill_value = NULL,
   pairwise = FALSE
 ) {
+  assert_that(
+    is.list(adatas),
+    all(sapply(adatas, is, "AnnData"))
+  )
+
+  # get python objects
+  adatas2 <- lapply(
+    adatas,
+    function(x) {
+      x$.__enclos_env__$private$.anndata
+    }
+  )
+
   python_anndata$concat(
-    adatas = adatas,
+    adatas = adatas2,
     axis = axis,
     join = join,
     merge = merge,

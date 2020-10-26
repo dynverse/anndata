@@ -12,8 +12,10 @@
 #' ad <- read_umi_tools("...")
 #' }
 read_umi_tools <- function(filename, dtype = "float32") {
-  python_anndata$read_umi_tools(
+  ad <- AnnData$new()
+  ad$.__enclos_env__$private$.anndata <- python_anndata$read_umi_tools(
     filename = filename,
     dtype = dtype
   )
+  ad
 }

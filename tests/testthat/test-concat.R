@@ -2,7 +2,7 @@ context("testing concat()")
 
 skip_if_no_anndata()
 
-a <- AnnData(
+a <- AnnData$new(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
@@ -21,7 +21,7 @@ a <- AnnData(
   )
 )
 
-b <- AnnData(
+b <- AnnData$new(
   X = matrix(c(4, 5, 6, 7, 8, 9), nrow = 2, byrow = TRUE),
   obs = data.frame(group = c("b", "c"), row.names = c("s3", "s4")),
   var = data.frame(type = c(1L, 2L, 3L), row.names = c("var1", "var2", "var3")),
@@ -38,7 +38,7 @@ b <- AnnData(
   )
 )
 
-c <- AnnData(
+c <- AnnData$new(
   X = matrix(c(10, 11, 12, 13), nrow = 2, byrow = TRUE),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
   var = data.frame(type = c(3L, 4L), row.names = c("var3", "var4")),

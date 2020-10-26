@@ -5,6 +5,7 @@
 
 # For interfacing with python and anndata
 #' @importFrom reticulate py_module_available import
+#' @importFrom assertthat assert_that
 NULL
 
 # global reference to umap (will be initialized in .onLoad)
