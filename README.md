@@ -7,8 +7,8 @@ status](https://github.com/rcannood/anndata/workflows/R-CMD-check/badge.svg)](ht
 
 # anndata - Annotated Data
 
-`AnnData` provides a scalable way of keeping track of data and learned
-annotations.
+R wrapper for anndata. `anndata` provides a scalable way of keeping
+track of data and learned annotations.
 
   - Read the [documentation](https://anndata.readthedocs.io).
   - Install via `install.packages("anndata")`.
