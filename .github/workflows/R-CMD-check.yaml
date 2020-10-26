@@ -61,6 +61,7 @@ jobs:
         run: |
           devtools::install_deps(dependencies = TRUE)
           devtools::install_cran(c("rcmdcheck", "devtools"))
+          reticulate::conda_create()
           devtools::install(".")
           anndata::install_anndata()
         shell: Rscript {0}
