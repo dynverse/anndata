@@ -57,3 +57,6 @@ py_to_r.pandas.core.indexes.base.Index <- function(x) {
 # * adpy$obsp: anndata._core.aligned_mapping.PairwiseArrays
 # * adpy$varp: anndata._core.aligned_mapping.PairwiseArrays
 # * adpy$uns: anndata.compat._overloaded_dict.OverloadedDict
+
+# TODO: Need to add mapping for:
+# * adpy$chunked_X: python.builtin.iterator

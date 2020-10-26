@@ -2,51 +2,7 @@
 % Please edit documentation in R/AnnData.R
 \name{AnnData}
 \alias{AnnData}
-\title{AnnData}
-\usage{
-AnnData(
-  X = NULL,
-  obs = NULL,
-  var = NULL,
-  uns = NULL,
-  obsm = NULL,
-  varm = NULL,
-  layers = NULL,
-  raw = NULL,
-  dtype = "float32",
-  shape = NULL,
-  filename = NULL,
-  filemode = NULL,
-  asview = FALSE
-)
-}
-\arguments{
-\item{X}{A #observations × #variables data matrix. A view of the data is used if the data type matches, otherwise, a copy is made.}
-
-\item{obs}{Key-indexed one-dimensional observations annotation of length #observations.}
-
-\item{var}{Key-indexed one-dimensional variables annotation of length #variables.}
-
-\item{uns}{Key-indexed unstructured annotation.}
-
-\item{obsm}{Key-indexed multi-dimensional observations annotation of length #observations. If passing a \code{~numpy.ndarray}, it needs to have a structured datatype.}
-
-\item{varm}{Key-indexed multi-dimensional variables annotation of length #variables. If passing a \code{~numpy.ndarray}, it needs to have a structured datatype.}
-
-\item{layers}{Key-indexed multi-dimensional arrays aligned to dimensions of \code{X}.}
-
-\item{raw}{undocumented argument}
-
-\item{dtype}{Data type used for storage.}
-
-\item{shape}{Shape list (#observations, #variables). Can only be provided if \code{X} is \code{NULL}.}
-
-\item{filename}{Name of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
-
-\item{filemode}{Open mode of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
-
-\item{asview}{asview}
-}
+\title{Annotated Data}
 \description{
 An annotated data matrix.
 }
@@ -109,60 +65,71 @@ AnnDatas always have two inherent dimensions, \code{obs} and \code{var}.
 Additionally, maintaining the dimensionality of the AnnData object allows for
 consistent handling of \code{scipy.sparse} matrices and \code{numpy} arrays.
 }
-\section{Attributes}{
-\tabular{ll}{
-   Attribute \tab Description \cr
-   \code{T} \tab Transpose whole object. \cr
-   \code{X} \tab Data matrix of shape \code{n_obs} × \code{n_vars} \cr
-   \code{filename} \tab Change to backing mode by setting the filename of a \code{.h5ad} file. \cr
-   \code{is_view} \tab \code{TRUE} if object is view of another AnnData object, \code{FALSE} otherwise. \cr
-   \code{isbacked} \tab \code{TRUE} if object is backed on disk, \code{FALSE} otherwise. \cr
-   \code{layers} \tab Dictionary-like object with values of the same dimensions as X. \cr
-   \code{n_obs} \tab Number of observations. \cr
-   \code{n_vars} \tab Number of variables/features. \cr
-   \code{obs} \tab One-dimensional annotation of observations (data frame). \cr
-   \code{obs_names} \tab Names of observations (alias for \verb{$obs$index}). \cr
-   \code{obsm} \tab Multi-dimensional annotation of observations (mutable structured ndarray). \cr
-   \code{obsp} \tab Pairwise annotation of observations, a mutable mapping with array-like values. \cr
-   \code{raw} \tab Store raw version of X and var as \verb{$raw$X}^ and \verb{$raw$var}. \cr
-   \code{shape} \tab Shape of data matrix (n_obs, n_vars). \cr
-   \code{uns} \tab Unstructured annotation (ordered dictionary). \cr
-   \code{var} \tab One-dimensional annotation of variables/ features (data frame). \cr
-   \code{var_names} \tab Names of variables (alias for \verb{$var$index}). \cr
-   \code{varm} \tab Multi-dimensional annotation of variables/features (mutable structured ndarray). \cr
-   \code{varp} \tab Pairwise annotation of observations, a mutable mapping with array-like values. \cr
-}
-}
-
-\section{Methods}{
-\tabular{ll}{
-   Method \tab Description \cr
-   \verb{chunk_X([select, replace])} \tab Return a chunk of the data matrix \code{X} with random or specified indices. \cr
-   \verb{chunked_X([chunk_size])} \tab Return an iterator over the rows of the data matrix \code{X}. \cr
-   \code{concatenate(adatas[, join, batch_key, ...])} \tab Concatenate along the observations axis. \cr
-   \verb{copy([filename])} \tab Full copy, optionally on disk. \cr
-   \code{obs_keys()} \tab List keys of observation annotation \code{o}bs. \cr
-   \verb{obs_names_make_unique([join])} \tab Makes the index unique by appending a number string to each duplicate index element: ‘1’, ‘2’, etc. \cr
-   \verb{obs_vector(k, *[, layer])} \tab Convenience function for returning a 1 dimensional ndarray of values from \code{X}, \code{layers[k]}, or \code{obs}. \cr
-   \code{obsm_keys()} \tab List keys of observation annotation \code{obsm}. \cr
-   \code{rename_categories(key, categories)} \tab Rename categories of annotation key in \code{obs}, \code{var}, and \code{uns}. \cr
-   \verb{strings_to_categoricals([df])} \tab Transform string annotations to categoricals. \cr
-   \verb{to_df([layer])} \tab Generate shallow data frame. \cr
-   \code{transpose()} \tab Transpose whole object. \cr
-   \code{uns_keys()} \tab List keys of unstructured annotation. \cr
-   \code{var_keys()} \tab List keys of variable annotation \code{var}. \cr
-   \verb{var_names_make_unique([join])} \tab Makes the index unique by appending a number string to each duplicate index element: ‘1’, ‘2’, etc. \cr
-   \verb{var_vector(k, *[, layer])} \tab Convenience function for returning a 1 dimensional ndarray of values from \code{X}, \code{layers[k]}, or \code{obs}. \cr
-   \code{varm_keys()} \tab List keys of variable annotation varm. \cr
-   \verb{write([filename, compression, ...])} \tab Write \code{h5ad}-formatted hdf5 file. \cr
-   \code{write_csvs(dirname[, skip_data, sep])} \tab Write annotation to \code{csv} files. \cr
-   \verb{write_h5ad([filename, compression, ...])} \tab Write \code{h5ad}-formatted hdf5 file. \cr
-   \verb{write_loom(filename[, write_obsm_varm]} \tab Write \code{loom}-formatted hdf5 file. \cr
-   \code{write_zarr(store[, chunks])} \tab Write a hierarchical Zarr array store. \cr
-}
-}
-
 \examples{
+\dontrun{
+ad <- AnnData$new(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  layers = list(
+    spliced = matrix(c(4, 5, 6, 7), nrow = 2, byrow = TRUE),
+    unspliced = matrix(c(8, 9, 10, 11), nrow = 2, byrow = TRUE)
+  ),
+  varm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  ),
+  uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
+)
+adpy <- ad$.__enclos_env__$private$.anndata
+private <- list(.anndata = adpy)
+
+value <- matrix(c(1,2,3,4), nrow = 2)
+ad$X
+ad$X <- value
+ad$X
+
+ad$layers
+ad$layers["spliced"]
+ad$layers["test"] <- value
+ad$layers
+
+ad$X
+ad$to_df()
+ad$uns
+
+# and many more...
+}
+
+## ------------------------------------------------
+## Method `AnnData$obs_names_make_unique`
+## ------------------------------------------------
+
+ad <- AnnData$new(
+  X = matrix(rep(1, 6), nrow = 3),
+  obs = data.frame(field = c(1, 2, 3))
+)
+ad$obs_names <- c("a", "a", "b")
+ad$obs_names_make_unique()
+ad$obs_names
+
+## ------------------------------------------------
+## Method `AnnData$var_names_make_unique`
+## ------------------------------------------------
+
+ad <- AnnData$new(
+  X = matrix(rep(1, 6), nrow = 2),
+  var = data.frame(field = c(1, 2, 3))
+)
+ad$var_names <- c("a", "a", "b")
+ad$var_names_make_unique()
+ad$var_names
+
+## ------------------------------------------------
+## Method `AnnData$write_csvs`
+## ------------------------------------------------
+
 \dontrun{
 ad <- AnnData(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
@@ -176,14 +143,656 @@ ad <- AnnData(
   uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
 )
 
-ad$X
-ad$to_df()
-ad$uns
+write_csvs(ad, "output")
 
-# and many more...
+unlink("output", recursive = TRUE)
 }
 
+## ------------------------------------------------
+## Method `AnnData$write_h5ad`
+## ------------------------------------------------
+
+\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  varm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  ),
+  uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
+)
+
+write_h5ad(ad, "output.h5ad")
+
+file.remove("output.h5ad")
+}
+Write .loom-formatted hdf5 file.
+
+
+## ------------------------------------------------
+## Method `AnnData$write_loom`
+## ------------------------------------------------
+
+\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  varm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  ),
+  uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
+)
+
+write_loom(ad, "output.loom")
+
+file.remove("output.loom")
+}
 }
 \seealso{
 \code{\link[=read_h5ad]{read_h5ad()}} \code{\link[=read_csv]{read_csv()}} \code{\link[=read_excel]{read_excel()}} \code{\link[=read_hdf]{read_hdf()}} \code{\link[=read_loom]{read_loom()}} \code{\link[=read_mtx]{read_mtx()}} \code{\link[=read_text]{read_text()}} \code{\link[=read_umi_tools]{read_umi_tools()}} \code{\link[=write_h5ad]{write_h5ad()}} \code{\link[=write_csvs]{write_csvs()}} \code{\link[=write_loom]{write_loom()}}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{X}}{Data matrix of shape \code{n_obs} × \code{n_vars}.}
+
+\item{\code{filename}}{Name of the backing file.
+
+Change to backing mode by setting the filename of a \code{.h5ad} file.
+\itemize{
+\item Setting the filename writes the stored data to disk.
+\item Setting the filename when the filename was previously another name
+moves the backing file from the previous file to the new file.
+If you want to copy the previous file, use \code{copy(filename='new_filename')}.
+}}
+
+\item{\code{layers}}{A list-like object with values of the same dimensions as \code{X}.
+Layers in AnnData are inspired by \href{https://linnarssonlab.org/loompy/apiwalkthrough/index.html#loomlayers}{loompy's layers}.
+
+Overwrite the layers:\preformatted{adata$layers <- list(spliced = spliced, unspliced = unspliced)
+}
+
+Return the layer named \code{"unspliced"}:\preformatted{adata$layers["unspliced"]
+}
+
+Create or replace the \code{"spliced"} layer:\preformatted{adata$layers["spliced"] = example_matrix
+}
+
+Assign the 10th column of layer \code{"spliced"} to the variable a:\preformatted{a <- adata$layers["spliced"][, 10]
+}
+
+Delete the \code{"spliced"}:\preformatted{adata$layers["spliced"] <- NULL
+}
+
+Return layers' names:\preformatted{names(adata$layers)
+}}
+
+\item{\code{T}}{Transpose whole object.
+
+Data matrix is transposed, observations and variables are interchanged.
+
+Ignores \code{.raw}.}
+
+\item{\code{is_view}}{\code{TRUE} if object is view of another AnnData object, \code{FALSE} otherwise.}
+
+\item{\code{isbacked}}{\code{TRUE} if object is backed on disk, \code{FALSE} otherwise.}
+
+\item{\code{n_obs}}{Number of observations.}
+
+\item{\code{obs}}{One-dimensional annotation of observations (data.frame).}
+
+\item{\code{obs_names}}{Names of observations.}
+
+\item{\code{obsm}}{Multi-dimensional annotation of observations (matrix).
+
+Stores for each key a two or higher-dimensional matrix with \code{n_obs} rows.}
+
+\item{\code{obsp}}{Pairwise annotation of observations, a mutable mapping with array-like values.
+
+Stores for each key a two or higher-dimensional data frame? whose first two dimensions are of length \code{n_obs}.}
+
+\item{\code{n_var}}{Number of variables.}
+
+\item{\code{var}}{One-dimensional annotation of variables (data.frame).}
+
+\item{\code{var_names}}{Names of variables.}
+
+\item{\code{varm}}{Multi-dimensional annotation of variables (matrix).
+
+Stores for each key a two or higher-dimensional matrix with \code{n_var} rows.}
+
+\item{\code{varp}}{Pairwise annotation of variables, a mutable mapping with array-like values.
+
+Stores for each key a two or higher-dimensional data frame? whose first two dimensions are of length \code{n_var}.}
+
+\item{\code{shape}}{Shape of data matrix (\code{n_obs}, \code{n_vars}).}
+
+\item{\code{uns}}{Unstructured annotation (ordered dictionary).}
+}
+\if{html}{\out{</div>}}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{AnnData$new()}}
+\item \href{#method-obs_keys}{\code{AnnData$obs_keys()}}
+\item \href{#method-obs_names_make_unique}{\code{AnnData$obs_names_make_unique()}}
+\item \href{#method-obsm_keys}{\code{AnnData$obsm_keys()}}
+\item \href{#method-var_keys}{\code{AnnData$var_keys()}}
+\item \href{#method-var_names_make_unique}{\code{AnnData$var_names_make_unique()}}
+\item \href{#method-varm_keys}{\code{AnnData$varm_keys()}}
+\item \href{#method-uns_keys}{\code{AnnData$uns_keys()}}
+\item \href{#method-chunk_X}{\code{AnnData$chunk_X()}}
+\item \href{#method-chunked_X}{\code{AnnData$chunked_X()}}
+\item \href{#method-concatenate}{\code{AnnData$concatenate()}}
+\item \href{#method-copy}{\code{AnnData$copy()}}
+\item \href{#method-rename_categories}{\code{AnnData$rename_categories()}}
+\item \href{#method-strings_to_categoricals}{\code{AnnData$strings_to_categoricals()}}
+\item \href{#method-to_df}{\code{AnnData$to_df()}}
+\item \href{#method-transpose}{\code{AnnData$transpose()}}
+\item \href{#method-write_csvs}{\code{AnnData$write_csvs()}}
+\item \href{#method-write_h5ad}{\code{AnnData$write_h5ad()}}
+\item \href{#method-write_loom}{\code{AnnData$write_loom()}}
+\item \href{#method-clone}{\code{AnnData$clone()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+Create a new AnnData object
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$new(
+  X = NULL,
+  obs = NULL,
+  var = NULL,
+  uns = NULL,
+  obsm = NULL,
+  varm = NULL,
+  layers = NULL,
+  dtype = "float32",
+  shape = NULL,
+  filename = NULL,
+  filemode = NULL
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{X}}{A #observations × #variables data matrix. A view of the data is used if the data type matches, otherwise, a copy is made.}
+
+\item{\code{obs}}{Key-indexed one-dimensional observations annotation of length #observations.}
+
+\item{\code{var}}{Key-indexed one-dimensional variables annotation of length #variables.}
+
+\item{\code{uns}}{Key-indexed unstructured annotation.}
+
+\item{\code{obsm}}{Key-indexed multi-dimensional observations annotation of length #observations. If passing a \code{~numpy.ndarray}, it needs to have a structured datatype.}
+
+\item{\code{varm}}{Key-indexed multi-dimensional variables annotation of length #variables. If passing a \code{~numpy.ndarray}, it needs to have a structured datatype.}
+
+\item{\code{layers}}{Key-indexed multi-dimensional arrays aligned to dimensions of \code{X}.}
+
+\item{\code{dtype}}{Data type used for storage.}
+
+\item{\code{shape}}{Shape list (#observations, #variables). Can only be provided if \code{X} is \code{NULL}.}
+
+\item{\code{filename}}{Name of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
+
+\item{\code{filemode}}{Open mode of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-obs_keys"></a>}}
+\if{latex}{\out{\hypertarget{method-obs_keys}{}}}
+\subsection{Method \code{obs_keys()}}{
+List keys of observation annotation \code{obs}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$obs_keys()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-obs_names_make_unique"></a>}}
+\if{latex}{\out{\hypertarget{method-obs_names_make_unique}{}}}
+\subsection{Method \code{obs_names_make_unique()}}{
+Makes the index unique by appending a number string to each duplicate index element: 1, 2, etc.
+
+If a tentative name created by the algorithm already exists in the index, it tries the next integer in the sequence.
+
+The first occurrence of a non-unique value is ignored.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$obs_names_make_unique(join = "-")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{join}}{The connecting string between name and integer (default: \code{"-"}).}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{ad <- AnnData$new(
+  X = matrix(rep(1, 6), nrow = 3),
+  obs = data.frame(field = c(1, 2, 3))
+)
+ad$obs_names <- c("a", "a", "b")
+ad$obs_names_make_unique()
+ad$obs_names
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-obsm_keys"></a>}}
+\if{latex}{\out{\hypertarget{method-obsm_keys}{}}}
+\subsection{Method \code{obsm_keys()}}{
+List keys of observation annotation \code{obsm}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$obsm_keys()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-var_keys"></a>}}
+\if{latex}{\out{\hypertarget{method-var_keys}{}}}
+\subsection{Method \code{var_keys()}}{
+List keys of variable annotation \code{var}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$var_keys()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-var_names_make_unique"></a>}}
+\if{latex}{\out{\hypertarget{method-var_names_make_unique}{}}}
+\subsection{Method \code{var_names_make_unique()}}{
+Makes the index unique by appending a number string to each duplicate index element: 1, 2, etc.
+
+If a tentative name created by the algorithm already exists in the index, it tries the next integer in the sequence.
+
+The first occurrence of a non-unique value is ignored.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$var_names_make_unique(join = "-")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{join}}{The connecting string between name and integer (default: \code{"-"}).}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{ad <- AnnData$new(
+  X = matrix(rep(1, 6), nrow = 2),
+  var = data.frame(field = c(1, 2, 3))
+)
+ad$var_names <- c("a", "a", "b")
+ad$var_names_make_unique()
+ad$var_names
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-varm_keys"></a>}}
+\if{latex}{\out{\hypertarget{method-varm_keys}{}}}
+\subsection{Method \code{varm_keys()}}{
+List keys of variable annotation \code{varm}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$varm_keys()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-uns_keys"></a>}}
+\if{latex}{\out{\hypertarget{method-uns_keys}{}}}
+\subsection{Method \code{uns_keys()}}{
+List keys of unstructured annotation \code{uns}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$uns_keys()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-chunk_X"></a>}}
+\if{latex}{\out{\hypertarget{method-chunk_X}{}}}
+\subsection{Method \code{chunk_X()}}{
+Return a chunk of the data matrix \code{X} with random or specified indices.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$chunk_X(select = 1000L, replace = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{select}}{Depending on the values:
+\itemize{
+\item 1 integer: A random chunk with select rows will be returned.
+\item multiple integers: A chunk with these indices will be returned.
+}}
+
+\item{\code{replace}}{if \code{select} is an integer then \code{TRUE} means random sampling of indices with replacement,
+\code{FALSE} without replacement.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-chunked_X"></a>}}
+\if{latex}{\out{\hypertarget{method-chunked_X}{}}}
+\subsection{Method \code{chunked_X()}}{
+Return an iterator over the rows of the data matrix X.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$chunked_X(chunk_size = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{chunk_size}}{Row size of a single chunk.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-concatenate"></a>}}
+\if{latex}{\out{\hypertarget{method-concatenate}{}}}
+\subsection{Method \code{concatenate()}}{
+Concatenate along the observations axis.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$concatenate(...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{Deprecated}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-copy"></a>}}
+\if{latex}{\out{\hypertarget{method-copy}{}}}
+\subsection{Method \code{copy()}}{
+Full copy, optionally on disk.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$copy(filename = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{Path to filename (default: \code{NULL}).}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-rename_categories"></a>}}
+\if{latex}{\out{\hypertarget{method-rename_categories}{}}}
+\subsection{Method \code{rename_categories()}}{
+Rename categories of annotation \code{key} in \code{obs}, \code{var}, and \code{uns}.
+Only supports passing a list/array-like \code{categories} argument.
+Besides calling \verb{self.obs[key].cat.categories = categories} –
+similar for \code{var} - this also renames categories in unstructured
+annotation that uses the categorical annotation \code{key}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$rename_categories(key, categories)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{key}}{Key for observations or variables annotation.}
+
+\item{\code{categories}}{New categories, the same number as the old categories.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-strings_to_categoricals"></a>}}
+\if{latex}{\out{\hypertarget{method-strings_to_categoricals}{}}}
+\subsection{Method \code{strings_to_categoricals()}}{
+Transform string annotations to categoricals.
+
+Only affects string annotations that lead to less categories than the total number of observations.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$strings_to_categoricals(df = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{df}}{If \code{df} is \code{NULL}, modifies both \code{obs} and \code{var}, otherwise modifies \code{df} inplace.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-to_df"></a>}}
+\if{latex}{\out{\hypertarget{method-to_df}{}}}
+\subsection{Method \code{to_df()}}{
+Generate shallow data frame.
+
+The data matrix \code{X} is returned as data frame, where \code{obs_names} are the rownames, and \code{var_names} the columns names.
+
+No annotations are maintained in the returned object.
+
+The data matrix is densified in case it is sparse.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$to_df(layer = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{layer}}{Key for layers}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-transpose"></a>}}
+\if{latex}{\out{\hypertarget{method-transpose}{}}}
+\subsection{Method \code{transpose()}}{
+transpose Transpose whole object.
+
+Data matrix is transposed, observations and variables are interchanged.
+
+Ignores \code{.raw}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$transpose()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-write_csvs"></a>}}
+\if{latex}{\out{\hypertarget{method-write_csvs}{}}}
+\subsection{Method \code{write_csvs()}}{
+Write annotation to .csv files.
+
+It is not possible to recover the full AnnData from these files. Use \code{\link[=write_h5ad]{write_h5ad()}} for this.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$write_csvs(dirname, skip_data = TRUE, sep = ",")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{dirname}}{Name of the directory to which to export.}
+
+\item{\code{skip_data}}{Skip the data matrix \code{X}.}
+
+\item{\code{sep}}{Separator for the data}
+
+\item{\code{anndata}}{An \code{\link[=AnnData]{AnnData()}} object}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  varm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  ),
+  uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
+)
+
+write_csvs(ad, "output")
+
+unlink("output", recursive = TRUE)
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-write_h5ad"></a>}}
+\if{latex}{\out{\hypertarget{method-write_h5ad}{}}}
+\subsection{Method \code{write_h5ad()}}{
+Write .h5ad-formatted hdf5 file.
+
+Generally, if you have sparse data that are stored as a dense matrix, you can
+dramatically improve performance and reduce disk space by converting to a csr_matrix:
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$write_h5ad(
+  filename,
+  compression = NULL,
+  compression_opts = NULL,
+  as_dense = list()
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{Filename of data file. Defaults to backing file.}
+
+\item{\code{compression}}{See the h5py \href{http://docs.h5py.org/en/latest/high/dataset.html#dataset-compression}{filter pipeline}.
+Options are \code{"gzip"}, \code{"lzf"} or \code{NULL}.}
+
+\item{\code{compression_opts}}{See the h5py \href{http://docs.h5py.org/en/latest/high/dataset.html#dataset-compression}{filter pipeline}.}
+
+\item{\code{as_dense}}{Sparse in AnnData object to write as dense. Currently only supports \code{"X"} and \code{"raw/X"}.}
+
+\item{\code{anndata}}{An \code{\link[=AnnData]{AnnData()}} object}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  varm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  ),
+  uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
+)
+
+write_h5ad(ad, "output.h5ad")
+
+file.remove("output.h5ad")
+}
+Write .loom-formatted hdf5 file.
+
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-write_loom"></a>}}
+\if{latex}{\out{\hypertarget{method-write_loom}{}}}
+\subsection{Method \code{write_loom()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$write_loom(filename, write_obsm_varm = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{The filename.}
+
+\item{\code{write_obsm_varm}}{Whether or not to also write the varm and obsm.}
+
+\item{\code{anndata}}{An \code{\link[=AnnData]{AnnData()}} object}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  varm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  ),
+  uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
+)
+
+write_loom(ad, "output.loom")
+
+file.remove("output.loom")
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnData$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
 }
