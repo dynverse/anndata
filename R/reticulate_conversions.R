@@ -1,3 +1,12 @@
+#' Convert between Python and R objects
+#'
+#' @param x A Python object.
+#' @param name A name
+#' @param value A value
+#'
+#' @return An \R object, as converted from the Python object.
+#'
+#' @name r-py-conversion
 #' @export
 `[[<-.collections.abc.MutableMapping` <- function(x, name, value) {
   if (is.null(value)) {
@@ -7,11 +16,13 @@
   }
 }
 
+#' @name r-py-conversion
 #' @export
 `[[.collections.abc.Mapping` <- function(x, name) {
   reticulate::py_to_r(reticulate::py_get_item(x, name))
 }
 
+#' @name r-py-conversion
 #' @export
 `[<-.collections.abc.MutableMapping` <- function(x, name, value) {
   if (is.null(value)) {
@@ -21,29 +32,34 @@
   }
 }
 
+#' @name r-py-conversion
 #' @export
 `[.collections.abc.Mapping` <- function(x, name) {
   reticulate::py_to_r(reticulate::py_get_item(x, name))
 }
 
+#' @name r-py-conversion
 #' @export
-`names.collections.abc.Mapping` <- function(x, name) {
+`names.collections.abc.Mapping` <- function(x) {
   python_builtins <- reticulate::import_builtins()
   python_builtins$list(x$keys())
 }
 
+#' @name r-py-conversion
 #' @export
 `py_to_r.collections.abc.Set` <- function(x) {
   python_builtins <- reticulate::import_builtins()
   python_builtins$list(x)
 }
 
+#' @name r-py-conversion
 #' @export
 py_to_r.pandas.core.indexes.base.Index <- function(x) {
   python_builtins <- reticulate::import_builtins()
   python_builtins$list(x)
 }
 
+#' @name r-py-conversion
 #' @export
 `py_to_r.collections.abc.Mapping` <- function(x, name) {
   python_builtins <- reticulate::import_builtins()
