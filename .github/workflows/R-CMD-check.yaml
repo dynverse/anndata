@@ -52,13 +52,6 @@ jobs:
           key: ${{ matrix.config.name }}
           restore-keys: ${{ matrix.config.name }}
 
-      - name: Install system dependencies
-        if: runner.os == 'Linux'
-        run: |
-            Rscript -e "remotes::install_github('r-hub/sysreqs')"
-            sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
-            sudo -s eval "$sysreqs"
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
