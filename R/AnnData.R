@@ -499,7 +499,7 @@ AnnDataR6 <- R6::R6Class(
 
     #' @description List keys of variable annotation `varm`.
     #' @examples
-    #' #' \dontrun{
+    #' \dontrun{
     #' ad <- AnnData(
     #'   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
     #'   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
@@ -842,7 +842,7 @@ dim.AnnDataR6 <- function(x) {
 
 #' @rdname AnnDataHelpers
 #' @export
-as.data.frame.AnnDataR6 <- function (x, layer = NULL, ...) {
+as.data.frame.AnnDataR6 <- function (x, row.names = NULL, optional = FALSE, layer = NULL, ...) {
   x$to_df(layer = layer)
 }
 

@@ -217,7 +217,7 @@ ad$var_names
 ## Method `AnnDataR6$varm_keys`
 ## ------------------------------------------------
 
-#' \dontrun{
+\dontrun{
 ad <- AnnData(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
@@ -762,7 +762,7 @@ List keys of variable annotation \code{varm}.
 
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{#' \dontrun{
+\preformatted{\dontrun{
 ad <- AnnData(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),

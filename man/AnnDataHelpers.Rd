@@ -13,7 +13,7 @@
 
 \method{dim}{AnnDataR6}(x)
 
-\method{as.data.frame}{AnnDataR6}(x, layer = NULL, ...)
+\method{as.data.frame}{AnnDataR6}(x, row.names = NULL, optional = FALSE, layer = NULL, ...)
 
 \method{as.matrix}{AnnDataR6}(x, layer = NULL, ...)
 
