@@ -648,6 +648,13 @@ AnnDataR6 <- R6::R6Class(
   )
 )
 
+#' AnnData Helpers
+#'
+#' @param x An AnnData object
+#' @param layer An AnnData layer. If `NULL`, will use `ad$X`, otherwise `ad$layers[layer]`.
+#' @param convert ?
+#'
+#' @rdname AnnDataHelpers
 #' @export
 dimnames.AnnDataR6 <- function(x) {
   list(
@@ -656,16 +663,19 @@ dimnames.AnnDataR6 <- function(x) {
   )
 }
 
+#' @rdname AnnDataHelpers
 #' @export
 dim.AnnDataR6 <- function(x) {
   x$shape
 }
 
+#' @rdname AnnDataHelpers
 #' @export
-as.data.frame.AnnDataR6 <- function (x, row.names = NULL, optional = FALSE, layer = NULL, ...) {
+as.data.frame.AnnDataR6 <- function (x, layer = NULL, ...) {
   x$to_df(layer = layer)
 }
 
+#' @rdname AnnDataHelpers
 #' @export
 as.matrix.AnnDataR6 <- function (x, layer = NULL, ...) {
   mat <-
@@ -678,11 +688,13 @@ as.matrix.AnnDataR6 <- function (x, layer = NULL, ...) {
   mat
 }
 
+#' @rdname AnnDataHelpers
 #' @export
 r_to_py.AnnDataR6 <- function(x, convert = FALSE) {
   x$.__enclos_env__$private$.anndata
 }
 
+#' @rdname AnnDataHelpers
 #' @export
 `[.AnnDataR6` <- function(x, ..., layer = NULL) {
   as.matrix.AnnDataR6(x, layer = layer)[...]
