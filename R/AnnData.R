@@ -362,6 +362,7 @@ AnnData <- R6::R6Class(
     #' @param join The connecting string between name and integer (default: `"-"`).
     #'
     #' @examples
+    #' \dontrun{
     #' ad <- AnnData$new(
     #'   X = matrix(rep(1, 6), nrow = 3),
     #'   obs = data.frame(field = c(1, 2, 3))
@@ -369,6 +370,7 @@ AnnData <- R6::R6Class(
     #' ad$obs_names <- c("a", "a", "b")
     #' ad$obs_names_make_unique()
     #' ad$obs_names
+    #' }
     obs_names_make_unique = function(join = "-") {
       private$.anndata$obs_names_make_unique(join = join)
     },
@@ -392,6 +394,7 @@ AnnData <- R6::R6Class(
     #' @param join The connecting string between name and integer (default: `"-"`).
     #'
     #' @examples
+    #' \dontrun{
     #' ad <- AnnData$new(
     #'   X = matrix(rep(1, 6), nrow = 2),
     #'   var = data.frame(field = c(1, 2, 3))
@@ -399,6 +402,7 @@ AnnData <- R6::R6Class(
     #' ad$var_names <- c("a", "a", "b")
     #' ad$var_names_make_unique()
     #' ad$var_names
+    #' }
     var_names_make_unique = function(join = "-") {
       private$.anndata$var_names_make_unique(join = join)
     },

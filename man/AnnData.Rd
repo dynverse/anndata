@@ -106,6 +106,7 @@ ad$uns
 ## Method `AnnData$obs_names_make_unique`
 ## ------------------------------------------------
 
+\dontrun{
 ad <- AnnData$new(
   X = matrix(rep(1, 6), nrow = 3),
   obs = data.frame(field = c(1, 2, 3))
@@ -113,11 +114,13 @@ ad <- AnnData$new(
 ad$obs_names <- c("a", "a", "b")
 ad$obs_names_make_unique()
 ad$obs_names
+}
 
 ## ------------------------------------------------
 ## Method `AnnData$var_names_make_unique`
 ## ------------------------------------------------
 
+\dontrun{
 ad <- AnnData$new(
   X = matrix(rep(1, 6), nrow = 2),
   var = data.frame(field = c(1, 2, 3))
@@ -125,6 +128,7 @@ ad <- AnnData$new(
 ad$var_names <- c("a", "a", "b")
 ad$var_names_make_unique()
 ad$var_names
+}
 
 ## ------------------------------------------------
 ## Method `AnnData$write_csvs`
@@ -381,13 +385,15 @@ The first occurrence of a non-unique value is ignored.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{ad <- AnnData$new(
+\preformatted{\dontrun{
+ad <- AnnData$new(
   X = matrix(rep(1, 6), nrow = 3),
   obs = data.frame(field = c(1, 2, 3))
 )
 ad$obs_names <- c("a", "a", "b")
 ad$obs_names_make_unique()
 ad$obs_names
+}
 }
 \if{html}{\out{</div>}}
 
@@ -436,13 +442,15 @@ The first occurrence of a non-unique value is ignored.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{ad <- AnnData$new(
+\preformatted{\dontrun{
+ad <- AnnData$new(
   X = matrix(rep(1, 6), nrow = 2),
   var = data.frame(field = c(1, 2, 3))
 )
 ad$var_names <- c("a", "a", "b")
 ad$var_names_make_unique()
 ad$var_names
+}
 }
 \if{html}{\out{</div>}}
 
