@@ -41,30 +41,26 @@
 #' @name r-py-conversion
 #' @export
 `names.collections.abc.Mapping` <- function(x) {
-  python_builtins <- reticulate::import_builtins()
   python_builtins$list(x$keys())
 }
 
 #' @name r-py-conversion
 #' @export
 `py_to_r.collections.abc.Set` <- function(x) {
-  python_builtins <- reticulate::import_builtins()
   python_builtins$list(x)
 }
 
 #' @name r-py-conversion
 #' @export
 py_to_r.pandas.core.indexes.base.Index <- function(x) {
-  python_builtins <- reticulate::import_builtins()
   python_builtins$list(x)
 }
 
-#' @name r-py-conversion
-#' @export
-`py_to_r.collections.abc.Mapping` <- function(x, name) {
-  python_builtins <- reticulate::import_builtins()
-  python_builtins$list(x$keys())
-}
+# #' @name r-py-conversion
+# #' @export
+# `py_to_r.collections.abc.Mapping` <- function(x, name) {
+#   python_builtins$list(x)
+# }
 
 # TODO: could add mapping specifically for:
 # * adpy$layers: anndata._core.aligned_mapping.Layers

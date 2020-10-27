@@ -9,7 +9,6 @@
 \alias{names.collections.abc.Mapping}
 \alias{py_to_r.collections.abc.Set}
 \alias{py_to_r.pandas.core.indexes.base.Index}
-\alias{py_to_r.collections.abc.Mapping}
 \title{Convert between Python and R objects}
 \usage{
 \method{[[}{collections.abc.MutableMapping}(x, name) <- value
@@ -25,8 +24,6 @@
 py_to_r.collections.abc.Set(x)
 
 py_to_r.pandas.core.indexes.base.Index(x)
-
-py_to_r.collections.abc.Mapping(x, name)
 }
 \arguments{
 \item{x}{A Python object.}

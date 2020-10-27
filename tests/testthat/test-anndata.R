@@ -17,7 +17,6 @@ ad <- AnnData$new(
   ),
   uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
 )
-# adpy <- ad$.__enclos_env__$private$.anndata
 
 test_that("simple functions", {
   value <- matrix(1:4, nrow = 2)
@@ -25,8 +24,6 @@ test_that("simple functions", {
   expect_true(all(ad$X == 0:3))
   ad$X <- value
   expect_true(all(ad$X == 1:4))
-
-  print(ad$layers["spliced"])
 
   expect_true(all(ad$layers["spliced"] == 4:7))
   ad$layers["spliced"] <- value
