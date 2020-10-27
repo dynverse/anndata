@@ -369,6 +369,7 @@ AnnDataR6 <- R6::R6Class(
     #' @param filename Name of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
     #' @param filemode Open mode of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
     #'
+    #' @examples
     #' \dontrun{
     #' # use AnnData() instead of AnnDataR6$new()
     #' ad <- AnnDataR6$new(
@@ -821,9 +822,12 @@ AnnDataR6 <- R6::R6Class(
 
 #' AnnData Helpers
 #'
-#' @param x An AnnData object
+#' @param x An AnnData object.
 #' @param layer An AnnData layer. If `NULL`, will use `ad$X`, otherwise `ad$layers[layer]`.
-#' @param convert ?
+#' @param convert Not used.
+#' @param row.names Not used.
+#' @param optional Not used.
+#' @param ... Parameters passed to the underlying function.
 #'
 #' @rdname AnnDataHelpers
 #' @export
@@ -842,13 +846,13 @@ dim.AnnDataR6 <- function(x) {
 
 #' @rdname AnnDataHelpers
 #' @export
-as.data.frame.AnnDataR6 <- function (x, row.names = NULL, optional = FALSE, layer = NULL, ...) {
+as.data.frame.AnnDataR6 <- function(x, row.names = NULL, optional = FALSE, layer = NULL, ...) {
   x$to_df(layer = layer)
 }
 
 #' @rdname AnnDataHelpers
 #' @export
-as.matrix.AnnDataR6 <- function (x, layer = NULL, ...) {
+as.matrix.AnnDataR6 <- function(x, layer = NULL, ...) {
   mat <-
     if (is.null(layer)) {
       x$X

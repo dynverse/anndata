@@ -22,11 +22,17 @@
 \method{[}{AnnDataR6}(x, ..., layer = NULL)
 }
 \arguments{
-\item{x}{An AnnData object}
+\item{x}{An AnnData object.}
+
+\item{row.names}{Not used.}
+
+\item{optional}{Not used.}
 
 \item{layer}{An AnnData layer. If \code{NULL}, will use \code{ad$X}, otherwise \code{ad$layers[layer]}.}
 
-\item{convert}{?}
+\item{...}{Parameters passed to the underlying function.}
+
+\item{convert}{Not used.}
 }
 \description{
 AnnData Helpers

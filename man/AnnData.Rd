@@ -145,6 +145,19 @@ colnames(ad)
 }
 
 ## ------------------------------------------------
+## Method `AnnDataR6$new`
+## ------------------------------------------------
+
+\dontrun{
+# use AnnData() instead of AnnDataR6$new()
+ad <- AnnDataR6$new(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2"))
+)
+}
+
+## ------------------------------------------------
 ## Method `AnnDataR6$obs_keys`
 ## ------------------------------------------------
 
@@ -586,19 +599,25 @@ Create a new AnnData object
 
 \item{\code{filename}}{Name of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
 
-\item{\code{filemode}}{Open mode of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.
-
-\dontrun{
+\item{\code{filemode}}{Open mode of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
 # use AnnData() instead of AnnDataR6$new()
 ad <- AnnDataR6$new(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2"))
 )
-}}
+}
 }
 \if{html}{\out{</div>}}
+
 }
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-obs_keys"></a>}}
