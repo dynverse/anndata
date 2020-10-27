@@ -6,7 +6,7 @@
 #' and learned annotations.
 #' Used to read from and write to the h5ad file format.
 #'
-#' @name anndata
+#' @name anndata-package
 #' @aliases anndata-package anndata
 #' @docType package
 #'

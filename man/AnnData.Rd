@@ -112,6 +112,11 @@ ad <- AnnData(
     spliced = matrix(c(4, 5, 6, 7), nrow = 2, byrow = TRUE),
     unspliced = matrix(c(8, 9, 10, 11), nrow = 2, byrow = TRUE)
   ),
+  obsm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  ),
   varm = list(
     ones = matrix(rep(1L, 10), nrow = 2),
     rand = matrix(rnorm(6), nrow = 2),
@@ -121,7 +126,6 @@ ad <- AnnData(
 )
 
 value <- matrix(c(1,2,3,4), nrow = 2)
-ad$X
 ad$X <- value
 ad$X
 
@@ -130,9 +134,26 @@ ad$layers["spliced"]
 ad$layers["test"] <- value
 ad$layers
 
-ad$X
 ad$to_df()
 ad$uns
+
+as.matrix(ad)
+as.matrix(ad, layer = "unspliced")
+dim(ad)
+rownames(ad)
+colnames(ad)
+}
+
+## ------------------------------------------------
+## Method `AnnDataR6$obs_keys`
+## ------------------------------------------------
+
+\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2"))
+)
+ad$obs_keys()
 }
 
 ## ------------------------------------------------
@@ -150,6 +171,35 @@ ad$obs_names
 }
 
 ## ------------------------------------------------
+## Method `AnnDataR6$obsm_keys`
+## ------------------------------------------------
+
+\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  obsm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  )
+)
+ad$obs_keys()
+}
+
+## ------------------------------------------------
+## Method `AnnDataR6$var_keys`
+## ------------------------------------------------
+
+\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2"))
+)
+ad$var_keys()
+}
+
+## ------------------------------------------------
 ## Method `AnnDataR6$var_names_make_unique`
 ## ------------------------------------------------
 
@@ -161,6 +211,130 @@ ad <- AnnData(
 ad$var_names <- c("a", "a", "b")
 ad$var_names_make_unique()
 ad$var_names
+}
+
+## ------------------------------------------------
+## Method `AnnDataR6$varm_keys`
+## ------------------------------------------------
+
+#' \dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  varm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  )
+)
+ad$varm_keys()
+}
+
+## ------------------------------------------------
+## Method `AnnDataR6$uns_keys`
+## ------------------------------------------------
+
+\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
+)
+}
+
+## ------------------------------------------------
+## Method `AnnDataR6$chunk_X`
+## ------------------------------------------------
+
+\dontrun{
+ad <- AnnData(
+  X = matrix(runif(10000), nrow = 50)
+)
+
+ad$chunk_X(select = 10L) # 10 random samples
+ad$chunk_X(select = 1:3) # first 3 samples
+}
+
+## ------------------------------------------------
+## Method `AnnDataR6$chunked_X`
+## ------------------------------------------------
+
+\dontrun{
+ad <- AnnData(
+  X = matrix(runif(10000), nrow = 50)
+)
+ad$chunked_X(10)
+}
+
+## ------------------------------------------------
+## Method `AnnDataR6$copy`
+## ------------------------------------------------
+
+\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2)
+)
+ad$copy()
+ad$copy("file.h5ad")
+}
+
+## ------------------------------------------------
+## Method `AnnDataR6$rename_categories`
+## ------------------------------------------------
+
+\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2"))
+)
+ad$rename_categories("group", c(a = "A", b = "B")) # ??
+}
+
+## ------------------------------------------------
+## Method `AnnDataR6$strings_to_categoricals`
+## ------------------------------------------------
+
+\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+)
+ad$strings_to_categoricals() # ??
+}
+
+## ------------------------------------------------
+## Method `AnnDataR6$to_df`
+## ------------------------------------------------
+
+\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  layers = list(
+    spliced = matrix(c(4, 5, 6, 7), nrow = 2, byrow = TRUE),
+    unspliced = matrix(c(8, 9, 10, 11), nrow = 2, byrow = TRUE)
+  )
+)
+
+ad$to_df()
+ad$to_df("unspliced")
+}
+
+## ------------------------------------------------
+## Method `AnnDataR6$transpose`
+## ------------------------------------------------
+
+\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2"))
+)
+
+ad$transpose()
 }
 
 ## ------------------------------------------------
@@ -180,7 +354,7 @@ ad <- AnnData(
   uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
 )
 
-write_csvs(ad, "output")
+ad$to_write_csvs("output")
 
 unlink("output", recursive = TRUE)
 }
@@ -202,7 +376,7 @@ ad <- AnnData(
   uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
 )
 
-write_h5ad(ad, "output.h5ad")
+ad$write_h5ad("output.h5ad")
 
 file.remove("output.h5ad")
 }
@@ -224,9 +398,39 @@ ad <- AnnData(
   uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
 )
 
-write_loom(ad, "output.loom")
+ad$write_loom("output.loom")
 
 file.remove("output.loom")
+}
+
+## ------------------------------------------------
+## Method `AnnDataR6$print`
+## ------------------------------------------------
+
+\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  layers = list(
+    spliced = matrix(c(4, 5, 6, 7), nrow = 2, byrow = TRUE),
+    unspliced = matrix(c(8, 9, 10, 11), nrow = 2, byrow = TRUE)
+  ),
+  obsm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  ),
+  varm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  ),
+  uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
+)
+
+ad$print()
+print(ad)
 }
 }
 \seealso{
@@ -382,7 +586,16 @@ Create a new AnnData object
 
 \item{\code{filename}}{Name of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
 
-\item{\code{filemode}}{Open mode of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
+\item{\code{filemode}}{Open mode of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.
+
+\dontrun{
+# use AnnData() instead of AnnDataR6$new()
+ad <- AnnDataR6$new(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2"))
+)
+}}
 }
 \if{html}{\out{</div>}}
 }
@@ -394,6 +607,20 @@ Create a new AnnData object
 List keys of observation annotation \code{obs}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AnnDataR6$obs_keys()}\if{html}{\out{</div>}}
+}
+
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2"))
+)
+ad$obs_keys()
+}
+}
+\if{html}{\out{</div>}}
+
 }
 
 }
@@ -443,6 +670,25 @@ List keys of observation annotation \code{obsm}.
 \if{html}{\out{<div class="r">}}\preformatted{AnnDataR6$obsm_keys()}\if{html}{\out{</div>}}
 }
 
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  obsm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  )
+)
+ad$obs_keys()
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-var_keys"></a>}}
@@ -451,6 +697,20 @@ List keys of observation annotation \code{obsm}.
 List keys of variable annotation \code{var}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AnnDataR6$var_keys()}\if{html}{\out{</div>}}
+}
+
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2"))
+)
+ad$var_keys()
+}
+}
+\if{html}{\out{</div>}}
+
 }
 
 }
@@ -500,6 +760,25 @@ List keys of variable annotation \code{varm}.
 \if{html}{\out{<div class="r">}}\preformatted{AnnDataR6$varm_keys()}\if{html}{\out{</div>}}
 }
 
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{#' \dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  varm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  )
+)
+ad$varm_keys()
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-uns_keys"></a>}}
@@ -508,6 +787,21 @@ List keys of variable annotation \code{varm}.
 List keys of unstructured annotation \code{uns}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AnnDataR6$uns_keys()}\if{html}{\out{</div>}}
+}
+
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
+)
+}
+}
+\if{html}{\out{</div>}}
+
 }
 
 }
@@ -534,6 +828,21 @@ Return a chunk of the data matrix \code{X} with random or specified indices.
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
+ad <- AnnData(
+  X = matrix(runif(10000), nrow = 50)
+)
+
+ad$chunk_X(select = 10L) # 10 random samples
+ad$chunk_X(select = 1:3) # first 3 samples
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-chunked_X"></a>}}
@@ -551,6 +860,19 @@ Return an iterator over the rows of the data matrix X.
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
+ad <- AnnData(
+  X = matrix(runif(10000), nrow = 50)
+)
+ad$chunked_X(10)
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-concatenate"></a>}}
@@ -585,6 +907,20 @@ Full copy, optionally on disk.
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2)
+)
+ad$copy()
+ad$copy("file.h5ad")
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-rename_categories"></a>}}
@@ -608,6 +944,20 @@ annotation that uses the categorical annotation \code{key}.
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2"))
+)
+ad$rename_categories("group", c(a = "A", b = "B")) # ??
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-strings_to_categoricals"></a>}}
@@ -627,6 +977,21 @@ Only affects string annotations that lead to less categories than the total numb
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+)
+ad$strings_to_categoricals() # ??
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-to_df"></a>}}
@@ -650,6 +1015,27 @@ The data matrix is densified in case it is sparse.
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  layers = list(
+    spliced = matrix(c(4, 5, 6, 7), nrow = 2, byrow = TRUE),
+    unspliced = matrix(c(8, 9, 10, 11), nrow = 2, byrow = TRUE)
+  )
+)
+
+ad$to_df()
+ad$to_df("unspliced")
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-transpose"></a>}}
@@ -662,6 +1048,22 @@ Data matrix is transposed, observations and variables are interchanged.
 Ignores \code{.raw}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AnnDataR6$transpose()}\if{html}{\out{</div>}}
+}
+
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2"))
+)
+
+ad$transpose()
+}
+}
+\if{html}{\out{</div>}}
+
 }
 
 }
@@ -704,7 +1106,7 @@ ad <- AnnData(
   uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
 )
 
-write_csvs(ad, "output")
+ad$to_write_csvs("output")
 
 unlink("output", recursive = TRUE)
 }
@@ -762,7 +1164,7 @@ ad <- AnnData(
   uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
 )
 
-write_h5ad(ad, "output.h5ad")
+ad$write_h5ad("output.h5ad")
 
 file.remove("output.h5ad")
 }
@@ -807,7 +1209,7 @@ ad <- AnnData(
   uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
 )
 
-write_loom(ad, "output.loom")
+ad$write_loom("output.loom")
 
 file.remove("output.loom")
 }
@@ -833,6 +1235,38 @@ Print AnnData object
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  layers = list(
+    spliced = matrix(c(4, 5, 6, 7), nrow = 2, byrow = TRUE),
+    unspliced = matrix(c(8, 9, 10, 11), nrow = 2, byrow = TRUE)
+  ),
+  obsm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  ),
+  varm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  ),
+  uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
+)
+
+ad$print()
+print(ad)
+}
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
