@@ -12,7 +12,7 @@
 #' ad <- read_mtx("matrix.mtx")
 #' }
 read_mtx <- function(filename, dtype = "float32") {
-  ad <- AnnData$new()
+  ad <- AnnData()
   ad$.__enclos_env__$private$.anndata <- python_anndata$read_mtx(
     filename = filename,
     dtype = dtype

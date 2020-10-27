@@ -16,7 +16,7 @@
 #' ad <- read_excel("spreadsheet.xls")
 #' }
 read_excel <- function(filename, sheet, dtype = "float32") {
-  ad <- AnnData$new()
+  ad <- AnnData()
   ad$.__enclos_env__$private$.anndata <- python_anndata$read_excel(
     filename = filename,
     sheet = sheet,

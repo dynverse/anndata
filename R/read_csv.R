@@ -16,7 +16,7 @@
 #' ad <- read_csv("matrix.csv")
 #' }
 read_csv <- function(filename, delimiter = ",", first_column_names = NULL, dtype = "float32") {
-  ad <- AnnData$new()
+  ad <- AnnData()
   ad$.__enclos_env__$private$.anndata <- python_anndata$read_csv(
     filename = filename,
     delimiter = delimiter,

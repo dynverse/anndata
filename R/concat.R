@@ -124,15 +124,13 @@ concat <- function(
 ) {
   assert_that(
     is.list(adatas),
-    all(sapply(adatas, is, "AnnData"))
+    all(sapply(adatas, is, "AnnDataR6"))
   )
 
   # get python objects
   adatas2 <- lapply(
     adatas,
-    function(x) {
-      x$.__enclos_env__$private$.anndata
-    }
+    reticulate::r_to_py
   )
 
   python_anndata$concat(

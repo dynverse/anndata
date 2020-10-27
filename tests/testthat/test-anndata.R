@@ -2,30 +2,64 @@ context("testing AnnData")
 
 skip_if_no_anndata()
 
-ad <- AnnData$new(
-  X = matrix(c(0, 1, 2, 3), nrow = 2),
+ad <- AnnData(
+  X = matrix(0:5, nrow = 2),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
-  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  var = data.frame(type = c(1L, 2L, 3L), row.names = c("var1", "var2", "var3")),
   layers = list(
-    spliced = matrix(c(4, 5, 6, 7), nrow = 2),
-    unspliced = matrix(c(8, 9, 10, 11), nrow = 2)
+    spliced = matrix(4:9, nrow = 2),
+    unspliced = matrix(8:13, nrow = 2)
   ),
-  varm = list(
+  obsm = list(
     ones = matrix(rep(1L, 10), nrow = 2),
     rand = matrix(rnorm(6), nrow = 2),
     zeros = matrix(rep(0L, 10), nrow = 2)
   ),
-  uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
+  varm = list(
+    ones = matrix(rep(1L, 15), nrow = 3),
+    rand = matrix(rnorm(6), nrow = 3),
+    zeros = matrix(rep(0L, 15), nrow = 3)
+  ),
+  uns = list(
+    a = 1,
+    b = data.frame(f = 10),
+    c = list(c.a = 3, c.b = 4)
+  )
 )
 
-test_that("simple functions", {
-  value <- matrix(1:4, nrow = 2)
+value <- matrix(1:6, nrow = 2)
 
-  expect_true(all(ad$X == 0:3))
+test_that("read and change X", {
+  expect_true(all(ad$X == 0:5))
   ad$X <- value
-  expect_true(all(ad$X == 1:4))
+  expect_true(all(ad$X == 1:6))
+})
 
-  expect_true(all(ad$layers["spliced"] == 4:7))
+test_that("read and change layer", {
+  expect_true(all(ad$layers["spliced"] == 4:9))
   ad$layers["spliced"] <- value
-  expect_true(all(ad$layers["spliced"] == 1:4))
+  expect_true(all(ad$layers["spliced"] == 1:6))
+  ad$layers["spliced"] <- NULL
+  expect_false("spliced" %in% names(ad$layers))
+})
+
+test_that("add new layer", {
+  expect_error(ad$layers["test"])
+  ad$layers["test"] <- value
+  expect_true(all(ad$layers["test"] == 1:6))
+  ad$layers["test"] <- NULL
+  expect_false("test" %in% names(ad$layers))
+})
+
+test_that("test common R functions", {
+  expect_equal(dimnames(ad), list(c("s1", "s2"), c("var1", "var2", "var3")))
+  expect_equal(dim(ad), c(2L, 3L))
+
+  expect_true(all(as.matrix(ad) == 1:6))
+
+  expect_true(all(as.matrix(ad, layer = "unspliced") == 8:13))
+
+  expect_true(all(as.data.frame(ad) == list(var1 = 1:2, var2 = 3:4, var3 = 5:6)))
+
+  expect_true(all(as.data.frame(ad, layer = "unspliced") == list(var1 = 8:9, var2 = 10:11, var3 = 12:13)))
 })

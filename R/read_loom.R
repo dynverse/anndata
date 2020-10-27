@@ -34,7 +34,7 @@ read_loom <- function(
   dtype = "float32",
   ...
 ) {
-  ad <- AnnData$new()
+  ad <- AnnData()
   ad$.__enclos_env__$private$.anndata <- python_anndata$read_loom(
     filename = filename,
     sparse = sparse,

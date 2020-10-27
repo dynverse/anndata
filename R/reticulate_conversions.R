@@ -56,6 +56,12 @@ py_to_r.pandas.core.indexes.base.Index <- function(x) {
   python_builtins$list(x)
 }
 
+#' @name r-py-conversion
+#' @export
+py_to_r.collections.abc.KeysView <- function(x) {
+  anndata:::python_builtins$list(x)
+}
+
 # #' @name r-py-conversion
 # #' @export
 # `py_to_r.collections.abc.Mapping` <- function(x, name) {

@@ -18,7 +18,7 @@
 #' ad <- read_text("matrix.tab")
 #' }
 read_text <- function(filename, delimiter = NULL, first_column_names = NULL, dtype = "float32") {
-  ad <- AnnData$new()
+  ad <- AnnData()
   ad$.__enclos_env__$private$.anndata <- python_anndata$read_text(
     filename = filename,
     delimiter = delimiter,
