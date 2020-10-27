@@ -1,70 +1,16 @@
-#' Create a new AnnData object
+#' Create an Annotated Data Matrix
 #'
-#' @rdname AnnDataR6
-#'
-#' @param X A #observations × #variables data matrix. A view of the data is used if the data type matches, otherwise, a copy is made.
-#' @param obs Key-indexed one-dimensional observations annotation of length #observations.
-#' @param var Key-indexed one-dimensional variables annotation of length #variables.
-#' @param uns Key-indexed unstructured annotation.
-#' @param obsm Key-indexed multi-dimensional observations annotation of length #observations. If passing a `~numpy.ndarray`, it needs to have a structured datatype.
-#' @param varm Key-indexed multi-dimensional variables annotation of length #variables. If passing a `~numpy.ndarray`, it needs to have a structured datatype.
-#' @param layers Key-indexed multi-dimensional arrays aligned to dimensions of `X`.
-#' @param dtype Data type used for storage.
-#' @param shape Shape list (#observations, #variables). Can only be provided if `X` is `NULL`.
-#' @param filename Name of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
-#' @param filemode Open mode of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
-#'
-#' @export
-AnnData <- function(
-  X = NULL,
-  obs = NULL,
-  var = NULL,
-  uns = NULL,
-  obsm = NULL,
-  varm = NULL,
-  layers = NULL,
-  # raw = NULL,
-  dtype = "float32",
-  shape = NULL,
-  filename = NULL,
-  filemode = NULL
-) {
-  AnnDataR6$new(
-    X = X,
-    obs = obs,
-    var = var,
-    uns = uns,
-    obsm = obsm,
-    varm = varm,
-    layers = layers,
-    # raw = raw,
-    dtype = dtype,
-    shape = shape,
-    filename = filename,
-    filemode = filemode
-  )
-}
-
-#' @title Annotated Data
-#'
-#' @description An annotated data matrix.
-#'
-#' @details `AnnData` stores a data matrix `X` together with annotations
+#' @description `AnnData` stores a data matrix `X` together with annotations
 #' of observations `obs` (`obsm`, `obsp`), variables `var` (`varm`, `varp`),
 #' and unstructured annotations `uns`.
 #'
 #' An `AnnData` object `adata` can be sliced like a data frame,
-#' for instance `adata_subset <- adata[, list_of_variable_names]`.`AnnData`’s
+#' for instance `adata_subset <- adata[, list_of_variable_names]`. `AnnData`’s
 #' basic structure is similar to R's ExpressionSet.
 #'
 #' If setting an `h5ad`-formatted HDF5 backing file `filename`,
 #' data remains on the disk but is automatically loaded into memory if needed.
 #' See this [blog post](http://falexwolf.de/blog/171223_AnnData_indexing_views_HDF5-backing/) for more details.
-#'
-#' @import R6
-#' @export
-#'
-#' @seealso [read_h5ad()] [read_csv()] [read_excel()] [read_hdf()] [read_loom()] [read_mtx()] [read_text()] [read_umi_tools()] [write_h5ad()] [write_csvs()] [write_loom()]
 #'
 #' @details
 #' `AnnData` stores observations (samples) of variables/features in the rows of a matrix.
@@ -116,6 +62,24 @@ AnnData <- function(
 #' Additionally, maintaining the dimensionality of the AnnData object allows for
 #' consistent handling of `scipy.sparse` matrices and `numpy` arrays.
 #'
+#' @rdname AnnData
+#'
+#' @param X A #observations × #variables data matrix. A view of the data is used if the data type matches, otherwise, a copy is made.
+#' @param obs Key-indexed one-dimensional observations annotation of length #observations.
+#' @param var Key-indexed one-dimensional variables annotation of length #variables.
+#' @param uns Key-indexed unstructured annotation.
+#' @param obsm Key-indexed multi-dimensional observations annotation of length #observations. If passing a `~numpy.ndarray`, it needs to have a structured datatype.
+#' @param varm Key-indexed multi-dimensional variables annotation of length #variables. If passing a `~numpy.ndarray`, it needs to have a structured datatype.
+#' @param layers Key-indexed multi-dimensional arrays aligned to dimensions of `X`.
+#' @param dtype Data type used for storage.
+#' @param shape Shape list (#observations, #variables). Can only be provided if `X` is `NULL`.
+#' @param filename Name of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
+#' @param filemode Open mode of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
+#'
+#' @export
+#'
+#' @seealso [read_h5ad()] [read_csv()] [read_excel()] [read_hdf()] [read_loom()] [read_mtx()] [read_text()] [read_umi_tools()] [write_h5ad()] [write_csvs()] [write_loom()]
+#'
 #' @examples
 #' \dontrun{
 #' ad <- AnnData(
@@ -147,9 +111,42 @@ AnnData <- function(
 #' ad$X
 #' ad$to_df()
 #' ad$uns
-#'
-#' # and many more...
 #' }
+AnnData <- function(
+  X = NULL,
+  obs = NULL,
+  var = NULL,
+  uns = NULL,
+  obsm = NULL,
+  varm = NULL,
+  layers = NULL,
+  # raw = NULL,
+  dtype = "float32",
+  shape = NULL,
+  filename = NULL,
+  filemode = NULL
+) {
+  AnnDataR6$new(
+    X = X,
+    obs = obs,
+    var = var,
+    uns = uns,
+    obsm = obsm,
+    varm = varm,
+    layers = layers,
+    # raw = raw,
+    dtype = dtype,
+    shape = shape,
+    filename = filename,
+    filemode = filemode
+  )
+}
+
+#' @rdname AnnData
+#'
+#' @importFrom R6 R6Class
+#' @export
+#'
 AnnDataR6 <- R6::R6Class(
   "AnnDataR6",
   private = list(
@@ -684,4 +681,9 @@ as.matrix.AnnDataR6 <- function (x, layer = NULL, ...) {
 #' @export
 r_to_py.AnnDataR6 <- function(x, convert = FALSE) {
   x$.__enclos_env__$private$.anndata
+}
+
+#' @export
+`[.AnnDataR6` <- function(x, ..., layer = NULL) {
+  as.matrix.AnnDataR6(x, layer = layer)[...]
 }

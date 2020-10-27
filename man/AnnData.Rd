@@ -3,7 +3,7 @@
 \name{AnnData}
 \alias{AnnData}
 \alias{AnnDataR6}
-\title{Create a new AnnData object}
+\title{Create an Annotated Data Matrix}
 \usage{
 AnnData(
   X = NULL,
@@ -43,21 +43,19 @@ AnnData(
 \item{filemode}{Open mode of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
 }
 \description{
-An annotated data matrix.
-}
-\details{
 \code{AnnData} stores a data matrix \code{X} together with annotations
 of observations \code{obs} (\code{obsm}, \code{obsp}), variables \code{var} (\code{varm}, \code{varp}),
 and unstructured annotations \code{uns}.
 
 An \code{AnnData} object \code{adata} can be sliced like a data frame,
-for instance \code{adata_subset <- adata[, list_of_variable_names]}.\code{AnnData}’s
+for instance \code{adata_subset <- adata[, list_of_variable_names]}. \code{AnnData}’s
 basic structure is similar to R's ExpressionSet.
 
 If setting an \code{h5ad}-formatted HDF5 backing file \code{filename},
 data remains on the disk but is automatically loaded into memory if needed.
 See this \href{http://falexwolf.de/blog/171223_AnnData_indexing_views_HDF5-backing/}{blog post} for more details.
-
+}
+\details{
 \code{AnnData} stores observations (samples) of variables/features in the rows of a matrix.
 This is the convention of the modern classics of statistic and machine learning,
 the convention of dataframes both in R and Python and the established statistics
@@ -135,8 +133,6 @@ ad$layers
 ad$X
 ad$to_df()
 ad$uns
-
-# and many more...
 }
 
 ## ------------------------------------------------
