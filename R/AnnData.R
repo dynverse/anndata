@@ -1,3 +1,50 @@
+#' Create a new AnnData object
+#'
+#' @rdname AnnDataR6
+#'
+#' @param X A #observations × #variables data matrix. A view of the data is used if the data type matches, otherwise, a copy is made.
+#' @param obs Key-indexed one-dimensional observations annotation of length #observations.
+#' @param var Key-indexed one-dimensional variables annotation of length #variables.
+#' @param uns Key-indexed unstructured annotation.
+#' @param obsm Key-indexed multi-dimensional observations annotation of length #observations. If passing a `~numpy.ndarray`, it needs to have a structured datatype.
+#' @param varm Key-indexed multi-dimensional variables annotation of length #variables. If passing a `~numpy.ndarray`, it needs to have a structured datatype.
+#' @param layers Key-indexed multi-dimensional arrays aligned to dimensions of `X`.
+#' @param dtype Data type used for storage.
+#' @param shape Shape list (#observations, #variables). Can only be provided if `X` is `NULL`.
+#' @param filename Name of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
+#' @param filemode Open mode of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
+#'
+#' @export
+AnnData <- function(
+  X = NULL,
+  obs = NULL,
+  var = NULL,
+  uns = NULL,
+  obsm = NULL,
+  varm = NULL,
+  layers = NULL,
+  # raw = NULL,
+  dtype = "float32",
+  shape = NULL,
+  filename = NULL,
+  filemode = NULL
+) {
+  AnnDataR6$new(
+    X = X,
+    obs = obs,
+    var = var,
+    uns = uns,
+    obsm = obsm,
+    varm = varm,
+    layers = layers,
+    # raw = raw,
+    dtype = dtype,
+    shape = shape,
+    filename = filename,
+    filemode = filemode
+  )
+}
+
 #' @title Annotated Data
 #'
 #' @description An annotated data matrix.
@@ -71,7 +118,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' ad <- AnnData$new(
+#' ad <- AnnData(
 #'   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
 #'   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
 #'   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
@@ -86,8 +133,6 @@
 #'   ),
 #'   uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
 #' )
-#' adpy <- ad$.__enclos_env__$private$.anndata
-#' private <- list(.anndata = adpy)
 #'
 #' value <- matrix(c(1,2,3,4), nrow = 2)
 #' ad$X
@@ -105,8 +150,8 @@
 #'
 #' # and many more...
 #' }
-AnnData <- R6::R6Class(
-  "AnnData",
+AnnDataR6 <- R6::R6Class(
+  "AnnDataR6",
   private = list(
     .anndata = NULL
   ),
@@ -173,7 +218,7 @@ AnnData <- R6::R6Class(
         private$.anndata$layers
       } else {
         # add check for value
-        private$.anndata$layers <- value
+        private$.anndata$layers <- reticulate::r_to_py(value)
         self
       }
     },
@@ -363,7 +408,7 @@ AnnData <- R6::R6Class(
     #'
     #' @examples
     #' \dontrun{
-    #' ad <- AnnData$new(
+    #' ad <- AnnData(
     #'   X = matrix(rep(1, 6), nrow = 3),
     #'   obs = data.frame(field = c(1, 2, 3))
     #' )
@@ -395,7 +440,7 @@ AnnData <- R6::R6Class(
     #'
     #' @examples
     #' \dontrun{
-    #' ad <- AnnData$new(
+    #' ad <- AnnData(
     #'   X = matrix(rep(1, 6), nrow = 2),
     #'   var = data.frame(field = c(1, 2, 3))
     #' )
@@ -504,7 +549,7 @@ AnnData <- R6::R6Class(
     #'
     #' @examples
     #' \dontrun{
-    #' ad <- AnnData$new(
+    #' ad <- AnnData(
     #'   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
     #'   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
     #'   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
@@ -542,7 +587,7 @@ AnnData <- R6::R6Class(
     #'
     #' @examples
     #' \dontrun{
-    #' ad <- AnnData$new(
+    #' ad <- AnnData(
     #'   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
     #'   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
     #'   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
@@ -575,7 +620,7 @@ AnnData <- R6::R6Class(
     #'
     #' @examples
     #' \dontrun{
-    #' ad <- AnnData$new(
+    #' ad <- AnnData(
     #'   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
     #'   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
     #'   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
@@ -596,19 +641,18 @@ AnnData <- R6::R6Class(
         filename = filename,
         write_obsm_varm = write_obsm_varm
       )
+    },
+
+    #' @description Print AnnData object
+    #' @param ... optional arguments to print method.
+    print = function(...) {
+      print(private$.anndata, ...)
     }
   )
 )
 
 #' @export
-`dimnames.anndata._core.anndata.AnnData` <- function(x) {
-  list(
-    x$obs_names,
-    x$var_names
-  )
-}
-#' @export
-dimnames.AnnData <- function(x) {
+dimnames.AnnDataR6 <- function(x) {
   list(
     x$obs_names,
     x$var_names
@@ -616,16 +660,28 @@ dimnames.AnnData <- function(x) {
 }
 
 #' @export
-dim.anndata._core.anndata.AnnData <- function(x) {
-  unlist(x$shape())
-}
-#' @export
-dim.AnnData <- function(x) {
-  x$shape()
+dim.AnnDataR6 <- function(x) {
+  x$shape
 }
 
-# TODO: does this need to be implemented?
-# #' @export
-# r_to_py.AnnData <- function(x, convert = FALSE) {
-#   reticulate::r_to_py(x$.__enclos_env__$private$.anndata)
-# }
+#' @export
+as.data.frame.AnnDataR6 <- function (x, row.names = NULL, optional = FALSE, layer = NULL, ...) {
+  x$to_df(layer = layer)
+}
+
+#' @export
+as.matrix.AnnDataR6 <- function (x, layer = NULL, ...) {
+  mat <-
+    if (is.null(layer)) {
+      x$X
+    } else {
+      x$layers[layer]
+    }
+  dimnames(mat) <- dimnames(x)
+  mat
+}
+
+#' @export
+r_to_py.AnnDataR6 <- function(x, convert = FALSE) {
+  x$.__enclos_env__$private$.anndata
+}

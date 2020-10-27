@@ -26,8 +26,10 @@ Authors@R:
              role = c("aut", "ctb", "cre", "cph"),
              email = "rcannood@gmail.com",
              comment = c(ORCID = "0000-0003-3641-729X", github = "rcannood")))
-Description: Provides a scalable way of keeping track of data
-    and learned annotations.
+Description: An R wrapper for the Python package `anndata`. 
+    Provides a scalable way of keeping track of data
+    and learned annotations. 
+    Used to read from and write to the h5ad file format.
 License: MIT + file LICENSE
 URL: https://github.com/rcannood/anndata
 BugReports: https://github.com/rcannood/anndata/issues
