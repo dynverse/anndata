@@ -57,11 +57,18 @@ jobs:
         with:
           python-version: ${{ matrix.config.python }}
 
+      - name: Fix Mac OS X permissions issue
+        if: runner.os != 'Windows'
+        run: |
+          if [ ! -d /usr/local/miniconda ]; then sudo mkdir -p /usr/local/miniconda; fi
+          sudo chown -R 501:20 /usr/local/miniconda
+
       - name: Install dependencies
         run: |
+          install.packages("reticulate")
+          reticulate::install_miniconda()
           devtools::install_deps(dependencies = TRUE)
           devtools::install_cran(c("rcmdcheck", "devtools"))
-          reticulate::conda_create()
           devtools::install(".")
           anndata::install_anndata()
         shell: Rscript {0}

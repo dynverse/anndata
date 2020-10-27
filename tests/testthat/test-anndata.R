@@ -26,6 +26,8 @@ test_that("simple functions", {
   ad$X <- value
   expect_true(all(ad$X == 1:4))
 
+  print(ad$layers["spliced"])
+
   expect_true(all(ad$layers["spliced"] == 4:7))
   ad$layers["spliced"] <- value
   expect_true(all(ad$layers["spliced"] == 1:4))

@@ -11,5 +11,5 @@
 #' install_anndata()
 #' }
 install_anndata <- function(method = "auto", conda = "auto") {
-  reticulate::py_install("anndata", method = method, conda = conda)
+  reticulate::py_install("anndata>=0.7.4", method = method, conda = conda)
 }
