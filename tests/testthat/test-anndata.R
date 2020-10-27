@@ -62,4 +62,23 @@ test_that("test common R functions", {
   expect_true(all(as.data.frame(ad) == list(var1 = 1:2, var2 = 3:4, var3 = 5:6)))
 
   expect_true(all(as.data.frame(ad, layer = "unspliced") == list(var1 = 8:9, var2 = 10:11, var3 = 12:13)))
+
+  expect_equal(ad[,1], c(s1 = 0, s2 = 1))
+  expect_equal(ad[1,], c(var1 = 0, var2 = 2, var3 = 4))
+})
+
+test_that("anndata works with sparse data", {
+  sp <- as(matrix(0:5, nrow = 2), "dgCMatrix")
+  ad <- AnnData(
+    X = sp,
+    obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+    var = data.frame(type = c(1L, 2L, 3L), row.names = c("var1", "var2", "var3")),
+    layers = list(
+      spliced = matrix(4:9, nrow = 2) %>% as("dgRMatrix"),
+      unspliced = matrix(8:13, nrow = 2)
+    )
+  )
+  expect_is(ad$X, "sparseMatrix")
+  expect_is(ad$layers["spliced"], "sparseMatrix")
+  expect_is(ad$layers["unspliced"], "matrix")
 })
