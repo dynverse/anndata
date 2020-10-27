@@ -8,6 +8,7 @@
 #'
 #' @examples
 #' \dontrun{
+#' reticulate::conda_install()
 #' install_anndata()
 #' }
 install_anndata <- function(method = "auto", conda = "auto") {

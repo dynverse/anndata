@@ -37,3 +37,37 @@
 \description{
 AnnData Helpers
 }
+\examples{
+\dontrun{
+ad <- AnnData(
+  X = matrix(c(0, 1, 2, 3, 4, 5), nrow = 2),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L, 3L), row.names = c("var1", "var2", "var3")),
+  layers = list(
+    spliced = matrix(c(4, 5, 6, 7, 8, 9), nrow = 2),
+    unspliced = matrix(c(8, 9, 10, 11, 12, 13), nrow = 2)
+  ),
+  obsm = list(
+    ones = matrix(rep(1L, 10), nrow = 2),
+    rand = matrix(rnorm(6), nrow = 2),
+    zeros = matrix(rep(0L, 10), nrow = 2)
+  ),
+  varm = list(
+    ones = matrix(rep(1L, 12), nrow = 3),
+    rand = matrix(rnorm(6), nrow = 3),
+    zeros = matrix(rep(0L, 12), nrow = 3)
+  ),
+  uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
+)
+
+dimnames(ad)
+dim(ad)
+as.data.frame(ad)
+as.data.frame(ad, layer = "unspliced")
+as.matrix(ad)
+as.matrix(ad, layer = "unspliced")
+ad[2,,drop=FALSE]
+ad[,-1]
+ad[,c("var1", "var2")]
+}
+}
