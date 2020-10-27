@@ -9,7 +9,6 @@ output:
 
 [![Stars](https://img.shields.io/github/stars/theislab/anndata?logo=GitHub&color=yellow)](https://github.com/theislab/anndata/stargazers)
 [![CRAN](https://www.r-pkg.org/badges/version/anndata)](https://cran.r-project.org/package=anndata)
-[![PyPI](https://img.shields.io/pypi/v/anndata.svg)](https://pypi.org/project/anndata)
 [![Build status](https://github.com/rcannood/anndata/workflows/R-CMD-check/badge.svg)](https://github.com/rcannood/anndata/actions)
 
 # anndata - Annotated Data
