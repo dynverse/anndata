@@ -5,6 +5,7 @@ output:
 ---
 
 ```{r setup1, include=FALSE}
+set.seed(1)
 ```
 
 [![Stars](https://img.shields.io/github/stars/theislab/anndata?logo=GitHub&color=yellow)](https://github.com/theislab/anndata/stargazers)
@@ -96,6 +97,15 @@ ad$layers["spliced"]
 ad$uns["b"]
 ```
 
+### Reading / writing AnnData objects
+
+Read from h5ad format:
+```{r}
+read_h5ad("example_formats/pbmc_1k_protein_v3_processed.h5ad")
+```
+
+
+### AnnData as a matrix
 An `AnnData` object can be used as an R matrix:
 ```{r}
 ad[,c("var1", "var2")]
@@ -111,7 +121,7 @@ ad[layer="unspliced"]
 ad[,c("var2", "var3"),layer="unspliced"]
 ```
 
-### Note on modifiability
+### Note on state
 If you assign an AnnData object to another variable and
 modify either, both will be modified:
 ```{r}
@@ -131,3 +141,22 @@ ad$X[,2] <- c(3, 4)
 
 list(ad = ad$X, ad3 = ad3$X)
 ```
+
+## Future work
+
+In some cases, this package may still act more like a Python package rather than an R package.
+Some more helper functions and helper classes need to be defined in order to fully encapsulate
+`AnnData()` objects. Examples are:
+
+```{r}
+ad$layers
+ad$chunked_X(1)
+```
+
+Following functionality has not been tested:
+```r
+ad$rename_categories(...)
+ad$strings_to_categoricals(...)
+```
+
+Currently not implemented are the `read_zarr()` and `ad$write_zarr()` functions.

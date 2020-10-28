@@ -123,10 +123,10 @@ ad$obsm["ones"]
 ad$varm["rand"]
 ```
 
-    ##            [,1]       [,2]
-    ## [1,]  0.1952919 -1.0035604
-    ## [2,] -0.5690888  0.7477607
-    ## [3,] -0.7296439  0.4262203
+    ##              [,1]       [,2]
+    ## [1,] -0.005767173 -0.7990092
+    ## [2,]  2.404653389 -1.1476570
+    ## [3,]  0.763593461 -0.2894616
 
 ``` r
 ad$layers["unspliced"]
@@ -149,9 +149,25 @@ ad$uns["b"]
 ```
 
     ##   i j     value
-    ## 1 1 4 0.2910851
-    ## 2 2 5 0.2795689
-    ## 3 3 6 0.9563980
+    ## 1 1 4 0.2655087
+    ## 2 2 5 0.3721239
+    ## 3 3 6 0.5728534
+
+### Reading / writing AnnData objects
+
+Read from h5ad format:
+
+``` r
+read_h5ad("example_formats/pbmc_1k_protein_v3_processed.h5ad")
+```
+
+    ## AnnData object with n_obs × n_vars = 713 × 33538
+    ##     var: 'gene_ids', 'feature_types', 'genome', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'
+    ##     uns: 'hvgParameters', 'normalizationParameters', 'pca', 'pcaParameters'
+    ##     obsm: 'X_pca'
+    ##     varm: 'PCs'
+
+### AnnData as a matrix
 
 An `AnnData` object can be used as an R matrix:
 
@@ -201,7 +217,7 @@ ad[,c("var2", "var3"),layer="unspliced"]
     ## s1   10   12
     ## s2   11   13
 
-### Note on modifiability
+### Note on state
 
 If you assign an AnnData object to another variable and modify either,
 both will be modified:
@@ -244,3 +260,32 @@ list(ad = ad$X, ad3 = ad3$X)
     ##      [,1] [,2] [,3]
     ## [1,]    1   10    5
     ## [2,]    2   10    6
+
+## Future work
+
+In some cases, this package may still act more like a Python package
+rather than an R package. Some more helper functions and helper classes
+need to be defined in order to fully encapsulate `AnnData()` objects.
+Examples are:
+
+``` r
+ad$layers
+```
+
+    ## Layers with keys: spliced, unspliced
+
+``` r
+ad$chunked_X(1)
+```
+
+    ## <generator object AnnData.chunked_X at 0x7fcdc8fa49e0>
+
+Following functionality has not been tested:
+
+``` r
+ad$rename_categories(...)
+ad$strings_to_categoricals(...)
+```
+
+Currently not implemented are the `read_zarr()` and `ad$write_zarr()`
+functions.
