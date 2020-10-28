@@ -21,7 +21,7 @@ Please unwrap the examples if they are executable in < 5 sec, or replace
 
 This package is a reticulate wrapper for the 'anndata' Python package. 
 Since I cannot assume that the anndata package is installed on CRAN, 
-the examples are wrapped in \donttext{}.
+the examples are wrapped in \donttest{}.
 
 --------------------------------------------------------------------------
 
@@ -35,13 +35,7 @@ Done!
 > Please do not modify the global environment (e.g. by using <<-) in your
 functions. This is not allowed by the CRAN policies.
 
-Here I am following the recommendations of RStudio related to making sure
-my package is well bahaved on CRAN:
-
-  https://rstudio.github.io/reticulate/articles/package.html#checking-and-testing-on-cran-1
-  
-In addition, I see several other CRAN packages importing python packages 
-in a similar fashion.
+Solved.
 
 --------------------------------------------------------------------------
 
