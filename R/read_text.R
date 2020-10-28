@@ -19,12 +19,10 @@
 #' }
 read_text <- function(filename, delimiter = NULL, first_column_names = NULL, dtype = "float32") {
   python_anndata <- reticulate::import("anndata")
-  ad <- AnnData()
-  ad$.__enclos_env__$private$.anndata <- python_anndata$read_text(
+  python_anndata$read_text(
     filename = filename,
     delimiter = delimiter,
     first_column_names = first_column_names,
     dtype = dtype
   )
-  ad
 }

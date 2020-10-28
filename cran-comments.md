@@ -1,6 +1,6 @@
 This package is a reticulate wrapper for the Python package 'anndata'.
 
-Comments by CRAN submissions team are addressed below.
+Previous comments by CRAN submissions team are addressed below.
 
 --------------------------------------------------------------------------
 

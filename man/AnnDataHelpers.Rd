@@ -6,6 +6,7 @@
 \alias{as.data.frame.AnnDataR6}
 \alias{as.matrix.AnnDataR6}
 \alias{r_to_py.AnnDataR6}
+\alias{py_to_r.anndata._core.anndata.AnnData}
 \alias{[.AnnDataR6}
 \alias{[<-.AnnDataR6}
 \alias{t.AnnDataR6}
@@ -20,6 +21,8 @@
 \method{as.matrix}{AnnDataR6}(x, layer = NULL, ...)
 
 \method{r_to_py}{AnnDataR6}(x, convert = FALSE)
+
+\method{py_to_r}{anndata._core.anndata.AnnData}(x)
 
 \method{[}{AnnDataR6}(x, ..., layer = NULL)
 

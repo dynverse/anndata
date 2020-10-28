@@ -35,8 +35,7 @@ read_loom <- function(
   ...
 ) {
   python_anndata <- reticulate::import("anndata")
-  ad <- AnnData()
-  ad$.__enclos_env__$private$.anndata <- python_anndata$read_loom(
+  python_anndata$read_loom(
     filename = filename,
     sparse = sparse,
     cleanup = cleanup,
@@ -48,5 +47,4 @@ read_loom <- function(
     dtype = dtype,
     ...
   )
-  ad
 }

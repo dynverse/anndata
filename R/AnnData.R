@@ -161,203 +161,6 @@ AnnDataR6 <- R6::R6Class(
     .anndata = NULL
   ),
   cloneable = FALSE,
-  active = list(
-    #' @field X Data matrix of shape `n_obs` × `n_vars`.
-    X = function(value) {
-      if (missing(value)) {
-        private$.anndata$X
-      } else {
-        private$.anndata$X <- value
-        self
-      }
-    },
-    #' @field filename Name of the backing file.
-    #'
-    #' Change to backing mode by setting the filename of a `.h5ad` file.
-    #'
-    #' - Setting the filename writes the stored data to disk.
-    #' - Setting the filename when the filename was previously another name
-    #'   moves the backing file from the previous file to the new file.
-    #'   If you want to copy the previous file, use `copy(filename='new_filename')`.
-    filename = function(value) {
-      if (missing(value)) {
-        private$.anndata$filename
-      } else {
-        private$.anndata$filename <- value
-        self
-      }
-    },
-    #' @field layers A list-like object with values of the same dimensions as `X`.
-    #' Layers in AnnData are inspired by [loompy's layers](https://linnarssonlab.org/loompy/apiwalkthrough/index.html#loomlayers).
-    #'
-    #' Overwrite the layers:
-    #' ```
-    #' adata$layers <- list(spliced = spliced, unspliced = unspliced)
-    #' ````
-    #'
-    #' Return the layer named `"unspliced"`:
-    #' ```
-    #' adata$layers["unspliced"]
-    #' ```
-    #'
-    #' Create or replace the `"spliced"` layer:
-    #' ```
-    #' adata$layers["spliced"] = example_matrix
-    #' ```
-    #'
-    #' Assign the 10th column of layer `"spliced"` to the variable a:
-    #' ```
-    #' a <- adata$layers["spliced"][, 10]
-    #' ```
-    #'
-    #' Delete the `"spliced"`:
-    #' ```
-    #' adata$layers["spliced"] <- NULL
-    #' ```
-    #'
-    #' Return layers' names:
-    #' ```
-    #' names(adata$layers)
-    #' ```
-    layers = function(value) {
-      if (missing(value)) {
-        private$.anndata$layers
-      } else {
-        # add check for value
-        private$.anndata$layers <- reticulate::r_to_py(value)
-        self
-      }
-    },
-    #' @field T Transpose whole object.
-    #'
-    #' Data matrix is transposed, observations and variables are interchanged.
-    #'
-    #' Ignores `.raw`.
-    `T` = function() {
-      ad <- AnnData()
-      ad$.__enclos_env__$private$.anndata <-
-        private$.anndata$`T`
-      ad
-    },
-    #' @field is_view `TRUE` if object is view of another AnnData object, `FALSE` otherwise.
-    is_view = function() {
-      private$.anndata$is_view
-    },
-    #' @field isbacked `TRUE` if object is backed on disk, `FALSE` otherwise.
-    isbacked = function() {
-      private$.anndata$isbacked
-    },
-    #' @field n_obs Number of observations.
-    n_obs = function() {
-      private$.anndata$n_obs
-    },
-    #' @field obs One-dimensional annotation of observations (data.frame).
-    obs = function(value) {
-      if (missing(value)) {
-        private$.anndata$obs
-      } else {
-        # add check for value
-        private$.anndata$obs <- value
-        self
-      }
-    },
-    #' @field obs_names Names of observations.
-    obs_names = function(value) {
-      if (missing(value)) {
-        private$.anndata$obs_names
-      } else {
-        # add check for value
-        private$.anndata$obs_names <- value
-        self
-      }
-    },
-    #' @field obsm Multi-dimensional annotation of observations (matrix).
-    #'
-    #' Stores for each key a two or higher-dimensional matrix with `n_obs` rows.
-    obsm = function(value) {
-      if (missing(value)) {
-        private$.anndata$obsm
-      } else {
-        # add check for value
-        private$.anndata$obsm <- value
-        self
-      }
-    },
-    #' @field obsp Pairwise annotation of observations, a mutable mapping with array-like values.
-    #'
-    #' Stores for each key a two or higher-dimensional data frame? whose first two dimensions are of length `n_obs`.
-    obsp = function(value) {
-      if (missing(value)) {
-        private$.anndata$obsp
-      } else {
-        # add check for value
-        private$.anndata$obsp <- value
-        self
-      }
-    },
-    #' @field n_var Number of variables.
-    n_var = function() {
-      private$.anndata$n_var
-    },
-    #' @field var One-dimensional annotation of variables (data.frame).
-    var = function(value) {
-      if (missing(value)) {
-        private$.anndata$var
-      } else {
-        # add check for value
-        private$.anndata$var <- value
-        self
-      }
-    },
-    #' @field var_names Names of variables.
-    var_names = function(value) {
-      if (missing(value)) {
-        private$.anndata$var_names
-      } else {
-        # add check for value
-        private$.anndata$var_names <- value
-        self
-      }
-    },
-    #' @field varm Multi-dimensional annotation of variables (matrix).
-    #'
-    #' Stores for each key a two or higher-dimensional matrix with `n_var` rows.
-    varm = function(value) {
-      if (missing(value)) {
-        private$.anndata$varm
-      } else {
-        # add check for value
-        private$.anndata$varm <- value
-        self
-      }
-    },
-    #' @field varp Pairwise annotation of variables, a mutable mapping with array-like values.
-    #'
-    #' Stores for each key a two or higher-dimensional data frame? whose first two dimensions are of length `n_var`.
-    varp = function(value) {
-      if (missing(value)) {
-        private$.anndata$varp
-      } else {
-        # add check for value
-        private$.anndata$varp <- value
-        self
-      }
-    },
-    #' @field shape Shape of data matrix (`n_obs`, `n_vars`).
-    shape = function() {
-      unlist(private$.anndata$shape)
-    },
-    #' @field uns Unstructured annotation (ordered dictionary).
-    uns = function(value) {
-      if (missing(value)) {
-        private$.anndata$uns
-      } else {
-        # add check for value
-        private$.anndata$uns <- value
-        self
-      }
-    }
-  ),
   public = list(
     #' @description Create a new AnnData object
     #'
@@ -396,21 +199,23 @@ AnnDataR6 <- R6::R6Class(
       filename = NULL,
       filemode = NULL
     ) {
-      python_anndata <- reticulate::import("anndata")
-      private$.anndata <- python_anndata$AnnData(
-        X = X,
-        obs = obs,
-        var = var,
-        uns = uns,
-        obsm = obsm,
-        varm = varm,
-        layers = layers,
-        # raw = raw,
-        dtype = dtype,
-        shape = shape,
-        filename = filename,
-        filemode = filemode
-      )
+      if (dtype != "DUMMY") {
+        python_anndata <- reticulate::import("anndata")
+        private$.anndata <- python_anndata$AnnData(
+          X = X,
+          obs = obs,
+          var = var,
+          uns = uns,
+          obsm = obsm,
+          varm = varm,
+          layers = layers,
+          # raw = raw,
+          dtype = dtype,
+          shape = shape,
+          filename = filename,
+          filemode = filemode
+        )
+      }
     },
 
     #' @description List keys of observation annotation `obs`.
@@ -593,10 +398,7 @@ AnnDataR6 <- R6::R6Class(
     #' ad$copy("file.h5ad")
     #' }
     copy = function(filename = NULL) {
-      ad <- AnnData()
-      ad$.__enclos_env__$private$.anndata <-
-        private$.anndata$copy(filename = filename)
-      ad
+      private$.anndata$copy(filename = filename)
     },
 
     #' @description Rename categories of annotation `key` in `obs`, `var`, and `uns`.
@@ -685,10 +487,7 @@ AnnDataR6 <- R6::R6Class(
     #' ad$transpose()
     #' }
     transpose = function() {
-      ad <- AnnData()
-      ad$.__enclos_env__$private$.anndata <-
-        private$.anndata$transpose()
-      ad
+      private$.anndata$transpose()
     },
 
     #' @description Write annotation to .csv files.
@@ -828,6 +627,200 @@ AnnDataR6 <- R6::R6Class(
     print = function(...) {
       print(private$.anndata, ...)
     }
+  ),
+  active = list(
+    #' @field X Data matrix of shape `n_obs` × `n_vars`.
+    X = function(value) {
+      if (missing(value)) {
+        private$.anndata$X
+      } else {
+        private$.anndata$X <- value
+        self
+      }
+    },
+    #' @field filename Name of the backing file.
+    #'
+    #' Change to backing mode by setting the filename of a `.h5ad` file.
+    #'
+    #' - Setting the filename writes the stored data to disk.
+    #' - Setting the filename when the filename was previously another name
+    #'   moves the backing file from the previous file to the new file.
+    #'   If you want to copy the previous file, use `copy(filename='new_filename')`.
+    filename = function(value) {
+      if (missing(value)) {
+        private$.anndata$filename
+      } else {
+        private$.anndata$filename <- value
+        self
+      }
+    },
+    #' @field layers A list-like object with values of the same dimensions as `X`.
+    #' Layers in AnnData are inspired by [loompy's layers](https://linnarssonlab.org/loompy/apiwalkthrough/index.html#loomlayers).
+    #'
+    #' Overwrite the layers:
+    #' ```
+    #' adata$layers <- list(spliced = spliced, unspliced = unspliced)
+    #' ````
+    #'
+    #' Return the layer named `"unspliced"`:
+    #' ```
+    #' adata$layers["unspliced"]
+    #' ```
+    #'
+    #' Create or replace the `"spliced"` layer:
+    #' ```
+    #' adata$layers["spliced"] = example_matrix
+    #' ```
+    #'
+    #' Assign the 10th column of layer `"spliced"` to the variable a:
+    #' ```
+    #' a <- adata$layers["spliced"][, 10]
+    #' ```
+    #'
+    #' Delete the `"spliced"`:
+    #' ```
+    #' adata$layers["spliced"] <- NULL
+    #' ```
+    #'
+    #' Return layers' names:
+    #' ```
+    #' names(adata$layers)
+    #' ```
+    layers = function(value) {
+      if (missing(value)) {
+        private$.anndata$layers
+      } else {
+        # add check for value
+        private$.anndata$layers <- reticulate::r_to_py(value)
+        self
+      }
+    },
+    #' @field T Transpose whole object.
+    #'
+    #' Data matrix is transposed, observations and variables are interchanged.
+    #'
+    #' Ignores `.raw`.
+    `T` = function() {
+      private$.anndata$`T`
+    },
+    #' @field is_view `TRUE` if object is view of another AnnData object, `FALSE` otherwise.
+    is_view = function() {
+      private$.anndata$is_view
+    },
+    #' @field isbacked `TRUE` if object is backed on disk, `FALSE` otherwise.
+    isbacked = function() {
+      private$.anndata$isbacked
+    },
+    #' @field n_obs Number of observations.
+    n_obs = function() {
+      private$.anndata$n_obs
+    },
+    #' @field obs One-dimensional annotation of observations (data.frame).
+    obs = function(value) {
+      if (missing(value)) {
+        private$.anndata$obs
+      } else {
+        # add check for value
+        private$.anndata$obs <- value
+        self
+      }
+    },
+    #' @field obs_names Names of observations.
+    obs_names = function(value) {
+      if (missing(value)) {
+        private$.anndata$obs_names
+      } else {
+        # add check for value
+        private$.anndata$obs_names <- value
+        self
+      }
+    },
+    #' @field obsm Multi-dimensional annotation of observations (matrix).
+    #'
+    #' Stores for each key a two or higher-dimensional matrix with `n_obs` rows.
+    obsm = function(value) {
+      if (missing(value)) {
+        private$.anndata$obsm
+      } else {
+        # add check for value
+        private$.anndata$obsm <- value
+        self
+      }
+    },
+    #' @field obsp Pairwise annotation of observations, a mutable mapping with array-like values.
+    #'
+    #' Stores for each key a two or higher-dimensional data frame? whose first two dimensions are of length `n_obs`.
+    obsp = function(value) {
+      if (missing(value)) {
+        private$.anndata$obsp
+      } else {
+        # add check for value
+        private$.anndata$obsp <- value
+        self
+      }
+    },
+    #' @field n_var Number of variables.
+    n_var = function() {
+      private$.anndata$n_var
+    },
+    #' @field var One-dimensional annotation of variables (data.frame).
+    var = function(value) {
+      if (missing(value)) {
+        private$.anndata$var
+      } else {
+        # add check for value
+        private$.anndata$var <- value
+        self
+      }
+    },
+    #' @field var_names Names of variables.
+    var_names = function(value) {
+      if (missing(value)) {
+        private$.anndata$var_names
+      } else {
+        # add check for value
+        private$.anndata$var_names <- value
+        self
+      }
+    },
+    #' @field varm Multi-dimensional annotation of variables (matrix).
+    #'
+    #' Stores for each key a two or higher-dimensional matrix with `n_var` rows.
+    varm = function(value) {
+      if (missing(value)) {
+        private$.anndata$varm
+      } else {
+        # add check for value
+        private$.anndata$varm <- value
+        self
+      }
+    },
+    #' @field varp Pairwise annotation of variables, a mutable mapping with array-like values.
+    #'
+    #' Stores for each key a two or higher-dimensional data frame? whose first two dimensions are of length `n_var`.
+    varp = function(value) {
+      if (missing(value)) {
+        private$.anndata$varp
+      } else {
+        # add check for value
+        private$.anndata$varp <- value
+        self
+      }
+    },
+    #' @field shape Shape of data matrix (`n_obs`, `n_vars`).
+    shape = function() {
+      unlist(private$.anndata$shape)
+    },
+    #' @field uns Unstructured annotation (ordered dictionary).
+    uns = function(value) {
+      if (missing(value)) {
+        private$.anndata$uns
+      } else {
+        # add check for value
+        private$.anndata$uns <- value
+        self
+      }
+    }
   )
 )
 
@@ -913,6 +906,14 @@ as.matrix.AnnDataR6 <- function(x, layer = NULL, ...) {
 #' @export
 r_to_py.AnnDataR6 <- function(x, convert = FALSE) {
   x$.__enclos_env__$private$.anndata
+}
+
+#' @rdname AnnDataHelpers
+#' @export
+py_to_r.anndata._core.anndata.AnnData <- function(x) {
+  ad <- AnnData(dtype = "DUMMY")
+  ad$.__enclos_env__$private$.anndata <- x
+  ad
 }
 
 #' @rdname AnnDataHelpers

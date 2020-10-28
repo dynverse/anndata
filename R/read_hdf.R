@@ -15,10 +15,8 @@
 #' }
 read_hdf <- function(filename, key) {
   python_anndata <- reticulate::import("anndata")
-  ad <- AnnData()
-  ad$.__enclos_env__$private$.anndata <- python_anndata$read_hdf(
+  python_anndata$read_hdf(
     filename = filename,
     key = key
   )
-  ad
 }
