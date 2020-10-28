@@ -20,6 +20,7 @@ Needs to be run after installing the anndata R package.
 }
 \examples{
 \dontrun{
+reticulate::conda_install()
 install_anndata()
 }
 }

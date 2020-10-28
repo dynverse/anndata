@@ -18,6 +18,7 @@
 #' ad <- read_text("matrix.tab")
 #' }
 read_text <- function(filename, delimiter = NULL, first_column_names = NULL, dtype = "float32") {
+  python_anndata <- reticulate::import("anndata")
   ad <- AnnData()
   ad$.__enclos_env__$private$.anndata <- python_anndata$read_text(
     filename = filename,

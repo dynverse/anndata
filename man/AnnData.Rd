@@ -150,7 +150,7 @@ colnames(ad)
 
 \dontrun{
 # use AnnData() instead of AnnDataR6$new()
-ad <- AnnDataR6$new(
+ad <- AnnData(
   X = matrix(c(0, 1, 2, 3), nrow = 2),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2"))
@@ -607,7 +607,7 @@ Create a new AnnData object
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{\dontrun{
 # use AnnData() instead of AnnDataR6$new()
-ad <- AnnDataR6$new(
+ad <- AnnData(
   X = matrix(c(0, 1, 2, 3), nrow = 2),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2"))

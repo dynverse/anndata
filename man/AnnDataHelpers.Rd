@@ -7,6 +7,8 @@
 \alias{as.matrix.AnnDataR6}
 \alias{r_to_py.AnnDataR6}
 \alias{[.AnnDataR6}
+\alias{[<-.AnnDataR6}
+\alias{t.AnnDataR6}
 \title{AnnData Helpers}
 \usage{
 \method{dimnames}{AnnDataR6}(x)
@@ -20,6 +22,10 @@
 \method{r_to_py}{AnnDataR6}(x, convert = FALSE)
 
 \method{[}{AnnDataR6}(x, ..., layer = NULL)
+
+\method{[}{AnnDataR6}(x, ..., layer = NULL) <- value
+
+\method{t}{AnnDataR6}(x)
 }
 \arguments{
 \item{x}{An AnnData object.}

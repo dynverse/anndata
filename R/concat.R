@@ -132,6 +132,7 @@ concat <- function(
     reticulate::r_to_py
   )
 
+  python_anndata <- reticulate::import("anndata")
   python_anndata$concat(
     adatas = adatas2,
     axis = axis,

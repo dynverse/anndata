@@ -104,7 +104,6 @@ c <- AnnData(
 
 # Concatenating along different axes
 concat(list(a, b))$to_df()
-
 concat(list(a, c), axis = 1L)$to_df()
 
 # Inner and outer joins

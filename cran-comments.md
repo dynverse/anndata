@@ -1,5 +1,9 @@
 This package is a reticulate wrapper for the Python package 'anndata'.
 
+Comments by CRAN submissions team are addressed below.
+
+--------------------------------------------------------------------------
+
  > Please add more details about the package functionality and implemented
 methods in your Description text.
 

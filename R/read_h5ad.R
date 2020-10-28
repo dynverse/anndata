@@ -15,6 +15,7 @@ read_h5ad <- function(
   filename,
   backed = NULL
 ) {
+  python_anndata <- reticulate::import("anndata")
   ad <- AnnData()
   ad$.__enclos_env__$private$.anndata <- python_anndata$read_h5ad(
     filename = filename,

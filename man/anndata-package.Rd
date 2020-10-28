@@ -6,41 +6,106 @@
 \alias{anndata}
 \title{anndata - Annotated Data}
 \description{
-An R wrapper for the Python package
-\href{https://github.com/theislab/anndata/tree/58886f09b2e387c6389a2de20ed0bc7d20d1b843}{\verb{theislab/anndata@58886f}}.
-Provides a scalable way of keeping track of data
-and learned annotations.
-Used to read from and write to the h5ad file format.
+\code{anndata} provides a scalable way of keeping track of data
+and learned annotations, and can be used to read from and write to the h5ad
+file format. \code{AnnData()} stores a data matrix \code{X} together with annotations
+of observations \code{obs} (\code{obsm}, \code{obsp}), variables \code{var} (\code{varm}, \code{varp}),
+and unstructured annotations \code{uns}.
 }
+\details{
+This package is, in essense, an R wrapper for the similarly named Python package
+\href{https://anndata.readthedocs.io/en/latest/}{\code{anndata}}, with some added functionality
+to support more R-like syntax.
+The specific version used is \href{https://github.com/theislab/anndata/tree/58886f09b2e387c6389a2de20ed0bc7d20d1b843}{\verb{theislab/anndata@58886f}}.
+
+Check out \code{?anndata} for a full list of the functions provided by this package.
+}
+\section{Creating an AnnData object}{
+
+\itemize{
+\item \code{\link[=AnnData]{AnnData()}}
+}
+}
+
+\section{Concatenating two or more AnnData objects}{
+
+\itemize{
+\item \code{\link[=concat]{concat()}}
+}
+}
+
+\section{Reading an AnnData object from a file}{
+
+\itemize{
+\item \code{\link[=read_csv]{read_csv()}}
+\item \code{\link[=read_excel]{read_excel()}}
+\item \code{\link[=read_h5ad]{read_h5ad()}}
+\item \code{\link[=read_hdf]{read_hdf()}}
+\item \code{\link[=read_loom]{read_loom()}}
+\item \code{\link[=read_mtx]{read_mtx()}}
+\item \code{\link[=read_text]{read_text()}}
+\item \code{\link[=read_umi_tools]{read_umi_tools()}}
+}
+}
+
+\section{Writing an AnnData object to a file}{
+
+\itemize{
+\item \code{\link[=write_csvs]{write_csvs()}}
+\item \code{\link[=write_h5ad]{write_h5ad()}}
+\item \code{\link[=write_loom]{write_loom()}}
+}
+}
+
+\section{Install the \code{anndata} Python package}{
+
+\itemize{
+\item \code{\link[=install_anndata]{install_anndata()}}
+}
+}
+
 \examples{
 \dontrun{
 ad <- AnnData(
-  X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
+  X = matrix(1:6, nrow = 2),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
-  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
+  var = data.frame(type = c(1L, 2L, 3L), row.names = c("var1", "var2", "var3")),
   layers = list(
-    spliced = matrix(c(4, 5, 6, 7), nrow = 2, byrow = TRUE),
-    unspliced = matrix(c(8, 9, 10, 11), nrow = 2, byrow = TRUE)
+    spliced = matrix(4:9, nrow = 2),
+    unspliced = matrix(8:13, nrow = 2)
   ),
-  varm = list(
+  obsm = list(
     ones = matrix(rep(1L, 10), nrow = 2),
     rand = matrix(rnorm(6), nrow = 2),
     zeros = matrix(rep(0L, 10), nrow = 2)
   ),
-  uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
+  varm = list(
+    ones = matrix(rep(1L, 12), nrow = 3),
+    rand = matrix(rnorm(6), nrow = 3),
+    zeros = matrix(rep(0L, 12), nrow = 3)
+  ),
+  uns = list(
+    a = 1,
+    b = data.frame(i = 1:3, j = 4:6, value = runif(3)),
+    c = list(c.a = 3, c.b = 4)
+  )
 )
 
-value <- matrix(c(1,2,3,4), nrow = 2)
-ad$X
-ad$X <- value
 ad$X
 
-ad$layers
+ad$obs
+ad$var
+
+ad$obsm["ones"]
+ad$varm["rand"]
+
+ad$layers["unspliced"]
 ad$layers["spliced"]
-ad$layers["test"] <- value
-ad$layers
 
-ad$to_df()
-ad$uns
+ad$uns["b"]
+
+ad[,c("var1", "var2")]
+ad[-1, , drop = FALSE]
+ad[, 2] <- 10
 }
 }

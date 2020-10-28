@@ -135,7 +135,7 @@ AnnData <- function(
   filename = NULL,
   filemode = NULL
 ) {
-  AnnDataR6$new(
+  ad <- AnnDataR6New(
     X = X,
     obs = obs,
     var = var,
@@ -149,6 +149,15 @@ AnnData <- function(
     filename = filename,
     filemode = filemode
   )
+
+  # replace 'clone()' function with 'copy()',
+  # otherwise cloning will not behave adequately.
+  unlockBinding("clone", ad)
+  ad$clone <- function(deep = FALSE) {
+    ad$copy()
+  }
+
+  ad
 }
 
 #' @rdname AnnData
@@ -233,7 +242,10 @@ AnnDataR6 <- R6::R6Class(
     #'
     #' Ignores `.raw`.
     `T` = function() {
-      private$.anndata$`T`
+      ad <- AnnData()
+      ad$.__enclos_env__$private$.anndata <-
+        private$.anndata$`T`
+      ad
     },
     #' @field is_view `TRUE` if object is view of another AnnData object, `FALSE` otherwise.
     is_view = function() {
@@ -372,7 +384,7 @@ AnnDataR6 <- R6::R6Class(
     #' @examples
     #' \dontrun{
     #' # use AnnData() instead of AnnDataR6$new()
-    #' ad <- AnnDataR6$new(
+    #' ad <- AnnData(
     #'   X = matrix(c(0, 1, 2, 3), nrow = 2),
     #'   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
     #'   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2"))
@@ -392,6 +404,7 @@ AnnDataR6 <- R6::R6Class(
       filename = NULL,
       filemode = NULL
     ) {
+      python_anndata <- reticulate::import("anndata")
       private$.anndata <- python_anndata$AnnData(
         X = X,
         obs = obs,
@@ -588,7 +601,10 @@ AnnDataR6 <- R6::R6Class(
     #' ad$copy("file.h5ad")
     #' }
     copy = function(filename = NULL) {
-      private$.anndata$copy(filename = filename)
+      ad <- AnnData()
+      ad$.__enclos_env__$private$.anndata <-
+        private$.anndata$copy(filename = filename)
+      ad
     },
 
     #' @description Rename categories of annotation `key` in `obs`, `var`, and `uns`.
@@ -677,7 +693,10 @@ AnnDataR6 <- R6::R6Class(
     #' ad$transpose()
     #' }
     transpose = function() {
-      private$.anndata$transpose()
+      ad <- AnnData()
+      ad$.__enclos_env__$private$.anndata <-
+        private$.anndata$transpose()
+      ad
     },
 
     #' @description Write annotation to .csv files.
@@ -820,6 +839,11 @@ AnnDataR6 <- R6::R6Class(
   )
 )
 
+# override AnnDataR6$new to make sure
+# that the 'clone' command gets overridden
+AnnDataR6New <- AnnDataR6$new
+AnnDataR6$new <- AnnData
+
 #' AnnData Helpers
 #'
 #' @param x An AnnData object.
@@ -907,4 +931,24 @@ r_to_py.AnnDataR6 <- function(x, convert = FALSE) {
 #' @export
 `[.AnnDataR6` <- function(x, ..., layer = NULL) {
   as.matrix.AnnDataR6(x, layer = layer)[...]
+}
+
+#' @rdname AnnDataHelpers
+#' @export
+`[<-.AnnDataR6` <-  function(x, ..., value, layer = NULL) {
+  mat <- as.matrix(x, layer = layer)
+  mat[...] <- value
+  dimnames(mat) <- NULL
+  if (is.null(layer)) {
+    x$X <- mat
+  } else {
+    x$layers[layer] <- mat
+  }
+  x
+}
+
+#' @rdname AnnDataHelpers
+#' @export
+t.AnnDataR6 <- function(x) {
+  x$`T`
 }
