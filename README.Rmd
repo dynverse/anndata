@@ -123,8 +123,7 @@ list(ad = ad$X, ad2 = ad2$X)
 ```
 
 This is standard Python behaviour but not R. In order to 
-have two separate copies of an AnnData object, use the `$copy()` or `$clone()` 
-functions:
+have two separate copies of an AnnData object, use the `$copy()` function:
 ```{r}
 ad3 <- ad$copy()
 

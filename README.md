@@ -123,10 +123,10 @@ ad$obsm["ones"]
 ad$varm["rand"]
 ```
 
-    ##             [,1]        [,2]
-    ## [1,] -1.04833636  0.82391727
-    ## [2,] -0.09273597 -0.08048568
-    ## [3,]  0.32969706  0.48064135
+    ##            [,1]       [,2]
+    ## [1,]  0.1952919 -1.0035604
+    ## [2,] -0.5690888  0.7477607
+    ## [3,] -0.7296439  0.4262203
 
 ``` r
 ad$layers["unspliced"]
@@ -148,10 +148,10 @@ ad$layers["spliced"]
 ad$uns["b"]
 ```
 
-    ##   i j      value
-    ## 1 1 4 0.47528871
-    ## 2 2 5 0.07379199
-    ## 3 3 6 0.90769828
+    ##   i j     value
+    ## 1 1 4 0.2910851
+    ## 2 2 5 0.2795689
+    ## 3 3 6 0.9563980
 
 An `AnnData` object can be used as an R matrix:
 
@@ -225,8 +225,7 @@ list(ad = ad$X, ad2 = ad2$X)
     ## [2,]    2   10    6
 
 This is standard Python behaviour but not R. In order to have two
-separate copies of an AnnData object, use the `$copy()` or `$clone()`
-functions:
+separate copies of an AnnData object, use the `$copy()` function:
 
 ``` r
 ad3 <- ad$copy()

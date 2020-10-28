@@ -135,7 +135,7 @@ AnnData <- function(
   filename = NULL,
   filemode = NULL
 ) {
-  ad <- AnnDataR6New(
+  AnnDataR6$new(
     X = X,
     obs = obs,
     var = var,
@@ -149,15 +149,6 @@ AnnData <- function(
     filename = filename,
     filemode = filemode
   )
-
-  # replace 'clone()' function with 'copy()',
-  # otherwise cloning will not behave adequately.
-  unlockBinding("clone", ad)
-  ad$clone <- function(deep = FALSE) {
-    ad$copy()
-  }
-
-  ad
 }
 
 #' @rdname AnnData
@@ -169,6 +160,7 @@ AnnDataR6 <- R6::R6Class(
   private = list(
     .anndata = NULL
   ),
+  cloneable = FALSE,
   active = list(
     #' @field X Data matrix of shape `n_obs` × `n_vars`.
     X = function(value) {
@@ -839,15 +831,11 @@ AnnDataR6 <- R6::R6Class(
   )
 )
 
-# override AnnDataR6$new to make sure
-# that the 'clone' command gets overridden
-AnnDataR6New <- AnnDataR6$new
-AnnDataR6$new <- AnnData
-
 #' AnnData Helpers
 #'
 #' @param x An AnnData object.
 #' @param layer An AnnData layer. If `NULL`, will use `ad$X`, otherwise `ad$layers[layer]`.
+#' @param value Replacement value.
 #' @param convert Not used.
 #' @param row.names Not used.
 #' @param optional Not used.
@@ -935,7 +923,7 @@ r_to_py.AnnDataR6 <- function(x, convert = FALSE) {
 
 #' @rdname AnnDataHelpers
 #' @export
-`[<-.AnnDataR6` <-  function(x, ..., value, layer = NULL) {
+`[<-.AnnDataR6` <-  function(x, ..., layer = NULL, value) {
   mat <- as.matrix(x, layer = layer)
   mat[...] <- value
   dimnames(mat) <- NULL

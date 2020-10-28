@@ -552,7 +552,6 @@ Stores for each key a two or higher-dimensional data frame? whose first two dime
 \item \href{#method-write_h5ad}{\code{AnnDataR6$write_h5ad()}}
 \item \href{#method-write_loom}{\code{AnnDataR6$write_loom()}}
 \item \href{#method-print}{\code{AnnDataR6$print()}}
-\item \href{#method-clone}{\code{AnnDataR6$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -1286,22 +1285,5 @@ print(ad)
 
 }
 
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AnnDataR6$clone(deep = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
 }
 }

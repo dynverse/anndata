@@ -39,6 +39,8 @@
 \item{...}{Parameters passed to the underlying function.}
 
 \item{convert}{Not used.}
+
+\item{value}{Replacement value.}
 }
 \description{
 AnnData Helpers
