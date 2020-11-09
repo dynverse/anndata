@@ -75,6 +75,9 @@
 #' @param shape Shape list (#observations, #variables). Can only be provided if `X` is `NULL`.
 #' @param filename Name of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
 #' @param filemode Open mode of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
+#' @param raw Store raw version of `X` and `var` as `$raw$X` and `$raw$var`.
+#' @param obsp Pairwise annotation of observations, a mutable mapping with array-like values.
+#' @param varp Pairwise annotation of observations, a mutable mapping with array-like values.
 #'
 #' @export
 #'
@@ -129,11 +132,13 @@ AnnData <- function(
   obsm = NULL,
   varm = NULL,
   layers = NULL,
-  # raw = NULL,
+  raw = NULL,
   dtype = "float32",
   shape = NULL,
   filename = NULL,
-  filemode = NULL
+  filemode = NULL,
+  obsp = NULL,
+  varp = NULL
 ) {
   AnnDataR6$new(
     X = X,
@@ -143,11 +148,13 @@ AnnData <- function(
     obsm = obsm,
     varm = varm,
     layers = layers,
-    # raw = raw,
+    raw = raw,
     dtype = dtype,
     shape = shape,
     filename = filename,
-    filemode = filemode
+    filemode = filemode,
+    obsp = obsp,
+    varp = varp
   )
 }
 
@@ -175,6 +182,9 @@ AnnDataR6 <- R6::R6Class(
     #' @param shape Shape list (#observations, #variables). Can only be provided if `X` is `NULL`.
     #' @param filename Name of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
     #' @param filemode Open mode of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
+    #' @param raw Store raw version of `X` and `var` as `$raw$X` and `$raw$var`.
+    #' @param obsp Pairwise annotation of observations, a mutable mapping with array-like values.
+    #' @param varp Pairwise annotation of observations, a mutable mapping with array-like values.
     #'
     #' @examples
     #' \dontrun{
@@ -193,13 +203,32 @@ AnnDataR6 <- R6::R6Class(
       obsm = NULL,
       varm = NULL,
       layers = NULL,
-      # raw = NULL,
+      raw = NULL,
       dtype = "float32",
       shape = NULL,
       filename = NULL,
-      filemode = NULL
+      filemode = NULL,
+      obsp = NULL,
+      varp = NULL
     ) {
       if (dtype != "DUMMY") {
+        if (!is.null(rownames(X)) && is.null(rownames(obs))) {
+          if (is.null(obs)) {
+            obs <- list(obs_names = rownames(X))
+          } else {
+            obs$obs_names <- rownames(X)
+            # rownames(obs) <- rownames(X)
+          }
+        }
+        if (!is.null(colnames(X)) && is.null(rownames(var))) {
+          if (is.null(var)) {
+            var <- list(var_names = colnames(X))
+          } else {
+            var$var_names <- colnames(X)
+            # rownames(var) <- colnames(X)
+          }
+        }
+
         python_anndata <- reticulate::import("anndata")
         private$.anndata <- python_anndata$AnnData(
           X = X,
@@ -209,11 +238,13 @@ AnnDataR6 <- R6::R6Class(
           obsm = obsm,
           varm = varm,
           layers = layers,
-          # raw = raw,
+          raw = raw,
           dtype = dtype,
           shape = shape,
           filename = filename,
-          filemode = filemode
+          filemode = filemode,
+          obsp = obsp,
+          varp = varp
         )
       }
     },
@@ -749,7 +780,7 @@ AnnDataR6 <- R6::R6Class(
     },
     #' @field obsp Pairwise annotation of observations, a mutable mapping with array-like values.
     #'
-    #' Stores for each key a two or higher-dimensional data frame? whose first two dimensions are of length `n_obs`.
+    #' Stores for each key a two or higher-dimensional matrix whose first two dimensions are of length `n_obs`.
     obsp = function(value) {
       if (missing(value)) {
         private$.anndata$obsp
@@ -797,7 +828,7 @@ AnnDataR6 <- R6::R6Class(
     },
     #' @field varp Pairwise annotation of variables, a mutable mapping with array-like values.
     #'
-    #' Stores for each key a two or higher-dimensional data frame? whose first two dimensions are of length `n_var`.
+    #' Stores for each key a two or higher-dimensional matrix whose first two dimensions are of length `n_var`.
     varp = function(value) {
       if (missing(value)) {
         private$.anndata$varp
@@ -818,6 +849,48 @@ AnnDataR6 <- R6::R6Class(
       } else {
         # add check for value
         private$.anndata$uns <- value
+        self
+      }
+    },
+    #' @field raw Store raw version of `X` and `var` as `$raw$X` and `$raw$var`.
+    #'
+    #' The `raw` attribute is initialized with the current content of an object
+    #' by setting:
+    #'
+    #' ```
+    #' adata$raw = adata
+    #' ```
+    #'
+    #' Its content can be deleted:
+    #' ```
+    #' adata$raw <- NULL
+    #' ```
+    #' Upon slicing an AnnData object along the obs (row) axis, `raw` is also
+    #' sliced. Slicing an AnnData object along the vars (columns) axis
+    #' leaves `raw` unaffected. Note that you can call:
+    #'
+    #' ```
+    #' adata$raw[, 'orig_variable_name']$X
+    #' ```
+    #' `
+    #' to retrieve the data associated with a variable that might have been
+    #' filtered out or "compressed away" in `X`.
+    raw = function(value) {
+      if (missing(value)) {
+        private$.anndata$raw
+      } else {
+        # TODO: fix `ad$raw <- ...`
+        # add check for value
+        if (is.null(value)) {
+          # reticulate::py_del_attr(private$.anndata, "raw")
+          reticulate::py_del_attr(r_to_py(private$.anndata), "raw")
+        } else {
+          if (is(value, "AnnDataR")) {
+            value <- r_to_py(value)
+          }
+          private$.anndata$raw <- value
+        }
+
         self
       }
     }
@@ -940,4 +1013,70 @@ py_to_r.anndata._core.anndata.AnnData <- function(x) {
 #' @export
 t.AnnDataR6 <- function(x) {
   x$`T`
+}
+
+# interpreted from
+# https://github.com/theislab/anndata/blob/58886f09b2e387c6389a2de20ed0bc7d20d1b843/anndata/tests/helpers.py#L352
+#' Test if two AnnDataR6 objects are equal
+#' @inheritParams base::all.equal
+#' @param exact Whether comparisons should be exact or not. This has a somewhat flexible
+#'   meaning and should probably get refined in the future.
+#' @export
+all.equal.AnnDataR6 <- function(target, current, exact = TRUE) {
+  a <- target
+  b <- current
+
+  if (!is(b, "AnnDataR6")) {
+    return("Not an AnnData object")
+  }
+
+  aecheck <- function(a, b, field) {
+    e <- all.equal(a, b)
+    if (!isTRUE(e)) {
+      paste0("Field ", field, " mismatch: ", e)
+    } else {
+      e
+    }
+  }
+
+  `%&%` <- function(a, b) {
+    if (isTRUE(a)) {
+      if (isTRUE(b)) {
+        a
+      } else {
+        b
+      }
+    } else {
+      if (isTRUE(b)) {
+        a
+      } else {
+        c(a, b)
+      }
+    }
+  }
+
+  match <-
+    aecheck(a$obs_names, b$obs_names, "obs_names") %&%
+    aecheck(a$var_names, b$var_names, "var_names")
+
+  if (isTRUE(match) && !exact) {
+    # TODO: implement not exact.. but what does it do?
+  }
+
+  match <- match %&%
+    aecheck(a$obs, b$obs, "obs") %&%
+    aecheck(a$var, b$var, "var") %&%
+    aecheck(a$X, b$X, "X") %&%
+    aecheck(a$obsm, b$obsm, "obsm") %&%
+    aecheck(a$varm, b$varm, "varm") %&%
+    aecheck(a$layers, b$layers, "layers") %&%
+    aecheck(a$uns, b$uns, "uns") %&%
+    aecheck(a$obsp, b$obsp, "obsp") %&%
+    aecheck(a$varp, b$varp, "varp")
+
+  if (!is.null(a$raw)) {
+    # TODO: implement all equal for raw
+  }
+
+  match
 }

@@ -13,10 +13,13 @@ AnnData(
   obsm = NULL,
   varm = NULL,
   layers = NULL,
+  raw = NULL,
   dtype = "float32",
   shape = NULL,
   filename = NULL,
-  filemode = NULL
+  filemode = NULL,
+  obsp = NULL,
+  varp = NULL
 )
 }
 \arguments{
@@ -34,6 +37,8 @@ AnnData(
 
 \item{layers}{Key-indexed multi-dimensional arrays aligned to dimensions of \code{X}.}
 
+\item{raw}{Store raw version of \code{X} and \code{var} as \verb{$raw$X} and \verb{$raw$var}.}
+
 \item{dtype}{Data type used for storage.}
 
 \item{shape}{Shape list (#observations, #variables). Can only be provided if \code{X} is \code{NULL}.}
@@ -41,6 +46,10 @@ AnnData(
 \item{filename}{Name of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
 
 \item{filemode}{Open mode of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
+
+\item{obsp}{Pairwise annotation of observations, a mutable mapping with array-like values.}
+
+\item{varp}{Pairwise annotation of observations, a mutable mapping with array-like values.}
 }
 \description{
 \code{AnnData} stores a data matrix \code{X} together with annotations
@@ -507,7 +516,7 @@ Stores for each key a two or higher-dimensional matrix with \code{n_obs} rows.}
 
 \item{\code{obsp}}{Pairwise annotation of observations, a mutable mapping with array-like values.
 
-Stores for each key a two or higher-dimensional data frame? whose first two dimensions are of length \code{n_obs}.}
+Stores for each key a two or higher-dimensional matrix whose first two dimensions are of length \code{n_obs}.}
 
 \item{\code{n_var}}{Number of variables.}
 
@@ -521,11 +530,27 @@ Stores for each key a two or higher-dimensional matrix with \code{n_var} rows.}
 
 \item{\code{varp}}{Pairwise annotation of variables, a mutable mapping with array-like values.
 
-Stores for each key a two or higher-dimensional data frame? whose first two dimensions are of length \code{n_var}.}
+Stores for each key a two or higher-dimensional matrix whose first two dimensions are of length \code{n_var}.}
 
 \item{\code{shape}}{Shape of data matrix (\code{n_obs}, \code{n_vars}).}
 
 \item{\code{uns}}{Unstructured annotation (ordered dictionary).}
+
+\item{\code{raw}}{Store raw version of \code{X} and \code{var} as \verb{$raw$X} and \verb{$raw$var}.
+
+The \code{raw} attribute is initialized with the current content of an object
+by setting:\preformatted{adata$raw = adata
+}
+
+Its content can be deleted:\preformatted{adata$raw <- NULL
+}
+
+Upon slicing an AnnData object along the obs (row) axis, \code{raw} is also
+sliced. Slicing an AnnData object along the vars (columns) axis
+leaves \code{raw} unaffected. Note that you can call:\preformatted{adata$raw[, 'orig_variable_name']$X
+}
+
+\verb{to retrieve the data associated with a variable that might have been filtered out or "compressed away" in}X`.}
 }
 \if{html}{\out{</div>}}
 }
@@ -568,10 +593,13 @@ Create a new AnnData object
   obsm = NULL,
   varm = NULL,
   layers = NULL,
+  raw = NULL,
   dtype = "float32",
   shape = NULL,
   filename = NULL,
-  filemode = NULL
+  filemode = NULL,
+  obsp = NULL,
+  varp = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -592,6 +620,8 @@ Create a new AnnData object
 
 \item{\code{layers}}{Key-indexed multi-dimensional arrays aligned to dimensions of \code{X}.}
 
+\item{\code{raw}}{Store raw version of \code{X} and \code{var} as \verb{$raw$X} and \verb{$raw$var}.}
+
 \item{\code{dtype}}{Data type used for storage.}
 
 \item{\code{shape}}{Shape list (#observations, #variables). Can only be provided if \code{X} is \code{NULL}.}
@@ -599,6 +629,10 @@ Create a new AnnData object
 \item{\code{filename}}{Name of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
 
 \item{\code{filemode}}{Open mode of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
+
+\item{\code{obsp}}{Pairwise annotation of observations, a mutable mapping with array-like values.}
+
+\item{\code{varp}}{Pairwise annotation of observations, a mutable mapping with array-like values.}
 }
 \if{html}{\out{</div>}}
 }
