@@ -18,11 +18,11 @@
 #' ad <- read_text("matrix.tab")
 #' }
 read_text <- function(filename, delimiter = NULL, first_column_names = NULL, dtype = "float32") {
-  python_anndata <- reticulate::import("anndata")
-  python_anndata$read_text(
+  python_anndata <- reticulate::import("anndata", convert = FALSE)
+  py_to_r(python_anndata$read_text(
     filename = filename,
     delimiter = delimiter,
     first_column_names = first_column_names,
     dtype = dtype
-  )
+  ))
 }

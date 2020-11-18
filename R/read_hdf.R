@@ -14,9 +14,9 @@
 #' ad <- read_hdf("file.h5")
 #' }
 read_hdf <- function(filename, key) {
-  python_anndata <- reticulate::import("anndata")
-  python_anndata$read_hdf(
+  python_anndata <- reticulate::import("anndata", convert = FALSE)
+  py_to_r(python_anndata$read_hdf(
     filename = filename,
     key = key
-  )
+  ))
 }

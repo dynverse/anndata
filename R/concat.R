@@ -132,8 +132,8 @@ concat <- function(
     reticulate::r_to_py
   )
 
-  python_anndata <- reticulate::import("anndata")
-  python_anndata$concat(
+  python_anndata <- reticulate::import("anndata", convert = FALSE)
+  py_to_r(python_anndata$concat(
     adatas = adatas2,
     axis = axis,
     join = join,
@@ -144,5 +144,5 @@ concat <- function(
     index_unique = index_unique,
     fill_value = fill_value,
     pairwise = pairwise
-  )
+  ))
 }

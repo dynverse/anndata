@@ -34,8 +34,8 @@ read_loom <- function(
   dtype = "float32",
   ...
 ) {
-  python_anndata <- reticulate::import("anndata")
-  python_anndata$read_loom(
+  python_anndata <- reticulate::import("anndata", convert = FALSE)
+  py_to_r(python_anndata$read_loom(
     filename = filename,
     sparse = sparse,
     cleanup = cleanup,
@@ -46,5 +46,5 @@ read_loom <- function(
     varm_names = varm_names,
     dtype = dtype,
     ...
-  )
+  ))
 }

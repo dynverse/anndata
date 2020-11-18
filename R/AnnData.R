@@ -229,7 +229,7 @@ AnnDataR6 <- R6::R6Class(
           }
         }
 
-        python_anndata <- reticulate::import("anndata")
+        python_anndata <- reticulate::import("anndata", convert = FALSE)
         private$.anndata <- python_anndata$AnnData(
           X = X,
           obs = obs,
@@ -260,7 +260,7 @@ AnnDataR6 <- R6::R6Class(
     #' ad$obs_keys()
     #' }
     obs_keys = function() {
-      private$.anndata$obs_keys()
+      py_to_r(private$.anndata$obs_keys())
     },
 
     #' @description Makes the index unique by appending a number string to each duplicate index element: 1, 2, etc.
@@ -282,7 +282,7 @@ AnnDataR6 <- R6::R6Class(
     #' ad$obs_names
     #' }
     obs_names_make_unique = function(join = "-") {
-      private$.anndata$obs_names_make_unique(join = join)
+      py_to_r(private$.anndata$obs_names_make_unique(join = join))
     },
 
     #' @description List keys of observation annotation `obsm`.
@@ -301,7 +301,7 @@ AnnDataR6 <- R6::R6Class(
     #' ad$obs_keys()
     #' }
     obsm_keys = function() {
-      private$.anndata$obsm_keys()
+      py_to_r(private$.anndata$obsm_keys())
     },
 
     #' @description List keys of variable annotation `var`.
@@ -314,7 +314,7 @@ AnnDataR6 <- R6::R6Class(
     #' ad$var_keys()
     #' }
     var_keys = function() {
-      private$.anndata$var_keys()
+      py_to_r(private$.anndata$var_keys())
     },
 
     #' @description Makes the index unique by appending a number string to each duplicate index element: 1, 2, etc.
@@ -336,7 +336,7 @@ AnnDataR6 <- R6::R6Class(
     #' ad$var_names
     #' }
     var_names_make_unique = function(join = "-") {
-      private$.anndata$var_names_make_unique(join = join)
+      py_to_r(private$.anndata$var_names_make_unique(join = join))
     },
 
     #' @description List keys of variable annotation `varm`.
@@ -354,7 +354,7 @@ AnnDataR6 <- R6::R6Class(
     #' ad$varm_keys()
     #' }
     varm_keys = function() {
-      private$.anndata$varm_keys()
+      py_to_r(private$.anndata$varm_keys())
     },
 
     #' @description List keys of unstructured annotation `uns`.
@@ -369,7 +369,7 @@ AnnDataR6 <- R6::R6Class(
     #' )
     #' }
     uns_keys = function() {
-      private$.anndata$uns_keys()
+      py_to_r(private$.anndata$uns_keys())
     },
 
     #' @description Return a chunk of the data matrix `X` with random or specified indices.
@@ -390,7 +390,7 @@ AnnDataR6 <- R6::R6Class(
     #' ad$chunk_X(select = 1:3) # first 3 samples
     #' }
     chunk_X = function(select = 1000L, replace = TRUE) {
-      private$.anndata$chunk_X(select = select, replace = replace)
+      py_to_r(private$.anndata$chunk_X(select = select, replace = replace))
     },
 
 
@@ -406,6 +406,7 @@ AnnDataR6 <- R6::R6Class(
     #' ad$chunked_X(10)
     #' }
     chunked_X = function(chunk_size = NULL) {
+      # TODO: write py_to_r for this class
       private$.anndata$chunked_X(chunk_size = chunk_size)
     },
 
@@ -429,7 +430,7 @@ AnnDataR6 <- R6::R6Class(
     #' ad$copy("file.h5ad")
     #' }
     copy = function(filename = NULL) {
-      private$.anndata$copy(filename = filename)
+      py_to_r(private$.anndata$copy(filename = filename))
     },
 
     #' @description Rename categories of annotation `key` in `obs`, `var`, and `uns`.
@@ -450,7 +451,7 @@ AnnDataR6 <- R6::R6Class(
     #' ad$rename_categories("group", c(a = "A", b = "B")) # ??
     #' }
     rename_categories = function(key, categories) {
-      private$.anndata$rename_categories(key = key, categories = categories)
+      py_to_r(private$.anndata$rename_categories(key = key, categories = categories))
     },
 
     #' @description Transform string annotations to categoricals.
@@ -469,7 +470,7 @@ AnnDataR6 <- R6::R6Class(
     #' ad$strings_to_categoricals() # ??
     #' }
     strings_to_categoricals = function(df = NULL) {
-      private$.anndata$strings_to_categoricals(df = df)
+      py_to_r(private$.anndata$strings_to_categoricals(df = df))
     },
 
     #' @description Generate shallow data frame.
@@ -498,7 +499,7 @@ AnnDataR6 <- R6::R6Class(
     #' ad$to_df("unspliced")
     #' }
     to_df = function(layer = NULL) {
-      private$.anndata$to_df(layer = layer)
+      py_to_r(private$.anndata$to_df(layer = layer))
     },
 
     #' @description transpose Transpose whole object.
@@ -518,7 +519,7 @@ AnnDataR6 <- R6::R6Class(
     #' ad$transpose()
     #' }
     transpose = function() {
-      private$.anndata$transpose()
+      py_to_r(private$.anndata$transpose())
     },
 
     #' @description Write annotation to .csv files.
@@ -663,7 +664,7 @@ AnnDataR6 <- R6::R6Class(
     #' @field X Data matrix of shape `n_obs` × `n_vars`.
     X = function(value) {
       if (missing(value)) {
-        private$.anndata$X
+        py_to_r(private$.anndata$X)
       } else {
         private$.anndata$X <- value
         self
@@ -679,7 +680,7 @@ AnnDataR6 <- R6::R6Class(
     #'   If you want to copy the previous file, use `copy(filename='new_filename')`.
     filename = function(value) {
       if (missing(value)) {
-        private$.anndata$filename
+        py_to_r(private$.anndata$filename)
       } else {
         private$.anndata$filename <- value
         self
@@ -719,7 +720,7 @@ AnnDataR6 <- R6::R6Class(
     #' ```
     layers = function(value) {
       if (missing(value)) {
-        private$.anndata$layers
+        py_to_r(private$.anndata$layers)
       } else {
         # add check for value
         private$.anndata$layers <- reticulate::r_to_py(value)
@@ -732,24 +733,24 @@ AnnDataR6 <- R6::R6Class(
     #'
     #' Ignores `.raw`.
     `T` = function() {
-      private$.anndata$`T`
+      py_to_r(private$.anndata$`T`)
     },
     #' @field is_view `TRUE` if object is view of another AnnData object, `FALSE` otherwise.
     is_view = function() {
-      private$.anndata$is_view
+      py_to_r(private$.anndata$is_view)
     },
     #' @field isbacked `TRUE` if object is backed on disk, `FALSE` otherwise.
     isbacked = function() {
-      private$.anndata$isbacked
+      py_to_r(private$.anndata$isbacked)
     },
     #' @field n_obs Number of observations.
     n_obs = function() {
-      private$.anndata$n_obs
+      py_to_r(private$.anndata$n_obs)
     },
     #' @field obs One-dimensional annotation of observations (data.frame).
     obs = function(value) {
       if (missing(value)) {
-        private$.anndata$obs
+        py_to_r(private$.anndata$obs)
       } else {
         # add check for value
         private$.anndata$obs <- value
@@ -759,7 +760,7 @@ AnnDataR6 <- R6::R6Class(
     #' @field obs_names Names of observations.
     obs_names = function(value) {
       if (missing(value)) {
-        private$.anndata$obs_names
+        py_to_r(private$.anndata$obs_names)
       } else {
         # add check for value
         private$.anndata$obs_names <- value
@@ -771,7 +772,7 @@ AnnDataR6 <- R6::R6Class(
     #' Stores for each key a two or higher-dimensional matrix with `n_obs` rows.
     obsm = function(value) {
       if (missing(value)) {
-        private$.anndata$obsm
+        py_to_r(private$.anndata$obsm)
       } else {
         # add check for value
         private$.anndata$obsm <- value
@@ -783,7 +784,7 @@ AnnDataR6 <- R6::R6Class(
     #' Stores for each key a two or higher-dimensional matrix whose first two dimensions are of length `n_obs`.
     obsp = function(value) {
       if (missing(value)) {
-        private$.anndata$obsp
+        py_to_r(private$.anndata$obsp)
       } else {
         # add check for value
         private$.anndata$obsp <- value
@@ -792,12 +793,12 @@ AnnDataR6 <- R6::R6Class(
     },
     #' @field n_var Number of variables.
     n_var = function() {
-      private$.anndata$n_var
+      py_to_r(private$.anndata$n_var)
     },
     #' @field var One-dimensional annotation of variables (data.frame).
     var = function(value) {
       if (missing(value)) {
-        private$.anndata$var
+        py_to_r(private$.anndata$var)
       } else {
         # add check for value
         private$.anndata$var <- value
@@ -807,7 +808,7 @@ AnnDataR6 <- R6::R6Class(
     #' @field var_names Names of variables.
     var_names = function(value) {
       if (missing(value)) {
-        private$.anndata$var_names
+        py_to_r(private$.anndata$var_names)
       } else {
         # add check for value
         private$.anndata$var_names <- value
@@ -819,7 +820,7 @@ AnnDataR6 <- R6::R6Class(
     #' Stores for each key a two or higher-dimensional matrix with `n_var` rows.
     varm = function(value) {
       if (missing(value)) {
-        private$.anndata$varm
+        py_to_r(private$.anndata$varm)
       } else {
         # add check for value
         private$.anndata$varm <- value
@@ -831,7 +832,7 @@ AnnDataR6 <- R6::R6Class(
     #' Stores for each key a two or higher-dimensional matrix whose first two dimensions are of length `n_var`.
     varp = function(value) {
       if (missing(value)) {
-        private$.anndata$varp
+        py_to_r(private$.anndata$varp)
       } else {
         # add check for value
         private$.anndata$varp <- value
@@ -840,12 +841,13 @@ AnnDataR6 <- R6::R6Class(
     },
     #' @field shape Shape of data matrix (`n_obs`, `n_vars`).
     shape = function() {
-      unlist(private$.anndata$shape)
+      unlist(py_to_r(private$.anndata$shape))
     },
     #' @field uns Unstructured annotation (ordered dictionary).
     uns = function(value) {
       if (missing(value)) {
-        private$.anndata$uns
+        py_builtins <- reticulate::import_builtins()
+        py_builtins$dict(private$.anndata$uns)
       } else {
         # add check for value
         private$.anndata$uns <- value
@@ -877,7 +879,7 @@ AnnDataR6 <- R6::R6Class(
     #' filtered out or "compressed away" in `X`.
     raw = function(value) {
       if (missing(value)) {
-        private$.anndata$raw
+        py_to_r(private$.anndata$raw)
       } else {
         # TODO: fix `ad$raw <- ...`
         # add check for value
