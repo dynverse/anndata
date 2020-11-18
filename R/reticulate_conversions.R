@@ -62,12 +62,22 @@ py_to_r.collections.abc.KeysView <- function(x) {
   python_builtins$list(x)
 }
 
-# #' @name r-py-conversion
-# #' @export
-# `py_to_r.collections.abc.Mapping` <- function(x, name) {
-#   python_builtins <- reticulate::import_builtins()
-#   python_builtins$list(x)
-# }
+#' @name r-py-conversion
+#' @export
+`py_to_r.collections.abc.Mapping` <- function(x) {
+  python_builtins <- reticulate::import_builtins()
+
+  x_list <- python_builtins$dict(x)
+
+  # convert members of x_list if need be
+  for (i in seq_along(x_list)) {
+    if (methods::is(x_list[[i]], "python.builtin.object")) {
+      x_list[[i]] <- py_to_r(x_list[[i]])
+    }
+  }
+
+  x_list
+}
 
 # TODO: could add mapping specifically for:
 # * adpy$layers: anndata._core.aligned_mapping.Layers

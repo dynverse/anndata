@@ -846,8 +846,7 @@ AnnDataR6 <- R6::R6Class(
     #' @field uns Unstructured annotation (ordered dictionary).
     uns = function(value) {
       if (missing(value)) {
-        py_builtins <- reticulate::import_builtins()
-        py_builtins$dict(private$.anndata$uns)
+        py_to_r(private$.anndata$uns)
       } else {
         # add check for value
         private$.anndata$uns <- value
@@ -971,7 +970,7 @@ as.matrix.AnnDataR6 <- function(x, layer = NULL, ...) {
     if (is.null(layer)) {
       x$X
     } else {
-      x$layers[layer]
+      x$layers[[layer]]
     }
   dimnames(mat) <- dimnames(x)
   mat

@@ -4,7 +4,7 @@ skip_if_no_anndata()
 
 # some test objects that we use below
 adata_dense <- AnnData(rbind(c(1, 2), c(3, 4)))
-adata_dense$layers["test"] <- adata_dense$X
+adata_dense$layers[["test"]] <- adata_dense$X
 adata_sparse <- AnnData(
   Matrix::Matrix(c(0, 2, 3, 0, 5, 6), byrow = TRUE, nrow = 2, sparse = TRUE),
   list(obs_names=c("s1", "s2"), anno1=c("c1", "c2")),

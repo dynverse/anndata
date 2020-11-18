@@ -37,19 +37,19 @@ test_that("read and change X", {
 })
 
 test_that("read and change layer", {
-  expect_true(all(ad$layers["spliced"] == 4:9))
-  ad$layers["spliced"] <- value
-  expect_true(all(ad$layers["spliced"] == 1:6))
-  ad$layers["spliced"] <- NULL
+  expect_true(all(ad$layers[["spliced"]] == 4:9))
+  ad$layers[["spliced"]] <- value
+  expect_true(all(ad$layers[["spliced"]] == 1:6))
+  ad$layers[["spliced"]] <- NULL
   expect_false("spliced" %in% names(ad$layers))
 })
 
 test_that("add new layer", {
   # expect_error(ad$layers["test"])
-  expect_null(ad$layers["test"]) # difference w.r.t. anndata py: R lists return NULL when item is not found, not errors
-  ad$layers["test"] <- value
-  expect_true(all(ad$layers["test"] == 1:6))
-  ad$layers["test"] <- NULL
+  expect_null(ad$layers[["test"]]) # difference w.r.t. anndata py: R lists return NULL when item is not found, not errors
+  ad$layers[["test"]] <- value
+  expect_true(all(ad$layers[["test"]] == 1:6))
+  ad$layers[["test"]] <- NULL
   expect_false("test" %in% names(ad$layers))
 })
 
@@ -81,6 +81,21 @@ test_that("anndata works with sparse data", {
     )
   )
   expect_is(ad$X, "sparseMatrix")
-  expect_is(ad$layers["spliced"], "sparseMatrix")
-  expect_is(ad$layers["unspliced"], "matrix")
+  expect_is(ad$layers[["spliced"]], "sparseMatrix")
+  expect_is(ad$layers[["unspliced"]], "matrix")
+})
+
+test_that("uns python objects get converted", {
+  b <- ad$uns$b
+  expect_is(b, "data.frame")
+
+  # change object
+  ad$uns$b <- data.frame(f = 8, z = 10)
+  ad$uns$b$a <- 3
+
+  expect_is(b, "data.frame")
+  expect_true(all(c("f", "z", "a") %in% colnames(ad$uns$b)))
+
+
+  ad$uns$b <- list(a = data.frame(f = 1), b = 2)
 })
