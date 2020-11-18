@@ -26,6 +26,7 @@ ad <- AnnData(
     c = list(c.a = 3, c.b = 4)
   )
 )
+# private <- ad$.__enclos_env__$private
 
 value <- matrix(1:6, nrow = 2)
 
@@ -44,7 +45,8 @@ test_that("read and change layer", {
 })
 
 test_that("add new layer", {
-  expect_error(ad$layers["test"])
+  # expect_error(ad$layers["test"])
+  expect_null(ad$layers["test"]) # difference w.r.t. anndata py: R lists return NULL when item is not found, not errors
   ad$layers["test"] <- value
   expect_true(all(ad$layers["test"] == 1:6))
   ad$layers["test"] <- NULL
