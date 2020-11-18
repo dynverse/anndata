@@ -16,7 +16,8 @@ and unstructured annotations \code{uns}.
 This package is, in essense, an R wrapper for the similarly named Python package
 \href{https://anndata.readthedocs.io/en/latest/}{\code{anndata}}, with some added functionality
 to support more R-like syntax.
-The specific version used is \href{https://github.com/theislab/anndata/tree/58886f09b2e387c6389a2de20ed0bc7d20d1b843}{\verb{theislab/anndata@58886f}}.
+The version number of the anndata R package is synced
+with the version number of the python version.
 
 Check out \code{?anndata} for a full list of the functions provided by this package.
 }

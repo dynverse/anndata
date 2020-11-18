@@ -9,7 +9,8 @@
 #' This package is, in essense, an R wrapper for the similarly named Python package
 #' [`anndata`](https://anndata.readthedocs.io/en/latest/), with some added functionality
 #' to support more R-like syntax.
-#' The specific version used is [`theislab/anndata@58886f`](https://github.com/theislab/anndata/tree/58886f09b2e387c6389a2de20ed0bc7d20d1b843).
+#' The version number of the anndata R package is synced
+#' with the version number of the python version.
 #'
 #' Check out `?anndata` for a full list of the functions provided by this package.
 #'

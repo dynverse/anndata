@@ -14,10 +14,9 @@ format.
 
 This package is, in essense, an R wrapper for the similarly named Python
 package [`anndata`](https://anndata.readthedocs.io/en/latest/), with
-some added functionality to support more R-like syntax.
-
-The specific version used is
-[`theislab/anndata@58886f`](https://github.com/theislab/anndata/tree/58886f09b2e387c6389a2de20ed0bc7d20d1b843).
+some added functionality to support more R-like syntax. The version
+number of the anndata R package is synced with the version number of the
+python version.
 
 ## Installation
 
@@ -148,10 +147,11 @@ ad$layers["spliced"]
 ad$uns["b"]
 ```
 
-    ##   i j     value
-    ## 1 1 4 0.2655087
-    ## 2 2 5 0.3721239
-    ## 3 3 6 0.5728534
+    ## $b
+    ##    i  j     value
+    ## 0  1  4  0.265509
+    ## 1  2  5  0.372124
+    ## 2  3  6  0.572853
 
 ### Reading / writing AnnData objects
 
@@ -278,7 +278,7 @@ ad$layers
 ad$chunked_X(1)
 ```
 
-    ## <generator object AnnData.chunked_X at 0x7fcdc8fa49e0>
+    ## <generator object AnnData.chunked_X at 0x7f206c391970>
 
 Following functionality has not been tested:
 
