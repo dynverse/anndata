@@ -9,34 +9,30 @@
 #' @name r-py-conversion
 #' @export
 `[[<-.collections.abc.MutableMapping` <- function(x, name, value) {
-  if (is.null(value)) {
-    reticulate::py_del_item(x, name)
-  } else {
+  if (!is.null(value)) {
     reticulate::py_set_item(x, name, value)
+  } else if (name %in% x$keys()) {
+    reticulate::py_del_item(x, name)
   }
 }
 
 #' @name r-py-conversion
 #' @export
 `[[.collections.abc.Mapping` <- function(x, name) {
-  reticulate::py_to_r(reticulate::py_get_item(x, name))
-}
-
-#' @name r-py-conversion
-#' @export
-`[<-.collections.abc.MutableMapping` <- function(x, name, value) {
-  if (is.null(value)) {
-    reticulate::py_del_item(x, name)
+  if (name %in% x$keys()) {
+    reticulate::py_to_r(reticulate::py_get_item(x, name))
   } else {
-    reticulate::py_set_item(x, name, value)
+    NULL
   }
 }
 
 #' @name r-py-conversion
 #' @export
-`[.collections.abc.Mapping` <- function(x, name) {
-  reticulate::py_to_r(reticulate::py_get_item(x, name))
-}
+`[<-.collections.abc.MutableMapping` <- `[[<-.collections.abc.MutableMapping`
+
+#' @name r-py-conversion
+#' @export
+`[.collections.abc.Mapping` <- `[[.collections.abc.Mapping`
 
 #' @name r-py-conversion
 #' @export
