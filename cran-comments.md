@@ -1,46 +1,11 @@
-This package is a reticulate wrapper for the Python package 'anndata'.
+The python package 'anndata' which this package uses as an API was updated a few days ago.
 
-Previous comments by CRAN submissions team are addressed below.
-
---------------------------------------------------------------------------
-
- > Please add more details about the package functionality and implemented
-methods in your Description text.
-
-Done!
-
---------------------------------------------------------------------------
-
-> \dontrun{} should only be used if the example really cannot be executed
-(e.g. because of missing additional software, missing API keys, ...) by
-the user. That's why wrapping examples in \dontrun{} adds the comment
-("# Not run:") as a warning for the user.
-Does not seem necessary.
-Please unwrap the examples if they are executable in < 5 sec, or replace
-\dontrun{} with \donttest{}.
-
-This package is a reticulate wrapper for the 'anndata' Python package. 
-Since I cannot assume that the anndata package is installed on CRAN, 
-the examples are wrapped in \donttest{}.
-
---------------------------------------------------------------------------
-
-> Please add small executable examples in your Rd-files to illustrate the
-use of the exported function but also enable automatic testing.
-
-Done!
-
---------------------------------------------------------------------------
-
-> Please do not modify the global environment (e.g. by using <<-) in your
-functions. This is not allowed by the CRAN policies.
-
-Solved.
+The R package 'anndata' needs to be updated to match the API of the newer version.
 
 --------------------------------------------------------------------------
 
 ## Test environments
-* local R installation, R 4.0.2
+* local R installation, R 4.0.3
 * win-builder (devel)
 * Github Actions: 
   - Windows, R 4.0
@@ -50,6 +15,8 @@ Solved.
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+Duration: 27.9s
 
-* This is a new release.
+0 errors ✓ | 0 warnings ✓ | 0 notes ✓
+
+R CMD check succeeded
