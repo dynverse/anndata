@@ -160,3 +160,13 @@ ad$strings_to_categoricals(...)
 ```
 
 Currently not implemented are the `read_zarr()` and `ad$write_zarr()` functions.
+
+## Latest changes
+Check out `news(package = "anndata")` or [NEWS.md](NEWS.md) for a full list of changes.
+
+<!-- This section gets automatically generated from NEWS.md -->
+
+```{r news, echo=FALSE, results="asis"}
+cat(dynutils::recent_news())
+```
+

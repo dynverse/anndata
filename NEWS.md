@@ -1,4 +1,4 @@
-# anndata 0.7.5
+# anndata 0.7.5 (2020-11-19)
 
 * MINOR CHANGES: Updated Python requirements to anndata 0.7.5.
 

@@ -147,11 +147,10 @@ ad$layers["spliced"]
 ad$uns["b"]
 ```
 
-    ## $b
-    ##    i  j     value
-    ## 0  1  4  0.265509
-    ## 1  2  5  0.372124
-    ## 2  3  6  0.572853
+    ##   i j     value
+    ## 1 1 4 0.2655087
+    ## 2 2 5 0.3721239
+    ## 3 3 6 0.5728534
 
 ### Reading / writing AnnData objects
 
@@ -278,7 +277,7 @@ ad$layers
 ad$chunked_X(1)
 ```
 
-    ## <generator object AnnData.chunked_X at 0x7f206c391970>
+    ## <generator object AnnData.chunked_X at 0x7fb6cff46970>
 
 Following functionality has not been tested:
 
@@ -289,3 +288,23 @@ ad$strings_to_categoricals(...)
 
 Currently not implemented are the `read_zarr()` and `ad$write_zarr()`
 functions.
+
+## Latest changes
+
+Check out `news(package = "anndata")` or [NEWS.md](NEWS.md) for a full
+list of changes.
+
+<!-- This section gets automatically generated from NEWS.md -->
+
+### Recent changes in anndata 0.7.5 (2020-11-19)
+
+  - MINOR CHANGES: Updated Python requirements to anndata 0.7.5.
+
+  - NEW FEATURE `AnnData()`: Added `obsp`, `varp`, and `raw` objects to
+    parameters.
+
+  - TESTING: Added more tests based on `theislab/anndata` repository.
+
+### Recent changes in anndata 0.7.4 (2020-11-04)
+
+  - Initial release
