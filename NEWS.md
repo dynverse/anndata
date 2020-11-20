@@ -1,3 +1,7 @@
+# anndata 0.7.5.1
+
+* MINOR CHANGE: Add wrapper class for Raw objects.
+
 # anndata 0.7.5 (2020-11-19)
 
 * MINOR CHANGES: Updated Python requirements to anndata 0.7.5.

@@ -142,6 +142,24 @@ ad$X[,2] <- c(3, 4)
 list(ad = ad$X, ad3 = ad3$X)
 ```
 
+### Interoperability with other Python packages
+
+AnnData objects created by this package usually work together extremely well with
+other Python packages imported with reticulate. You can pass AnnData objects created
+by this package into Python packages and still get easy to work with results!
+
+```{r}
+library(reticulate)
+
+ad$raw <- ad
+
+sc <- import("scanpy")
+sc$pp$normalize_per_cell(ad)
+
+ad[]
+ad$raw[]
+```
+
 ## Future work
 
 In some cases, this package may still act more like a Python package rather than an R package.

@@ -184,7 +184,7 @@ AnnDataR6 <- R6::R6Class(
     #' @param filemode Open mode of backing file. See [h5py.File](https://docs.h5py.org/en/latest/high/file.html#h5py.File).
     #' @param raw Store raw version of `X` and `var` as `$raw$X` and `$raw$var`.
     #' @param obsp Pairwise annotation of observations, a mutable mapping with array-like values.
-    #' @param varp Pairwise annotation of observations, a mutable mapping with array-like values.
+    #' @param varp Pairwise annotation of variables, a mutable mapping with array-like values.
     #'
     #' @examples
     #' \dontrun{
@@ -211,7 +211,7 @@ AnnDataR6 <- R6::R6Class(
       obsp = NULL,
       varp = NULL
     ) {
-      if (dtype != "DUMMY") {
+      if (!identical(dtype, "DUMMY")) {
         if (!is.null(rownames(X)) && is.null(rownames(obs))) {
           if (is.null(obs)) {
             obs <- list(obs_names = rownames(X))
@@ -791,9 +791,9 @@ AnnDataR6 <- R6::R6Class(
         self
       }
     },
-    #' @field n_var Number of variables.
-    n_var = function() {
-      py_to_r(private$.anndata$n_var)
+    #' @field n_vars Number of variables.
+    n_vars = function() {
+      py_to_r(private$.anndata$n_vars)
     },
     #' @field var One-dimensional annotation of variables (data.frame).
     var = function(value) {
@@ -817,7 +817,7 @@ AnnDataR6 <- R6::R6Class(
     },
     #' @field varm Multi-dimensional annotation of variables (matrix).
     #'
-    #' Stores for each key a two or higher-dimensional matrix with `n_var` rows.
+    #' Stores for each key a two or higher-dimensional matrix with `n_vars` rows.
     varm = function(value) {
       if (missing(value)) {
         py_to_r(private$.anndata$varm)
@@ -829,7 +829,7 @@ AnnDataR6 <- R6::R6Class(
     },
     #' @field varp Pairwise annotation of variables, a mutable mapping with array-like values.
     #'
-    #' Stores for each key a two or higher-dimensional matrix whose first two dimensions are of length `n_var`.
+    #' Stores for each key a two or higher-dimensional matrix whose first two dimensions are of length `n_vars`.
     varp = function(value) {
       if (missing(value)) {
         py_to_r(private$.anndata$varp)
@@ -886,7 +886,7 @@ AnnDataR6 <- R6::R6Class(
           # reticulate::py_del_attr(private$.anndata, "raw")
           reticulate::py_del_attr(r_to_py(private$.anndata), "raw")
         } else {
-          if (is(value, "AnnDataR")) {
+          if (is(value, "AnnDataR6") || is(value, "RawR6")) {
             value <- r_to_py(value)
           }
           private$.anndata$raw <- value

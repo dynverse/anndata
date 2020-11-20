@@ -114,6 +114,7 @@ ad$var
 ad$obsm["ones"]
 ```
 
+    ## $ones
     ##      [,1] [,2] [,3] [,4] [,5]
     ## [1,]    1    1    1    1    1
     ## [2,]    1    1    1    1    1
@@ -122,6 +123,7 @@ ad$obsm["ones"]
 ad$varm["rand"]
 ```
 
+    ## $rand
     ##              [,1]       [,2]
     ## [1,] -0.005767173 -0.7990092
     ## [2,]  2.404653389 -1.1476570
@@ -131,6 +133,7 @@ ad$varm["rand"]
 ad$layers["unspliced"]
 ```
 
+    ## $unspliced
     ##      [,1] [,2] [,3]
     ## [1,]    8   10   12
     ## [2,]    9   11   13
@@ -139,6 +142,7 @@ ad$layers["unspliced"]
 ad$layers["spliced"]
 ```
 
+    ## $spliced
     ##      [,1] [,2] [,3]
     ## [1,]    4    6    8
     ## [2,]    5    7    9
@@ -147,6 +151,7 @@ ad$layers["spliced"]
 ad$uns["b"]
 ```
 
+    ## $b
     ##   i j     value
     ## 1 1 4 0.2655087
     ## 2 2 5 0.3721239
@@ -260,6 +265,36 @@ list(ad = ad$X, ad3 = ad3$X)
     ## [1,]    1   10    5
     ## [2,]    2   10    6
 
+### Interoperability with other Python packages
+
+AnnData objects created by this package usually work together extremely
+well with other Python packages imported with reticulate. You can pass
+AnnData objects created by this package into Python packages and still
+get easy to work with results\!
+
+``` r
+library(reticulate)
+
+ad$raw <- ad
+
+sc <- import("scanpy")
+sc$pp$normalize_per_cell(ad)
+
+ad[]
+```
+
+    ##        var1 var2     var3
+    ## s1 1.166667  3.5 5.833333
+    ## s2 1.750000  3.5 5.250000
+
+``` r
+ad$raw[]
+```
+
+    ##    var1 var2 var3
+    ## s1    1    3    5
+    ## s2    2    4    6
+
 ## Future work
 
 In some cases, this package may still act more like a Python package
@@ -271,13 +306,21 @@ Examples are:
 ad$layers
 ```
 
-    ## Layers with keys: spliced, unspliced
+    ## $spliced
+    ##      [,1] [,2] [,3]
+    ## [1,]    4    6    8
+    ## [2,]    5    7    9
+    ## 
+    ## $unspliced
+    ##      [,1] [,2] [,3]
+    ## [1,]    8   10   12
+    ## [2,]    9   11   13
 
 ``` r
 ad$chunked_X(1)
 ```
 
-    ## <generator object AnnData.chunked_X at 0x7fb6cff46970>
+    ## <generator object AnnData.chunked_X at 0x7fa69f0c95f0>
 
 Following functionality has not been tested:
 
