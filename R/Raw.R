@@ -223,11 +223,7 @@ RawR6 <- R6::R6Class(
 #' AnnData Helpers
 #'
 #' @param x An AnnData object.
-#' @param layer An AnnData layer. If `NULL`, will use `ad$X`, otherwise `ad$layers[layer]`.
-#' @param value Replacement value.
 #' @param convert Not used.
-#' @param row.names Not used.
-#' @param optional Not used.
 #' @param ... Parameters passed to the underlying function.
 #'
 #' @rdname RawHelpers

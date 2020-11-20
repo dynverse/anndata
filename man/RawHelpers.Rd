@@ -27,14 +27,6 @@
 \item{...}{Parameters passed to the underlying function.}
 
 \item{convert}{Not used.}
-
-\item{layer}{An AnnData layer. If \code{NULL}, will use \code{ad$X}, otherwise \code{ad$layers[layer]}.}
-
-\item{value}{Replacement value.}
-
-\item{row.names}{Not used.}
-
-\item{optional}{Not used.}
 }
 \description{
 AnnData Helpers
@@ -61,15 +53,13 @@ ad <- AnnData(
   ),
   uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
 )
+ad$raw <- ad
 
-dimnames(ad)
-dim(ad)
-as.data.frame(ad)
-as.data.frame(ad, layer = "unspliced")
-as.matrix(ad)
-as.matrix(ad, layer = "unspliced")
-ad[2,,drop=FALSE]
-ad[,-1]
-ad[,c("var1", "var2")]
+dimnames(ad$raw)
+dim(ad$raw)
+as.matrix(ad$raw)
+ad$raw[2,,drop=FALSE]
+ad$raw[,-1]
+ad$raw[,c("var1", "var2")]
 }
 }

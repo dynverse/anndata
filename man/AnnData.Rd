@@ -481,24 +481,14 @@ ad <- AnnData(
   ),
   uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
 )
+ad$raw <- ad
 
-value <- matrix(c(1,2,3,4), nrow = 2)
-ad$X <- value
-ad$X
+library(reticulate)
+sc <- import("scanpy")
+sc$pp$normalize_per_cell(ad)
 
-ad$layers
-ad$layers["spliced"]
-ad$layers["test"] <- value
-ad$layers
-
-ad$to_df()
-ad$uns
-
-as.matrix(ad)
-as.matrix(ad, layer = "unspliced")
-dim(ad)
-rownames(ad)
-colnames(ad)
+ad[]
+ad$raw[]
 }
 
 ## ------------------------------------------------
@@ -512,6 +502,10 @@ ad <- AnnData(
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2"))
 )
+
+ad$raw <- ad
+
+ad$raw[]
 }
 
 ## ------------------------------------------------
@@ -540,9 +534,9 @@ ad <- AnnData(
     unspliced = matrix(c(8, 9, 10, 11), nrow = 2)
   )
 )
+ad$raw <- ad
 
-ad$to_df()
-ad$to_df("unspliced")
+ad$raw$to_adata()
 }
 
 ## ------------------------------------------------
@@ -578,7 +572,6 @@ sc$pp$normalize_per_cell(ad)
 
 ad[]
 ad$raw[]
-
 
 ad$print()
 print(ad)
@@ -761,7 +754,7 @@ Create a new AnnData object
 
 \item{\code{obsp}}{Pairwise annotation of observations, a mutable mapping with array-like values.}
 
-\item{\code{varp}}{Pairwise annotation of observations, a mutable mapping with array-like values.}
+\item{\code{varp}}{Pairwise annotation of variables, a mutable mapping with array-like values.}
 }
 \if{html}{\out{</div>}}
 }
@@ -1513,6 +1506,10 @@ ad <- AnnData(
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2"))
 )
+
+ad$raw <- ad
+
+ad$raw[]
 }
 }
 \if{html}{\out{</div>}}
@@ -1572,9 +1569,9 @@ ad <- AnnData(
     unspliced = matrix(c(8, 9, 10, 11), nrow = 2)
   )
 )
+ad$raw <- ad
 
-ad$to_df()
-ad$to_df("unspliced")
+ad$raw$to_adata()
 }
 }
 \if{html}{\out{</div>}}
@@ -1629,7 +1626,6 @@ sc$pp$normalize_per_cell(ad)
 
 ad[]
 ad$raw[]
-
 
 ad$print()
 print(ad)
