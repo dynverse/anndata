@@ -15,8 +15,7 @@ test_that("test creation", {
   ad <- AnnData(rbind(c(1, 2), c(3, 4)))
   ad <- AnnData(rbind(c(1, 2), c(3, 4)), list(), list())
   ad <- AnnData(rbind(c(1, 2), c(3, 4)), uns = list(mask = c(0, 1, 1, 0)))
-  # TODO: fix
-  # ad <- AnnData(Matrix::Matrix(Matrix::diag(2)))
+  ad <- AnnData(Matrix::Matrix(Matrix::diag(2)))
   X <- rbind(c(1, 2, 3), c(4, 5, 6))
   adata <- AnnData(
     X = X,
@@ -38,8 +37,7 @@ test_that("test creation", {
   adata <- AnnData(NULL, uns = list(test = c(3, 3)), shape = shape)
   expect_null(adata$X)
   expect_equal(adata$shape, shape)
-  # TODO: fix
-  # expect_true("test" %in% names(adata$uns))
+  expect_true("test" %in% names(adata$uns))
 })
 
 test_that("create with dfs", {
@@ -107,7 +105,7 @@ test_that("attr deletion", {
   full <- gen_adata(c(30, 30))
   # Empty has just X, obs_names, var_names
   #empty <- AnnData(full$X, obs = full$obs[,integer(0)], var = full$var[,integer(0)])
-  # TODO: allow passing empty data frames
+  # TODO: allow passing empty data frames??
   empty <- AnnData(full$X)
   empty$obs_names <- full$obs_names
   empty$var_names <- full$var_names
