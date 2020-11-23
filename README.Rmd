@@ -104,21 +104,31 @@ Read from h5ad format:
 read_h5ad("example_formats/pbmc_1k_protein_v3_processed.h5ad")
 ```
 
-
-### AnnData as a matrix
-An `AnnData` object can be used as an R matrix:
+### Creating a view
+You can use any of the regular R indexing methods to subset the `AnnData` object.
+This will result in a 'View' of the underlying data without needing to store 
+the same data twice.
 ```{r}
+view <- ad[, 2]
+view
+view$is_view
+
 ad[,c("var1", "var2")]
-ad[-1, , drop = FALSE]
-ad[, 2] <- 10
+ad[-1, ]
 ```
 
-You can simply use `ad[]` to get quick access to the `X` matrix, or add in 
-`layer="unspliced"` to switch to a different layer.
+### AnnData as a matrix
+The `X` attribute can be used as an R matrix:
 ```{r}
-ad[]
-ad[layer="unspliced"]
-ad[,c("var2", "var3"),layer="unspliced"]
+ad$X[,c("var1", "var2")]
+ad$X[-1, , drop = FALSE]
+ad$X[, 2] <- 10
+```
+
+You can access a different layer matrix as follows:
+```{r}
+ad$layers["unspliced"]
+ad$layers["unspliced"][,c("var2", "var3")]
 ```
 
 ### Note on state
@@ -156,7 +166,7 @@ ad$raw <- ad
 sc <- import("scanpy")
 sc$pp$normalize_per_cell(ad)
 
-ad[]
+ad$X
 ad$raw[]
 ```
 

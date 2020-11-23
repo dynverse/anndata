@@ -8,7 +8,6 @@
 \alias{r_to_py.AnnDataR6}
 \alias{py_to_r.anndata._core.anndata.AnnData}
 \alias{[.AnnDataR6}
-\alias{[<-.AnnDataR6}
 \alias{t.AnnDataR6}
 \title{AnnData Helpers}
 \usage{
@@ -24,9 +23,7 @@
 
 \method{py_to_r}{anndata._core.anndata.AnnData}(x)
 
-\method{[}{AnnDataR6}(x, ..., layer = NULL)
-
-\method{[}{AnnDataR6}(x, ..., layer = NULL) <- value
+\method{[}{AnnDataR6}(x, oidx, vidx)
 
 \method{t}{AnnDataR6}(x)
 }
@@ -43,7 +40,9 @@
 
 \item{convert}{Not used.}
 
-\item{value}{Replacement value.}
+\item{oidx}{Observation indices}
+
+\item{vidx}{Variable indices}
 }
 \description{
 AnnData Helpers

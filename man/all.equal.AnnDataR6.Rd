@@ -4,15 +4,12 @@
 \alias{all.equal.AnnDataR6}
 \title{Test if two AnnDataR6 objects are equal}
 \usage{
-\method{all}{equal.AnnDataR6}(target, current, exact = TRUE)
+\method{all}{equal.AnnDataR6}(target, current)
 }
 \arguments{
 \item{target}{\R object.}
 
 \item{current}{other \R object, to be compared with \code{target}.}
-
-\item{exact}{Whether comparisons should be exact or not. This has a somewhat flexible
-meaning and should probably get refined in the future.}
 }
 \description{
 Test if two AnnDataR6 objects are equal

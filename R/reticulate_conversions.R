@@ -29,11 +29,11 @@
 #' @name r-py-conversion
 #' @export
 `[<-.collections.abc.MutableMapping` <- `[[<-.collections.abc.MutableMapping`
-
+#
 #' @name r-py-conversion
 #' @export
 `[.collections.abc.Mapping` <- `[[.collections.abc.Mapping`
-
+#
 #' @name r-py-conversion
 #' @export
 `names.collections.abc.Mapping` <- function(x) {
@@ -52,7 +52,9 @@
 #' @export
 py_to_r.pandas.core.indexes.base.Index <- function(x) {
   python_builtins <- reticulate::import_builtins()
-  python_builtins$list(x)
+  out <- python_builtins$list(x)
+  attr(out, "name") <- py_to_r(x$name)
+  out
 }
 
 #' @name r-py-conversion

@@ -65,8 +65,8 @@ test_that("test common R functions", {
 
   expect_true(all(as.data.frame(ad, layer = "unspliced") == list(var1 = 8:9, var2 = 10:11, var3 = 12:13)))
 
-  expect_equal(ad[,1], c(s1 = 1, s2 = 2))
-  expect_equal(ad[1,], c(var1 = 1, var2 = 3, var3 = 5))
+  expect_equal(ad$X[,1], c(s1 = 1, s2 = 2))
+  expect_equal(ad$X[1,], c(var1 = 1, var2 = 3, var3 = 5))
 })
 
 test_that("anndata works with sparse data", {

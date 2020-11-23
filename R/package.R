@@ -18,7 +18,7 @@
 #' @aliases anndata-package anndata
 #' @docType package
 #'
-#' @importFrom reticulate py_module_available import import_builtins r_to_py py_to_r py_del_item py_get_item py_set_item
+#' @importFrom reticulate py_module_available import import_builtins r_to_py py_to_r py_del_item py_del_attr py_get_item py_set_item
 #' @importFrom assertthat assert_that
 #'
 #' @section Creating an AnnData object:

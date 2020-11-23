@@ -4,7 +4,7 @@ skip_if_no_anndata()
 
 # some test objects that we use below
 adata_dense <- AnnData(rbind(c(1, 2), c(3, 4)))
-adata_dense$layers[["test"]] <- adata_dense$X
+adata_dense$layers["test"] <- adata_dense$X
 adata_sparse <- AnnData(
   Matrix::Matrix(c(0, 2, 3, 0, 5, 6), byrow = TRUE, nrow = 2, sparse = TRUE),
   list(obs_names=c("s1", "s2"), anno1=c("c1", "c2")),
@@ -109,33 +109,90 @@ test_that("attr deletion", {
   empty <- AnnData(full$X)
   empty$obs_names <- full$obs_names
   empty$var_names <- full$var_names
-  expect_false(isTRUE(all.equal(full$obs, empty$obs)))
-  # full$obs <- NULL
-  # expect_equal(full$obs, empty$obs)
-  expect_false(isTRUE(all.equal(full$var, empty$var)))
-  # full$var <- NULL
-  # expect_equal(full$var, empty$var)
-  # expect_false(isTRUE(all.equal(full$obsm, empty$obsm)))
-  # full$obsm <- NULL
-  # expect_equal(full$obsm, empty$obsm)
-  # expect_false(isTRUE(all.equal(full$varm, empty$varm)))
-  # full$varm <- NULL
-  # expect_equal(full$varm, empty$varm)
-  # expect_false(isTRUE(all.equal(full$obsp, empty$obsp)))
-  # full$obsp <- NULL
-  # expect_equal(full$obsp, empty$obsp)
-  # expect_false(isTRUE(all.equal(full$varp, empty$varp)))
-  # full$varp <- NULL
-  # expect_equal(full$varp, empty$varp)
-  # expect_false(isTRUE(all.equal(full$layers, empty$layers)))
-  # full$layers <- NULL
-  # expect_equal(full$layers, empty$layers)
-  # expect_false(isTRUE(all.equal(full$uns, empty$uns)))
-  # full$uns <- NULL
-  # expect_equal(full$uns, empty$uns)
 
-  # TODO: fix
-  # expect_equal(full, empty)
+  expect_not_equal(full, empty)
+  expect_not_equal(full$obs, empty$obs)
+  full$obs <- NULL
+  expect_equal(full$obs, empty$obs)
 
-  # wip: https://github.com/theislab/anndata/blob/master/anndata/tests/test_base.py#L118
+  expect_not_equal(full, empty)
+  expect_not_equal(full$var, empty$var)
+  full$var <- NULL
+  expect_equal(full$var, empty$var)
+
+  expect_not_equal(full, empty)
+  expect_not_equal(full$obsm, empty$obsm)
+  full$obsm <- NULL
+  expect_equal(full$obsm, empty$obsm)
+
+  expect_not_equal(full, empty)
+  expect_not_equal(full$varm, empty$varm)
+  full$varm <- NULL
+  expect_equal(full$varm, empty$varm)
+
+  expect_not_equal(full, empty)
+  expect_not_equal(full$obsp, empty$obsp)
+  full$obsp <- NULL
+  expect_equal(full$obsp, empty$obsp)
+
+  expect_not_equal(full, empty)
+  expect_not_equal(full$varp, empty$varp)
+  full$varp <- NULL
+  expect_equal(full$varp, empty$varp)
+
+  expect_not_equal(full, empty)
+  expect_not_equal(full$layers, empty$layers)
+  full$layers <- NULL
+  expect_equal(full$layers, empty$layers)
+
+  expect_not_equal(full, empty)
+  expect_not_equal(full$uns, empty$uns)
+  full$uns <- NULL
+  expect_equal(full$uns, empty$uns)
+
+  expect_equal(full, empty)
+})
+
+test_that("setting index names", {
+  li <- list(
+    list(names = c("a", "b"), after = NULL),
+    list(names = c("AAD", "CCA"), after = "barcodes")
+  )
+  attr(li[[2]]$names, "name") <- "barcodes"
+
+  for (i in seq_along(li)) {
+    names <- li[[i]]$names
+    after <- li[[i]]$after
+
+    adata <- adata_dense$copy()
+
+    # do it for obs_names
+    expect_null(attr(adata$obs_names, "name"))
+    adata$obs_names <- names
+    expect_equal(attr(adata$obs_names, "name"), after)
+
+    new <- adata[,]
+    expect_true(new$is_view)
+    new$obs_names <- names
+    expect_equal(new, adata)
+    expect_false(new$is_view)
+
+    # do it for var_names
+    expect_null(attr(adata$var_names, "name"))
+    adata$var_names <- names
+    expect_equal(attr(adata$var_names, "name"), after)
+
+    new <- adata[,]
+    expect_true(new$is_view)
+    new$obs_names <- names
+    expect_equal(new, adata)
+    expect_false(new$is_view)
+  }
+})
+
+test_that("setting index names error", {
+  orig <- adata_sparse[1:2, 1:2]
+  adata <- adata_sparse[1:2, 1:2]
+
+  expect_null(attr(adata$obs_names, "name"))
 })

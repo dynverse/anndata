@@ -89,9 +89,9 @@ You can read the information back out using the `$` notation.
 ad$X
 ```
 
-    ##      [,1] [,2] [,3]
-    ## [1,]    1    3    5
-    ## [2,]    2    4    6
+    ##    var1 var2 var3
+    ## s1    1    3    5
+    ## s2    2    4    6
 
 ``` r
 ad$obs
@@ -133,19 +133,17 @@ ad$varm["rand"]
 ad$layers["unspliced"]
 ```
 
-    ## $unspliced
-    ##      [,1] [,2] [,3]
-    ## [1,]    8   10   12
-    ## [2,]    9   11   13
+    ##    var1 var2 var3
+    ## s1    8   10   12
+    ## s2    9   11   13
 
 ``` r
 ad$layers["spliced"]
 ```
 
-    ## $spliced
-    ##      [,1] [,2] [,3]
-    ## [1,]    4    6    8
-    ## [2,]    5    7    9
+    ##    var1 var2 var3
+    ## s1    4    6    8
+    ## s2    5    7    9
 
 ``` r
 ad$uns["b"]
@@ -171,12 +169,61 @@ read_h5ad("example_formats/pbmc_1k_protein_v3_processed.h5ad")
     ##     obsm: 'X_pca'
     ##     varm: 'PCs'
 
-### AnnData as a matrix
+### Creating a view
 
-An `AnnData` object can be used as an R matrix:
+You can use any of the regular R indexing methods to subset the
+`AnnData` object. This will result in a ‘View’ of the underlying data
+without needing to store the same data twice.
+
+``` r
+view <- ad[, 2]
+view
+```
+
+    ## View of AnnData object with n_obs × n_vars = 2 × 1
+    ##     obs: 'group'
+    ##     var: 'type'
+    ##     uns: 'a', 'b', 'c'
+    ##     obsm: 'ones', 'rand', 'zeros'
+    ##     varm: 'ones', 'rand', 'zeros'
+    ##     layers: 'spliced', 'unspliced'
+
+``` r
+view$is_view
+```
+
+    ## [1] TRUE
 
 ``` r
 ad[,c("var1", "var2")]
+```
+
+    ## View of AnnData object with n_obs × n_vars = 2 × 2
+    ##     obs: 'group'
+    ##     var: 'type'
+    ##     uns: 'a', 'b', 'c'
+    ##     obsm: 'ones', 'rand', 'zeros'
+    ##     varm: 'ones', 'rand', 'zeros'
+    ##     layers: 'spliced', 'unspliced'
+
+``` r
+ad[-1, ]
+```
+
+    ## View of AnnData object with n_obs × n_vars = 1 × 3
+    ##     obs: 'group'
+    ##     var: 'type'
+    ##     uns: 'a', 'b', 'c'
+    ##     obsm: 'ones', 'rand', 'zeros'
+    ##     varm: 'ones', 'rand', 'zeros'
+    ##     layers: 'spliced', 'unspliced'
+
+### AnnData as a matrix
+
+The `X` attribute can be used as an R matrix:
+
+``` r
+ad$X[,c("var1", "var2")]
 ```
 
     ##    var1 var2
@@ -184,29 +231,20 @@ ad[,c("var1", "var2")]
     ## s2    2    4
 
 ``` r
-ad[-1, , drop = FALSE]
+ad$X[-1, , drop = FALSE]
 ```
 
     ##    var1 var2 var3
     ## s2    2    4    6
 
 ``` r
-ad[, 2] <- 10
+ad$X[, 2] <- 10
 ```
 
-You can simply use `ad[]` to get quick access to the `X` matrix, or add
-in `layer="unspliced"` to switch to a different layer.
+You can access a different layer matrix as follows:
 
 ``` r
-ad[]
-```
-
-    ##    var1 var2 var3
-    ## s1    1   10    5
-    ## s2    2   10    6
-
-``` r
-ad[layer="unspliced"]
+ad$layers["unspliced"]
 ```
 
     ##    var1 var2 var3
@@ -214,7 +252,7 @@ ad[layer="unspliced"]
     ## s2    9   11   13
 
 ``` r
-ad[,c("var2", "var3"),layer="unspliced"]
+ad$layers["unspliced"][,c("var2", "var3")]
 ```
 
     ##    var2 var3
@@ -235,14 +273,14 @@ list(ad = ad$X, ad2 = ad2$X)
 ```
 
     ## $ad
-    ##      [,1] [,2] [,3]
-    ## [1,]    1   10    5
-    ## [2,]    2   10    6
+    ##    var1 var2 var3
+    ## s1    1   10    5
+    ## s2    2   10    6
     ## 
     ## $ad2
-    ##      [,1] [,2] [,3]
-    ## [1,]    1   10    5
-    ## [2,]    2   10    6
+    ##    var1 var2 var3
+    ## s1    1   10    5
+    ## s2    2   10    6
 
 This is standard Python behaviour but not R. In order to have two
 separate copies of an AnnData object, use the `$copy()` function:
@@ -256,14 +294,14 @@ list(ad = ad$X, ad3 = ad3$X)
 ```
 
     ## $ad
-    ##      [,1] [,2] [,3]
-    ## [1,]    1    3    5
-    ## [2,]    2    4    6
+    ##    var1 var2 var3
+    ## s1    1    3    5
+    ## s2    2    4    6
     ## 
     ## $ad3
-    ##      [,1] [,2] [,3]
-    ## [1,]    1   10    5
-    ## [2,]    2   10    6
+    ##    var1 var2 var3
+    ## s1    1   10    5
+    ## s2    2   10    6
 
 ### Interoperability with other Python packages
 
@@ -280,7 +318,7 @@ ad$raw <- ad
 sc <- import("scanpy")
 sc$pp$normalize_per_cell(ad)
 
-ad[]
+ad$X
 ```
 
     ##        var1 var2     var3
@@ -306,21 +344,13 @@ Examples are:
 ad$layers
 ```
 
-    ## $spliced
-    ##      [,1] [,2] [,3]
-    ## [1,]    4    6    8
-    ## [2,]    5    7    9
-    ## 
-    ## $unspliced
-    ##      [,1] [,2] [,3]
-    ## [1,]    8   10   12
-    ## [2,]    9   11   13
+    ## Layers with keys: spliced, unspliced
 
 ``` r
 ad$chunked_X(1)
 ```
 
-    ## <generator object AnnData.chunked_X at 0x7fa69f0c95f0>
+    ## <generator object AnnData.chunked_X at 0x7f9c1009a040>
 
 Following functionality has not been tested:
 
@@ -339,6 +369,13 @@ list of changes.
 
 <!-- This section gets automatically generated from NEWS.md -->
 
+### Recent changes in anndata 0.7.5.1
+
+  - MINOR CHANGE: Add wrapper classes for Raw and Layers objects.
+
+  - MAJOR CHANGE: Calling `ad[..., ...]` now correctly returns a view of
+    `ad` instead of returning a matrix.
+
 ### Recent changes in anndata 0.7.5 (2020-11-19)
 
   - MINOR CHANGES: Updated Python requirements to anndata 0.7.5.
@@ -347,7 +384,3 @@ list of changes.
     parameters.
 
   - TESTING: Added more tests based on `theislab/anndata` repository.
-
-### Recent changes in anndata 0.7.4 (2020-11-04)
-
-  - Initial release
