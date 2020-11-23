@@ -158,6 +158,14 @@ AnnData <- function(
   )
 }
 
+.check_matrix <- function(X) {
+  if (is(X, "sparseMatrix") && !is(X, "dgCMatrix") && !is(X, "dgRMatrix")) {
+    X <- as(X, "CsparseMatrix")
+  }
+
+  X
+}
+
 #' @rdname AnnData
 #'
 #' @importFrom R6 R6Class
@@ -217,7 +225,6 @@ AnnDataR6 <- R6::R6Class(
             obs <- list(obs_names = rownames(X))
           } else {
             obs$obs_names <- rownames(X)
-            # rownames(obs) <- rownames(X)
           }
         }
         if (!is.null(colnames(X)) && is.null(rownames(var))) {
@@ -225,7 +232,14 @@ AnnDataR6 <- R6::R6Class(
             var <- list(var_names = colnames(X))
           } else {
             var$var_names <- colnames(X)
-            # rownames(var) <- colnames(X)
+          }
+        }
+
+        # cast matrices if necessary
+        X <- .check_matrix(X)
+        if (!is.null(layers)) {
+          for (i in seq_along(layers)) {
+            layers[[i]] <- .check_matrix(layers[[i]])
           }
         }
 
@@ -666,6 +680,7 @@ AnnDataR6 <- R6::R6Class(
       if (missing(value)) {
         py_to_r(private$.anndata$X)
       } else {
+        value <- .check_matrix(value)
         private$.anndata$X <- value
         self
       }
@@ -723,6 +738,11 @@ AnnDataR6 <- R6::R6Class(
         py_to_r(private$.anndata$layers)
       } else {
         # add check for value
+        if (!is.null(value)) {
+          for (i in seq_along(value)) {
+            value[[i]] <- .check_matrix(value[[i]])
+          }
+        }
         private$.anndata$layers <- reticulate::r_to_py(value)
         self
       }
