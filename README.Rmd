@@ -20,7 +20,7 @@ file format.
 
 ![anndata](http://falexwolf.de/img/scanpy/anndata.svg)
 
-This package is, in essense, an R wrapper for the similarly named Python package
+This package is an R wrapper for the Python package
 [`anndata`](https://anndata.readthedocs.io/en/latest/), with some added functionality
 to support more R-like syntax. The version number of the anndata R package is synced
 with the version number of the python version.
@@ -177,7 +177,6 @@ Some more helper functions and helper classes need to be defined in order to ful
 `AnnData()` objects. Examples are:
 
 ```{r}
-ad$layers
 ad$chunked_X(1)
 ```
 
@@ -187,7 +186,7 @@ ad$rename_categories(...)
 ad$strings_to_categoricals(...)
 ```
 
-Currently not implemented are the `read_zarr()` and `ad$write_zarr()` functions.
+Currently not implemented are the `read_zarr()` and `ad$write_zarr()` functions. Need some example data to test this functionality.
 
 ## Latest changes
 Check out `news(package = "anndata")` or [NEWS.md](NEWS.md) for a full list of changes.

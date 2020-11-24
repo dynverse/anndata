@@ -12,11 +12,11 @@ format.
 
 ![anndata](http://falexwolf.de/img/scanpy/anndata.svg)
 
-This package is, in essense, an R wrapper for the similarly named Python
-package [`anndata`](https://anndata.readthedocs.io/en/latest/), with
-some added functionality to support more R-like syntax. The version
-number of the anndata R package is synced with the version number of the
-python version.
+This package is an R wrapper for the Python package
+[`anndata`](https://anndata.readthedocs.io/en/latest/), with some added
+functionality to support more R-like syntax. The version number of the
+anndata R package is synced with the version number of the python
+version.
 
 ## Installation
 
@@ -341,16 +341,10 @@ need to be defined in order to fully encapsulate `AnnData()` objects.
 Examples are:
 
 ``` r
-ad$layers
-```
-
-    ## Layers with keys: spliced, unspliced
-
-``` r
 ad$chunked_X(1)
 ```
 
-    ## <generator object AnnData.chunked_X at 0x7f9c1009a040>
+    ## <generator object AnnData.chunked_X at 0x7efddaff8040>
 
 Following functionality has not been tested:
 
@@ -360,7 +354,7 @@ ad$strings_to_categoricals(...)
 ```
 
 Currently not implemented are the `read_zarr()` and `ad$write_zarr()`
-functions.
+functions. Need some example data to test this functionality.
 
 ## Latest changes
 
