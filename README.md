@@ -328,7 +328,7 @@ Examples are:
 ad$chunked_X(1)
 ```
 
-    ## <generator object AnnData.chunked_X at 0x7f3bed64e4c0>
+    ## <generator object AnnData.chunked_X at 0x7f16f189e4c0>
 
 Following functionality has not been tested:
 
@@ -355,6 +355,8 @@ list of changes.
 
 -   MAJOR CHANGE: Calling `ad[..., ...]` now correctly returns a view of
     `ad` instead of returning a matrix.
+
+-   TESTING: Extend tests based on `theislab/anndata` repository.
 
 ### Recent changes in anndata 0.7.5 (2020-11-19)
 
