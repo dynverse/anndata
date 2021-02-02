@@ -2,6 +2,7 @@
 output:
   github_document:
     html_preview: false
+bibliography: man/readme_files/references.bib
 ---
 
 ```{r setup1, include=FALSE}
@@ -190,8 +191,6 @@ ad$strings_to_categoricals(...)
 Currently not implemented are the `read_zarr()` and `ad$write_zarr()` functions. 
 I need some example data to test this functionality.
 
-## References
-
 ## Latest changes
 Check out `news(package = "anndata")` or [NEWS.md](NEWS.md) for a full list of changes.
 
@@ -201,3 +200,4 @@ Check out `news(package = "anndata")` or [NEWS.md](NEWS.md) for a full list of c
 cat(dynutils::recent_news())
 ```
 
+## References

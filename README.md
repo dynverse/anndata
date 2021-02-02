@@ -8,8 +8,8 @@ status](https://github.com/rcannood/anndata/workflows/R-CMD-check/badge.svg)](ht
 [`anndata`](https://anndata.readthedocs.io/en/latest/) is a commonly
 used Python package for keeping track of data and learned annotations,
 and can be used to read from and write to the h5ad file format. It is
-also the main data format used in the scanpy python package
-\[@wolf\_scanpylargescalesinglecell\_2018\].
+also the main data format used in the scanpy python package (Wolf,
+Angerer, and Theis 2018).
 
 ![anndata](man/readme_files/anndata_for_r.svg)
 
@@ -328,7 +328,7 @@ Examples are:
 ad$chunked_X(1)
 ```
 
-    ## <generator object AnnData.chunked_X at 0x7f16f189e4c0>
+    ## <generator object AnnData.chunked_X at 0x7f68580674c0>
 
 Following functionality has not been tested:
 
@@ -339,8 +339,6 @@ ad$strings_to_categoricals(...)
 
 Currently not implemented are the `read_zarr()` and `ad$write_zarr()`
 functions. I need some example data to test this functionality.
-
-## References
 
 ## Latest changes
 
@@ -366,3 +364,17 @@ list of changes.
     parameters.
 
 -   TESTING: Added more tests based on `theislab/anndata` repository.
+
+## References
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-wolf_scanpylargescalesinglecell_2018" class="csl-entry">
+
+Wolf, F Alexander, Philipp Angerer, and Fabian J Theis. 2018. “SCANPY:
+Large-Scale Single-Cell Gene Expression Data Analysis.” *Genome Biology*
+19 (February): 15. <https://doi.org/10.1186/s13059-017-1382-0>.
+
+</div>
+
+</div>
