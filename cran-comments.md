@@ -1,6 +1,12 @@
-The python package 'anndata' which this package uses as an API was updated a few days ago.
+# anndata 0.7.5.1
 
-The R package 'anndata' needs to be updated to match the API of the newer version.
+Version number is set to '0.7.5.1' to keep in sync with the Python package 'anndata' which is at version 0.7.5.
+
+* MINOR CHANGE: Add wrapper classes for Raw and Layers objects.
+
+* MAJOR CHANGE: Calling `ad[..., ...]` now correctly returns a view of `ad` instead of returning a matrix.
+
+* TESTING: Extend tests based on `theislab/anndata` repository.
 
 --------------------------------------------------------------------------
 
@@ -15,7 +21,7 @@ The R package 'anndata' needs to be updated to match the API of the newer versio
 
 ## R CMD check results
 
-Duration: 27.9s
+Duration: 42.7s
 
 0 errors ✓ | 0 warnings ✓ | 0 notes ✓
 
