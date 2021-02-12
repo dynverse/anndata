@@ -111,7 +111,7 @@ LayersR6 <- R6::R6Class(
   )
 )
 
-#' AnnData Helpers
+#' Layers Helpers
 #'
 #' @param x An AnnData object.
 #' @param convert Not used.

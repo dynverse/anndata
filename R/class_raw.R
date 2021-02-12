@@ -220,7 +220,7 @@ RawR6 <- R6::R6Class(
   )
 )
 
-#' AnnData Helpers
+#' Raw Helpers
 #'
 #' @param x An AnnData object.
 #' @param convert Not used.
