@@ -11,7 +11,7 @@ and can be used to read from and write to the h5ad file format. It is
 also the main data format used in the scanpy python package (Wolf,
 Angerer, and Theis 2018).
 
-![anndata](man/readme_files/anndata_for_r.svg)
+![anndata](man/readme_files/anndata_for_r.png)
 
 However, using scanpy/anndata in R can be a major hassle. When trying to
 read an h5ad file, R users could approach this problem in one of two
@@ -328,7 +328,7 @@ Examples are:
 ad$chunked_X(1)
 ```
 
-    ## <generator object AnnData.chunked_X at 0x7fc410b84200>
+    ## <generator object AnnData.chunked_X at 0x7f1d15cf2200>
 
 Following functionality has not been tested:
 
