@@ -18,7 +18,7 @@ set.seed(1)
 for keeping track of data and learned annotations, and can be used to read from and write to the h5ad 
 file format. It is also the main data format used in the scanpy python package [@wolf_scanpylargescalesinglecell_2018].
 
-![](man/readme_files/anndata_for_r.png)
+![](https://github.com/dynverse/anndata/blob/master/man/readme_files/anndata_for_r.png)
 
 However, using scanpy/anndata in R can be a major hassle. When trying to read an h5ad file,
 R users could approach this problem in one of two ways. A) You could read in the file manually
