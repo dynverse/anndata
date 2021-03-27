@@ -51,7 +51,7 @@ RoxygenNote: 7.1.1
 Config/reticulate:
   list(
     packages = list(
-      list(package = "anndata")
+      list(package = c("anndata", "scanpy"))
     )
   )
 VignetteBuilder: knitr
