@@ -17,7 +17,7 @@
 #' }
 read_excel <- function(filename, sheet, dtype = "float32") {
   python_anndata <- reticulate::import("anndata", convert = FALSE)
-  py_to_r(python_anndata$read_excel(
+  py_to_r_ifneedbe(python_anndata$read_excel(
     filename = filename,
     sheet = sheet,
     dtype = dtype

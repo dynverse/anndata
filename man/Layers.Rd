@@ -34,29 +34,6 @@ names(ad$layers)
 }
 
 ## ------------------------------------------------
-## Method `LayersR6$new`
-## ------------------------------------------------
-
-\dontrun{
-# use Layers() instead of LayersR6$new()
-ad <- AnnData(
-  X = matrix(c(0, 1, 2, 3), nrow = 2),
-  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
-  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
-  layers = list(
-    spliced = matrix(c(4, 5, 6, 7), nrow = 2),
-    unspliced = matrix(c(8, 9, 10, 11), nrow = 2)
-  )
-)
-
-ad$layers["spliced"]
-ad$layers["test"] <- matrix(c(1, 3, 5, 7), nrow = 2)
-
-length(ad$layers)
-names(ad$layers)
-}
-
-## ------------------------------------------------
 ## Method `LayersR6$print`
 ## ------------------------------------------------
 
@@ -91,6 +68,8 @@ print(ad$layers)
 \item \href{#method-del}{\code{LayersR6$del()}}
 \item \href{#method-keys}{\code{LayersR6$keys()}}
 \item \href{#method-length}{\code{LayersR6$length()}}
+\item \href{#method-.set_py_object}{\code{LayersR6$.set_py_object()}}
+\item \href{#method-.get_py_object}{\code{LayersR6$.get_py_object()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -99,43 +78,16 @@ print(ad$layers)
 \subsection{Method \code{new()}}{
 Create a new Layers object
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LayersR6$new(parent, vals = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{LayersR6$new(obj)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{parent}}{An AnnData object.}
-
-\item{\code{vals}}{A named list of matrices with the same dimensions as \code{parent}.}
+\item{\code{obj}}{A Python Layers object}
 }
 \if{html}{\out{</div>}}
 }
-\subsection{Examples}{
-\if{html}{\out{<div class="r example copy">}}
-\preformatted{\dontrun{
-# use Layers() instead of LayersR6$new()
-ad <- AnnData(
-  X = matrix(c(0, 1, 2, 3), nrow = 2),
-  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
-  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2")),
-  layers = list(
-    spliced = matrix(c(4, 5, 6, 7), nrow = 2),
-    unspliced = matrix(c(8, 9, 10, 11), nrow = 2)
-  )
-)
-
-ad$layers["spliced"]
-ad$layers["test"] <- matrix(c(1, 3, 5, 7), nrow = 2)
-
-length(ad$layers)
-names(ad$layers)
-}
-}
-\if{html}{\out{</div>}}
-
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}
@@ -244,6 +196,33 @@ Get the names of the layers
 Get the number of layers
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LayersR6$length()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-.set_py_object"></a>}}
+\if{latex}{\out{\hypertarget{method-.set_py_object}{}}}
+\subsection{Method \code{.set_py_object()}}{
+Set internal Python object
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LayersR6$.set_py_object(obj)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{obj}}{A Python layers object}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-.get_py_object"></a>}}
+\if{latex}{\out{\hypertarget{method-.get_py_object}{}}}
+\subsection{Method \code{.get_py_object()}}{
+Get internal Python object
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LayersR6$.get_py_object()}\if{html}{\out{</div>}}
 }
 
 }

@@ -16,7 +16,7 @@ read_h5ad <- function(
   backed = NULL
 ) {
   python_anndata <- reticulate::import("anndata", convert = FALSE)
-  py_to_r(python_anndata$read_h5ad(
+  py_to_r_ifneedbe(python_anndata$read_h5ad(
     filename = filename,
     backed = backed
   ))
