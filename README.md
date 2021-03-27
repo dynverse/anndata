@@ -1,7 +1,7 @@
 
 [![CRAN](https://www.r-pkg.org/badges/version/anndata)](https://cran.r-project.org/package=anndata)
 [![Build
-status](https://github.com/rcannood/anndata/workflows/R-CMD-check/badge.svg)](https://github.com/rcannood/anndata/actions)
+status](https://github.com/rcannood/dynverse/workflows/R-CMD-check/badge.svg)](https://github.com/dynverse/anndata/actions)
 
 # anndata - Annotated Data
 
@@ -28,7 +28,7 @@ is an R wrapper for the Python package – with some syntax sprinkled on
 top to make R users feel more at home.
 
 The R anndata is still under active development at
-[github.com/rcannood/anndata](https://github.com/rcannood/anndata). If
+[github.com/dynverse/anndata](https://github.com/dynverse/anndata). If
 you encounter any issues, feel free to post an issue on GitHub!
 
 ## Installation
@@ -328,7 +328,7 @@ Examples are:
 ad$chunked_X(1)
 ```
 
-    ## <generator object AnnData.chunked_X at 0x7f68580674c0>
+    ## <generator object AnnData.chunked_X at 0x7fc410b84200>
 
 Following functionality has not been tested:
 
@@ -347,6 +347,10 @@ list of changes.
 
 <!-- This section gets automatically generated from NEWS.md -->
 
+### Recent changes in anndata 0.7.5.2
+
+-   MINOR CHANGE: Add getters and setters to the LayersR6 class.
+
 ### Recent changes in anndata 0.7.5.1
 
 -   MINOR CHANGE: Add wrapper classes for Raw and Layers objects.
@@ -355,15 +359,6 @@ list of changes.
     `ad` instead of returning a matrix.
 
 -   TESTING: Extend tests based on `theislab/anndata` repository.
-
-### Recent changes in anndata 0.7.5 (2020-11-19)
-
--   MINOR CHANGES: Updated Python requirements to anndata 0.7.5.
-
--   NEW FEATURE `AnnData()`: Added `obsp`, `varp`, and `raw` objects to
-    parameters.
-
--   TESTING: Added more tests based on `theislab/anndata` repository.
 
 ## References
 

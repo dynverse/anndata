@@ -1,7 +1,7 @@
 Type: Package
 Package: anndata
 Title: Annotated Data
-Version: 0.7.5.1
+Version: 0.7.5.2
 Authors@R: 
     c(person(given = "Philipp",
              family = "Angerer",
@@ -30,8 +30,8 @@ Description: An R wrapper for the Python package 'anndata'.
     Provides a scalable way of keeping track of data and learned
     annotations.  Used to read from and write to the h5ad file format.
 License: MIT + file LICENSE
-URL: https://github.com/rcannood/anndata
-BugReports: https://github.com/rcannood/anndata/issues
+URL: https://anndata.dynverse.org, https://github.com/dynverse/anndata
+BugReports: https://github.com/dynverse/anndata/issues
 Depends: 
     R (>= 3.5.0)
 Imports:

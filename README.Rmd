@@ -10,7 +10,7 @@ set.seed(1)
 ```
 
 [![CRAN](https://www.r-pkg.org/badges/version/anndata)](https://cran.r-project.org/package=anndata)
-[![Build status](https://github.com/rcannood/anndata/workflows/R-CMD-check/badge.svg)](https://github.com/rcannood/anndata/actions)
+[![Build status](https://github.com/rcannood/dynverse/workflows/R-CMD-check/badge.svg)](https://github.com/dynverse/anndata/actions)
 
 # anndata - Annotated Data
 
@@ -31,7 +31,7 @@ We recently published [`anndata`](https://cran.r-project.org/package=anndata) on
 which is an R wrapper for the Python package -- with some syntax sprinkled on top to make
 R users feel more at home. 
 
-The R anndata is still under active development at [github.com/rcannood/anndata](https://github.com/rcannood/anndata). 
+The R anndata is still under active development at [github.com/dynverse/anndata](https://github.com/dynverse/anndata). 
 If you encounter any issues, feel free to post an issue on GitHub!
 
 ## Installation
