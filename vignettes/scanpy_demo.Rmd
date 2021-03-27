@@ -54,5 +54,5 @@ You can seamlessly switch back to using your dataset with other R functions, for
 by calculating the rowMeans of the expression matrix.
 ```{r}
 library(Matrix)
-rowMeans(ad$X)
+rowMeans(ad$X[1:10, ])
 ```
