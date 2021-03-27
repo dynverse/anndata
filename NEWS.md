@@ -2,6 +2,8 @@
 
 * MINOR CHANGE: Add getters and setters to the LayersR6 class.
 
+* MINOR CHANGE: Change when Python objects get converted and vice versa.
+
 # anndata 0.7.5.1
 
 * MINOR CHANGE: Add wrapper classes for Raw and Layers objects.
