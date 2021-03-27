@@ -3,7 +3,7 @@
 [![Build
 status](https://github.com/rcannood/dynverse/workflows/R-CMD-check/badge.svg)](https://github.com/dynverse/anndata/actions)
 
-# anndata - Annotated Data
+# anndata for R
 
 [`anndata`](https://anndata.readthedocs.io/en/latest/) is a commonly
 used Python package for keeping track of data and learned annotations,
@@ -11,7 +11,7 @@ and can be used to read from and write to the h5ad file format. It is
 also the main data format used in the scanpy python package (Wolf,
 Angerer, and Theis 2018).
 
-![anndata](man/readme_files/anndata_for_r.png)
+![](man/readme_files/anndata_for_r.png)
 
 However, using scanpy/anndata in R can be a major hassle. When trying to
 read an h5ad file, R users could approach this problem in one of two
@@ -24,10 +24,10 @@ into R.
 
 We recently published
 [`anndata`](https://cran.r-project.org/package=anndata) on CRAN, which
-is an R wrapper for the Python package – with some syntax sprinkled on
-top to make R users feel more at home.
+is a reticulate wrapper for the Python package – with some syntax
+sprinkled on top to make R users feel more at home.
 
-The R anndata is still under active development at
+anndata for R is still under active development at
 [github.com/dynverse/anndata](https://github.com/dynverse/anndata). If
 you encounter any issues, feel free to post an issue on GitHub!
 
@@ -50,11 +50,11 @@ anndata::install_anndata()
 
 ## Getting started
 
-The API of `anndata` is very similar to its Python counterpart. Check
-out `?anndata` for a full list of the functions provided by this
+The API of anndata for R is very similar to its Python counterpart.
+Check out `?anndata` for a full list of the functions provided by this
 package.
 
-`AnnData` stores a data matrix `X` together with annotations of
+`AnnData()` stores a data matrix `X` together with annotations of
 observations `obs` (`obsm`, `obsp`), variables `var` (`varm`, `varp`),
 and unstructured annotations `uns`.
 
@@ -328,7 +328,7 @@ Examples are:
 ad$chunked_X(1)
 ```
 
-    ## <generator object AnnData.chunked_X at 0x7f1d15cf2200>
+    ## <generator object AnnData.chunked_X at 0x7fad0a277200>
 
 Following functionality has not been tested:
 

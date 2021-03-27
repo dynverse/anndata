@@ -1,32 +1,32 @@
 Type: Package
 Package: anndata
-Title: Annotated Data
+Title: 'anndata' for R
 Version: 0.7.5.2
 Authors@R: 
     c(person(given = "Philipp",
              family = "Angerer",
-             role = "aut",
+             role = "ccp",
              email = "phil.angerer@gmail.com",
              comment = c(ORCID = "0000-0002-0369-2888", github = "flying-sheep")),
       person(given = "Alex",
              family = "Wolf",
-             role = "aut",
+             role = "ccp",
              email = "f.alex.wolf@gmx.de",
              comment = c(ORCID = "0000-0002-8760-7838", github = "falexwolf")),
       person(given = "Isaac",
              family = "Virshup",
-             role = "aut",
+             role = "ccp",
              comment = c(github = "ivirshup")),
       person(given = "Sergei",
              family = "Rybakov",
-             role = "aut",
+             role = "ccp",
              comment = c(github = "Koncopd")),
       person(given = "Robrecht",
              family = "Cannoodt",
              role = c("aut", "ctb", "cre", "cph"),
              email = "rcannood@gmail.com",
              comment = c(ORCID = "0000-0003-3641-729X", github = "rcannood")))
-Description: An R wrapper for the Python package 'anndata'.
+Description: A 'reticulate' wrapper for the Python package 'anndata'.
     Provides a scalable way of keeping track of data and learned
     annotations.  Used to read from and write to the h5ad file format.
 License: MIT + file LICENSE
@@ -43,6 +43,5 @@ Suggests:
     Matrix,
     testthat
 Encoding: UTF-8
-LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
