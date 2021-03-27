@@ -83,7 +83,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#anndata-for-r" class="anchor"></a>anndata for R</h1></div>
 <p><a href="https://anndata.readthedocs.io/en/latest/"><code>anndata</code></a> is a commonly used Python package for keeping track of data and learned annotations, and can be used to read from and write to the h5ad file format. It is also the main data format used in the scanpy python package (Wolf, Angerer, and Theis 2018).</p>
-<p><img src="https://raw.githubusercontent.com/dynverse/anndata/master/man/readme_files/anndata_for_r.png"></p>
+<p><img src="https://github.com/dynverse/anndata/blob/master/man/readme_files/anndata_for_r.png"></p>
 <p>However, using scanpy/anndata in R can be a major hassle. When trying to read an h5ad file, R users could approach this problem in one of two ways. A) You could read in the file manually (since it’s an H5 file), but this involves a lot of manual work and a lot of understanding on how the h5ad and H5 file formats work (also, expect major headaches from cryptic hdf5r bugs). Or B) interact with scanpy and anndata through reticulate, but run into issues converting some of the python objects into R.</p>
 <p>We recently published <a href="https://cran.r-project.org/package=anndata"><code>anndata</code></a> on CRAN, which is a reticulate wrapper for the Python package – with some syntax sprinkled on top to make R users feel more at home.</p>
 <p>anndata for R is still under active development at <a href="https://github.com/dynverse/anndata">github.com/dynverse/anndata</a>. If you encounter any issues, feel free to post an issue on GitHub!</p>
@@ -308,7 +308,7 @@
 <p>In some cases, this package may still act more like a Python package rather than an R package. Some more helper functions and helper classes need to be defined in order to fully encapsulate <code><a href="reference/AnnData.html">AnnData()</a></code> objects. Examples are:</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ad</span><span class="op">$</span><span class="fu">chunked_X</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co">## &lt;generator object AnnData.chunked_X at 0x7f35f4b30200&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co">## &lt;generator object AnnData.chunked_X at 0x7ff361279200&gt;</span></span></code></pre></div>
 <p>Following functionality has not been tested:</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ad</span><span class="op">$</span><span class="fu">rename_categories</span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
