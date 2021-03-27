@@ -1,0 +1,39 @@
+url: https://anndata.dynverse.org
+
+home:
+  links:
+    - text: Python package
+      href: "https://anndata.readthedocs.io"
+
+template:
+  params:
+    ganalytics: "G-XSL8ZZLBFK"
+
+
+reference:
+ - title: Creating an AnnData object
+ - contents:
+   - AnnData
+ - title: Concatenating two or more AnnData objects
+ - contents:
+   - concat
+ - title: Reading an AnnData object from a file
+ - contents:
+   - read_csv
+   - read_excel
+   - read_h5ad
+   - read_hdf
+   - read_loom
+   - read_loom
+   - read_mtx
+   - read_text
+   - read_umi_tools
+ - title: Writing an AnnData object to a file
+ - contents:
+   - write_csvs
+   - write_h5ad
+   - write_loom
+ - title: Installer
+   desc: Helper function for installing the anndata Python package
+ - contents:
+   - install_anndata
