@@ -42,6 +42,13 @@ install.packages("anndata")
 Normally, reticulate should take care of installing Miniconda and the
 Python anndata.
 
+If not, try running:
+
+``` r
+reticulate::install_miniconda()
+anndata::install_anndata()
+```
+
 ## Getting started
 
 The API of anndata for R is very similar to its Python counterpart. Here
