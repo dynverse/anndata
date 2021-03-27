@@ -1,8 +1,10 @@
-pandoc: 2.7.3
+pandoc: 2.11.2
 pkgdown: 1.6.1
 pkgdown_sha: ~
-articles: {}
-last_built: 2021-03-27T15:25Z
+articles:
+  getting_started: getting_started.html
+  scanpy_demo: scanpy_demo.html
+last_built: 2021-03-27T21:00Z
 urls:
   reference: https://anndata.dynverse.org/reference
   article: https://anndata.dynverse.org/articles

@@ -105,6 +105,21 @@ See this blog post for more details." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/getting_started.html">Getting started</a>
+    </li>
+    <li>
+      <a href="../articles/scanpy_demo.html">Demo with scanpy</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -362,56 +377,17 @@ leaves <code>raw</code> unaffected. Note that you can call:<pre><span class='va'
 <li><p><a href='#method-write_h5ad'><code>AnnDataR6$write_h5ad()</code></a></p></li>
 <li><p><a href='#method-write_loom'><code>AnnDataR6$write_loom()</code></a></p></li>
 <li><p><a href='#method-print'><code>AnnDataR6$print()</code></a></p></li>
+<li><p><a href='#method-.set_py_object'><code>AnnDataR6$.set_py_object()</code></a></p></li>
+<li><p><a href='#method-.get_py_object'><code>AnnDataR6$.get_py_object()</code></a></p></li>
 </ul>
 <p><hr>
 <a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
 <p>Create a new AnnData object</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>AnnDataR6</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
-  X <span class='op'>=</span> <span class='cn'>NULL</span>,
-  obs <span class='op'>=</span> <span class='cn'>NULL</span>,
-  var <span class='op'>=</span> <span class='cn'>NULL</span>,
-  uns <span class='op'>=</span> <span class='cn'>NULL</span>,
-  obsm <span class='op'>=</span> <span class='cn'>NULL</span>,
-  varm <span class='op'>=</span> <span class='cn'>NULL</span>,
-  layers <span class='op'>=</span> <span class='cn'>NULL</span>,
-  raw <span class='op'>=</span> <span class='cn'>NULL</span>,
-  dtype <span class='op'>=</span> <span class='st'>"float32"</span>,
-  shape <span class='op'>=</span> <span class='cn'>NULL</span>,
-  filename <span class='op'>=</span> <span class='cn'>NULL</span>,
-  filemode <span class='op'>=</span> <span class='cn'>NULL</span>,
-  obsp <span class='op'>=</span> <span class='cn'>NULL</span>,
-  varp <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>AnnDataR6</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
-<dt><code>X</code></dt><dd><p>A #observations × #variables data matrix. A view of the data is used if the data type matches, otherwise, a copy is made.</p></dd>
-
-<dt><code>obs</code></dt><dd><p>Key-indexed one-dimensional observations annotation of length #observations.</p></dd>
-
-<dt><code>var</code></dt><dd><p>Key-indexed one-dimensional variables annotation of length #variables.</p></dd>
-
-<dt><code>uns</code></dt><dd><p>Key-indexed unstructured annotation.</p></dd>
-
-<dt><code>obsm</code></dt><dd><p>Key-indexed multi-dimensional observations annotation of length #observations. If passing a <code>~numpy.ndarray</code>, it needs to have a structured datatype.</p></dd>
-
-<dt><code>varm</code></dt><dd><p>Key-indexed multi-dimensional variables annotation of length #variables. If passing a <code>~numpy.ndarray</code>, it needs to have a structured datatype.</p></dd>
-
-<dt><code>layers</code></dt><dd><p>Key-indexed multi-dimensional arrays aligned to dimensions of <code>X</code>.</p></dd>
-
-<dt><code>raw</code></dt><dd><p>Store raw version of <code>X</code> and <code>var</code> as <code>$raw$X</code> and <code>$raw$var</code>.</p></dd>
-
-<dt><code>dtype</code></dt><dd><p>Data type used for storage.</p></dd>
-
-<dt><code>shape</code></dt><dd><p>Shape list (#observations, #variables). Can only be provided if <code>X</code> is <code>NULL</code>.</p></dd>
-
-<dt><code>filename</code></dt><dd><p>Name of backing file. See <a href='https://docs.h5py.org/en/latest/high/file.html#h5py.File'>h5py.File</a>.</p></dd>
-
-<dt><code>filemode</code></dt><dd><p>Open mode of backing file. See <a href='https://docs.h5py.org/en/latest/high/file.html#h5py.File'>h5py.File</a>.</p></dd>
-
-<dt><code>obsp</code></dt><dd><p>Pairwise annotation of observations, a mutable mapping with array-like values.</p></dd>
-
-<dt><code>varp</code></dt><dd><p>Pairwise annotation of variables, a mutable mapping with array-like values.</p></dd>
+<dt><code>obj</code></dt><dd><p>A Python anndata object</p></dd>
 
 </dl><p></div></p>
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Examples</h4>
@@ -888,6 +864,21 @@ print(ad)
 }
 </pre><p></div></p>
 
+<p><hr>
+<a id="method-.set_py_object"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>.set_py_object()</code></h3>
+<p>Set internal Python object</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>AnnDataR6</span><span class='op'>$</span><span class='fu'>.set_py_object</span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>obj</code></dt><dd><p>A python anndata object</p></dd>
+
+</dl><p></div></p>
+<p><hr>
+<a id="method-.get_py_object"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>.get_py_object()</code></h3>
+<p>Get internal Python object</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>AnnDataR6</span><span class='op'>$</span><span class='fu'>.get_py_object</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
+
 
 
     <h2 class="hasAnchor" id="active-bindings"><a class="anchor" href="#active-bindings"></a>Active bindings</h2>
@@ -920,38 +911,19 @@ print(ad)
 <li><p><a href='#method-copy'><code>RawR6$copy()</code></a></p></li>
 <li><p><a href='#method-to_adata'><code>RawR6$to_adata()</code></a></p></li>
 <li><p><a href='#method-print'><code>RawR6$print()</code></a></p></li>
+<li><p><a href='#method-.set_py_object'><code>RawR6$.set_py_object()</code></a></p></li>
+<li><p><a href='#method-.get_py_object'><code>RawR6$.get_py_object()</code></a></p></li>
 </ul>
 <p><hr>
 <a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
 <p>Create a new Raw object</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>RawR6</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='va'>adata</span>, X <span class='op'>=</span> <span class='cn'>NULL</span>, var <span class='op'>=</span> <span class='cn'>NULL</span>, varm <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>RawR6</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
-<dt><code>adata</code></dt><dd><p>An AnnData object.</p></dd>
-
-<dt><code>X</code></dt><dd><p>A #observations × #variables data matrix.</p></dd>
-
-<dt><code>var</code></dt><dd><p>Key-indexed one-dimensional variables annotation of length #variables.</p></dd>
-
-<dt><code>varm</code></dt><dd><p>Key-indexed multi-dimensional variables annotation of length #variables.</p></dd>
+<dt><code>obj</code></dt><dd><p>A Python Raw object</p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Examples</h4>
-<p><div class="r example copy"></p><pre>\dontrun{
-# use Raw() instead of RawR6$new()
-ad &lt;- AnnData(
-  X = matrix(c(0, 1, 2, 3), nrow = 2),
-  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
-  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2"))
-)
-
-ad$raw &lt;- ad
-
-ad$raw[]
-}
-</pre><p></div></p>
-
 <p><hr>
 <a id="method-copy"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>copy()</code></h3>
 <p>Full copy, optionally on disk.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
@@ -1039,6 +1011,21 @@ ad$print()
 print(ad)
 }
 </pre><p></div></p>
+
+<p><hr>
+<a id="method-.set_py_object"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>.set_py_object()</code></h3>
+<p>Set internal Python object</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>RawR6</span><span class='op'>$</span><span class='fu'>.set_py_object</span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>obj</code></dt><dd><p>A Python Raw object</p></dd>
+
+</dl><p></div></p>
+<p><hr>
+<a id="method-.get_py_object"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>.get_py_object()</code></h3>
+<p>Get internal Python object</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>RawR6</span><span class='op'>$</span><span class='fu'>.get_py_object</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 
 
@@ -1414,23 +1401,6 @@ print(ad)
 <span class='va'>sc</span><span class='op'>$</span><span class='va'>pp</span><span class='op'>$</span><span class='fu'>normalize_per_cell</span><span class='op'>(</span><span class='va'>ad</span><span class='op'>)</span>
 
 <span class='va'>ad</span><span class='op'>[</span><span class='op'>]</span>
-<span class='va'>ad</span><span class='op'>$</span><span class='va'>raw</span><span class='op'>[</span><span class='op'>]</span>
-<span class='op'>}</span>
-
-<span class='co'>## ------------------------------------------------</span>
-<span class='co'>## Method `RawR6$new`</span>
-<span class='co'>## ------------------------------------------------</span>
-
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># use Raw() instead of RawR6$new()</span>
-<span class='va'>ad</span> <span class='op'>&lt;-</span> <span class='fu'>AnnData</span><span class='op'>(</span>
-  X <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span>, nrow <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>,
-  obs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>group <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span><span class='op'>)</span>, row.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s1"</span>, <span class='st'>"s2"</span><span class='op'>)</span><span class='op'>)</span>,
-  var <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1L</span>, <span class='fl'>2L</span><span class='op'>)</span>, row.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"var1"</span>, <span class='st'>"var2"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='op'>)</span>
-
-<span class='va'>ad</span><span class='op'>$</span><span class='va'>raw</span> <span class='op'>&lt;-</span> <span class='va'>ad</span>
-
 <span class='va'>ad</span><span class='op'>$</span><span class='va'>raw</span><span class='op'>[</span><span class='op'>]</span>
 <span class='op'>}</span>
 

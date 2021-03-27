@@ -69,4 +69,10 @@
   <url>
     <loc>https://anndata.dynverse.org/reference/write_loom.html</loc>
   </url>
+  <url>
+    <loc>https://anndata.dynverse.org/articles/getting_started.html</loc>
+  </url>
+  <url>
+    <loc>https://anndata.dynverse.org/articles/scanpy_demo.html</loc>
+  </url>
 </urlset>
