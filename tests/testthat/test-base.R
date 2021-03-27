@@ -307,7 +307,7 @@ test_that("boolean_slicing", {
 })
 
 test_that("oob boolean slicing", {
-  len <- sample.int(100, 2, replace = FALSE)
+  len <- sample.int(50, 2, replace = FALSE)
   expect_error({
     empty_mat <- matrix(rep(0, len[[1]] * 100), nrow = len[[1]])
     sel <- sample(c(TRUE, FALSE), len[[2]], replace = TRUE)
