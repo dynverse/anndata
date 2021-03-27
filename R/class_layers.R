@@ -175,7 +175,7 @@ length.LayersR6 <- function(x) {
 #' @rdname LayersHelpers
 #' @export
 r_to_py.LayersR6 <- function(x, convert = FALSE) {
-  if (convert) x$.get_py_object() else x
+  x$.get_py_object()
 }
 
 #' @rdname LayersHelpers

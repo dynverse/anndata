@@ -29,7 +29,7 @@ py_to_r_ifneedbe <- function(x) {
 #' @export
 `[[.collections.abc.Mapping` <- function(x, name) {
   if (name %in% x$keys()) {
-    reticulate::py_to_r_ifneedbe(reticulate::py_get_item(x, name))
+    py_to_r_ifneedbe(reticulate::py_get_item(x, name))
   } else {
     NULL
   }

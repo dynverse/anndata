@@ -982,7 +982,7 @@ as.matrix.AnnDataR6 <- function(x, layer = NULL, ...) {
 #' @rdname AnnDataHelpers
 #' @export
 r_to_py.AnnDataR6 <- function(x, convert = FALSE) {
-  if (convert) x$.get_py_object() else x
+  x$.get_py_object()
 }
 
 #' @rdname AnnDataHelpers

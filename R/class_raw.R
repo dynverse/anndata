@@ -266,7 +266,7 @@ as.matrix.RawR6 <- function(x, ...) {
 #' @rdname RawHelpers
 #' @export
 r_to_py.RawR6 <- function(x, convert = FALSE) {
-  if (convert) x$.get_python_object() else x
+  x$.get_py_object()
 }
 
 #' @rdname RawHelpers
