@@ -33,7 +33,7 @@ Layers <- function(
   )
 }
 
-#' @rdname AnnData
+#' @rdname Layers
 #'
 #' @importFrom R6 R6Class
 #' @export
@@ -101,10 +101,48 @@ LayersR6 <- R6::R6Class(
     #' }
     print = function(...) {
       print(private$.layers, ...)
+    },
+
+    #' @description Get a layer
+    #' @param name Name of the layer
+    get = function(name) {
+      out <- py_to_r(private$.layers$get(name))
+      if (!is.null(out)) {
+        dimnames(out) <- dimnames(self$parent)
+      }
+      out
+    },
+
+    #' @description Set a layer
+    #' @param name Name of the layer
+    #' @param value A matrix
+    set = function(name, value) {
+      if (!is.null(value)) {
+        invisible(private$.layers$`__setitem__`(name, value))
+      } else {
+        self$del(name)
+      }
+    },
+
+    #' @description Delete a layer
+    #' @param name Name of the layer
+    del = function(name) {
+      reticulate::py_del_item(private$.layers, name)
+    },
+
+    #' @description Get the names of the layers
+    keys = function() {
+      py_to_r(private$.layers$keys())
+    },
+
+    #' @description Get the number of layers
+    length = function() {
+      py_to_r(private$.layers$`__len__`())
     }
+
   ),
   active = list(
-    #' @field parent The parent AnnData of this object.
+    #' @field parent Reference to parent AnnData view
     parent = function() {
       py_to_r(private$.layers$parent)
     }
@@ -140,13 +178,13 @@ LayersR6 <- R6::R6Class(
 #' names(ad$layers)
 #' }
 names.LayersR6 <- function(x) {
-  py_to_r(x$.__enclos_env__$private$.layers$keys())
+  x$keys()
 }
 
 #' @rdname LayersHelpers
 #' @export
 length.LayersR6 <- function(x) {
-  py_to_r(x$.__enclos_env__$private$.layers$`__len__`())
+  x$length()
 }
 
 #' @rdname LayersHelpers
@@ -166,21 +204,13 @@ py_to_r.anndata._core.aligned_mapping.Layers <- function(x) {
 #' @rdname LayersHelpers
 #' @export
 `[.LayersR6` <- function(x, name) {
-  out <- py_to_r(x$.__enclos_env__$private$.layers$get(name))
-  if (!is.null(out)) {
-    dimnames(out) <- dimnames(x$parent)
-  }
-  out
+  x$get(name)
 }
 
 #' @rdname LayersHelpers
 #' @export
 `[<-.LayersR6` <- function(x, name, value) {
-  if (!is.null(value)) {
-    x$.__enclos_env__$private$.layers$`__setitem__`(name, value)
-  } else {
-    reticulate::py_del_item(x$.__enclos_env__$private$.layers, name)
-  }
+  x$set(name, value)
   x
 }
 

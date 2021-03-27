@@ -1,3 +1,7 @@
+# anndata 0.7.5.2
+
+* MINOR CHANGE: Add getters and setters to the LayersR6 class.
+
 # anndata 0.7.5.1
 
 * MINOR CHANGE: Add wrapper classes for Raw and Layers objects.
