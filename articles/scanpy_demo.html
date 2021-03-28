@@ -88,7 +88,7 @@
 
       
 
-      </header><script src="scanpy_demo_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><script src="scanpy_demo_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Demo with scanpy</h1>
@@ -102,21 +102,18 @@
     
     
 <p>We’ve found that by using anndata for R, interacting with other anndata-based Python packages becomes super easy!</p>
-<div id="download-and-load-dataset" class="section level2">
-<h2 class="hasAnchor">
-<a href="#download-and-load-dataset" class="anchor"></a>Download and load dataset</h2>
-<p>For example, let’s download a 10x dataset from the 10x genomics website.</p>
+<div id="download-and-load-dataset" class="section level3">
+<h3 class="hasAnchor">
+<a href="#download-and-load-dataset" class="anchor"></a>Download and load dataset</h3>
+<p>Let’s use a 10x dataset from the 10x genomics website. You can download it to an anndata object with scanpy as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://cf.10xgenomics.com/samples/cell-exp/6.0.0/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma_count_sample_feature_bc_matrix.h5"</span>
-<span class="va">h5tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".h5"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">url</span>, destfile <span class="op">=</span> <span class="va">h5tmp</span><span class="op">)</span></code></pre></div>
-<p>You can transform it to an anndata object with scanpy as follows:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://anndata.dynverse.org">anndata</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/reticulate">reticulate</a></span><span class="op">)</span>
-
 <span class="va">sc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/reticulate/man/import.html">import</a></span><span class="op">(</span><span class="st">"scanpy"</span><span class="op">)</span>
-<span class="va">ad</span> <span class="op">&lt;-</span> <span class="va">sc</span><span class="op">$</span><span class="fu">read_10x_h5</span><span class="op">(</span><span class="va">h5tmp</span><span class="op">)</span>
+
+<span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://cf.10xgenomics.com/samples/cell-exp/6.0.0/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma_count_sample_feature_bc_matrix.h5"</span>
+<span class="va">ad</span> <span class="op">&lt;-</span> <span class="va">sc</span><span class="op">$</span><span class="fu">read_10x_h5</span><span class="op">(</span><span class="st">"dataset.h5"</span>, backup_url <span class="op">=</span> <span class="va">url</span><span class="op">)</span>
+
 <span class="va">ad</span>
 <span class="co">#&gt; AnnData object with n_obs × n_vars = 5377 × 36601</span>
 <span class="co">#&gt;     var: 'gene_ids', 'feature_types', 'genome'</span></code></pre></div>
@@ -125,14 +122,14 @@
 <h2 class="hasAnchor">
 <a href="#preprocessing-dataset" class="anchor"></a>Preprocessing dataset</h2>
 <p>The resuling dataset is a wrapper for the Python class but behaves very much like an R object:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ad</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>
 <span class="co">#&gt; View of AnnData object with n_obs × n_vars = 5 × 3</span>
 <span class="co">#&gt;     var: 'gene_ids', 'feature_types', 'genome'</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">ad</span><span class="op">)</span>
 <span class="co">#&gt; [1]  5377 36601</span></code></pre></div>
 <p>But you can still call scanpy functions on it, for example to perform preprocessing.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sc</span><span class="op">$</span><span class="va">pp</span><span class="op">$</span><span class="fu">filter_cells</span><span class="op">(</span><span class="va">ad</span>, min_genes <span class="op">=</span> <span class="fl">200</span><span class="op">)</span>
 <span class="va">sc</span><span class="op">$</span><span class="va">pp</span><span class="op">$</span><span class="fu">filter_genes</span><span class="op">(</span><span class="va">ad</span>, min_cells <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="va">sc</span><span class="op">$</span><span class="va">pp</span><span class="op">$</span><span class="fu">normalize_per_cell</span><span class="op">(</span><span class="va">ad</span><span class="op">)</span>
@@ -142,7 +139,7 @@
 <h2 class="hasAnchor">
 <a href="#analysing-your-dataset-in-r" class="anchor"></a>Analysing your dataset in R</h2>
 <p>You can seamlessly switch back to using your dataset with other R functions, for example by calculating the rowMeans of the expression matrix.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://Matrix.R-forge.R-project.org/">Matrix</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums.html">rowMeans</a></span><span class="op">(</span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt; AAACCCAAGCGCGTTC-1 AAACCCAAGGCAATGC-1 AAACCCAGTATCTTCT-1 AAACCCAGTGACAACG-1 </span>

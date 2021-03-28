@@ -120,29 +120,29 @@
 <p>The API of anndata for R is very similar to its Python counterpart. Here is an example:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://anndata.dynverse.org">anndata</a></span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Attaching package: 'anndata'</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## The following object is masked from 'package:readr':</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     read_csv</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">## </span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">## Attaching package: 'anndata'</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">## The following object is masked from 'package:readr':</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">## </span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">##     read_csv</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ad</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_h5ad.html">read_h5ad</a></span><span class="op">(</span><span class="st">"example_formats/pbmc_1k_protein_v3_processed.h5ad"</span><span class="op">)</span>
 
 <span class="va">ad</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## AnnData object with n_obs × n_vars = 713 × 33538</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">##     var: 'gene_ids', 'feature_types', 'genome', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">##     uns: 'hvgParameters', 'normalizationParameters', 'pca', 'pcaParameters'</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">##     obsm: 'X_pca'</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="do">##     varm: 'PCs'</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">## AnnData object with n_obs × n_vars = 713 × 33538</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">##     var: 'gene_ids', 'feature_types', 'genome', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">##     uns: 'hvgParameters', 'normalizationParameters', 'pca', 'pcaParameters'</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">##     obsm: 'X_pca'</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">##     varm: 'PCs'</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">Matrix</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums.html">rowMeans</a></span><span class="op">(</span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">## AAACCCAAGTGGTCAG-1 AAAGGTATCAACTACG-1 AAAGTCCAGCGTGTCC-1 AACACACTCAAGAGTA-1 </span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">##         0.06499579         0.06385104         0.06102355         0.06739055 </span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">## AACACACTCGACGAGA-1 AACAGGGCAGGAGGTT-1 AACAGGGCAGTGTATC-1 AACAGGGTCAGAATAG-1 </span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="do">##         0.08891241         0.08648681         0.09318970         0.09140243 </span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="do">## AACCTGAAGATGGTCG-1 AACGGGATCGTTATCT-1 </span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">##         0.06664118         0.07866523</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">## AAACCCAAGTGGTCAG-1 AAAGGTATCAACTACG-1 AAAGTCCAGCGTGTCC-1 AACACACTCAAGAGTA-1 </span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">##         0.06499579         0.06385104         0.06102355         0.06739055 </span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">## AACACACTCGACGAGA-1 AACAGGGCAGGAGGTT-1 AACAGGGCAGTGTATC-1 AACAGGGTCAGAATAG-1 </span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">##         0.08891241         0.08648681         0.09318970         0.09140243 </span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">## AACCTGAAGATGGTCG-1 AACGGGATCGTTATCT-1 </span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">##         0.06664118         0.07866523</span></span></code></pre></div>
 <p>See <code><a href="reference/anndata-package.html">?anndata</a></code> for a full list of the functions provided by this package. Check out any of the other vignettes by clicking any of the links below:</p>
 <ul>
 <li><a href="https://anndata.dynverse.org/articles/getting_started.html">Getting started</a></li>
@@ -163,10 +163,10 @@
 <h3 class="hasAnchor">
 <a href="#recent-changes-in-anndata-0752" class="anchor"></a>Recent changes in anndata 0.7.5.2</h3>
 <ul>
-<li><p>MINOR CHANGE: Add getters and setters to the LayersR6 class.</p></li>
-<li><p>MINOR CHANGE: Change when Python objects get converted and vice versa.</p></li>
+<li><p>MINOR CHANGE: Add getters and setter for the internal python objects.</p></li>
+<li><p>MINOR CHANGE: Alter how and when Python objects get converted to R and vice versa.</p></li>
 <li><p>DOCUMENTATION: Documentation site is available at <a href="https://anndata.dynverse.org" class="uri">https://anndata.dynverse.org</a>!</p></li>
-<li><p>DOCUMENTATION: Added vignettes.</p></li>
+<li><p>DOCUMENTATION: Added two basic vignettes.</p></li>
 </ul>
 </div>
 <div id="recent-changes-in-anndata-0751" class="section level3">
@@ -184,7 +184,7 @@
 <a href="#references" class="anchor"></a>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-wolf_scanpylargescalesinglecell_2018" class="csl-entry">
-Wolf, F Alexander, Philipp Angerer, and Fabian J Theis. 2018. “SCANPY: Large-Scale Single-Cell Gene Expression Data Analysis.” <em>Genome Biology</em> 19 (February): 15. <a href="https://doi.org/10.1186/s13059-017-1382-0" class="uri">https://doi.org/10.1186/s13059-017-1382-0</a>.
+<p>Wolf, F Alexander, Philipp Angerer, and Fabian J Theis. 2018. “SCANPY: Large-Scale Single-Cell Gene Expression Data Analysis.” <em>Genome Biology</em> 19 (February): 15. <a href="https://doi.org/10.1186/s13059-017-1382-0" class="uri">https://doi.org/10.1186/s13059-017-1382-0</a>.</p>
 </div>
 </div>
 </div>
@@ -226,7 +226,7 @@ Wolf, F Alexander, Philipp Angerer, and Fabian J Theis. 2018. “SCANPY: Large-S
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=anndata"><img src="https://www.r-pkg.org/badges/version/anndata" alt="CRAN"></a></li>
-<li><a href="https://github.com/dynverse/anndata/actions"><img src="https://github.com/rcannood/dynverse/workflows/R-CMD-check/badge.svg" alt="Build status"></a></li>
+<li><a href="https://github.com/dynverse/anndata/actions"><img src="https://github.com/dynverse/anndata/workflows/R-CMD-check/badge.svg" alt="Build status"></a></li>
 </ul>
 </div>
 </div>
