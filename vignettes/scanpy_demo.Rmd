@@ -13,8 +13,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-NOT_CRAN <- identical(Sys.getenv("NOT_CRAN"), "true")
-knitr::opts_chunk$set(eval = NOT_CRAN)
+knitr::opts_chunk$set(eval = reticulate::py_module_available("anndata") && reticulate::py_module_available("scanpy"))
 ```
 
 We've found that by using anndata for R, interacting with other anndata-based Python packages becomes super easy!
