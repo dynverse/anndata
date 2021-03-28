@@ -11,7 +11,7 @@ set.seed(1)
 ```
 
 [![CRAN](https://www.r-pkg.org/badges/version/anndata)](https://cran.r-project.org/package=anndata)
-[![Build status](https://github.com/rcannood/dynverse/workflows/R-CMD-check/badge.svg)](https://github.com/dynverse/anndata/actions)
+[![Build status](https://github.com/dynverse/anndata/workflows/R-CMD-check/badge.svg)](https://github.com/dynverse/anndata/actions)
 
 # anndata for R
 

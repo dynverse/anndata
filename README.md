@@ -1,7 +1,7 @@
 
 [![CRAN](https://www.r-pkg.org/badges/version/anndata)](https://cran.r-project.org/package=anndata)
 [![Build
-status](https://github.com/rcannood/dynverse/workflows/R-CMD-check/badge.svg)](https://github.com/dynverse/anndata/actions)
+status](https://github.com/dynverse/anndata/workflows/R-CMD-check/badge.svg)](https://github.com/dynverse/anndata/actions)
 
 # anndata for R
 
@@ -114,15 +114,16 @@ list of changes.
 
 ### Recent changes in anndata 0.7.5.2
 
--   MINOR CHANGE: Add getters and setters to the LayersR6 class.
+-   MINOR CHANGE: Add getters and setter for the internal python
+    objects.
 
--   MINOR CHANGE: Change when Python objects get converted and vice
-    versa.
+-   MINOR CHANGE: Alter how and when Python objects get converted to R
+    and vice versa.
 
 -   DOCUMENTATION: Documentation site is available at
     <https://anndata.dynverse.org>!
 
--   DOCUMENTATION: Added vignettes.
+-   DOCUMENTATION: Added two basic vignettes.
 
 ### Recent changes in anndata 0.7.5.1
 
