@@ -1,6 +1,12 @@
 # anndata 0.7.5.2
 
-* MINOR CHANGE: Add getters and setters to the LayersR6 class.
+* MINOR CHANGE: Add getters and setter for the internal python objects.
+
+* MINOR CHANGE: Alter how and when Python objects get converted to R and vice versa.
+
+* DOCUMENTATION: Documentation site is available at https://anndata.dynverse.org!
+
+* DOCUMENTATION: Added two basic vignettes.
 
 # anndata 0.7.5.1
 

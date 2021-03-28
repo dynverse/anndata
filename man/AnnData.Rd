@@ -492,23 +492,6 @@ ad$raw[]
 }
 
 ## ------------------------------------------------
-## Method `RawR6$new`
-## ------------------------------------------------
-
-\dontrun{
-# use Raw() instead of RawR6$new()
-ad <- AnnData(
-  X = matrix(c(0, 1, 2, 3), nrow = 2),
-  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
-  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2"))
-)
-
-ad$raw <- ad
-
-ad$raw[]
-}
-
-## ------------------------------------------------
 ## Method `RawR6$copy`
 ## ------------------------------------------------
 
@@ -699,6 +682,8 @@ leaves \code{raw} unaffected. Note that you can call:\preformatted{adata$raw[, '
 \item \href{#method-write_h5ad}{\code{AnnDataR6$write_h5ad()}}
 \item \href{#method-write_loom}{\code{AnnDataR6$write_loom()}}
 \item \href{#method-print}{\code{AnnDataR6$print()}}
+\item \href{#method-.set_py_object}{\code{AnnDataR6$.set_py_object()}}
+\item \href{#method-.get_py_object}{\code{AnnDataR6$.get_py_object()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -707,54 +692,13 @@ leaves \code{raw} unaffected. Note that you can call:\preformatted{adata$raw[, '
 \subsection{Method \code{new()}}{
 Create a new AnnData object
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AnnDataR6$new(
-  X = NULL,
-  obs = NULL,
-  var = NULL,
-  uns = NULL,
-  obsm = NULL,
-  varm = NULL,
-  layers = NULL,
-  raw = NULL,
-  dtype = "float32",
-  shape = NULL,
-  filename = NULL,
-  filemode = NULL,
-  obsp = NULL,
-  varp = NULL
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{AnnDataR6$new(obj)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{X}}{A #observations × #variables data matrix. A view of the data is used if the data type matches, otherwise, a copy is made.}
-
-\item{\code{obs}}{Key-indexed one-dimensional observations annotation of length #observations.}
-
-\item{\code{var}}{Key-indexed one-dimensional variables annotation of length #variables.}
-
-\item{\code{uns}}{Key-indexed unstructured annotation.}
-
-\item{\code{obsm}}{Key-indexed multi-dimensional observations annotation of length #observations. If passing a \code{~numpy.ndarray}, it needs to have a structured datatype.}
-
-\item{\code{varm}}{Key-indexed multi-dimensional variables annotation of length #variables. If passing a \code{~numpy.ndarray}, it needs to have a structured datatype.}
-
-\item{\code{layers}}{Key-indexed multi-dimensional arrays aligned to dimensions of \code{X}.}
-
-\item{\code{raw}}{Store raw version of \code{X} and \code{var} as \verb{$raw$X} and \verb{$raw$var}.}
-
-\item{\code{dtype}}{Data type used for storage.}
-
-\item{\code{shape}}{Shape list (#observations, #variables). Can only be provided if \code{X} is \code{NULL}.}
-
-\item{\code{filename}}{Name of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
-
-\item{\code{filemode}}{Open mode of backing file. See \href{https://docs.h5py.org/en/latest/high/file.html#h5py.File}{h5py.File}.}
-
-\item{\code{obsp}}{Pairwise annotation of observations, a mutable mapping with array-like values.}
-
-\item{\code{varp}}{Pairwise annotation of variables, a mutable mapping with array-like values.}
+\item{\code{obj}}{A Python anndata object}
 }
 \if{html}{\out{</div>}}
 }
@@ -1442,6 +1386,33 @@ print(ad)
 }
 
 }
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-.set_py_object"></a>}}
+\if{latex}{\out{\hypertarget{method-.set_py_object}{}}}
+\subsection{Method \code{.set_py_object()}}{
+Set internal Python object
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnDataR6$.set_py_object(obj)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{obj}}{A python anndata object}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-.get_py_object"></a>}}
+\if{latex}{\out{\hypertarget{method-.get_py_object}{}}}
+\subsection{Method \code{.get_py_object()}}{
+Get internal Python object
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnDataR6$.get_py_object()}\if{html}{\out{</div>}}
+}
+
+}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -1473,6 +1444,8 @@ Stores for each key a two or higher-dimensional matrix with \code{n_var} rows.}
 \item \href{#method-copy}{\code{RawR6$copy()}}
 \item \href{#method-to_adata}{\code{RawR6$to_adata()}}
 \item \href{#method-print}{\code{RawR6$print()}}
+\item \href{#method-.set_py_object}{\code{RawR6$.set_py_object()}}
+\item \href{#method-.get_py_object}{\code{RawR6$.get_py_object()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -1481,41 +1454,16 @@ Stores for each key a two or higher-dimensional matrix with \code{n_var} rows.}
 \subsection{Method \code{new()}}{
 Create a new Raw object
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RawR6$new(adata, X = NULL, var = NULL, varm = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{RawR6$new(obj)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{adata}}{An AnnData object.}
-
-\item{\code{X}}{A #observations × #variables data matrix.}
-
-\item{\code{var}}{Key-indexed one-dimensional variables annotation of length #variables.}
-
-\item{\code{varm}}{Key-indexed multi-dimensional variables annotation of length #variables.}
+\item{\code{obj}}{A Python Raw object}
 }
 \if{html}{\out{</div>}}
 }
-\subsection{Examples}{
-\if{html}{\out{<div class="r example copy">}}
-\preformatted{\dontrun{
-# use Raw() instead of RawR6$new()
-ad <- AnnData(
-  X = matrix(c(0, 1, 2, 3), nrow = 2),
-  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
-  var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2"))
-)
-
-ad$raw <- ad
-
-ad$raw[]
-}
-}
-\if{html}{\out{</div>}}
-
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-copy"></a>}}
@@ -1633,6 +1581,33 @@ print(ad)
 }
 \if{html}{\out{</div>}}
 
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-.set_py_object"></a>}}
+\if{latex}{\out{\hypertarget{method-.set_py_object}{}}}
+\subsection{Method \code{.set_py_object()}}{
+Set internal Python object
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RawR6$.set_py_object(obj)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{obj}}{A Python Raw object}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-.get_py_object"></a>}}
+\if{latex}{\out{\hypertarget{method-.get_py_object}{}}}
+\subsection{Method \code{.get_py_object()}}{
+Get internal Python object
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RawR6$.get_py_object()}\if{html}{\out{</div>}}
 }
 
 }

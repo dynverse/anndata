@@ -1,3 +1,12 @@
+#' @importFrom methods is
+py_to_r_ifneedbe <- function(x) {
+  if (is(x, "python.builtin.object")) {
+    py_to_r(x)
+  } else {
+    x
+  }
+}
+
 #' Convert between Python and R objects
 #'
 #' @param x A Python object.
@@ -20,7 +29,7 @@
 #' @export
 `[[.collections.abc.Mapping` <- function(x, name) {
   if (name %in% x$keys()) {
-    reticulate::py_to_r(reticulate::py_get_item(x, name))
+    py_to_r_ifneedbe(reticulate::py_get_item(x, name))
   } else {
     NULL
   }
@@ -53,7 +62,7 @@
 py_to_r.pandas.core.indexes.base.Index <- function(x) {
   python_builtins <- reticulate::import_builtins()
   out <- python_builtins$list(x)
-  attr(out, "name") <- py_to_r(x$name)
+  attr(out, "name") <- py_to_r_ifneedbe(x$name)
   out
 }
 
@@ -74,7 +83,7 @@ py_to_r.collections.abc.KeysView <- function(x) {
   # convert members of x_list if need be
   for (i in seq_along(x_list)) {
     if (methods::is(x_list[[i]], "python.builtin.object")) {
-      x_list[[i]] <- py_to_r(x_list[[i]])
+      x_list[[i]] <- py_to_r_ifneedbe(x_list[[i]])
     }
   }
 
