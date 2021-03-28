@@ -1,12 +1,12 @@
-# anndata 0.7.5.1
+# anndata 0.7.5.2
 
-Version number is set to '0.7.5.1' to keep in sync with the Python package 'anndata' which is at version 0.7.5.
+* MINOR CHANGE: Add getters and setter for the internal python objects.
 
-* MINOR CHANGE: Add wrapper classes for Raw and Layers objects.
+* MINOR CHANGE: Alter how and when Python objects get converted to R and vice versa.
 
-* MAJOR CHANGE: Calling `ad[..., ...]` now correctly returns a view of `ad` instead of returning a matrix.
+* DOCUMENTATION: Documentation site is available at https://anndata.dynverse.org!
 
-* TESTING: Extend tests based on `theislab/anndata` repository.
+* DOCUMENTATION: Added two basic vignettes.
 
 --------------------------------------------------------------------------
 
@@ -19,9 +19,8 @@ Version number is set to '0.7.5.1' to keep in sync with the Python package 'annd
   - Ubuntu, R 4.0
   - Ubuntu, R 3.6
 
-## R CMD check results
-
-Duration: 42.7s
+## ── R CMD check results ──────────────────────────────────── anndata 0.7.5.2 ─
+Duration: 55.7s
 
 0 errors ✓ | 0 warnings ✓ | 0 notes ✓
 
