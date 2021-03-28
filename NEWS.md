@@ -7,7 +7,7 @@
 
 * DOCUMENTATION: Documentation site is available at https://anndata.dynverse.org!
 
-* DOCUMENTATION: Added vignettes.
+* DOCUMENTATION: Added two basic vignettes.
 
 # anndata 0.7.5.1
 

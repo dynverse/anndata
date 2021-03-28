@@ -9,4 +9,4 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-^vignettes/scanpy_demo
+^vignettes/dataset.h5$

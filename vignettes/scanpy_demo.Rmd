@@ -12,25 +12,24 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+NOT_CRAN <- identical(Sys.getenv("NOT_CRAN"), "true")
+knitr::opts_chunk$set(eval = NOT_CRAN)
 ```
 
 We've found that by using anndata for R, interacting with other anndata-based Python packages becomes super easy!
 
-## Download and load dataset
-For example, let's download a 10x dataset from the 10x genomics website.
-```{r}
-url <- "https://cf.10xgenomics.com/samples/cell-exp/6.0.0/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma_count_sample_feature_bc_matrix.h5"
-h5tmp <- tempfile(fileext = ".h5")
-download.file(url, destfile = h5tmp)
-```
-
-You can transform it to an anndata object with scanpy as follows:
+### Download and load dataset
+Let's use a 10x dataset from the 10x genomics website.
+You can download it to an anndata object with scanpy as follows:
 ```{r}
 library(anndata)
 library(reticulate)
-
 sc <- import("scanpy")
-ad <- sc$read_10x_h5(h5tmp)
+
+url <- "https://cf.10xgenomics.com/samples/cell-exp/6.0.0/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma_count_sample_feature_bc_matrix.h5"
+ad <- sc$read_10x_h5("dataset.h5", backup_url = url)
+
 ad
 ```
 
