@@ -1,9 +1,16 @@
 
+# anndata for R
+
+<!-- badges: start -->
+
 [![CRAN](https://www.r-pkg.org/badges/version/anndata)](https://cran.r-project.org/package=anndata)
+[![CRAN
+Downloads](https://cranlogs.r-pkg.org/badges/anndata)](https://cran.r-project.org/package=anndata)
 [![Build
 status](https://github.com/dynverse/anndata/workflows/R-CMD-check/badge.svg)](https://github.com/dynverse/anndata/actions)
-
-# anndata for R
+[![Coverage
+Status](https://codecov.io/gh/dynverse/anndata/branch/master/graph/badge.svg)](https://codecov.io/gh/dynverse/anndata?branch=master)
+<!-- badges: end -->
 
 [`anndata`](https://anndata.readthedocs.io/en/latest/) is a commonly
 used Python package for keeping track of data and learned annotations,
