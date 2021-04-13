@@ -25,8 +25,8 @@
 #' file.remove("output.loom")
 #' }
 write_loom <- function(anndata, filename, write_obsm_varm = FALSE) {
-  anndata$write_loom(
+  invisible(py_to_r_ifneedbe(anndata$write_loom(
     filename = filename,
     write_obsm_varm = write_obsm_varm
-  )
+  )))
 }

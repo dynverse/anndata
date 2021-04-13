@@ -28,9 +28,10 @@
 #' unlink("output", recursive = TRUE)
 #' }
 write_csvs <- function(anndata, dirname, skip_data = TRUE, sep = ",") {
-  anndata$write_csvs(
+  invisible(py_to_r_ifneedbe(anndata$write_csvs(
     dirname = dirname,
     skip_data = skip_data,
     sep = sep
-  )
+  )))
 }
+
