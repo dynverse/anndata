@@ -1,7 +1,7 @@
 Type: Package
 Package: anndata
 Title: 'anndata' for R
-Version: 0.7.5.2
+Version: 0.7.5.3
 Authors@R: 
     c(person(given = "Philipp",
              family = "Angerer",
@@ -38,7 +38,7 @@ Imports:
     assertthat,
     methods,
     R6,
-    reticulate
+    reticulate (>= 1.17)
 Suggests: 
     Matrix,
     stats,
