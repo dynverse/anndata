@@ -31,11 +31,11 @@
 #' file.remove("output.h5ad")
 #' }
 write_h5ad <- function(anndata, filename, compression = NULL, compression_opts = NULL, as_dense = list()) {
-  anndata$write(
+  invisible(py_to_r_ifneedbe(anndata$write_h5ad(
     filename = filename,
     compression = compression,
     compression_opts = compression_opts,
     as_dense = as_dense
-  )
+  )))
 }
 

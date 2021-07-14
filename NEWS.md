@@ -1,3 +1,7 @@
+# anndata 0.7.5.3
+
+* BUG FIX `write_h5ad(ad)`: Fix function pointer (#8).
+
 # anndata 0.7.5.2
 
 * MINOR CHANGE: Add getters and setter for the internal python objects.
