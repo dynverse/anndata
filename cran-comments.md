@@ -15,8 +15,8 @@
   - Ubuntu, R 4.0
   - Ubuntu, R 3.6
 
-## ── R CMD check results ──────────────────────────────────── anndata 0.7.5.2 ─
-Duration: 55.7s
+## ── R CMD check results ──────────────────────────────────── anndata 0.7.5.3 ─
+Duration: 38.6s
 
 0 errors ✓ | 0 warnings ✓ | 0 notes ✓
 
