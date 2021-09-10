@@ -21,8 +21,6 @@
 #'
 #' @export
 #'
-#' @importFrom methods is
-#'
 #' @examples
 #' \dontrun{
 #' # Preparing example objects
@@ -123,7 +121,7 @@ concat <- function(
 ) {
   assert_that(
     is.list(adatas),
-    all(sapply(adatas, is, "AnnDataR6"))
+    all(sapply(adatas, inherits, "AnnDataR6"))
   )
 
   # get python objects

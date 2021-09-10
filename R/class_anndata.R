@@ -186,7 +186,7 @@ AnnData <- function(
 
 #' @importFrom methods as
 .check_matrix <- function(X) {
-  if (is(X, "sparseMatrix") && !is(X, "dgCMatrix") && !is(X, "dgRMatrix")) {
+  if (inherits(X, "sparseMatrix") && !inherits(X, "dgCMatrix") && !inherits(X, "dgRMatrix")) {
     X <- as(X, "CsparseMatrix")
   }
 
@@ -890,7 +890,7 @@ AnnDataR6 <- R6::R6Class(
           # reticulate::py_del_attr(private$.anndata, "raw")
           reticulate::py_del_attr(r_to_py(private$.anndata), "raw")
         } else {
-          if (is(value, "AnnDataR6") || is(value, "RawR6")) {
+          if (inherits(value, "AnnDataR6") || inherits(value, "RawR6")) {
             value <- r_to_py(value)
           }
           private$.anndata$raw <- value
@@ -992,7 +992,7 @@ py_to_r.anndata._core.anndata.AnnData <- function(x) {
 }
 
 .process_index <- function(idx, len) {
-  if (missing(idx)) {
+  if (missing(idx) || is.null(idx)) {
     builtins <- reticulate::import_builtins(convert = FALSE)
     idx <- builtins$slice(builtins$None)
   } else if (is.numeric(idx)) {
@@ -1035,7 +1035,7 @@ all.equal.AnnDataR6 <- function(target, current) {
   a <- target
   b <- current
 
-  if (!is(b, "AnnDataR6")) {
+  if (!inherits(b, "AnnDataR6")) {
     return("Not an AnnData object")
   }
 

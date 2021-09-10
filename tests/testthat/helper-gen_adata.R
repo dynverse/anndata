@@ -54,7 +54,7 @@ gen_adata <- function(
     df = gen_typed_df(M, obs_names)
   )
   for (key in names(obsm)) {
-    type_match <- sapply(obsm_types, function(typ) is(obsm[[key]], typ))
+    type_match <- sapply(obsm_types, function(typ) inherits(obsm[[key]], typ))
     if (!any(type_match)) {
       obsm[[key]] <- NULL
     }
@@ -65,7 +65,7 @@ gen_adata <- function(
     df = gen_typed_df(N, var_names)
   )
   for (key in names(varm)) {
-    type_match <- sapply(varm_types, function(typ) is(varm[[key]], typ))
+    type_match <- sapply(varm_types, function(typ) inherits(varm[[key]], typ))
     if (!any(type_match)) {
       varm[[key]] <- NULL
     }
