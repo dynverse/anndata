@@ -1,6 +1,5 @@
-#' @importFrom methods is
 py_to_r_ifneedbe <- function(x) {
-  if (is(x, "python.builtin.object")) {
+  if (inherits(x, "python.builtin.object")) {
     py_to_r(x)
   } else {
     x
@@ -82,12 +81,23 @@ py_to_r.collections.abc.KeysView <- function(x) {
 
   # convert members of x_list if need be
   for (i in seq_along(x_list)) {
-    if (methods::is(x_list[[i]], "python.builtin.object")) {
+    if (inherits(x_list[[i]], "python.builtin.object")) {
       x_list[[i]] <- py_to_r_ifneedbe(x_list[[i]])
     }
   }
 
   x_list
+}
+
+
+#' @importFrom Matrix sparseMatrix
+py_to_r.scipy.sparse.csc.csc_matrix <- function(x) {
+  Matrix::sparseMatrix(
+    i = as.integer(py_to_r_ifneedbe(x$indices))+1,
+    p = as.integer(py_to_r_ifneedbe(x$indptr)),
+    x = as.vector(py_to_r_ifneedbe(x$data)),
+    dims = as.integer(dim(x))
+  )
 }
 
 # TODO: could add mapping specifically for:

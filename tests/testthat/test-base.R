@@ -345,7 +345,7 @@ test_that("slicing strings", {
   expect_error(adata[c("A", "B", "not_in_obs"), ], regexp = "not_in_obs")
 })
 
-test_that("slicing graphs", {
-  # WIP:
-  # https://github.com/theislab/anndata/blob/a745f2a82933fd4bb3aa734e814d06a70f9d0d8f/anndata/tests/test_base.py#L319
-})
+# test_that("slicing graphs", {
+#   # WIP:
+#   # https://github.com/theislab/anndata/blob/a745f2a82933fd4bb3aa734e814d06a70f9d0d8f/anndata/tests/test_base.py#L319
+# })

@@ -213,7 +213,7 @@ all.equal.LayersR6 <- function(target, current) {
   a <- target
   b <- current
 
-  if (!is(b, "LayersR6")) {
+  if (!inherits(b, "LayersR6")) {
     return("Not a Layers object")
   }
 

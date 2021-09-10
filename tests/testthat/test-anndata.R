@@ -99,3 +99,20 @@ test_that("uns python objects get converted", {
 
   ad$uns$b <- list(a = data.frame(f = 1), b = 2)
 })
+
+
+test_that("test writing and reading h5ad", {
+  tmp1 <- tempfile()
+  on.exit(file.remove(tmp1))
+  ad$write_h5ad(tmp1)
+
+  ad2 <- read_h5ad(tmp1)
+  expect_equal(ad$X, ad2$X)
+
+  tmp2 <- tempfile()
+  on.exit(file.remove(tmp2))
+  write_h5ad(ad, tmp2)
+
+  ad3 <- read_h5ad(tmp2)
+  expect_equal(ad$X, ad3$X)
+})
