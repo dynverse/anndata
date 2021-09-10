@@ -36,11 +36,11 @@ Depends:
     R (>= 3.5.0)
 Imports:
     assertthat,
+    Matrix,
     methods,
     R6,
     reticulate (>= 1.17)
 Suggests: 
-    Matrix,
     stats,
     testthat,
     knitr,
