@@ -30,7 +30,7 @@ test_that("test creation", {
 
   expect_error({
     AnnData(rbind(c(1, 2), c(3, 4)), list(TooLong = c(1, 2, 3, 4)))
-  }, "ValueError: Shape of passed values")
+  }, regexp = "ValueError: (Shape of passed values|Length of values)")
 
   # init with empty data matrix
   shape <- c(3, 5)
