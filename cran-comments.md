@@ -1,12 +1,8 @@
-# anndata 0.7.5.1
+# anndata 0.7.5.3
 
-Version number is set to '0.7.5.1' to keep in sync with the Python package 'anndata' which is at version 0.7.5.
+* BUG FIX `write_h5ad(ad)`: Fix function pointer (#8).
 
-* MINOR CHANGE: Add wrapper classes for Raw and Layers objects.
-
-* MAJOR CHANGE: Calling `ad[..., ...]` now correctly returns a view of `ad` instead of returning a matrix.
-
-* TESTING: Extend tests based on `theislab/anndata` repository.
+* BUG FIX: Add manual converter function for converting a csc_matrix to dgCMatrix (#11).
 
 --------------------------------------------------------------------------
 
@@ -19,9 +15,8 @@ Version number is set to '0.7.5.1' to keep in sync with the Python package 'annd
   - Ubuntu, R 4.0
   - Ubuntu, R 3.6
 
-## R CMD check results
-
-Duration: 42.7s
+## ── R CMD check results ──────────────────────────────────── anndata 0.7.5.3 ─
+Duration: 38.6s
 
 0 errors ✓ | 0 warnings ✓ | 0 notes ✓
 

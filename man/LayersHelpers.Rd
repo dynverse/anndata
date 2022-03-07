@@ -9,7 +9,7 @@
 \alias{[<-.LayersR6}
 \alias{[[.LayersR6}
 \alias{[[<-.LayersR6}
-\title{AnnData Helpers}
+\title{Layers Helpers}
 \usage{
 \method{names}{LayersR6}(x)
 
@@ -37,7 +37,7 @@
 \item{value}{Replacement value.}
 }
 \description{
-AnnData Helpers
+Layers Helpers
 }
 \examples{
 \dontrun{

@@ -30,7 +30,7 @@ test_that("test creation", {
 
   expect_error({
     AnnData(rbind(c(1, 2), c(3, 4)), list(TooLong = c(1, 2, 3, 4)))
-  }, "ValueError: Shape of passed values")
+  }, regexp = "ValueError: (Shape of passed values|Length of values)")
 
   # init with empty data matrix
   shape <- c(3, 5)
@@ -307,7 +307,7 @@ test_that("boolean_slicing", {
 })
 
 test_that("oob boolean slicing", {
-  len <- sample.int(100, 2, replace = FALSE)
+  len <- sample.int(50, 2, replace = FALSE)
   expect_error({
     empty_mat <- matrix(rep(0, len[[1]] * 100), nrow = len[[1]])
     sel <- sample(c(TRUE, FALSE), len[[2]], replace = TRUE)
@@ -345,7 +345,7 @@ test_that("slicing strings", {
   expect_error(adata[c("A", "B", "not_in_obs"), ], regexp = "not_in_obs")
 })
 
-test_that("slicing graphs", {
-  # WIP:
-  # https://github.com/theislab/anndata/blob/a745f2a82933fd4bb3aa734e814d06a70f9d0d8f/anndata/tests/test_base.py#L319
-})
+# test_that("slicing graphs", {
+#   # WIP:
+#   # https://github.com/theislab/anndata/blob/a745f2a82933fd4bb3aa734e814d06a70f9d0d8f/anndata/tests/test_base.py#L319
+# })

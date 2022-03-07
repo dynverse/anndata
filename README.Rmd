@@ -6,19 +6,24 @@ bibliography: man/readme_files/references.bib
 ---
 
 ```{r setup1, include=FALSE}
+library(tidyverse)
 set.seed(1)
 ```
 
-[![CRAN](https://www.r-pkg.org/badges/version/anndata)](https://cran.r-project.org/package=anndata)
-[![Build status](https://github.com/rcannood/anndata/workflows/R-CMD-check/badge.svg)](https://github.com/rcannood/anndata/actions)
+# anndata for R
 
-# anndata - Annotated Data
+<!-- badges: start -->
+[![CRAN](https://www.r-pkg.org/badges/version/anndata)](https://cran.r-project.org/package=anndata)
+[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/anndata)](https://cran.r-project.org/package=anndata)
+[![Build status](https://github.com/dynverse/anndata/workflows/R-CMD-check/badge.svg)](https://github.com/dynverse/anndata/actions)
+[![Coverage Status](https://codecov.io/gh/dynverse/anndata/branch/master/graph/badge.svg)](https://codecov.io/gh/dynverse/anndata?branch=master)
+<!-- badges: end -->
 
 [`anndata`](https://anndata.readthedocs.io/en/latest/) is a commonly used Python package 
 for keeping track of data and learned annotations, and can be used to read from and write to the h5ad 
 file format. It is also the main data format used in the scanpy python package [@wolf_scanpylargescalesinglecell_2018].
 
-![anndata](man/readme_files/anndata_for_r.svg)
+![](https://raw.githubusercontent.com/dynverse/anndata/master/man/readme_files/anndata_for_r.png)
 
 However, using scanpy/anndata in R can be a major hassle. When trying to read an h5ad file,
 R users could approach this problem in one of two ways. A) You could read in the file manually
@@ -28,168 +33,68 @@ Or B) interact with scanpy and anndata through reticulate, but run into issues c
 some of the python objects into R.
 
 We recently published [`anndata`](https://cran.r-project.org/package=anndata) on CRAN,
-which is an R wrapper for the Python package -- with some syntax sprinkled on top to make
+which is a reticulate wrapper for the Python package -- with some syntax sprinkled on top to make
 R users feel more at home. 
 
-The R anndata is still under active development at [github.com/rcannood/anndata](https://github.com/rcannood/anndata). 
+anndata for R is still under active development at [github.com/dynverse/anndata](https://github.com/dynverse/anndata). 
 If you encounter any issues, feel free to post an issue on GitHub!
 
 ## Installation
 
-Installing `anndata` is not particularly hard. You do need R and Python to be installed.
-If you don't have a working installation of Python, you can let reticulate install Miniconda.
+You can install `anndata` for R from CRAN as follows:
 
 ```r
-# install the R anndata package
 install.packages("anndata")
+```
 
-# skip this if you wish to use the local python installation
+Normally, reticulate should take care of installing Miniconda and the Python anndata.
+
+If not, try running:
+
+```r
 reticulate::install_miniconda()
-
-# skip this if anndata is already installed
 anndata::install_anndata()
 ```
 
 ## Getting started
 
-The API of `anndata` is very similar to its Python counterpart. 
-Check out `?anndata` for a full list of the functions provided by this package.
-
-`AnnData` stores a data matrix `X` together with annotations
-of observations `obs` (`obsm`, `obsp`), variables `var` (`varm`, `varp`),
-and unstructured annotations `uns`. 
-
-Here is an example of how to create an AnnData object with 2 observations and 3 variables.
+The API of anndata for R is very similar to its Python counterpart. Here is an example:
 
 ```{r}
 library(anndata)
 
-ad <- AnnData(
-  X = matrix(1:6, nrow = 2),
-  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
-  var = data.frame(type = c(1L, 2L, 3L), row.names = c("var1", "var2", "var3")),
-  layers = list(
-    spliced = matrix(4:9, nrow = 2),
-    unspliced = matrix(8:13, nrow = 2)
-  ),
-  obsm = list(
-    ones = matrix(rep(1L, 10), nrow = 2),
-    rand = matrix(rnorm(6), nrow = 2),
-    zeros = matrix(rep(0L, 10), nrow = 2)
-  ),
-  varm = list(
-    ones = matrix(rep(1L, 12), nrow = 3),
-    rand = matrix(rnorm(6), nrow = 3),
-    zeros = matrix(rep(0L, 12), nrow = 3)
-  ),
-  uns = list(
-    a = 1, 
-    b = data.frame(i = 1:3, j = 4:6, value = runif(3)),
-    c = list(c.a = 3, c.b = 4)
-  )
-)
+ad <- read_h5ad("example_formats/pbmc_1k_protein_v3_processed.h5ad")
 
 ad
+
+Matrix::rowMeans(ad$X[1:10,])
 ```
 
-You can read the information back out using the `$` notation.
-```{r}
-ad$X
-ad$obs
-ad$obsm[["ones"]]
-ad$layers[["spliced"]]
-ad$uns[["b"]]
-```
 
-### Using scanpy 
+See `?anndata` for a full list of the functions provided by this package.
+Check out any of the other vignettes by clicking any of the links below:
 
-A nice side-effect of loading this package is that it is now super easy to 
-interact with scanpy through these AnnData objects.
-
-```{r}
-library(reticulate)
-
-ad$X
-
-sc <- import("scanpy")
-sc$pp$normalize_per_cell(ad)
-
-ad$X
-```
-
-### Reading / writing AnnData objects
-
-Read from h5ad format:
-```{r}
-read_h5ad("example_formats/pbmc_1k_protein_v3_processed.h5ad")
-```
-
-### Creating a view
-You can use any of the regular R indexing methods to subset the `AnnData` object.
-This will result in a 'View' of the underlying data without needing to store 
-the same data twice.
-```{r}
-view <- ad[, 2]
-view
-view$is_view
-
-ad[,c("var1", "var2")]
-ad[-1, ]
-```
-
-### AnnData as a matrix
-The `X` attribute can be used as an R matrix:
-```{r}
-ad$X[,c("var1", "var2")]
-ad$X[-1, , drop = FALSE]
-ad$X[, 2] <- 10
-```
-
-You can access a different layer matrix as follows:
-```{r}
-ad$layers["unspliced"]
-ad$layers["unspliced"][,c("var2", "var3")]
-```
-
-### Note on state
-If you assign an AnnData object to another variable and
-modify either, both will be modified:
-```{r}
-ad2 <- ad
-
-ad$X[,2] <- 10
-
-list(ad = ad$X, ad2 = ad2$X)
-```
-
-This is standard Python behaviour but not R. In order to 
-have two separate copies of an AnnData object, use the `$copy()` function:
-```{r}
-ad3 <- ad$copy()
-
-ad$X[,2] <- c(3, 4)
-
-list(ad = ad$X, ad3 = ad3$X)
+```{r vignettes, results='asis', echo=FALSE}
+walk(
+  list.files("vignettes", pattern = "*.Rmd", recursive = TRUE),
+  function(file) {
+    title <- 
+      read_lines(paste0("vignettes/", file)) %>% 
+      keep(~grepl("^title: ", .)) %>% 
+      gsub("title: \"(.*)\"", "\\1", .)
+    vignette_name <- gsub("\\.Rmd", "", file)
+    html_name <- gsub("\\.Rmd", ".html", file)
+    
+    cat("* [", title, "](https://anndata.dynverse.org/articles/", html_name, ")\n", sep = "")
+  }
+)
 ```
 
 ## Future work
 
 In some cases, this package may still act more like a Python package rather than an R package.
 Some more helper functions and helper classes need to be defined in order to fully encapsulate
-`AnnData()` objects. Examples are:
-
-```{r}
-ad$chunked_X(1)
-```
-
-Following functionality has not been tested:
-```r
-ad$rename_categories(...)
-ad$strings_to_categoricals(...)
-```
-
-Currently not implemented are the `read_zarr()` and `ad$write_zarr()` functions. 
-I need some example data to test this functionality.
+`AnnData()` objects. Examples are `ad$chunked_X(...)`, backed file modes, `read_zarr()` and `ad$write_zarr()`.
 
 ## Latest changes
 Check out `news(package = "anndata")` or [NEWS.md](NEWS.md) for a full list of changes.

@@ -21,8 +21,8 @@
 # #'
 # #' write_zarr(ad, "output.zarr")
 # write_zarr <- function(anndata, store, chunks = NULL) {
-#   anndata$write_zarr(
+#   invisible(py_to_r_ifneedbe(anndata$write_zarr(
 #     store = store,
 #     chunks = chunks
-#   )
+#   )))
 # }

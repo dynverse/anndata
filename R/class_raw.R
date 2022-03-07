@@ -46,12 +46,16 @@ Raw <- function(
   var = NULL,
   varm = NULL
 ) {
-  RawR6$new(
+  python_anndata <- reticulate::import("anndata", convert = FALSE)
+
+  raw <- python_anndata$Raw(
     adata = adata,
     X = X,
     var = var,
     varm = varm
   )
+
+  RawR6$new(raw)
 }
 
 #' @rdname AnnData
@@ -66,42 +70,9 @@ RawR6 <- R6::R6Class(
   cloneable = FALSE,
   public = list(
     #' @description Create a new Raw object
-    #'
-    #' @param adata An AnnData object.
-    #' @param X A #observations × #variables data matrix.
-    #' @param var Key-indexed one-dimensional variables annotation of length #variables.
-    #' @param varm Key-indexed multi-dimensional variables annotation of length #variables.
-    #'
-    #' @examples
-    #' \dontrun{
-    #' # use Raw() instead of RawR6$new()
-    #' ad <- AnnData(
-    #'   X = matrix(c(0, 1, 2, 3), nrow = 2),
-    #'   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
-    #'   var = data.frame(type = c(1L, 2L), row.names = c("var1", "var2"))
-    #' )
-    #'
-    #' ad$raw <- ad
-    #'
-    #' ad$raw[]
-    #' }
-    initialize = function(
-      adata,
-      X = NULL,
-      var = NULL,
-      varm = NULL
-    ) {
-      if (!identical(adata, "DUMMY")) {
-        python_anndata <- reticulate::import("anndata", convert = FALSE)
-
-        private$.raw <- python_anndata$Raw(
-          adata = adata,
-          # adata = reticulate::r_to_py(adata), # ?
-          X = X,
-          var = var,
-          varm = varm
-        )
-      }
+    #' @param obj A Python Raw object
+    initialize = function(obj) {
+      private$.raw <- obj
     },
 
     #' @description Full copy, optionally on disk.
@@ -117,7 +88,7 @@ RawR6 <- R6::R6Class(
     #' ad$copy("file.h5ad")
     #' }
     copy = function() {
-      py_to_r(private$.raw$copy())
+      py_to_r_ifneedbe(private$.raw$copy())
     },
 
     #' @description Create a full AnnData object
@@ -138,7 +109,7 @@ RawR6 <- R6::R6Class(
     #' ad$raw$to_adata()
     #' }
     to_adata = function() {
-      py_to_r(private$.raw$to_adata())
+      py_to_r_ifneedbe(private$.raw$to_adata())
     },
 
     #' @description Print Raw object
@@ -180,47 +151,58 @@ RawR6 <- R6::R6Class(
     #' }
     print = function(...) {
       print(private$.raw, ...)
+    },
+
+    #' @description Set internal Python object
+    #' @param obj A Python Raw object
+    .set_py_object = function(obj) {
+      private$.raw <- obj
+    },
+
+    #' @description Get internal Python object
+    .get_py_object = function() {
+      private$.raw
     }
   ),
   active = list(
     #' @field X Data matrix of shape `n_obs` × `n_vars`.
     X = function() {
-        py_to_r(private$.raw$X)
+        py_to_r_ifneedbe(private$.raw$X)
     },
     #' @field n_obs Number of observations.
     n_obs = function() {
-      py_to_r(private$.raw$n_obs)
+      py_to_r_ifneedbe(private$.raw$n_obs)
     },
     #' @field obs_names Names of observations.
     obs_names = function(value) {
-      py_to_r(private$.raw$obs_names)
+      py_to_r_ifneedbe(private$.raw$obs_names)
     },
     #' @field n_vars Number of variables.
     n_vars = function() {
-      py_to_r(private$.raw$n_vars)
+      py_to_r_ifneedbe(private$.raw$n_vars)
     },
     #' @field var One-dimensional annotation of variables (data.frame).
     var = function(value) {
-      py_to_r(private$.raw$var)
+      py_to_r_ifneedbe(private$.raw$var)
     },
     #' @field var_names Names of variables.
     var_names = function(value) {
-      py_to_r(private$.raw$var_names)
+      py_to_r_ifneedbe(private$.raw$var_names)
     },
     #' @field varm Multi-dimensional annotation of variables (matrix).
     #'
     #' Stores for each key a two or higher-dimensional matrix with `n_var` rows.
     varm = function(value) {
-      py_to_r(private$.raw$varm)
+      py_to_r_ifneedbe(private$.raw$varm)
     },
     #' @field shape Shape of data matrix (`n_obs`, `n_vars`).
     shape = function() {
-      unlist(py_to_r(private$.raw$shape))
+      unlist(py_to_r_ifneedbe(private$.raw$shape))
     }
   )
 )
 
-#' AnnData Helpers
+#' Raw Helpers
 #'
 #' @param x An AnnData object.
 #' @param convert Not used.
@@ -284,15 +266,13 @@ as.matrix.RawR6 <- function(x, ...) {
 #' @rdname RawHelpers
 #' @export
 r_to_py.RawR6 <- function(x, convert = FALSE) {
-  x$.__enclos_env__$private$.raw
+  x$.get_py_object()
 }
 
 #' @rdname RawHelpers
 #' @export
 py_to_r.anndata._core.raw.Raw <- function(x) {
-  ad <- Raw(adata = "DUMMY")
-  ad$.__enclos_env__$private$.raw <- x
-  ad
+  RawR6$new(x)
 }
 
 #' @rdname RawHelpers

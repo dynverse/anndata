@@ -17,7 +17,7 @@
 #' }
 read_csv <- function(filename, delimiter = ",", first_column_names = NULL, dtype = "float32") {
   python_anndata <- reticulate::import("anndata", convert = FALSE)
-  py_to_r(python_anndata$read_csv(
+  py_to_r_ifneedbe(python_anndata$read_csv(
     filename = filename,
     delimiter = delimiter,
     first_column_names = first_column_names,

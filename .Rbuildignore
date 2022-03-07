@@ -6,3 +6,7 @@
 ^CRAN-RELEASE$
 ^cran-comments\.md$
 ^README\.Rmd$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^vignettes/dataset.h5$

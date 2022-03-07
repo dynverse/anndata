@@ -21,8 +21,6 @@
 #'
 #' @export
 #'
-#' @importFrom methods is
-#'
 #' @examples
 #' \dontrun{
 #' # Preparing example objects
@@ -123,7 +121,7 @@ concat <- function(
 ) {
   assert_that(
     is.list(adatas),
-    all(sapply(adatas, is, "AnnDataR6"))
+    all(sapply(adatas, inherits, "AnnDataR6"))
   )
 
   # get python objects
@@ -133,7 +131,7 @@ concat <- function(
   )
 
   python_anndata <- reticulate::import("anndata", convert = FALSE)
-  py_to_r(python_anndata$concat(
+  py_to_r_ifneedbe(python_anndata$concat(
     adatas = adatas2,
     axis = axis,
     join = join,

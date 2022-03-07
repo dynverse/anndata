@@ -7,7 +7,7 @@
 \alias{r_to_py.RawR6}
 \alias{py_to_r.anndata._core.raw.Raw}
 \alias{[.RawR6}
-\title{AnnData Helpers}
+\title{Raw Helpers}
 \usage{
 \method{dimnames}{RawR6}(x)
 
@@ -29,7 +29,7 @@
 \item{convert}{Not used.}
 }
 \description{
-AnnData Helpers
+Raw Helpers
 }
 \examples{
 \dontrun{
