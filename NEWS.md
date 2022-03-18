@@ -1,3 +1,7 @@
+# anndata 0.7.5.4
+
+* BUG FIX: Set dimnames on layer views as well (#16).
+
 # anndata 0.7.5.3
 
 * BUG FIX `write_h5ad(ad)`: Fix function pointer (#8).

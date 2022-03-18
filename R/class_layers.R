@@ -180,7 +180,7 @@ r_to_py.LayersR6 <- function(x, convert = FALSE) {
 
 #' @rdname LayersHelpers
 #' @export
-py_to_r.anndata._core.aligned_mapping.Layers <- function(x) {
+py_to_r.anndata._core.aligned_mapping.LayersBase <- function(x) {
   LayersR6$new(x)
 }
 

@@ -4,7 +4,7 @@
 \alias{names.LayersR6}
 \alias{length.LayersR6}
 \alias{r_to_py.LayersR6}
-\alias{py_to_r.anndata._core.aligned_mapping.Layers}
+\alias{py_to_r.anndata._core.aligned_mapping.LayersBase}
 \alias{[.LayersR6}
 \alias{[<-.LayersR6}
 \alias{[[.LayersR6}
@@ -17,7 +17,7 @@
 
 \method{r_to_py}{LayersR6}(x, convert = FALSE)
 
-\method{py_to_r}{anndata._core.aligned_mapping.Layers}(x)
+\method{py_to_r}{anndata._core.aligned_mapping.LayersBase}(x)
 
 \method{[}{LayersR6}(x, name)
 
