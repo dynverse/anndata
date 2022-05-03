@@ -522,6 +522,7 @@ AnnDataR6 <- R6::R6Class(
     #' unlink("output", recursive = TRUE)
     #' }
     write_csvs = function(dirname, skip_data = TRUE, sep = ",") {
+      dirname <- normalizePath(dirname, mustWork = FALSE)
       private$.anndata$write_csvs(
         dirname = dirname,
         skip_data = skip_data,
@@ -560,6 +561,7 @@ AnnDataR6 <- R6::R6Class(
     #' file.remove("output.h5ad")
     #' }
     write_h5ad = function(filename, compression = NULL, compression_opts = NULL, as_dense = list()) {
+      filename <- normalizePath(filename, mustWork = FALSE)
       private$.anndata$write_h5ad(
         filename = filename,
         compression = compression,
@@ -593,6 +595,7 @@ AnnDataR6 <- R6::R6Class(
     #' file.remove("output.loom")
     #' }
     write_loom = function(filename, write_obsm_varm = FALSE) {
+      filename <- normalizePath(filename, mustWork = FALSE)
       private$.anndata$write_loom(
         filename = filename,
         write_obsm_varm = write_obsm_varm

@@ -35,6 +35,7 @@ read_loom <- function(
   ...
 ) {
   python_anndata <- reticulate::import("anndata", convert = FALSE)
+  filename <- normalizePath(filename, mustWork = FALSE)
   py_to_r_ifneedbe(python_anndata$read_loom(
     filename = filename,
     sparse = sparse,
