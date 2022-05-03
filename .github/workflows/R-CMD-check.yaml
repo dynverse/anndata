@@ -1,11 +1,10 @@
 on:
   push:
     branches:
-      - master
-      - devel
+      - main
   pull_request:
     branches:
-      - master
+      - main
   schedule:
     - cron: "0 0 * * 1"
 
