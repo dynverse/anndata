@@ -913,6 +913,10 @@ AnnDataR6 <- R6::R6Class(
 #' @param row.names Not used.
 #' @param optional Not used.
 #' @param ... Parameters passed to the underlying function.
+#' @param value a possible valie for `dimnames(ad)`. The dimnames of a AnnData
+#'   can be `NULL` (which is not stored) or a list of the same length as `dim(ad)`.
+#'   If a list, its components are either NULL or a character vector with
+#'   positive length of the appropriate dimension of `ad`.
 #'
 #' @rdname AnnDataHelpers
 #' @export

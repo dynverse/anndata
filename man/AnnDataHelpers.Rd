@@ -33,6 +33,11 @@
 \arguments{
 \item{x}{An AnnData object.}
 
+\item{value}{a possible valie for \code{dimnames(ad)}. The dimnames of a AnnData
+can be \code{NULL} (which is not stored) or a list of the same length as \code{dim(ad)}.
+If a list, its components are either NULL or a character vector with
+positive length of the appropriate dimension of \code{ad}.}
+
 \item{row.names}{Not used.}
 
 \item{optional}{Not used.}
