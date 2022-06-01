@@ -6,6 +6,7 @@ home:
       href: "https://anndata.readthedocs.io"
 
 template:
+  bootstrap: 5
   params:
     ganalytics: "G-XSL8ZZLBFK"
 
