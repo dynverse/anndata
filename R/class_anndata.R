@@ -1050,7 +1050,8 @@ t.AnnDataR6 <- function(x) {
 
 # interpreted from
 # https://github.com/theislab/anndata/blob/58886f09b2e387c6389a2de20ed0bc7d20d1b843/anndata/tests/helpers.py#L352
-#' Test if two AnnDataR6 objects are equal
+#' Test if two objects objects are equal
+#' @rdname all.equal
 #' @inheritParams base::all.equal
 #' @export
 all.equal.AnnDataR6 <- function(target, current) {

@@ -206,8 +206,7 @@ py_to_r.anndata._core.aligned_mapping.LayersBase <- function(x) {
 `[[<-.LayersR6` <- `[<-.LayersR6`
 
 
-#' Test if two LayersR6 objects are equal
-#' @inheritParams base::all.equal
+#' @rdname all.equal
 #' @export
 all.equal.LayersR6 <- function(target, current) {
   a <- target

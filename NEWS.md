@@ -2,6 +2,10 @@
 
 * BUG FIX: Set dimnames on layer views as well (#16).
 
+* BUG FIX: Fix Github Actions for R CMD Check, test-coverage and pkgdown.
+
+* DOCUMENTATION: Fix pkgdown config structure by adding missing topics.
+
 # anndata 0.7.5.3
 
 * BUG FIX `write_h5ad(ad)`: Fix function pointer (#8).

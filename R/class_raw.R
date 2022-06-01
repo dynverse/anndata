@@ -1,6 +1,6 @@
 #' Create a Raw object
 #'
-#' @rdname AnnData
+#' @rdname Raw
 #'
 #' @param adata An AnnData object.
 #' @param X A #observations × #variables data matrix.
@@ -58,7 +58,7 @@ Raw <- function(
   RawR6$new(raw)
 }
 
-#' @rdname AnnData
+#' @rdname Raw
 #'
 #' @importFrom R6 R6Class
 #' @export
@@ -281,3 +281,26 @@ py_to_r.anndata._core.raw.Raw <- function(x) {
   as.matrix.RawR6(x)[...]
 }
 
+#' @rdname all.equal
+#' @export
+all.equal.RawR6 <- function(target, current) {
+  a <- target
+  b <- current
+
+  if (!inherits(b, "RawR6")) {
+    return("Not a Raw object")
+  }
+
+  a_names <- names(a)
+  b_names <- names(b)
+
+  match <-
+    aecheck(a_names, b_names, "names(.)")
+
+  for (nm in intersect(a_names, b_names)) {
+    match <- match %&%
+      aecheck(a[nm], b[nm], nm)
+  }
+
+  match
+}
