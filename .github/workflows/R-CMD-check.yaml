@@ -1,10 +1,10 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/master/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches:
-      - main
+    branches: [main, master]
   pull_request:
-    branches:
-      - main
+    branches: [main, master]
   schedule:
     - cron: "0 0 * * 1"
 
@@ -13,74 +13,46 @@ name: R-CMD-check
 jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
-    if: "!contains(github.event.head_commit.message, 'ci skip')"
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
     strategy:
       fail-fast: false
       matrix:
         config:
-          - {name: win-release,   os: windows-latest, r: 'release', python: '3.8'}
-          - {name: mac-release,   os: macos-latest,   r: 'release', python: '3.8'}
-          - {name: linux-prev,    os: ubuntu-latest,   r: '3.6',     python: '3.7', rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-          - {name: linux-release, os: ubuntu-latest,   r: 'release', python: '3.8', rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+          - {os: macOS-latest,   python: '3.x', r: 'release'}
+          - {os: windows-latest, python: '3.x', r: 'release'}
+          - {os: ubuntu-latest,  python: '3.x', r: 'devel', http-user-agent: 'release'}
+          - {os: ubuntu-latest,  python: '3.x', r: 'release'}
+          - {os: ubuntu-latest,  python: '3.8', r: 'oldrel-1'}
 
     env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
 
     steps:
       - uses: actions/checkout@v2
 
-      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-pandoc@v1
+
+      - uses: r-lib/actions/setup-r@v1
         with:
           r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+          use-public-rspm: true
 
-      - uses: r-lib/actions/setup-pandoc@master
-
-      - name: Query dependencies
-        run: |
-          install.packages('devtools')
-          saveRDS(devtools::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-        shell: Rscript {0}
-
-      - name: Cache R packages
-        if: runner.os != 'Windows'
-        uses: actions/cache@v1
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ matrix.config.name }}
-          restore-keys: ${{ matrix.config.name }}
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.config.python }}
 
-      - name: Fix Mac OS X permissions issue
-        if: runner.os != 'Windows'
-        run: |
-          if [ ! -d /usr/local/miniconda ]; then sudo mkdir -p /usr/local/miniconda; fi
-          sudo chown -R 501:20 /usr/local/miniconda
-
-      - name: Install dependencies
-        run: |
-          install.packages("reticulate")
-          reticulate::install_miniconda()
-          devtools::install_deps(dependencies = TRUE)
-          devtools::install_cran(c("rcmdcheck", "devtools"))
-          devtools::install(".")
-          anndata::install_anndata()
-        shell: Rscript {0}
-
-      - name: Check
-        env:
-          _R_CHECK_CRAN_INCOMING_REMOTE_: false
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
-
-      - name: Upload check results
-        if: failure()
-        uses: actions/upload-artifact@master
+      - uses: r-lib/actions/setup-r-dependencies@v1
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check
+          extra-packages: rcmdcheck
+
+      - name: Install Python dependencies
+        run: |
+          reticulate::install_miniconda()
+          reticulate::py_install(c("anndata", "scanpy"), pip = TRUE)
+        shell: Rscript {0}
+
+      - uses: r-lib/actions/check-r-package@v1
