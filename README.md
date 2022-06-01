@@ -6,10 +6,9 @@
 [![CRAN](https://www.r-pkg.org/badges/version/anndata)](https://cran.r-project.org/package=anndata)
 [![CRAN
 Downloads](https://cranlogs.r-pkg.org/badges/anndata)](https://cran.r-project.org/package=anndata)
-[![Build
-status](https://github.com/dynverse/anndata/workflows/R-CMD-check/badge.svg)](https://github.com/dynverse/anndata/actions)
-[![Coverage
-Status](https://codecov.io/gh/dynverse/anndata/branch/master/graph/badge.svg)](https://codecov.io/gh/dynverse/anndata?branch=master)
+[![R-CMD-check](https://github.com/dynverse/anndata/workflows/R-CMD-check/badge.svg)](https://github.com/dynverse/anndata/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/dynverse/anndata/branch/main/graph/badge.svg)](https://app.codecov.io/gh/dynverse/anndata?branch=main)
 <!-- badges: end -->
 
 [`anndata`](https://anndata.readthedocs.io/en/latest/) is a commonly
@@ -119,27 +118,16 @@ list of changes.
 
 <!-- This section gets automatically generated from NEWS.md -->
 
-### Recent changes in anndata 0.7.5.2
+### Recent changes in anndata 0.7.5.4
 
--   MINOR CHANGE: Add getters and setter for the internal python
-    objects.
+-   BUG FIX: Set dimnames on layer views as well (#16).
 
--   MINOR CHANGE: Alter how and when Python objects get converted to R
-    and vice versa.
+### Recent changes in anndata 0.7.5.3
 
--   DOCUMENTATION: Documentation site is available at
-    <https://anndata.dynverse.org>!
+-   BUG FIX `write_h5ad(ad)`: Fix function pointer (#8).
 
--   DOCUMENTATION: Added two basic vignettes.
-
-### Recent changes in anndata 0.7.5.1
-
--   MINOR CHANGE: Add wrapper classes for Raw and Layers objects.
-
--   MAJOR CHANGE: Calling `ad[..., ...]` now correctly returns a view of
-    `ad` instead of returning a matrix.
-
--   TESTING: Extend tests based on `theislab/anndata` repository.
+-   BUG FIX: Add manual converter function for converting a csc_matrix
+    to dgCMatrix (#11).
 
 ## References
 

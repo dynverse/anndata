@@ -522,6 +522,7 @@ AnnDataR6 <- R6::R6Class(
     #' unlink("output", recursive = TRUE)
     #' }
     write_csvs = function(dirname, skip_data = TRUE, sep = ",") {
+      dirname <- normalizePath(dirname, mustWork = FALSE)
       private$.anndata$write_csvs(
         dirname = dirname,
         skip_data = skip_data,
@@ -560,6 +561,7 @@ AnnDataR6 <- R6::R6Class(
     #' file.remove("output.h5ad")
     #' }
     write_h5ad = function(filename, compression = NULL, compression_opts = NULL, as_dense = list()) {
+      filename <- normalizePath(filename, mustWork = FALSE)
       private$.anndata$write_h5ad(
         filename = filename,
         compression = compression,
@@ -593,6 +595,7 @@ AnnDataR6 <- R6::R6Class(
     #' file.remove("output.loom")
     #' }
     write_loom = function(filename, write_obsm_varm = FALSE) {
+      filename <- normalizePath(filename, mustWork = FALSE)
       private$.anndata$write_loom(
         filename = filename,
         write_obsm_varm = write_obsm_varm
@@ -910,6 +913,10 @@ AnnDataR6 <- R6::R6Class(
 #' @param row.names Not used.
 #' @param optional Not used.
 #' @param ... Parameters passed to the underlying function.
+#' @param value a possible valie for `dimnames(ad)`. The dimnames of a AnnData
+#'   can be `NULL` (which is not stored) or a list of the same length as `dim(ad)`.
+#'   If a list, its components are either NULL or a character vector with
+#'   positive length of the appropriate dimension of `ad`.
 #'
 #' @rdname AnnDataHelpers
 #' @export
@@ -952,6 +959,21 @@ dimnames.AnnDataR6 <- function(x) {
     x$obs_names,
     x$var_names
   )
+}
+
+#' @rdname AnnDataHelpers
+#' @export
+`dimnames<-.AnnDataR6` <- function(x, value) {
+  d <- dim(x)
+  if (!is.list(value) || length(value) != 2L)
+    stop("invalid 'dimnames' given for AnnData")
+  # value[[1L]] <- as.character(value[[1L]])
+  # value[[2L]] <- as.character(value[[2L]])
+  if (d[[1L]] != length(value[[1L]]) || d[[2L]] != length(value[[2L]]))
+    stop("invalid 'dimnames' given for AnnData")
+  x$obs_names <- value[[1L]]
+  x$var_names <- value[[2L]]
+  x
 }
 
 #' @rdname AnnDataHelpers
@@ -1028,7 +1050,8 @@ t.AnnDataR6 <- function(x) {
 
 # interpreted from
 # https://github.com/theislab/anndata/blob/58886f09b2e387c6389a2de20ed0bc7d20d1b843/anndata/tests/helpers.py#L352
-#' Test if two AnnDataR6 objects are equal
+#' Test if two objects objects are equal
+#' @rdname all.equal
 #' @inheritParams base::all.equal
 #' @export
 all.equal.AnnDataR6 <- function(target, current) {
