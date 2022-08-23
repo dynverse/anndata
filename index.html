@@ -10,8 +10,8 @@
     annotations.  Used to read from and write to the h5ad file format.">
 <title>anndata for R • anndata</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="anndata for R">
 <meta property="og:description" content="A reticulate wrapper for the Python package anndata.
@@ -91,19 +91,19 @@
 </h2>
 <p>You can install <code>anndata</code> for R from CRAN as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"anndata"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"anndata"</span><span class="op">)</span></span></code></pre></div>
 <p>Normally, reticulate should take care of installing Miniconda and the Python anndata.</p>
 <p>If not, try running:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/install_miniconda.html" class="external-link">install_miniconda</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu">anndata</span><span class="fu">::</span><span class="fu"><a href="reference/install_anndata.html">install_anndata</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/install_miniconda.html" class="external-link">install_miniconda</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">anndata</span><span class="fu">::</span><span class="fu"><a href="reference/install_anndata.html">install_anndata</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
 </h2>
 <p>The API of anndata for R is very similar to its Python counterpart. Here is an example:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://anndata.dynverse.org">anndata</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://anndata.dynverse.org">anndata</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">## </span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="co">## Attaching package: 'anndata'</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a></span>
@@ -111,16 +111,16 @@
 <span id="cb4-5"><a href="#cb4-5"></a><span class="co">## </span></span>
 <span id="cb4-6"><a href="#cb4-6"></a><span class="co">##     read_csv</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ad</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_h5ad.html">read_h5ad</a></span><span class="op">(</span><span class="st">"example_formats/pbmc_1k_protein_v3_processed.h5ad"</span><span class="op">)</span>
-
-<span class="va">ad</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ad</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_h5ad.html">read_h5ad</a></span><span class="op">(</span><span class="st">"example_formats/pbmc_1k_protein_v3_processed.h5ad"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ad</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">## AnnData object with n_obs × n_vars = 713 × 33538</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="co">##     var: 'gene_ids', 'feature_types', 'genome', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="co">##     uns: 'hvgParameters', 'normalizationParameters', 'pca', 'pcaParameters'</span></span>
 <span id="cb6-4"><a href="#cb6-4"></a><span class="co">##     obsm: 'X_pca'</span></span>
 <span id="cb6-5"><a href="#cb6-5"></a><span class="co">##     varm: 'PCs'</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">Matrix</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">Matrix</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">## AAACCCAAGTGGTCAG-1 AAAGGTATCAACTACG-1 AAAGTCCAGCGTGTCC-1 AACACACTCAAGAGTA-1 </span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="co">##         0.06499579         0.06385104         0.06102355         0.06739055 </span></span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="co">## AACACACTCGACGAGA-1 AACAGGGCAGGAGGTT-1 AACAGGGCAGTGTATC-1 AACAGGGTCAGAATAG-1 </span></span>
@@ -223,7 +223,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>

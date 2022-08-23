@@ -8,8 +8,8 @@
 <meta name="description" content="anndata">
 <title>Demo with scanpy • anndata</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Demo with scanpy">
 <meta property="og:description" content="anndata">
@@ -76,7 +76,7 @@
 
 
 <script src="scanpy_demo_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Demo with scanpy</h1>
             
       
@@ -92,47 +92,47 @@
 </h3>
 <p>Let’s use a 10x dataset from the 10x genomics website. You can download it to an anndata object with scanpy as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://anndata.dynverse.org">anndata</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/" class="external-link">reticulate</a></span><span class="op">)</span>
-<span class="va">sc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/import.html" class="external-link">import</a></span><span class="op">(</span><span class="st">"scanpy"</span><span class="op">)</span>
-
-<span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://cf.10xgenomics.com/samples/cell-exp/6.0.0/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma_count_sample_feature_bc_matrix.h5"</span>
-<span class="va">ad</span> <span class="op">&lt;-</span> <span class="va">sc</span><span class="op">$</span><span class="fu">read_10x_h5</span><span class="op">(</span><span class="st">"dataset.h5"</span>, backup_url <span class="op">=</span> <span class="va">url</span><span class="op">)</span>
-
-<span class="va">ad</span>
-<span class="co">#&gt; AnnData object with n_obs × n_vars = 5377 × 36601</span>
-<span class="co">#&gt;     var: 'gene_ids', 'feature_types', 'genome'</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://anndata.dynverse.org">anndata</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/" class="external-link">reticulate</a></span><span class="op">)</span></span>
+<span><span class="va">sc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/import.html" class="external-link">import</a></span><span class="op">(</span><span class="st">"scanpy"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://cf.10xgenomics.com/samples/cell-exp/6.0.0/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma_count_sample_feature_bc_matrix.h5"</span></span>
+<span><span class="va">ad</span> <span class="op">&lt;-</span> <span class="va">sc</span><span class="op">$</span><span class="fu">read_10x_h5</span><span class="op">(</span><span class="st">"dataset.h5"</span>, backup_url <span class="op">=</span> <span class="va">url</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ad</span></span>
+<span><span class="co">#&gt; AnnData object with n_obs × n_vars = 5377 × 36601</span></span>
+<span><span class="co">#&gt;     var: 'gene_ids', 'feature_types', 'genome'</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="preprocessing-dataset">Preprocessing dataset<a class="anchor" aria-label="anchor" href="#preprocessing-dataset"></a>
 </h2>
 <p>The resuling dataset is a wrapper for the Python class but behaves very much like an R object:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ad</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>
-<span class="co">#&gt; View of AnnData object with n_obs × n_vars = 5 × 3</span>
-<span class="co">#&gt;     var: 'gene_ids', 'feature_types', 'genome'</span>
-<span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">ad</span><span class="op">)</span>
-<span class="co">#&gt; [1]  5377 36601</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ad</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
+<span><span class="co">#&gt; View of AnnData object with n_obs × n_vars = 5 × 3</span></span>
+<span><span class="co">#&gt;     var: 'gene_ids', 'feature_types', 'genome'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">ad</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1]  5377 36601</span></span></code></pre></div>
 <p>But you can still call scanpy functions on it, for example to perform preprocessing.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sc</span><span class="op">$</span><span class="va">pp</span><span class="op">$</span><span class="fu">filter_cells</span><span class="op">(</span><span class="va">ad</span>, min_genes <span class="op">=</span> <span class="fl">200</span><span class="op">)</span>
-<span class="va">sc</span><span class="op">$</span><span class="va">pp</span><span class="op">$</span><span class="fu">filter_genes</span><span class="op">(</span><span class="va">ad</span>, min_cells <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-<span class="va">sc</span><span class="op">$</span><span class="va">pp</span><span class="op">$</span><span class="fu">normalize_per_cell</span><span class="op">(</span><span class="va">ad</span><span class="op">)</span>
-<span class="va">sc</span><span class="op">$</span><span class="va">pp</span><span class="op">$</span><span class="fu">log1p</span><span class="op">(</span><span class="va">ad</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">sc</span><span class="op">$</span><span class="va">pp</span><span class="op">$</span><span class="fu">filter_cells</span><span class="op">(</span><span class="va">ad</span>, min_genes <span class="op">=</span> <span class="fl">200</span><span class="op">)</span></span>
+<span><span class="va">sc</span><span class="op">$</span><span class="va">pp</span><span class="op">$</span><span class="fu">filter_genes</span><span class="op">(</span><span class="va">ad</span>, min_cells <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">sc</span><span class="op">$</span><span class="va">pp</span><span class="op">$</span><span class="fu">normalize_per_cell</span><span class="op">(</span><span class="va">ad</span><span class="op">)</span></span>
+<span><span class="va">sc</span><span class="op">$</span><span class="va">pp</span><span class="op">$</span><span class="fu">log1p</span><span class="op">(</span><span class="va">ad</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="analysing-your-dataset-in-r">Analysing your dataset in R<a class="anchor" aria-label="anchor" href="#analysing-your-dataset-in-r"></a>
 </h2>
 <p>You can seamlessly switch back to using your dataset with other R functions, for example by calculating the rowMeans of the expression matrix.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org/" class="external-link">Matrix</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; AAACCCAAGCGCGTTC-1 AAACCCAAGGCAATGC-1 AAACCCAGTATCTTCT-1 AAACCCAGTGACAACG-1 </span>
-<span class="co">#&gt;         0.05451418         0.13627126         0.12637224         0.13958617 </span>
-<span class="co">#&gt; AAACCCAGTTGAATCC-1 AAACCCATCGGCTTGG-1 AAACGAAAGAGAGCCT-1 AAACGAAAGCTTAAGA-1 </span>
-<span class="co">#&gt;         0.05979424         0.11365748         0.05011727         0.14347850 </span>
-<span class="co">#&gt; AAACGAAAGGCACGAT-1 AAACGAAAGGTAGCCA-1 </span>
-<span class="co">#&gt;         0.12979302         0.12366312</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org/" class="external-link">Matrix</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; AAACCCAAGCGCGTTC-1 AAACCCAAGGCAATGC-1 AAACCCAGTATCTTCT-1 AAACCCAGTGACAACG-1 </span></span>
+<span><span class="co">#&gt;         0.05451418         0.13627126         0.12637224         0.13958617 </span></span>
+<span><span class="co">#&gt; AAACCCAGTTGAATCC-1 AAACCCATCGGCTTGG-1 AAACGAAAGAGAGCCT-1 AAACGAAAGCTTAAGA-1 </span></span>
+<span><span class="co">#&gt;         0.05979424         0.11365748         0.05011727         0.14347850 </span></span>
+<span><span class="co">#&gt; AAACGAAAGGCACGAT-1 AAACGAAAGGTAGCCA-1 </span></span>
+<span><span class="co">#&gt;         0.12979302         0.12366312</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -147,7 +147,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>
