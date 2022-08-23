@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   getting_started: getting_started.html
   scanpy_demo: scanpy_demo.html
-last_built: 2022-08-23T20:51Z
+last_built: 2022-08-23T20:58Z
 urls:
   reference: https://anndata.dynverse.org/reference
   article: https://anndata.dynverse.org/articles
