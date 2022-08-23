@@ -1,8 +1,12 @@
-# anndata 0.7.5.3
+# anndata 0.7.5.4
 
-* BUG FIX `write_h5ad(ad)`: Fix function pointer (#8).
+* BUG FIX: Set dimnames on layer views as well (#16).
 
-* BUG FIX: Add manual converter function for converting a csc_matrix to dgCMatrix (#11).
+* BUG FIX: Fix Github Actions for R CMD Check, test-coverage and pkgdown.
+
+* DOCUMENTATION: Fix pkgdown config structure by adding missing topics.
+
+* DOCUMENTATION: Regenerate the Rd files using the current CRAN version of roxygen2.
 
 --------------------------------------------------------------------------
 
@@ -10,14 +14,22 @@
 * local R installation, R 4.0.3
 * win-builder (devel)
 * Github Actions: 
-  - Windows, R 4.0
-  - Mac OS X, R 4.0
-  - Ubuntu, R 4.0
-  - Ubuntu, R 3.6
+  - Windows, R release
+  - Mac OS X, R release
+  - Ubuntu, R devel
+  - Ubuntu, R release
+  - Ubuntu, R oldrelease
 
-## ── R CMD check results ──────────────────────────────────── anndata 0.7.5.3 ─
-Duration: 38.6s
+── R CMD check results ──────────────────────────────────── anndata 0.7.5.4 ────
+Duration: 37.3s
 
-0 errors ✓ | 0 warnings ✓ | 0 notes ✓
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
 R CMD check succeeded
+
+## Revdepcheck
+revdepcheck resulted in no new errors or warnings for reverse dependencies.
+
+```
+> revdepcheck::revdep_check(timeout = as.difftime(600, units = "mins"), num_workers = 30)
+```

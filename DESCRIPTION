@@ -1,7 +1,7 @@
 Type: Package
 Package: anndata
 Title: 'anndata' for R
-Version: 0.7.5.3
+Version: 0.7.5.4
 Authors@R: 
     c(person(given = "Philipp",
              family = "Angerer",

@@ -11,3 +11,6 @@
 ^pkgdown$
 ^vignettes/dataset.h5$
 ^codecov\.yml$
+^revdep$
+^CONDUCT\.md$
+^CONTRIBUTING\.md$
