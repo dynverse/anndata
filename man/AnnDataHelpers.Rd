@@ -2,6 +2,7 @@
 % Please edit documentation in R/class_anndata.R
 \name{dimnames.AnnDataR6}
 \alias{dimnames.AnnDataR6}
+\alias{dimnames<-.AnnDataR6}
 \alias{dim.AnnDataR6}
 \alias{as.data.frame.AnnDataR6}
 \alias{as.matrix.AnnDataR6}
@@ -12,6 +13,8 @@
 \title{AnnData Helpers}
 \usage{
 \method{dimnames}{AnnDataR6}(x)
+
+\method{dimnames}{AnnDataR6}(x) <- value
 
 \method{dim}{AnnDataR6}(x)
 
@@ -29,6 +32,11 @@
 }
 \arguments{
 \item{x}{An AnnData object.}
+
+\item{value}{a possible valie for \code{dimnames(ad)}. The dimnames of a AnnData
+can be \code{NULL} (which is not stored) or a list of the same length as \code{dim(ad)}.
+If a list, its components are either NULL or a character vector with
+positive length of the appropriate dimension of \code{ad}.}
 
 \item{row.names}{Not used.}
 

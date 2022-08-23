@@ -61,20 +61,20 @@ print(ad$layers)
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{LayersR6$new()}}
-\item \href{#method-print}{\code{LayersR6$print()}}
-\item \href{#method-get}{\code{LayersR6$get()}}
-\item \href{#method-set}{\code{LayersR6$set()}}
-\item \href{#method-del}{\code{LayersR6$del()}}
-\item \href{#method-keys}{\code{LayersR6$keys()}}
-\item \href{#method-length}{\code{LayersR6$length()}}
-\item \href{#method-.set_py_object}{\code{LayersR6$.set_py_object()}}
-\item \href{#method-.get_py_object}{\code{LayersR6$.get_py_object()}}
+\item \href{#method-LayersR6-new}{\code{LayersR6$new()}}
+\item \href{#method-LayersR6-print}{\code{LayersR6$print()}}
+\item \href{#method-LayersR6-get}{\code{LayersR6$get()}}
+\item \href{#method-LayersR6-set}{\code{LayersR6$set()}}
+\item \href{#method-LayersR6-del}{\code{LayersR6$del()}}
+\item \href{#method-LayersR6-keys}{\code{LayersR6$keys()}}
+\item \href{#method-LayersR6-length}{\code{LayersR6$length()}}
+\item \href{#method-LayersR6-.set_py_object}{\code{LayersR6$.set_py_object()}}
+\item \href{#method-LayersR6-.get_py_object}{\code{LayersR6$.get_py_object()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-LayersR6-new"></a>}}
+\if{latex}{\out{\hypertarget{method-LayersR6-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new Layers object
 \subsection{Usage}{
@@ -90,8 +90,8 @@ Create a new Layers object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-LayersR6-print"></a>}}
+\if{latex}{\out{\hypertarget{method-LayersR6-print}{}}}
 \subsection{Method \code{print()}}{
 Print Layers object
 \subsection{Usage}{
@@ -127,8 +127,8 @@ print(ad$layers)
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get"></a>}}
-\if{latex}{\out{\hypertarget{method-get}{}}}
+\if{html}{\out{<a id="method-LayersR6-get"></a>}}
+\if{latex}{\out{\hypertarget{method-LayersR6-get}{}}}
 \subsection{Method \code{get()}}{
 Get a layer
 \subsection{Usage}{
@@ -144,8 +144,8 @@ Get a layer
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-set"></a>}}
-\if{latex}{\out{\hypertarget{method-set}{}}}
+\if{html}{\out{<a id="method-LayersR6-set"></a>}}
+\if{latex}{\out{\hypertarget{method-LayersR6-set}{}}}
 \subsection{Method \code{set()}}{
 Set a layer
 \subsection{Usage}{
@@ -163,8 +163,8 @@ Set a layer
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-del"></a>}}
-\if{latex}{\out{\hypertarget{method-del}{}}}
+\if{html}{\out{<a id="method-LayersR6-del"></a>}}
+\if{latex}{\out{\hypertarget{method-LayersR6-del}{}}}
 \subsection{Method \code{del()}}{
 Delete a layer
 \subsection{Usage}{
@@ -180,8 +180,8 @@ Delete a layer
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-keys"></a>}}
-\if{latex}{\out{\hypertarget{method-keys}{}}}
+\if{html}{\out{<a id="method-LayersR6-keys"></a>}}
+\if{latex}{\out{\hypertarget{method-LayersR6-keys}{}}}
 \subsection{Method \code{keys()}}{
 Get the names of the layers
 \subsection{Usage}{
@@ -190,8 +190,8 @@ Get the names of the layers
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-length"></a>}}
-\if{latex}{\out{\hypertarget{method-length}{}}}
+\if{html}{\out{<a id="method-LayersR6-length"></a>}}
+\if{latex}{\out{\hypertarget{method-LayersR6-length}{}}}
 \subsection{Method \code{length()}}{
 Get the number of layers
 \subsection{Usage}{
@@ -200,8 +200,8 @@ Get the number of layers
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-.set_py_object"></a>}}
-\if{latex}{\out{\hypertarget{method-.set_py_object}{}}}
+\if{html}{\out{<a id="method-LayersR6-.set_py_object"></a>}}
+\if{latex}{\out{\hypertarget{method-LayersR6-.set_py_object}{}}}
 \subsection{Method \code{.set_py_object()}}{
 Set internal Python object
 \subsection{Usage}{
@@ -217,8 +217,8 @@ Set internal Python object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-.get_py_object"></a>}}
-\if{latex}{\out{\hypertarget{method-.get_py_object}{}}}
+\if{html}{\out{<a id="method-LayersR6-.get_py_object"></a>}}
+\if{latex}{\out{\hypertarget{method-LayersR6-.get_py_object}{}}}
 \subsection{Method \code{.get_py_object()}}{
 Get internal Python object
 \subsection{Usage}{

@@ -13,8 +13,8 @@ a specific installation method. Note that the "virtualenv" method is not
 available on Windows.}
 
 \item{conda}{The path to a \code{conda} executable. Use \code{"auto"} to allow
-\code{reticulate} to automatically find an appropriate \code{conda} binary. See
-\strong{Finding Conda} for more details.}
+\code{reticulate} to automatically find an appropriate \code{conda} binary.
+See \strong{Finding Conda} and \code{\link[reticulate:conda_binary]{conda_binary()}} for more details.}
 }
 \description{
 Needs to be run after installing the anndata R package.

@@ -6,11 +6,15 @@ home:
       href: "https://anndata.readthedocs.io"
 
 template:
+  bootstrap: 5
   params:
     ganalytics: "G-XSL8ZZLBFK"
 
 
 reference:
+ - title: Package documentation
+ - contents:
+   - anndata-package
  - title: Creating an AnnData object
  - contents:
    - AnnData
@@ -37,3 +41,13 @@ reference:
    desc: Helper function for installing the anndata Python package
  - contents:
    - install_anndata
+ - title: Helper functions / sugar syntax
+ - contents:
+   - Layers
+   - Raw
+   - dimnames.AnnDataR6
+   - dimnames.RawR6
+   - all.equal.AnnDataR6
+   - names.LayersR6
+   - r-py-conversion
+

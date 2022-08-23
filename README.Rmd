@@ -15,8 +15,8 @@ set.seed(1)
 <!-- badges: start -->
 [![CRAN](https://www.r-pkg.org/badges/version/anndata)](https://cran.r-project.org/package=anndata)
 [![CRAN Downloads](https://cranlogs.r-pkg.org/badges/anndata)](https://cran.r-project.org/package=anndata)
-[![Build status](https://github.com/dynverse/anndata/workflows/R-CMD-check/badge.svg)](https://github.com/dynverse/anndata/actions)
-[![Coverage Status](https://codecov.io/gh/dynverse/anndata/branch/master/graph/badge.svg)](https://codecov.io/gh/dynverse/anndata?branch=master)
+[![R-CMD-check](https://github.com/dynverse/anndata/workflows/R-CMD-check/badge.svg)](https://github.com/dynverse/anndata/actions)
+[![Codecov test coverage](https://codecov.io/gh/dynverse/anndata/branch/main/graph/badge.svg)](https://app.codecov.io/gh/dynverse/anndata?branch=main)
 <!-- badges: end -->
 
 [`anndata`](https://anndata.readthedocs.io/en/latest/) is a commonly used Python package 

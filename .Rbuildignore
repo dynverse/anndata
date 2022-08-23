@@ -10,3 +10,4 @@
 ^docs$
 ^pkgdown$
 ^vignettes/dataset.h5$
+^codecov\.yml$

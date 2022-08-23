@@ -19,6 +19,7 @@
 #' }
 read_text <- function(filename, delimiter = NULL, first_column_names = NULL, dtype = "float32") {
   python_anndata <- reticulate::import("anndata", convert = FALSE)
+  filename <- normalizePath(filename, mustWork = FALSE)
   py_to_r_ifneedbe(python_anndata$read_text(
     filename = filename,
     delimiter = delimiter,
