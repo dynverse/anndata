@@ -32,4 +32,14 @@ revdepcheck resulted in no new errors or warnings for reverse dependencies.
 
 ```
 > revdepcheck::revdep_check(timeout = as.difftime(600, units = "mins"), num_workers = 30)
+── CHECK ───────────────────────────────────────────────────────── 1 packages ──
+I dyngen 1.0.3                           ── E: 1     | W: 0     | N: 1                                                                                 
+OK: 1                                                                                                                                                
+BROKEN: 0
+Total time: 15 min
+── REPORT ──────────────────────────────────────────────────────────────────────
+Writing summary to 'revdep/README.md'
+Writing problems to 'revdep/problems.md'
+Writing failures to 'revdep/failures.md'
+Writing CRAN report to 'revdep/cran.md'
 ```
