@@ -10,7 +10,7 @@
 #'
 #' If setting an `h5ad`-formatted HDF5 backing file `filename`,
 #' data remains on the disk but is automatically loaded into memory if needed.
-#' See this [blog post](http://falexwolf.de/blog/171223_AnnData_indexing_views_HDF5-backing/) for more details.
+#' See this [blog post](https://falexwolf.de/blog/171223_AnnData_indexing_views_HDF5-backing/) for more details.
 #'
 #' @details
 #' `AnnData` stores observations (samples) of variables/features in the rows of a matrix.
