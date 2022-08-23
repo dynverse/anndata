@@ -146,17 +146,17 @@ Stores for each key a two or higher-dimensional matrix with \code{n_var} rows.}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{RawR6$new()}}
-\item \href{#method-copy}{\code{RawR6$copy()}}
-\item \href{#method-to_adata}{\code{RawR6$to_adata()}}
-\item \href{#method-print}{\code{RawR6$print()}}
-\item \href{#method-.set_py_object}{\code{RawR6$.set_py_object()}}
-\item \href{#method-.get_py_object}{\code{RawR6$.get_py_object()}}
+\item \href{#method-RawR6-new}{\code{RawR6$new()}}
+\item \href{#method-RawR6-copy}{\code{RawR6$copy()}}
+\item \href{#method-RawR6-to_adata}{\code{RawR6$to_adata()}}
+\item \href{#method-RawR6-print}{\code{RawR6$print()}}
+\item \href{#method-RawR6-.set_py_object}{\code{RawR6$.set_py_object()}}
+\item \href{#method-RawR6-.get_py_object}{\code{RawR6$.get_py_object()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-RawR6-new"></a>}}
+\if{latex}{\out{\hypertarget{method-RawR6-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new Raw object
 \subsection{Usage}{
@@ -172,8 +172,8 @@ Create a new Raw object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-copy"></a>}}
-\if{latex}{\out{\hypertarget{method-copy}{}}}
+\if{html}{\out{<a id="method-RawR6-copy"></a>}}
+\if{latex}{\out{\hypertarget{method-RawR6-copy}{}}}
 \subsection{Method \code{copy()}}{
 Full copy, optionally on disk.
 \subsection{Usage}{
@@ -203,8 +203,8 @@ ad$copy("file.h5ad")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-to_adata"></a>}}
-\if{latex}{\out{\hypertarget{method-to_adata}{}}}
+\if{html}{\out{<a id="method-RawR6-to_adata"></a>}}
+\if{latex}{\out{\hypertarget{method-RawR6-to_adata}{}}}
 \subsection{Method \code{to_adata()}}{
 Create a full AnnData object
 \subsection{Usage}{
@@ -234,8 +234,8 @@ ad$raw$to_adata()
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-RawR6-print"></a>}}
+\if{latex}{\out{\hypertarget{method-RawR6-print}{}}}
 \subsection{Method \code{print()}}{
 Print Raw object
 \subsection{Usage}{
@@ -291,8 +291,8 @@ print(ad)
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-.set_py_object"></a>}}
-\if{latex}{\out{\hypertarget{method-.set_py_object}{}}}
+\if{html}{\out{<a id="method-RawR6-.set_py_object"></a>}}
+\if{latex}{\out{\hypertarget{method-RawR6-.set_py_object}{}}}
 \subsection{Method \code{.set_py_object()}}{
 Set internal Python object
 \subsection{Usage}{
@@ -308,8 +308,8 @@ Set internal Python object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-.get_py_object"></a>}}
-\if{latex}{\out{\hypertarget{method-.get_py_object}{}}}
+\if{html}{\out{<a id="method-RawR6-.get_py_object"></a>}}
+\if{latex}{\out{\hypertarget{method-RawR6-.get_py_object}{}}}
 \subsection{Method \code{.get_py_object()}}{
 Get internal Python object
 \subsection{Usage}{

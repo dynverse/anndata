@@ -44,9 +44,9 @@
 #' Copying a view causes an equivalent “real” AnnData object to be generated.
 #' Attempting to modify a view (at any attribute except X) is handled
 #' in a copy-on-modify manner, meaning the object is initialized in place.
-#' Here’s an example
+#' Here's an example
 #'
-#' ```
+#' ```r
 #' batch1 <- adata[adata$obs["batch"] == "batch1", ]
 #' batch1$obs["value"] = 0 # This makes batch1 a “real” AnnData object
 #' ```

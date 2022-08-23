@@ -96,9 +96,11 @@ This is achieved lazily, meaning that the constituent arrays are subset on acces
 Copying a view causes an equivalent “real” AnnData object to be generated.
 Attempting to modify a view (at any attribute except X) is handled
 in a copy-on-modify manner, meaning the object is initialized in place.
-Here’s an example\preformatted{batch1 <- adata[adata$obs["batch"] == "batch1", ]
+Here's an example
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{batch1 <- adata[adata$obs["batch"] == "batch1", ]
 batch1$obs["value"] = 0 # This makes batch1 a “real” AnnData object
-}
+}\if{html}{\out{</div>}}
 
 At the end of this snippet: \code{adata} was not modified,
 and \code{batch1} is its own AnnData object with its own data.
@@ -476,23 +478,35 @@ If you want to copy the previous file, use \code{copy(filename='new_filename')}.
 \item{\code{layers}}{A list-like object with values of the same dimensions as \code{X}.
 Layers in AnnData are inspired by \href{https://linnarssonlab.org/loompy/apiwalkthrough/index.html#loomlayers}{loompy's layers}.
 
-Overwrite the layers:\preformatted{adata$layers <- list(spliced = spliced, unspliced = unspliced)
-}
+Overwrite the layers:
 
-Return the layer named \code{"unspliced"}:\preformatted{adata$layers["unspliced"]
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{adata$layers <- list(spliced = spliced, unspliced = unspliced)
+}\if{html}{\out{</div>}}
 
-Create or replace the \code{"spliced"} layer:\preformatted{adata$layers["spliced"] = example_matrix
-}
+Return the layer named \code{"unspliced"}:
 
-Assign the 10th column of layer \code{"spliced"} to the variable a:\preformatted{a <- adata$layers["spliced"][, 10]
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{adata$layers["unspliced"]
+}\if{html}{\out{</div>}}
 
-Delete the \code{"spliced"}:\preformatted{adata$layers["spliced"] <- NULL
-}
+Create or replace the \code{"spliced"} layer:
 
-Return layers' names:\preformatted{names(adata$layers)
-}}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{adata$layers["spliced"] = example_matrix
+}\if{html}{\out{</div>}}
+
+Assign the 10th column of layer \code{"spliced"} to the variable a:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{a <- adata$layers["spliced"][, 10]
+}\if{html}{\out{</div>}}
+
+Delete the \code{"spliced"}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{adata$layers["spliced"] <- NULL
+}\if{html}{\out{</div>}}
+
+Return layers' names:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{names(adata$layers)
+}\if{html}{\out{</div>}}}
 
 \item{\code{T}}{Transpose whole object.
 
@@ -539,16 +553,22 @@ Stores for each key a two or higher-dimensional matrix whose first two dimension
 \item{\code{raw}}{Store raw version of \code{X} and \code{var} as \verb{$raw$X} and \verb{$raw$var}.
 
 The \code{raw} attribute is initialized with the current content of an object
-by setting:\preformatted{adata$raw = adata
-}
+by setting:
 
-Its content can be deleted:\preformatted{adata$raw <- NULL
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{adata$raw = adata
+}\if{html}{\out{</div>}}
+
+Its content can be deleted:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{adata$raw <- NULL
+}\if{html}{\out{</div>}}
 
 Upon slicing an AnnData object along the obs (row) axis, \code{raw} is also
 sliced. Slicing an AnnData object along the vars (columns) axis
-leaves \code{raw} unaffected. Note that you can call:\preformatted{adata$raw[, 'orig_variable_name']$X
-}
+leaves \code{raw} unaffected. Note that you can call:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{adata$raw[, 'orig_variable_name']$X
+}\if{html}{\out{</div>}}
 
 \verb{to retrieve the data associated with a variable that might have been filtered out or "compressed away" in}X`.}
 }
@@ -557,33 +577,33 @@ leaves \code{raw} unaffected. Note that you can call:\preformatted{adata$raw[, '
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{AnnDataR6$new()}}
-\item \href{#method-obs_keys}{\code{AnnDataR6$obs_keys()}}
-\item \href{#method-obs_names_make_unique}{\code{AnnDataR6$obs_names_make_unique()}}
-\item \href{#method-obsm_keys}{\code{AnnDataR6$obsm_keys()}}
-\item \href{#method-var_keys}{\code{AnnDataR6$var_keys()}}
-\item \href{#method-var_names_make_unique}{\code{AnnDataR6$var_names_make_unique()}}
-\item \href{#method-varm_keys}{\code{AnnDataR6$varm_keys()}}
-\item \href{#method-uns_keys}{\code{AnnDataR6$uns_keys()}}
-\item \href{#method-chunk_X}{\code{AnnDataR6$chunk_X()}}
-\item \href{#method-chunked_X}{\code{AnnDataR6$chunked_X()}}
-\item \href{#method-concatenate}{\code{AnnDataR6$concatenate()}}
-\item \href{#method-copy}{\code{AnnDataR6$copy()}}
-\item \href{#method-rename_categories}{\code{AnnDataR6$rename_categories()}}
-\item \href{#method-strings_to_categoricals}{\code{AnnDataR6$strings_to_categoricals()}}
-\item \href{#method-to_df}{\code{AnnDataR6$to_df()}}
-\item \href{#method-transpose}{\code{AnnDataR6$transpose()}}
-\item \href{#method-write_csvs}{\code{AnnDataR6$write_csvs()}}
-\item \href{#method-write_h5ad}{\code{AnnDataR6$write_h5ad()}}
-\item \href{#method-write_loom}{\code{AnnDataR6$write_loom()}}
-\item \href{#method-print}{\code{AnnDataR6$print()}}
-\item \href{#method-.set_py_object}{\code{AnnDataR6$.set_py_object()}}
-\item \href{#method-.get_py_object}{\code{AnnDataR6$.get_py_object()}}
+\item \href{#method-AnnDataR6-new}{\code{AnnDataR6$new()}}
+\item \href{#method-AnnDataR6-obs_keys}{\code{AnnDataR6$obs_keys()}}
+\item \href{#method-AnnDataR6-obs_names_make_unique}{\code{AnnDataR6$obs_names_make_unique()}}
+\item \href{#method-AnnDataR6-obsm_keys}{\code{AnnDataR6$obsm_keys()}}
+\item \href{#method-AnnDataR6-var_keys}{\code{AnnDataR6$var_keys()}}
+\item \href{#method-AnnDataR6-var_names_make_unique}{\code{AnnDataR6$var_names_make_unique()}}
+\item \href{#method-AnnDataR6-varm_keys}{\code{AnnDataR6$varm_keys()}}
+\item \href{#method-AnnDataR6-uns_keys}{\code{AnnDataR6$uns_keys()}}
+\item \href{#method-AnnDataR6-chunk_X}{\code{AnnDataR6$chunk_X()}}
+\item \href{#method-AnnDataR6-chunked_X}{\code{AnnDataR6$chunked_X()}}
+\item \href{#method-AnnDataR6-concatenate}{\code{AnnDataR6$concatenate()}}
+\item \href{#method-AnnDataR6-copy}{\code{AnnDataR6$copy()}}
+\item \href{#method-AnnDataR6-rename_categories}{\code{AnnDataR6$rename_categories()}}
+\item \href{#method-AnnDataR6-strings_to_categoricals}{\code{AnnDataR6$strings_to_categoricals()}}
+\item \href{#method-AnnDataR6-to_df}{\code{AnnDataR6$to_df()}}
+\item \href{#method-AnnDataR6-transpose}{\code{AnnDataR6$transpose()}}
+\item \href{#method-AnnDataR6-write_csvs}{\code{AnnDataR6$write_csvs()}}
+\item \href{#method-AnnDataR6-write_h5ad}{\code{AnnDataR6$write_h5ad()}}
+\item \href{#method-AnnDataR6-write_loom}{\code{AnnDataR6$write_loom()}}
+\item \href{#method-AnnDataR6-print}{\code{AnnDataR6$print()}}
+\item \href{#method-AnnDataR6-.set_py_object}{\code{AnnDataR6$.set_py_object()}}
+\item \href{#method-AnnDataR6-.get_py_object}{\code{AnnDataR6$.get_py_object()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-new"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new AnnData object
 \subsection{Usage}{
@@ -614,8 +634,8 @@ ad <- AnnData(
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-obs_keys"></a>}}
-\if{latex}{\out{\hypertarget{method-obs_keys}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-obs_keys"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-obs_keys}{}}}
 \subsection{Method \code{obs_keys()}}{
 List keys of observation annotation \code{obs}.
 \subsection{Usage}{
@@ -638,8 +658,8 @@ ad$obs_keys()
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-obs_names_make_unique"></a>}}
-\if{latex}{\out{\hypertarget{method-obs_names_make_unique}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-obs_names_make_unique"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-obs_names_make_unique}{}}}
 \subsection{Method \code{obs_names_make_unique()}}{
 Makes the index unique by appending a number string to each duplicate index element: 1, 2, etc.
 
@@ -675,8 +695,8 @@ ad$obs_names
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-obsm_keys"></a>}}
-\if{latex}{\out{\hypertarget{method-obsm_keys}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-obsm_keys"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-obsm_keys}{}}}
 \subsection{Method \code{obsm_keys()}}{
 List keys of observation annotation \code{obsm}.
 \subsection{Usage}{
@@ -704,8 +724,8 @@ ad$obs_keys()
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-var_keys"></a>}}
-\if{latex}{\out{\hypertarget{method-var_keys}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-var_keys"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-var_keys}{}}}
 \subsection{Method \code{var_keys()}}{
 List keys of variable annotation \code{var}.
 \subsection{Usage}{
@@ -728,8 +748,8 @@ ad$var_keys()
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-var_names_make_unique"></a>}}
-\if{latex}{\out{\hypertarget{method-var_names_make_unique}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-var_names_make_unique"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-var_names_make_unique}{}}}
 \subsection{Method \code{var_names_make_unique()}}{
 Makes the index unique by appending a number string to each duplicate index element: 1, 2, etc.
 
@@ -765,8 +785,8 @@ ad$var_names
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-varm_keys"></a>}}
-\if{latex}{\out{\hypertarget{method-varm_keys}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-varm_keys"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-varm_keys}{}}}
 \subsection{Method \code{varm_keys()}}{
 List keys of variable annotation \code{varm}.
 \subsection{Usage}{
@@ -794,8 +814,8 @@ ad$varm_keys()
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-uns_keys"></a>}}
-\if{latex}{\out{\hypertarget{method-uns_keys}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-uns_keys"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-uns_keys}{}}}
 \subsection{Method \code{uns_keys()}}{
 List keys of unstructured annotation \code{uns}.
 \subsection{Usage}{
@@ -819,8 +839,8 @@ ad <- AnnData(
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-chunk_X"></a>}}
-\if{latex}{\out{\hypertarget{method-chunk_X}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-chunk_X"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-chunk_X}{}}}
 \subsection{Method \code{chunk_X()}}{
 Return a chunk of the data matrix \code{X} with random or specified indices.
 \subsection{Usage}{
@@ -858,8 +878,8 @@ ad$chunk_X(select = 1:3) # first 3 samples
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-chunked_X"></a>}}
-\if{latex}{\out{\hypertarget{method-chunked_X}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-chunked_X"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-chunked_X}{}}}
 \subsection{Method \code{chunked_X()}}{
 Return an iterator over the rows of the data matrix X.
 \subsection{Usage}{
@@ -888,8 +908,8 @@ ad$chunked_X(10)
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-concatenate"></a>}}
-\if{latex}{\out{\hypertarget{method-concatenate}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-concatenate"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-concatenate}{}}}
 \subsection{Method \code{concatenate()}}{
 Concatenate along the observations axis.
 \subsection{Usage}{
@@ -905,8 +925,8 @@ Concatenate along the observations axis.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-copy"></a>}}
-\if{latex}{\out{\hypertarget{method-copy}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-copy"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-copy}{}}}
 \subsection{Method \code{copy()}}{
 Full copy, optionally on disk.
 \subsection{Usage}{
@@ -936,8 +956,8 @@ ad$copy("file.h5ad")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-rename_categories"></a>}}
-\if{latex}{\out{\hypertarget{method-rename_categories}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-rename_categories"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-rename_categories}{}}}
 \subsection{Method \code{rename_categories()}}{
 Rename categories of annotation \code{key} in \code{obs}, \code{var}, and \code{uns}.
 Only supports passing a list/array-like \code{categories} argument.
@@ -973,8 +993,8 @@ ad$rename_categories("group", c(a = "A", b = "B")) # ??
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-strings_to_categoricals"></a>}}
-\if{latex}{\out{\hypertarget{method-strings_to_categoricals}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-strings_to_categoricals"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-strings_to_categoricals}{}}}
 \subsection{Method \code{strings_to_categoricals()}}{
 Transform string annotations to categoricals.
 
@@ -1007,8 +1027,8 @@ ad$strings_to_categoricals() # ??
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-to_df"></a>}}
-\if{latex}{\out{\hypertarget{method-to_df}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-to_df"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-to_df}{}}}
 \subsection{Method \code{to_df()}}{
 Generate shallow data frame.
 
@@ -1051,8 +1071,8 @@ ad$to_df("unspliced")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-transpose"></a>}}
-\if{latex}{\out{\hypertarget{method-transpose}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-transpose"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-transpose}{}}}
 \subsection{Method \code{transpose()}}{
 transpose Transpose whole object.
 
@@ -1081,8 +1101,8 @@ ad$transpose()
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-write_csvs"></a>}}
-\if{latex}{\out{\hypertarget{method-write_csvs}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-write_csvs"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-write_csvs}{}}}
 \subsection{Method \code{write_csvs()}}{
 Write annotation to .csv files.
 
@@ -1130,8 +1150,8 @@ unlink("output", recursive = TRUE)
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-write_h5ad"></a>}}
-\if{latex}{\out{\hypertarget{method-write_h5ad}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-write_h5ad"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-write_h5ad}{}}}
 \subsection{Method \code{write_h5ad()}}{
 Write .h5ad-formatted hdf5 file.
 
@@ -1188,8 +1208,8 @@ file.remove("output.h5ad")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-write_loom"></a>}}
-\if{latex}{\out{\hypertarget{method-write_loom}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-write_loom"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-write_loom}{}}}
 \subsection{Method \code{write_loom()}}{
 Write .loom-formatted hdf5 file.
 \subsection{Usage}{
@@ -1233,8 +1253,8 @@ file.remove("output.loom")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-print"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-print}{}}}
 \subsection{Method \code{print()}}{
 Print AnnData object
 \subsection{Usage}{
@@ -1282,8 +1302,8 @@ print(ad)
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-.set_py_object"></a>}}
-\if{latex}{\out{\hypertarget{method-.set_py_object}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-.set_py_object"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-.set_py_object}{}}}
 \subsection{Method \code{.set_py_object()}}{
 Set internal Python object
 \subsection{Usage}{
@@ -1299,8 +1319,8 @@ Set internal Python object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-.get_py_object"></a>}}
-\if{latex}{\out{\hypertarget{method-.get_py_object}{}}}
+\if{html}{\out{<a id="method-AnnDataR6-.get_py_object"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-.get_py_object}{}}}
 \subsection{Method \code{.get_py_object()}}{
 Get internal Python object
 \subsection{Usage}{

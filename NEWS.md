@@ -6,6 +6,8 @@
 
 * DOCUMENTATION: Fix pkgdown config structure by adding missing topics.
 
+* DOCUMENTATION: Regenerate the Rd files using the current CRAN version of roxygen2.
+
 # anndata 0.7.5.3
 
 * BUG FIX `write_h5ad(ad)`: Fix function pointer (#8).
