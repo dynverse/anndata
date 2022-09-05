@@ -10,6 +10,8 @@
 \alias{py_to_r.anndata._core.anndata.AnnData}
 \alias{[.AnnDataR6}
 \alias{t.AnnDataR6}
+\alias{py_to_r.anndata._core.sparse_dataset.SparseDataset}
+\alias{py_to_r.h5py._hl.dataset.Dataset}
 \title{AnnData Helpers}
 \usage{
 \method{dimnames}{AnnDataR6}(x)
@@ -29,6 +31,10 @@
 \method{[}{AnnDataR6}(x, oidx, vidx)
 
 \method{t}{AnnDataR6}(x)
+
+\method{py_to_r}{anndata._core.sparse_dataset.SparseDataset}(x)
+
+\method{py_to_r}{h5py._hl.dataset.Dataset}(x)
 }
 \arguments{
 \item{x}{An AnnData object.}
