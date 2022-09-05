@@ -62,7 +62,7 @@ basic structure is similar to R's ExpressionSet.
 
 If setting an \code{h5ad}-formatted HDF5 backing file \code{filename},
 data remains on the disk but is automatically loaded into memory if needed.
-See this \href{http://falexwolf.de/blog/171223_AnnData_indexing_views_HDF5-backing/}{blog post} for more details.
+See this \href{https://falexwolf.de/blog/171223_AnnData_indexing_views_HDF5-backing/}{blog post} for more details.
 }
 \details{
 \code{AnnData} stores observations (samples) of variables/features in the rows of a matrix.
