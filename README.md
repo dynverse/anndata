@@ -8,7 +8,7 @@
 Downloads](https://cranlogs.r-pkg.org/badges/anndata)](https://cran.r-project.org/package=anndata)
 [![R-CMD-check](https://github.com/dynverse/anndata/workflows/R-CMD-check/badge.svg)](https://github.com/dynverse/anndata/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/dynverse/anndata/branch/main/graph/badge.svg)](https://app.codecov.io/gh/dynverse/anndata?branch=main)
+coverage](https://app.codecov.io/gh/dynverse/anndata/branch/main/graph/badge.svg)](https://app.codecov.io/gh/dynverse/anndata?branch=main)
 <!-- badges: end -->
 
 [`anndata`](https://anndata.readthedocs.io/en/latest/) is a commonly
@@ -110,24 +110,6 @@ rather than an R package. Some more helper functions and helper classes
 need to be defined in order to fully encapsulate `AnnData()` objects.
 Examples are `ad$chunked_X(...)`, backed file modes, `read_zarr()` and
 `ad$write_zarr()`.
-
-## Latest changes
-
-Check out `news(package = "anndata")` or [NEWS.md](NEWS.md) for a full
-list of changes.
-
-<!-- This section gets automatically generated from NEWS.md -->
-
-### Recent changes in anndata 0.7.5.4
-
--   BUG FIX: Set dimnames on layer views as well (#16).
-
-### Recent changes in anndata 0.7.5.3
-
--   BUG FIX `write_h5ad(ad)`: Fix function pointer (#8).
-
--   BUG FIX: Add manual converter function for converting a csc_matrix
-    to dgCMatrix (#11).
 
 ## References
 
