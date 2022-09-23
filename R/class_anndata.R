@@ -186,7 +186,7 @@ AnnData <- function(
 
 #' @importFrom methods as
 .check_matrix <- function(X) {
-  if (inherits(X, "sparseMatrix") && !inherits(X, "dgCMatrix") && !inherits(X, "dgRMatrix")) {
+  if (inherits(X, "sparseMatrix") && !inherits(X, "CsparseMatrix") && !inherits(X, "RsparseMatrix")) {
     X <- as(X, "CsparseMatrix")
   }
 

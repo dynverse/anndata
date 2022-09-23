@@ -70,13 +70,13 @@ test_that("test common R functions", {
 })
 
 test_that("anndata works with sparse data", {
-  sp <- as(matrix(0:5, nrow = 2), "dgCMatrix")
+  sp <- as(matrix(0:5, nrow = 2), "CsparseMatrix")
   ad <- AnnData(
     X = sp,
     obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
     var = data.frame(type = c(1L, 2L, 3L), row.names = c("var1", "var2", "var3")),
     layers = list(
-      spliced = matrix(4:9, nrow = 2) %>% as("dgRMatrix"),
+      spliced = matrix(4:9, nrow = 2) %>% as("RsparseMatrix"),
       unspliced = matrix(8:13, nrow = 2)
     )
   )
