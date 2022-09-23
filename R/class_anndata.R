@@ -140,18 +140,48 @@ AnnData <- function(
   obsp = NULL,
   varp = NULL
 ) {
-  if (!is.null(rownames(X)) && is.null(rownames(obs))) {
+  # check nrow size
+  nrow <- nrow(X)
+  if (is.null(nrow)) nrow <- nrow(obs)
+  if (is.null(nrow) && !is.null(shape)) nrow <- shape[[1]]
+  assert_that(!is.null(nrow), msg = "If $X, $obs and $var are NULL, shape should be set to the dimensions of the AnnData.")
+
+  # check ncol size
+  ncol <- ncol(X)
+  if (is.null(ncol)) ncol <- nrow(var)
+  if (is.null(ncol) && !is.null(shape)) ncol <- shape[[2]]
+  assert_that(!is.null(ncol), msg = "If $X, $obs and $var are NULL, shape should be set to the dimensions of the AnnData.")
+
+  # check for obs names
+  obs_names <- rownames(X)
+  if (is.null(obs_names)) obs_names <- rownames(obs)
+  if (is.null(obs_names)) obs_names <- as.character(seq_len(nrow))
+
+  # check for var names
+  var_names <- colnames(X)
+  if (is.null(var_names)) var_names <- rownames(var)
+  if (is.null(var_names)) var_names <- as.character(seq_len(ncol))
+
+
+  if (is.null(rownames(obs))) {
     if (is.null(obs)) {
-      obs <- list(obs_names = rownames(X))
+      obs <- data.frame(row.names = obs_names)
+      # obs <- list(obs_names = obs_names)
+    } else if (is.data.frame(obs)) {
+      rownames(obs) <- obs_names
+      # obs$obs_names <- obs_names
     } else {
-      obs$obs_names <- rownames(X)
+      obs$obs_names <- obs_names
     }
   }
-  if (!is.null(colnames(X)) && is.null(rownames(var))) {
+  if (is.null(rownames(var))) {
     if (is.null(var)) {
-      var <- list(var_names = colnames(X))
+      var <- data.frame(row.names = var_names)
+      # var <- list(var_names = var_names)
+    } else if (is.data.frame(var)) {
+      rownames(var) <- var_names
     } else {
-      var$var_names <- colnames(X)
+      var$var_names <- var_names
     }
   }
 
@@ -1105,4 +1135,16 @@ all.equal.AnnDataR6 <- function(target, current) {
   }
 
   match
+}
+
+#' @rdname AnnDataHelpers
+#' @export
+py_to_r.anndata._core.sparse_dataset.SparseDataset <- function(x) {
+  py_to_r_ifneedbe(x$value)
+}
+
+#' @rdname AnnDataHelpers
+#' @export
+py_to_r.h5py._hl.dataset.Dataset <- function(x) {
+  py_to_r(py_get_item(x, tuple()))
 }
