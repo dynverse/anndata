@@ -1,3 +1,7 @@
+# anndata 0.7.5.5
+
+* FUNCTIONALITY: Added initial support for loading AnnData with `backed=TRUE`.
+
 # anndata 0.7.5.4
 
 * BUG FIX: Set dimnames on layer views as well (#16).
