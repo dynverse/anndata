@@ -63,7 +63,7 @@ test_that("create from sparse", {
   df <- s
   dimnames(df) <- list(obs_names, var_names)
   a <- AnnData(df)
-  b <- AnnData(s, obs = list(obs_names = obs_names), var = list(var_names = var_names))
+  b <- AnnData(s, obs = data.frame(row.names = obs_names), var = data.frame(row.names = var_names))
   expect_equal(a, b)
   expect_is(a$X, "sparseMatrix")
 })
