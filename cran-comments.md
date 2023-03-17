@@ -1,6 +1,6 @@
-# anndata 0.7.5.5
+# anndata 0.7.5.6
 
-* FUNCTIONALITY: Added initial support for loading AnnData with `backed=TRUE`.
+* BUG FIX: Use the right interface for the `all.equal()` function.
 
 --------------------------------------------------------------------------
 
@@ -14,8 +14,8 @@
   - Ubuntu, R release
   - Ubuntu, R oldrelease
 
-── R CMD check results ──────────────────────────────────── anndata 0.7.5.5 ────
-Duration: 37.8s
+── R CMD check results ──────────────────── anndata 0.7.5.6 ────
+Duration: 28.5s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 

@@ -1,7 +1,7 @@
 Type: Package
 Package: anndata
 Title: 'anndata' for R
-Version: 0.7.5.5
+Version: 0.7.5.6
 Authors@R: 
     c(person(given = "Philipp",
              family = "Angerer",
@@ -47,7 +47,7 @@ Suggests:
     rmarkdown
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Config/reticulate:
   list(
     packages = list(
