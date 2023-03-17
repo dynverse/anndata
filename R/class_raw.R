@@ -283,7 +283,7 @@ py_to_r.anndata._core.raw.Raw <- function(x) {
 
 #' @rdname all.equal
 #' @export
-all.equal.RawR6 <- function(target, current) {
+all.equal.RawR6 <- function(target, current, ...) {
   a <- target
   b <- current
 
@@ -295,11 +295,11 @@ all.equal.RawR6 <- function(target, current) {
   b_names <- names(b)
 
   match <-
-    aecheck(a_names, b_names, "names(.)")
+    aecheck(a_names, b_names, "names(.)", ...)
 
   for (nm in intersect(a_names, b_names)) {
     match <- match %&%
-      aecheck(a[nm], b[nm], nm)
+      aecheck(a[nm], b[nm], nm, ...)
   }
 
   match

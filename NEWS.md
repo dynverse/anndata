@@ -1,3 +1,7 @@
+# anndata 0.7.5.6
+
+* BUG FIX: Use the right interface for the `all.equal()` function.
+
 # anndata 0.7.5.5
 
 * FUNCTIONALITY: Added initial support for loading AnnData with `backed=TRUE`.

@@ -7,16 +7,19 @@
 \alias{all.equal.RawR6}
 \title{Test if two objects objects are equal}
 \usage{
-\method{all}{equal.AnnDataR6}(target, current)
+\method{all}{equal.AnnDataR6}(target, current, ...)
 
-\method{all}{equal.LayersR6}(target, current)
+\method{all}{equal.LayersR6}(target, current, ...)
 
-\method{all}{equal.RawR6}(target, current)
+\method{all}{equal.RawR6}(target, current, ...)
 }
 \arguments{
 \item{target}{\R object.}
 
 \item{current}{other \R object, to be compared with \code{target}.}
+
+\item{...}{further arguments for different methods, notably the
+    following two, for numerical comparison:}
 }
 \description{
 Test if two objects objects are equal

@@ -1084,7 +1084,7 @@ t.AnnDataR6 <- function(x) {
 #' @rdname all.equal
 #' @inheritParams base::all.equal
 #' @export
-all.equal.AnnDataR6 <- function(target, current) {
+all.equal.AnnDataR6 <- function(target, current, ...) {
   a <- target
   b <- current
 
@@ -1093,7 +1093,7 @@ all.equal.AnnDataR6 <- function(target, current) {
   }
 
   aecheck <- function(a, b, field) {
-    e <- all.equal(a, b)
+    e <- all.equal(a, b, ...)
     if (!isTRUE(e)) {
       paste0("Field ", field, " mismatch: ", e)
     } else {
@@ -1118,17 +1118,17 @@ all.equal.AnnDataR6 <- function(target, current) {
   }
 
   match <-
-    aecheck(a$obs_names, b$obs_names, "obs_names") %&%
-    aecheck(a$var_names, b$var_names, "var_names") %&%
-    aecheck(a$obs, b$obs, "obs") %&%
-    aecheck(a$var, b$var, "var") %&%
-    aecheck(a$X, b$X, "X") %&%
-    aecheck(a$obsm, b$obsm, "obsm") %&%
-    aecheck(a$varm, b$varm, "varm") %&%
-    aecheck(a$layers, b$layers, "layers") %&%
-    aecheck(a$uns, b$uns, "uns") %&%
-    aecheck(a$obsp, b$obsp, "obsp") %&%
-    aecheck(a$varp, b$varp, "varp")
+    aecheck(a$obs_names, b$obs_names, "obs_names", ...) %&%
+    aecheck(a$var_names, b$var_names, "var_names", ...) %&%
+    aecheck(a$obs, b$obs, "obs", ...) %&%
+    aecheck(a$var, b$var, "var", ...) %&%
+    aecheck(a$X, b$X, "X", ...) %&%
+    aecheck(a$obsm, b$obsm, "obsm", ...) %&%
+    aecheck(a$varm, b$varm, "varm", ...) %&%
+    aecheck(a$layers, b$layers, "layers", ...) %&%
+    aecheck(a$uns, b$uns, "uns", ...) %&%
+    aecheck(a$obsp, b$obsp, "obsp", ...) %&%
+    aecheck(a$varp, b$varp, "varp", ...)
 
   if (!is.null(a$raw)) {
     # TODO: implement all equal for raw
