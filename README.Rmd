@@ -15,7 +15,7 @@ set.seed(1)
 <!-- badges: start -->
 [![CRAN](https://www.r-pkg.org/badges/version/anndata)](https://cran.r-project.org/package=anndata)
 [![CRAN Downloads](https://cranlogs.r-pkg.org/badges/anndata)](https://cran.r-project.org/package=anndata)
-[![R-CMD-check](https://github.com/dynverse/anndata/workflows/R-CMD-check/badge.svg)](https://github.com/dynverse/anndata/actions)
+[![R-CMD-check](https://github.com/dynverse/anndata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dynverse/anndata/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://app.codecov.io/gh/dynverse/anndata/branch/main/graph/badge.svg)](https://app.codecov.io/gh/dynverse/anndata?branch=main)
 <!-- badges: end -->
 
