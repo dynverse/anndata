@@ -110,3 +110,24 @@ ad[-1, , drop = FALSE]
 ad[, 2] <- 10
 }
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://anndata.dynverse.org}
+  \item \url{https://github.com/dynverse/anndata}
+  \item Report bugs at \url{https://github.com/dynverse/anndata/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Robrecht Cannoodt \email{rcannood@gmail.com} (\href{https://orcid.org/0000-0003-3641-729X}{ORCID}) (rcannood) [copyright holder]
+
+Other contributors:
+\itemize{
+  \item Philipp Angerer \email{phil.angerer@gmail.com} (\href{https://orcid.org/0000-0002-0369-2888}{ORCID}) (flying-sheep) [conceptor]
+  \item Alex Wolf \email{f.alex.wolf@gmx.de} (\href{https://orcid.org/0000-0002-8760-7838}{ORCID}) (falexwolf) [conceptor]
+  \item Isaac Virshup (ivirshup) [conceptor]
+  \item Sergei Rybakov (Koncopd) [conceptor]
+}
+
+}
