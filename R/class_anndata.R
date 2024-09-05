@@ -106,7 +106,7 @@
 #'   uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
 #' )
 #'
-#' value <- matrix(c(1,2,3,4), nrow = 2)
+#' value <- matrix(c(1, 2, 3, 4), nrow = 2)
 #' ad$X <- value
 #' ad$X
 #'
@@ -125,21 +125,20 @@
 #' colnames(ad)
 #' }
 AnnData <- function(
-  X = NULL,
-  obs = NULL,
-  var = NULL,
-  uns = NULL,
-  obsm = NULL,
-  varm = NULL,
-  layers = NULL,
-  raw = NULL,
-  dtype = "float32",
-  shape = NULL,
-  filename = NULL,
-  filemode = NULL,
-  obsp = NULL,
-  varp = NULL
-) {
+    X = NULL,
+    obs = NULL,
+    var = NULL,
+    uns = NULL,
+    obsm = NULL,
+    varm = NULL,
+    layers = NULL,
+    raw = NULL,
+    dtype = "float32",
+    shape = NULL,
+    filename = NULL,
+    filemode = NULL,
+    obsp = NULL,
+    varp = NULL) {
   # check nrow size
   nrow <- nrow(X)
   if (is.null(nrow)) nrow <- nrow(obs)
@@ -980,9 +979,9 @@ AnnDataR6 <- R6::R6Class(
 #' as.data.frame(ad, layer = "unspliced")
 #' as.matrix(ad)
 #' as.matrix(ad, layer = "unspliced")
-#' ad[2,,drop=FALSE]
-#' ad[,-1]
-#' ad[,c("var1", "var2")]
+#' ad[2, , drop = FALSE]
+#' ad[, -1]
+#' ad[, c("var1", "var2")]
 #' }
 dimnames.AnnDataR6 <- function(x) {
   list(
@@ -995,12 +994,14 @@ dimnames.AnnDataR6 <- function(x) {
 #' @export
 `dimnames<-.AnnDataR6` <- function(x, value) {
   d <- dim(x)
-  if (!is.list(value) || length(value) != 2L)
+  if (!is.list(value) || length(value) != 2L) {
     stop("invalid 'dimnames' given for AnnData")
+  }
   # value[[1L]] <- as.character(value[[1L]])
   # value[[2L]] <- as.character(value[[2L]])
-  if (d[[1L]] != length(value[[1L]]) || d[[2L]] != length(value[[2L]]))
+  if (d[[1L]] != length(value[[1L]]) || d[[2L]] != length(value[[2L]])) {
     stop("invalid 'dimnames' given for AnnData")
+  }
   x$obs_names <- value[[1L]]
   x$var_names <- value[[2L]]
   x

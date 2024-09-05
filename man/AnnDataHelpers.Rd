@@ -90,8 +90,8 @@ as.data.frame(ad)
 as.data.frame(ad, layer = "unspliced")
 as.matrix(ad)
 as.matrix(ad, layer = "unspliced")
-ad[2,,drop=FALSE]
-ad[,-1]
-ad[,c("var1", "var2")]
+ad[2, , drop = FALSE]
+ad[, -1]
+ad[, c("var1", "var2")]
 }
 }

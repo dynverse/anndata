@@ -108,17 +108,16 @@
 #' concat(list(a, b, c), uns_merge = "only")$uns
 #' }
 concat <- function(
-  adatas,
-  axis = 0L,
-  join = "inner",
-  merge = NULL,
-  uns_merge = NULL,
-  label = NULL,
-  keys = NULL,
-  index_unique = NULL,
-  fill_value = NULL,
-  pairwise = FALSE
-) {
+    adatas,
+    axis = 0L,
+    join = "inner",
+    merge = NULL,
+    uns_merge = NULL,
+    label = NULL,
+    keys = NULL,
+    index_unique = NULL,
+    fill_value = NULL,
+    pairwise = FALSE) {
   assert_that(
     is.list(adatas),
     all(sapply(adatas, inherits, "AnnDataR6"))

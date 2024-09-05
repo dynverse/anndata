@@ -32,11 +32,10 @@ gen_typed_df <- function(n, index = NULL) {
 }
 
 gen_adata <- function(
-  shape,
-  obsm_types = c("matrix", "sparseMatrix", "data.frame"),
-  varm_types = c("matrix", "sparseMatrix", "data.frame"),
-  layer_types = c("matrix", "sparseMatrix")
-) {
+    shape,
+    obsm_types = c("matrix", "sparseMatrix", "data.frame"),
+    varm_types = c("matrix", "sparseMatrix", "data.frame"),
+    layer_types = c("matrix", "sparseMatrix")) {
   M <- shape[[1]]
   N <- shape[[2]]
 
@@ -45,8 +44,10 @@ gen_adata <- function(
   obs <- gen_typed_df(M, obs_names)
   var <- gen_typed_df(N, var_names)
   # for #147
-  obs$obs_cat <- obs$cat; obs$cat <- NULL
-  var$var_cat <- var$cat; var$cat <- NULL
+  obs$obs_cat <- obs$cat
+  obs$cat <- NULL
+  var$var_cat <- var$cat
+  var$cat <- NULL
 
   obsm <- list(
     array = matrix(runif(M * 50), nrow = M),
@@ -83,7 +84,7 @@ gen_adata <- function(
     sparse = Matrix::rsparsematrix(N, N, density = 0.1)
   )
   uns <- list(
-    O_recarray = gen_vstr_recarray(N, 5)#,
+    O_recarray = gen_vstr_recarray(N, 5) # ,
     # U_recarray=gen_vstr_recarray(N, 5, "U4")
   )
 

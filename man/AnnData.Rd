@@ -136,7 +136,7 @@ ad <- AnnData(
   uns = list(a = 1, b = 2, c = list(c.a = 3, c.b = 4))
 )
 
-value <- matrix(c(1,2,3,4), nrow = 2)
+value <- matrix(c(1, 2, 3, 4), nrow = 2)
 ad$X <- value
 ad$X
 

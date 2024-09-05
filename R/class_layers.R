@@ -25,9 +25,8 @@
 #' names(ad$layers)
 #' }
 Layers <- function(
-  parent,
-  vals = NULL
-) {
+    parent,
+    vals = NULL) {
   python_anndata <- reticulate::import("anndata", convert = FALSE)
 
   obj <- python_anndata$Layers(
@@ -124,7 +123,6 @@ LayersR6 <- R6::R6Class(
     .get_py_object = function() {
       private$.layers
     }
-
   ),
   active = list(
     #' @field parent Reference to parent AnnData view

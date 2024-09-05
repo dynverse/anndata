@@ -58,8 +58,8 @@ ad$raw <- ad
 dimnames(ad$raw)
 dim(ad$raw)
 as.matrix(ad$raw)
-ad$raw[2,,drop=FALSE]
-ad$raw[,-1]
-ad$raw[,c("var1", "var2")]
+ad$raw[2, , drop = FALSE]
+ad$raw[, -1]
+ad$raw[, c("var1", "var2")]
 }
 }

@@ -38,4 +38,3 @@ write_h5ad <- function(anndata, filename, compression = NULL, compression_opts =
     as_dense = as_dense
   )))
 }
-

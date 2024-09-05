@@ -90,7 +90,7 @@
 #'
 #' ad$uns["b"]
 #'
-#' ad[,c("var1", "var2")]
+#' ad[, c("var1", "var2")]
 #' ad[-1, , drop = FALSE]
 #' ad[, 2] <- 10
 #' }

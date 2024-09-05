@@ -93,7 +93,7 @@ py_to_r.collections.abc.KeysView <- function(x) {
 #' @importFrom Matrix sparseMatrix
 py_to_r.scipy.sparse.csc.csc_matrix <- function(x) {
   Matrix::sparseMatrix(
-    i = as.integer(py_to_r_ifneedbe(x$indices))+1,
+    i = as.integer(py_to_r_ifneedbe(x$indices)) + 1,
     p = as.integer(py_to_r_ifneedbe(x$indptr)),
     x = as.vector(py_to_r_ifneedbe(x$data)),
     dims = as.integer(dim(x))

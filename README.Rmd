@@ -67,7 +67,7 @@ ad <- read_h5ad("example_formats/pbmc_1k_protein_v3_processed.h5ad")
 
 ad
 
-Matrix::rowMeans(ad$X[1:10,])
+Matrix::rowMeans(ad$X[1:10, ])
 ```
 
 
@@ -78,13 +78,13 @@ Check out any of the other vignettes by clicking any of the links below:
 walk(
   list.files("vignettes", pattern = "*.Rmd", recursive = TRUE),
   function(file) {
-    title <- 
-      read_lines(paste0("vignettes/", file)) %>% 
-      keep(~grepl("^title: ", .)) %>% 
+    title <-
+      read_lines(paste0("vignettes/", file)) %>%
+      keep(~ grepl("^title: ", .)) %>%
       gsub("title: \"(.*)\"", "\\1", .)
     vignette_name <- gsub("\\.Rmd", "", file)
     html_name <- gsub("\\.Rmd", ".html", file)
-    
+
     cat("* [", title, "](https://anndata.dynverse.org/articles/", html_name, ")\n", sep = "")
   }
 )

@@ -23,17 +23,16 @@
 #' ad <- read_loom("dataset.loom")
 #' }
 read_loom <- function(
-  filename,
-  sparse = TRUE,
-  cleanup = FALSE,
-  X_name = "spliced",
-  obs_names = "CellID",
-  obsm_names = NULL,
-  var_names = "Gene",
-  varm_names = NULL,
-  dtype = "float32",
-  ...
-) {
+    filename,
+    sparse = TRUE,
+    cleanup = FALSE,
+    X_name = "spliced",
+    obs_names = "CellID",
+    obsm_names = NULL,
+    var_names = "Gene",
+    varm_names = NULL,
+    dtype = "float32",
+    ...) {
   python_anndata <- reticulate::import("anndata", convert = FALSE)
   filename <- normalizePath(filename, mustWork = FALSE)
   py_to_r_ifneedbe(python_anndata$read_loom(

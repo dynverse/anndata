@@ -88,5 +88,4 @@ test_that("simple concat", {
   # concat(list(a, b, c), uns_merge = "unique")$uns
   # concat(list(a, b, c), uns_merge = "first")$uns
   # concat(list(a, b, c), uns_merge = "only")$uns
-
 })

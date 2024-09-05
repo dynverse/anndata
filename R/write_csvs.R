@@ -34,4 +34,3 @@ write_csvs <- function(anndata, dirname, skip_data = TRUE, sep = ",") {
     sep = sep
   )))
 }
-

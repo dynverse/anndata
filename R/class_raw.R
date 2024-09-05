@@ -41,11 +41,10 @@
 #' ad$raw[]
 #' }
 Raw <- function(
-  adata,
-  X = NULL,
-  var = NULL,
-  varm = NULL
-) {
+    adata,
+    X = NULL,
+    var = NULL,
+    varm = NULL) {
   python_anndata <- reticulate::import("anndata", convert = FALSE)
 
   raw <- python_anndata$Raw(
@@ -167,7 +166,7 @@ RawR6 <- R6::R6Class(
   active = list(
     #' @field X Data matrix of shape `n_obs` × `n_vars`.
     X = function() {
-        py_to_r_ifneedbe(private$.raw$X)
+      py_to_r_ifneedbe(private$.raw$X)
     },
     #' @field n_obs Number of observations.
     n_obs = function() {
@@ -238,9 +237,9 @@ RawR6 <- R6::R6Class(
 #' dimnames(ad$raw)
 #' dim(ad$raw)
 #' as.matrix(ad$raw)
-#' ad$raw[2,,drop=FALSE]
-#' ad$raw[,-1]
-#' ad$raw[,c("var1", "var2")]
+#' ad$raw[2, , drop = FALSE]
+#' ad$raw[, -1]
+#' ad$raw[, c("var1", "var2")]
 #' }
 dimnames.RawR6 <- function(x) {
   list(

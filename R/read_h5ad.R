@@ -12,9 +12,8 @@
 #' ad <- read_h5ad("example_formats/pbmc_1k_protein_v3_processed.h5ad")
 #' }
 read_h5ad <- function(
-  filename,
-  backed = NULL
-) {
+    filename,
+    backed = NULL) {
   python_anndata <- reticulate::import("anndata", convert = FALSE)
   filename <- normalizePath(filename, mustWork = FALSE)
   py_to_r_ifneedbe(python_anndata$read_h5ad(
