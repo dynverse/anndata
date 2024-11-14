@@ -281,7 +281,8 @@ py_to_r.anndata._core.raw.Raw <- function(x) {
 }
 
 #' @rdname all.equal
-#' @export
+#' @method all.equal RawR6
+#' @exportS3Method all.equal RawR6
 all.equal.RawR6 <- function(target, current, ...) {
   a <- target
   b <- current
