@@ -1084,7 +1084,8 @@ t.AnnDataR6 <- function(x) {
 #' Test if two objects objects are equal
 #' @rdname all.equal
 #' @inheritParams base::all.equal
-#' @export
+#' @method all.equal AnnDataR6
+#' @exportS3Method all.equal AnnDataR6
 all.equal.AnnDataR6 <- function(target, current, ...) {
   a <- target
   b <- current
