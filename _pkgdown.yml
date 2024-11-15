@@ -32,11 +32,13 @@ reference:
    - read_mtx
    - read_text
    - read_umi_tools
+   - read_zarr
  - title: Writing an AnnData object to a file
  - contents:
    - write_csvs
    - write_h5ad
    - write_loom
+   - write_zarr
  - title: Installer
    desc: Helper function for installing the anndata Python package
  - contents:
