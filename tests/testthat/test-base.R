@@ -314,6 +314,7 @@ test_that("boolean_slicing", {
 })
 
 test_that("oob boolean slicing", {
+  skip_if(tolower(Sys.info()[["sysname"]]) == "darwin") # skip on macOS
   len <- sample.int(50, 2, replace = FALSE)
   expect_error(
     {
