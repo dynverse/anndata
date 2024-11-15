@@ -1,4 +1,6 @@
-# anndata 0.7.5.6
+# anndata 0.8.0
+
+* FUNCTIONALITY: Added support for `read_zarr()` and `write_zarr()`.
 
 * BUG FIX: Use the right interface for the `all.equal()` function.
 
