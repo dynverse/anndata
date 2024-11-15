@@ -2,6 +2,9 @@ context("testing AnnData")
 
 skip_if_no_anndata()
 
+warnings <- reticulate::import("warnings")
+warnings$filterwarnings("ignore")
+
 ad <- AnnData(
   X = matrix(0:5, nrow = 2),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),

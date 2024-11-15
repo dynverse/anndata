@@ -2,6 +2,9 @@ context("testing concat()")
 
 skip_if_no_anndata()
 
+warnings <- reticulate::import("warnings")
+warnings$filterwarnings("ignore")
+
 a <- AnnData(
   X = matrix(c(0, 1, 2, 3), nrow = 2, byrow = TRUE),
   obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),

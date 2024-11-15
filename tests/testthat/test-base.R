@@ -2,6 +2,9 @@ context("testing the base functionality")
 
 skip_if_no_anndata()
 
+warnings <- reticulate::import("warnings")
+warnings$filterwarnings("ignore")
+
 # some test objects that we use below
 adata_dense <- AnnData(rbind(c(1, 2), c(3, 4)))
 adata_dense$layers["test"] <- adata_dense$X
