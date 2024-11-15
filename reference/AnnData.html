@@ -337,6 +337,7 @@ leaves <code>raw</code> unaffected. Note that you can call:</p>
 <li><p><a href="#method-AnnDataR6-write_csvs"><code>AnnDataR6$write_csvs()</code></a></p></li>
 <li><p><a href="#method-AnnDataR6-write_h5ad"><code>AnnDataR6$write_h5ad()</code></a></p></li>
 <li><p><a href="#method-AnnDataR6-write_loom"><code>AnnDataR6$write_loom()</code></a></p></li>
+<li><p><a href="#method-AnnDataR6-write_zarr"><code>AnnDataR6$write_zarr()</code></a></p></li>
 <li><p><a href="#method-AnnDataR6-print"><code>AnnDataR6$print()</code></a></p></li>
 <li><p><a href="#method-AnnDataR6-.set_py_object"><code>AnnDataR6$.set_py_object()</code></a></p></li>
 <li><p><a href="#method-AnnDataR6-.get_py_object"><code>AnnDataR6$.get_py_object()</code></a></p></li>
@@ -863,10 +864,6 @@ Options are <code>"gzip"</code>, <code>"lzf"</code> or <code>NULL</code>.</p></d
 <dd><p>Sparse in AnnData object to write as dense. Currently only supports <code>"X"</code> and <code>"raw/X"</code>.</p></dd>
 
 
-<dt><code>anndata</code></dt>
-<dd><p>An <code>AnnData()</code> object</p></dd>
-
-
 </dl><p></p></div>
 </div>
 <div class="section">
@@ -909,10 +906,6 @@ file.remove("output.h5ad")
 <dd><p>Whether or not to also write the varm and obsm.</p></dd>
 
 
-<dt><code>anndata</code></dt>
-<dd><p>An <code>AnnData()</code> object</p></dd>
-
-
 </dl><p></p></div>
 </div>
 <div class="section">
@@ -938,15 +931,35 @@ file.remove("output.loom")
 </div>
 
 
-</div><p></p><hr><a id="method-AnnDataR6-print"></a><div class="section">
-<h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
-<p>Print AnnData object</p><div class="section">
+</div><p></p><hr><a id="method-AnnDataR6-write_zarr"></a><div class="section">
+<h3 id="method-write-zarr-">Method <code><a href="write_zarr.html">write_zarr()</a></code><a class="anchor" aria-label="anchor" href="#method-write-zarr-"></a></h3>
+<p>Write a hierarchical Zarr array store.</p><div class="section">
 <h4 id="usage-19">Usage<a class="anchor" aria-label="anchor" href="#usage-19"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AnnDataR6</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AnnDataR6</span><span class="op">$</span><span class="fu">write_zarr</span><span class="op">(</span><span class="va">store</span>, chunks <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-14">Arguments<a class="anchor" aria-label="anchor" href="#arguments-14"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>store</code></dt>
+<dd><p>The filename, a MutableMapping, or a Zarr storage class.</p></dd>
+
+
+<dt><code>chunks</code></dt>
+<dd><p>Chunk size.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-AnnDataR6-print"></a><div class="section">
+<h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
+<p>Print AnnData object</p><div class="section">
+<h4 id="usage-20">Usage<a class="anchor" aria-label="anchor" href="#usage-20"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AnnDataR6</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-15">Arguments<a class="anchor" aria-label="anchor" href="#arguments-15"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>optional arguments to print method.</p></dd>
 
@@ -987,12 +1000,12 @@ print(ad)
 </div><p></p><hr><a id="method-AnnDataR6-.set_py_object"></a><div class="section">
 <h3 id="method-set-py-object-">Method <code>.set_py_object()</code><a class="anchor" aria-label="anchor" href="#method-set-py-object-"></a></h3>
 <p>Set internal Python object</p><div class="section">
-<h4 id="usage-20">Usage<a class="anchor" aria-label="anchor" href="#usage-20"></a></h4>
+<h4 id="usage-21">Usage<a class="anchor" aria-label="anchor" href="#usage-21"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AnnDataR6</span><span class="op">$</span><span class="fu">.set_py_object</span><span class="op">(</span><span class="va">obj</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-15">Arguments<a class="anchor" aria-label="anchor" href="#arguments-15"></a></h4>
+<h4 id="arguments-16">Arguments<a class="anchor" aria-label="anchor" href="#arguments-16"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>obj</code></dt>
 <dd><p>A python anndata object</p></dd>
 
@@ -1003,7 +1016,7 @@ print(ad)
 </div><p></p><hr><a id="method-AnnDataR6-.get_py_object"></a><div class="section">
 <h3 id="method-get-py-object-">Method <code>.get_py_object()</code><a class="anchor" aria-label="anchor" href="#method-get-py-object-"></a></h3>
 <p>Get internal Python object</p><div class="section">
-<h4 id="usage-21">Usage<a class="anchor" aria-label="anchor" href="#usage-21"></a></h4>
+<h4 id="usage-22">Usage<a class="anchor" aria-label="anchor" href="#usage-22"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AnnDataR6</span><span class="op">$</span><span class="fu">.get_py_object</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 

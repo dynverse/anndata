@@ -30,8 +30,10 @@
 <url><loc>https://anndata.dynverse.org/reference/read_mtx.html</loc></url>
 <url><loc>https://anndata.dynverse.org/reference/read_text.html</loc></url>
 <url><loc>https://anndata.dynverse.org/reference/read_umi_tools.html</loc></url>
+<url><loc>https://anndata.dynverse.org/reference/read_zarr.html</loc></url>
 <url><loc>https://anndata.dynverse.org/reference/write_csvs.html</loc></url>
 <url><loc>https://anndata.dynverse.org/reference/write_h5ad.html</loc></url>
 <url><loc>https://anndata.dynverse.org/reference/write_loom.html</loc></url>
+<url><loc>https://anndata.dynverse.org/reference/write_zarr.html</loc></url>
 </urlset>
 
