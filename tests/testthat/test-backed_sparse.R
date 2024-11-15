@@ -2,6 +2,8 @@ context("testing backed mode")
 
 skip_if_no_anndata()
 
+warnings <- reticulate::import("warnings")
+warnings$filterwarnings("ignore")
 
 test_that("backed indexing", {
   tmp_path <- tempfile()

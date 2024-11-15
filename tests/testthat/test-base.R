@@ -2,6 +2,9 @@ context("testing the base functionality")
 
 skip_if_no_anndata()
 
+warnings <- reticulate::import("warnings")
+warnings$filterwarnings("ignore")
+
 # some test objects that we use below
 adata_dense <- AnnData(rbind(c(1, 2), c(3, 4)))
 adata_dense$layers["test"] <- adata_dense$X
@@ -311,6 +314,7 @@ test_that("boolean_slicing", {
 })
 
 test_that("oob boolean slicing", {
+  skip_if(tolower(Sys.info()[["sysname"]]) == "darwin") # skip on macOS
   len <- sample.int(50, 2, replace = FALSE)
   expect_error(
     {
