@@ -552,11 +552,11 @@ AnnDataR6 <- R6::R6Class(
     #' }
     write_csvs = function(dirname, skip_data = TRUE, sep = ",") {
       dirname <- normalizePath(dirname, mustWork = FALSE)
-      private$.anndata$write_csvs(
+      invisible(py_to_r_ifneedbe(private$.anndata$write_csvs(
         dirname = dirname,
         skip_data = skip_data,
         sep = sep
-      )
+      )))
     },
 
     #' @description Write .h5ad-formatted hdf5 file.
@@ -564,7 +564,6 @@ AnnDataR6 <- R6::R6Class(
     #' Generally, if you have sparse data that are stored as a dense matrix, you can
     #' dramatically improve performance and reduce disk space by converting to a csr_matrix:
     #'
-    #' @param anndata An [AnnData()] object
     #' @param filename Filename of data file. Defaults to backing file.
     #' @param compression See the h5py [filter pipeline](http://docs.h5py.org/en/latest/high/dataset.html#dataset-compression).
     #'   Options are `"gzip"`, `"lzf"` or `NULL`.
@@ -591,17 +590,16 @@ AnnDataR6 <- R6::R6Class(
     #' }
     write_h5ad = function(filename, compression = NULL, compression_opts = NULL, as_dense = list()) {
       filename <- normalizePath(filename, mustWork = FALSE)
-      private$.anndata$write_h5ad(
+      invisible(py_to_r_ifneedbe(private$.anndata$write_h5ad(
         filename = filename,
         compression = compression,
         compression_opts = compression_opts,
         as_dense = as_dense
-      )
+      )))
     },
 
     #' @description Write .loom-formatted hdf5 file.
     #'
-    #' @param anndata An [AnnData()] object
     #' @param filename The filename.
     #' @param write_obsm_varm Whether or not to also write the varm and obsm.
     #'
@@ -625,10 +623,23 @@ AnnDataR6 <- R6::R6Class(
     #' }
     write_loom = function(filename, write_obsm_varm = FALSE) {
       filename <- normalizePath(filename, mustWork = FALSE)
-      private$.anndata$write_loom(
+      invisible(py_to_r_ifneedbe(private$.anndata$write_loom(
         filename = filename,
         write_obsm_varm = write_obsm_varm
-      )
+      )))
+    },
+
+    #' @description Write a hierarchical Zarr array store.
+    #' @param store The filename, a MutableMapping, or a Zarr storage class.
+    #' @param chunks Chunk size.
+    write_zarr = function(store, chunks = NULL) {
+      if (is.character(store)) {
+        store <- normalizePath(store, mustWork = FALSE)
+      }
+      invisible(py_to_r_ifneedbe(private$.anndata$write_zarr(
+        store = store,
+        chunks = chunks
+      )))
     },
 
     #' @description Print AnnData object

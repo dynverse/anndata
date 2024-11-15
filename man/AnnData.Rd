@@ -596,6 +596,7 @@ leaves \code{raw} unaffected. Note that you can call:
 \item \href{#method-AnnDataR6-write_csvs}{\code{AnnDataR6$write_csvs()}}
 \item \href{#method-AnnDataR6-write_h5ad}{\code{AnnDataR6$write_h5ad()}}
 \item \href{#method-AnnDataR6-write_loom}{\code{AnnDataR6$write_loom()}}
+\item \href{#method-AnnDataR6-write_zarr}{\code{AnnDataR6$write_zarr()}}
 \item \href{#method-AnnDataR6-print}{\code{AnnDataR6$print()}}
 \item \href{#method-AnnDataR6-.set_py_object}{\code{AnnDataR6$.set_py_object()}}
 \item \href{#method-AnnDataR6-.get_py_object}{\code{AnnDataR6$.get_py_object()}}
@@ -1177,8 +1178,6 @@ Options are \code{"gzip"}, \code{"lzf"} or \code{NULL}.}
 \item{\code{compression_opts}}{See the h5py \href{http://docs.h5py.org/en/latest/high/dataset.html#dataset-compression}{filter pipeline}.}
 
 \item{\code{as_dense}}{Sparse in AnnData object to write as dense. Currently only supports \code{"X"} and \code{"raw/X"}.}
-
-\item{\code{anndata}}{An \code{\link[=AnnData]{AnnData()}} object}
 }
 \if{html}{\out{</div>}}
 }
@@ -1222,8 +1221,6 @@ Write .loom-formatted hdf5 file.
 \item{\code{filename}}{The filename.}
 
 \item{\code{write_obsm_varm}}{Whether or not to also write the varm and obsm.}
-
-\item{\code{anndata}}{An \code{\link[=AnnData]{AnnData()}} object}
 }
 \if{html}{\out{</div>}}
 }
@@ -1251,6 +1248,25 @@ file.remove("output.loom")
 
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-AnnDataR6-write_zarr"></a>}}
+\if{latex}{\out{\hypertarget{method-AnnDataR6-write_zarr}{}}}
+\subsection{Method \code{write_zarr()}}{
+Write a hierarchical Zarr array store.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AnnDataR6$write_zarr(store, chunks = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{store}}{The filename, a MutableMapping, or a Zarr storage class.}
+
+\item{\code{chunks}}{Chunk size.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-AnnDataR6-print"></a>}}
