@@ -100,6 +100,10 @@ py_to_r.scipy.sparse.csc.csc_matrix <- function(x) {
   )
 }
 
+py_to_r.anndata.abc._AbstractCSDataset <- function(x) {
+  py_to_r_ifneedbe(x$to_memory())
+}
+
 # TODO: could add mapping specifically for:
 # * adpy$layers: anndata._core.aligned_mapping.Layers
 # * adpy$obsm: anndata._core.aligned_mapping.AxisArrays

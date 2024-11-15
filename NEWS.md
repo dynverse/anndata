@@ -2,7 +2,11 @@
 
 * FUNCTIONALITY: Added support for `read_zarr()` and `write_zarr()`.
 
-* BUG FIX: Use the right interface for the `all.equal()` function.
+* BUG FIX: Use the right interface for the `all.equal()` function (PR #32).
+
+* BUG FIX: Add `py_to_r` converter for `anndata.abc._AbstractCSDataset` (PR #34).
+
+* MINOR CHANGES: Ignore python warnings when running tests (PR #34).
 
 # anndata 0.7.5.5
 
