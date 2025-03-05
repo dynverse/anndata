@@ -8,8 +8,8 @@
 <title>Demo with scanpy • anndata</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Demo with scanpy">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XSL8ZZLBFK"></script><script>
   window.dataLayer = window.dataLayer || [];
@@ -88,9 +88,7 @@ download it to an anndata object with scanpy as follows:</p>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://cf.10xgenomics.com/samples/cell-exp/6.0.0/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma_count_sample_feature_bc_matrix.h5"</span></span>
 <span><span class="va">ad</span> <span class="op">&lt;-</span> <span class="va">sc</span><span class="op">$</span><span class="fu">read_10x_h5</span><span class="op">(</span><span class="st">"dataset.h5"</span>, backup_url <span class="op">=</span> <span class="va">url</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ad</span></span>
-<span><span class="co">#&gt; AnnData object with n_obs × n_vars = 5377 × 36601</span></span>
-<span><span class="co">#&gt;     var: 'gene_ids', 'feature_types', 'genome', 'pattern', 'read', 'sequence'</span></span></code></pre></div>
+<span><span class="va">ad</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="preprocessing-dataset">Preprocessing dataset<a class="anchor" aria-label="anchor" href="#preprocessing-dataset"></a>
@@ -99,10 +97,7 @@ download it to an anndata object with scanpy as follows:</p>
 very much like an R object:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ad</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
-<span><span class="co">#&gt; View of AnnData object with n_obs × n_vars = 5 × 3</span></span>
-<span><span class="co">#&gt;     var: 'gene_ids', 'feature_types', 'genome', 'pattern', 'read', 'sequence'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">ad</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1]  5377 36601</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">ad</span><span class="op">)</span></span></code></pre></div>
 <p>But you can still call scanpy functions on it, for example to perform
 preprocessing.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -119,13 +114,7 @@ functions, for example by calculating the rowMeans of the expression
 matrix.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org" class="external-link">Matrix</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums-methods.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; AAACCCAAGCGCGTTC-1 AAACCCAAGGCAATGC-1 AAACCCAGTATCTTCT-1 AAACCCAGTGACAACG-1 </span></span>
-<span><span class="co">#&gt;         0.05451418         0.13627126         0.12637224         0.13958617 </span></span>
-<span><span class="co">#&gt; AAACCCAGTTGAATCC-1 AAACCCATCGGCTTGG-1 AAACGAAAGAGAGCCT-1 AAACGAAAGCTTAAGA-1 </span></span>
-<span><span class="co">#&gt;         0.05979424         0.11365747         0.05011727         0.14347849 </span></span>
-<span><span class="co">#&gt; AAACGAAAGGCACGAT-1 AAACGAAAGGTAGCCA-1 </span></span>
-<span><span class="co">#&gt;         0.12979302         0.12366312</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums-methods.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

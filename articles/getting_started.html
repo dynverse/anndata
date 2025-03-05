@@ -8,8 +8,8 @@
 <title>Getting started • anndata</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Getting started">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XSL8ZZLBFK"></script><script>
   window.dataLayer = window.dataLayer || [];
@@ -110,38 +110,15 @@ observations and 3 variables.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ad</span></span>
-<span><span class="co">#&gt; AnnData object with n_obs × n_vars = 2 × 3</span></span>
-<span><span class="co">#&gt;     obs: 'group'</span></span>
-<span><span class="co">#&gt;     var: 'type'</span></span>
-<span><span class="co">#&gt;     uns: 'a', 'b', 'c'</span></span>
-<span><span class="co">#&gt;     obsm: 'ones', 'rand', 'zeros'</span></span>
-<span><span class="co">#&gt;     varm: 'ones', 'rand', 'zeros'</span></span>
-<span><span class="co">#&gt;     layers: 'spliced', 'unspliced'</span></span></code></pre></div>
+<span><span class="va">ad</span></span></code></pre></div>
 <p>You can read the information back out using the <code>$</code>
 notation.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ad</span><span class="op">$</span><span class="va">X</span></span>
-<span><span class="co">#&gt;    var1 var2 var3</span></span>
-<span><span class="co">#&gt; s1    1    3    5</span></span>
-<span><span class="co">#&gt; s2    2    4    6</span></span>
 <span><span class="va">ad</span><span class="op">$</span><span class="va">obs</span></span>
-<span><span class="co">#&gt;    group</span></span>
-<span><span class="co">#&gt; s1     a</span></span>
-<span><span class="co">#&gt; s2     b</span></span>
 <span><span class="va">ad</span><span class="op">$</span><span class="va">obsm</span><span class="op">[[</span><span class="st">"ones"</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt;      [,1] [,2] [,3] [,4] [,5]</span></span>
-<span><span class="co">#&gt; [1,]    1    1    1    1    1</span></span>
-<span><span class="co">#&gt; [2,]    1    1    1    1    1</span></span>
 <span><span class="va">ad</span><span class="op">$</span><span class="va">layers</span><span class="op">[[</span><span class="st">"spliced"</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt;    var1 var2 var3</span></span>
-<span><span class="co">#&gt; s1    4    6    8</span></span>
-<span><span class="co">#&gt; s2    5    7    9</span></span>
-<span><span class="va">ad</span><span class="op">$</span><span class="va">uns</span><span class="op">[[</span><span class="st">"b"</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt;   i j      value</span></span>
-<span><span class="co">#&gt; 1 1 4 0.08075014</span></span>
-<span><span class="co">#&gt; 2 2 5 0.83433304</span></span>
-<span><span class="co">#&gt; 3 3 6 0.60076089</span></span></code></pre></div>
+<span><span class="va">ad</span><span class="op">$</span><span class="va">uns</span><span class="op">[[</span><span class="st">"b"</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="reading-writing-anndata-objects">Reading / writing AnnData objects<a class="anchor" aria-label="anchor" href="#reading-writing-anndata-objects"></a>
 </h3>
@@ -158,32 +135,10 @@ underlying data without needing to store the same data twice.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">view</span> <span class="op">&lt;-</span> <span class="va">ad</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span></span>
 <span><span class="va">view</span></span>
-<span><span class="co">#&gt; View of AnnData object with n_obs × n_vars = 2 × 1</span></span>
-<span><span class="co">#&gt;     obs: 'group'</span></span>
-<span><span class="co">#&gt;     var: 'type'</span></span>
-<span><span class="co">#&gt;     uns: 'a', 'b', 'c'</span></span>
-<span><span class="co">#&gt;     obsm: 'ones', 'rand', 'zeros'</span></span>
-<span><span class="co">#&gt;     varm: 'ones', 'rand', 'zeros'</span></span>
-<span><span class="co">#&gt;     layers: 'spliced', 'unspliced'</span></span>
 <span><span class="va">view</span><span class="op">$</span><span class="va">is_view</span></span>
-<span><span class="co">#&gt; [1] TRUE</span></span>
 <span></span>
 <span><span class="va">ad</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"var1"</span>, <span class="st">"var2"</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt; View of AnnData object with n_obs × n_vars = 2 × 2</span></span>
-<span><span class="co">#&gt;     obs: 'group'</span></span>
-<span><span class="co">#&gt;     var: 'type'</span></span>
-<span><span class="co">#&gt;     uns: 'a', 'b', 'c'</span></span>
-<span><span class="co">#&gt;     obsm: 'ones', 'rand', 'zeros'</span></span>
-<span><span class="co">#&gt;     varm: 'ones', 'rand', 'zeros'</span></span>
-<span><span class="co">#&gt;     layers: 'spliced', 'unspliced'</span></span>
-<span><span class="va">ad</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span>, <span class="op">]</span></span>
-<span><span class="co">#&gt; View of AnnData object with n_obs × n_vars = 1 × 3</span></span>
-<span><span class="co">#&gt;     obs: 'group'</span></span>
-<span><span class="co">#&gt;     var: 'type'</span></span>
-<span><span class="co">#&gt;     uns: 'a', 'b', 'c'</span></span>
-<span><span class="co">#&gt;     obsm: 'ones', 'rand', 'zeros'</span></span>
-<span><span class="co">#&gt;     varm: 'ones', 'rand', 'zeros'</span></span>
-<span><span class="co">#&gt;     layers: 'spliced', 'unspliced'</span></span></code></pre></div>
+<span><span class="va">ad</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span>, <span class="op">]</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="anndata-as-a-matrix">AnnData as a matrix<a class="anchor" aria-label="anchor" href="#anndata-as-a-matrix"></a>
@@ -191,23 +146,12 @@ underlying data without needing to store the same data twice.</p>
 <p>The <code>X</code> attribute can be used as an R matrix:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"var1"</span>, <span class="st">"var2"</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt;    var1 var2</span></span>
-<span><span class="co">#&gt; s1    1    3</span></span>
-<span><span class="co">#&gt; s2    2    4</span></span>
 <span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span>, , drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></span>
-<span><span class="co">#&gt;    var1 var2 var3</span></span>
-<span><span class="co">#&gt; s2    2    4    6</span></span>
 <span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">10</span></span></code></pre></div>
 <p>You can access a different layer matrix as follows:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ad</span><span class="op">$</span><span class="va">layers</span><span class="op">[</span><span class="st">"unspliced"</span><span class="op">]</span></span>
-<span><span class="co">#&gt;    var1 var2 var3</span></span>
-<span><span class="co">#&gt; s1    8   10   12</span></span>
-<span><span class="co">#&gt; s2    9   11   13</span></span>
-<span><span class="va">ad</span><span class="op">$</span><span class="va">layers</span><span class="op">[</span><span class="st">"unspliced"</span><span class="op">]</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"var2"</span>, <span class="st">"var3"</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt;    var2 var3</span></span>
-<span><span class="co">#&gt; s1   10   12</span></span>
-<span><span class="co">#&gt; s2   11   13</span></span></code></pre></div>
+<span><span class="va">ad</span><span class="op">$</span><span class="va">layers</span><span class="op">[</span><span class="st">"unspliced"</span><span class="op">]</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"var2"</span>, <span class="st">"var3"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="note-on-state">Note on state<a class="anchor" aria-label="anchor" href="#note-on-state"></a>
@@ -219,16 +163,7 @@ either, both will be modified:</p>
 <span></span>
 <span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ad <span class="op">=</span> <span class="va">ad</span><span class="op">$</span><span class="va">X</span>, ad2 <span class="op">=</span> <span class="va">ad2</span><span class="op">$</span><span class="va">X</span><span class="op">)</span></span>
-<span><span class="co">#&gt; $ad</span></span>
-<span><span class="co">#&gt;    var1 var2 var3</span></span>
-<span><span class="co">#&gt; s1    1   10    5</span></span>
-<span><span class="co">#&gt; s2    2   10    6</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $ad2</span></span>
-<span><span class="co">#&gt;    var1 var2 var3</span></span>
-<span><span class="co">#&gt; s1    1   10    5</span></span>
-<span><span class="co">#&gt; s2    2   10    6</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ad <span class="op">=</span> <span class="va">ad</span><span class="op">$</span><span class="va">X</span>, ad2 <span class="op">=</span> <span class="va">ad2</span><span class="op">$</span><span class="va">X</span><span class="op">)</span></span></code></pre></div>
 <p>This is standard Python behaviour but not R. In order to have two
 separate copies of an AnnData object, use the <code>$copy()</code>
 function:</p>
@@ -237,16 +172,7 @@ function:</p>
 <span></span>
 <span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ad <span class="op">=</span> <span class="va">ad</span><span class="op">$</span><span class="va">X</span>, ad3 <span class="op">=</span> <span class="va">ad3</span><span class="op">$</span><span class="va">X</span><span class="op">)</span></span>
-<span><span class="co">#&gt; $ad</span></span>
-<span><span class="co">#&gt;    var1 var2 var3</span></span>
-<span><span class="co">#&gt; s1    1    3    5</span></span>
-<span><span class="co">#&gt; s2    2    4    6</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $ad3</span></span>
-<span><span class="co">#&gt;    var1 var2 var3</span></span>
-<span><span class="co">#&gt; s1    1   10    5</span></span>
-<span><span class="co">#&gt; s2    2   10    6</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ad <span class="op">=</span> <span class="va">ad</span><span class="op">$</span><span class="va">X</span>, ad3 <span class="op">=</span> <span class="va">ad3</span><span class="op">$</span><span class="va">X</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
