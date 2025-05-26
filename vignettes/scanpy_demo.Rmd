@@ -18,12 +18,21 @@ knitr::opts_chunk$set(eval = reticulate::py_module_available("anndata") && retic
 
 We've found that by using anndata for R, interacting with other anndata-based Python packages becomes super easy!
 
-### Download and load dataset
-Let's use a 10x dataset from the 10x genomics website.
-You can download it to an anndata object with scanpy as follows:
+### Set up
+
+To use another Python package (e.g. `scanpy`), you need to make sure that it is installed in the same ephemeral Python environment that `anndata` uses. You can let `reticulate` handle this for you by using the `py_require()` function:
+
 ```{r}
 library(anndata)
 library(reticulate)
+py_require("scanpy")
+```
+
+### Download and load dataset
+
+Let's use a 10x dataset from the 10x genomics website.
+You can download it to an anndata object with scanpy as follows:
+```{r}
 sc <- import("scanpy")
 
 url <- "https://cf.10xgenomics.com/samples/cell-exp/6.0.0/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma_count_sample_feature_bc_matrix.h5"
