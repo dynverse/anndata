@@ -36,6 +36,7 @@ Depends:
     R (>= 3.5.0)
 Imports:
     assertthat,
+    cli,
     lifecycle,
     Matrix,
     methods,
