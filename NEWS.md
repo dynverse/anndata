@@ -8,6 +8,8 @@
 
 * MINOR CHANGES: Ignore python warnings when running tests (PR #34).
 
+* MAJOR CHANGES: Update reticulate package dependency management (PR #xxx).
+
 # anndata 0.7.5.5
 
 * FUNCTIONALITY: Added initial support for loading AnnData with `backed=TRUE`.
