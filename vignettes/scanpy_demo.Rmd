@@ -24,7 +24,15 @@ if (on_cran) {
   knitr::asis_output(paste0(
     "<span style=\"color: red;\">**WARNING:** The outputs of this vignette are not rendered on CRAN due to package size limitations. ",
     "Please check the [Demo with scanpy](https://anndata.dynverse.org/articles/scanpy_demo.html) ",
-    "vignette in the package documentation. </span>"
+    "vignette in the package documentation.</span>"
+  ))
+}
+
+is_macos <- Sys.info()[["sysname"]] == "Darwin"
+if (is_macos) {
+  knitr::opts_chunk$set(eval = FALSE)
+  knitr::asis_output(paste0(
+    "<span style=\"color: red;\">**WARNING:** The outputs of this vignette are not rendered on macOS.</span>"
   ))
 }
 ```

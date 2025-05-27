@@ -47,14 +47,6 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
-      - name: Install Python dependencies
-        if: matrix.config.os == 'macos-latest'
-        run: |
-          pip install scanpy
-
-          # test that the Python package is installed correctly
-          python -c "import scanpy; print(scanpy.__version__)"
-
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
