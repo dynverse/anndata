@@ -1,5 +1,6 @@
 context("testing backed mode")
 
+skip_on_cran()
 skip_if_no_anndata()
 
 warnings <- reticulate::import("warnings")
@@ -15,10 +16,15 @@ test_that("backed indexing", {
   dense_path <- paste0(tmp_path, "/dense.h5ad")
 
   m <- Matrix::rsparsematrix(50, 50, density = 0.1)
-  dimnames(m) <- list(paste0("cell", seq_len(nrow(m))), paste0("gene", seq_len(ncol(m))))
+  dimnames(m) <- list(
+    paste0("cell", seq_len(nrow(m))),
+    paste0("gene", seq_len(ncol(m)))
+  )
 
   csc_mem <- AnnData(X = m)
-  csr_mem <- AnnData(X = as(as(as(m, "dMatrix"), "generalMatrix"), "RsparseMatrix"))
+  csr_mem <- AnnData(
+    X = as(as(as(m, "dMatrix"), "generalMatrix"), "RsparseMatrix")
+  )
 
   csr_mem$write_h5ad(csr_path)
   csc_mem$write_h5ad(csc_path)

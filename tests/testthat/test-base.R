@@ -1,5 +1,6 @@
 context("testing the base functionality")
 
+skip_on_cran()
 skip_if_no_anndata()
 
 warnings <- reticulate::import("warnings")
@@ -69,7 +70,11 @@ test_that("create from sparse", {
   df <- s
   dimnames(df) <- list(obs_names, var_names)
   a <- AnnData(df)
-  b <- AnnData(s, obs = data.frame(row.names = obs_names), var = data.frame(row.names = var_names))
+  b <- AnnData(
+    s,
+    obs = data.frame(row.names = obs_names),
+    var = data.frame(row.names = var_names)
+  )
   expect_equal(a, b)
   expect_is(a$X, "sparseMatrix")
 })
@@ -177,7 +182,7 @@ test_that("setting index names", {
     adata$obs_names <- names
     expect_equal(attr(adata$obs_names, "name"), after)
 
-    new <- adata[, ]
+    new <- adata[,]
     expect_true(new$is_view)
     new$obs_names <- names
     expect_equal(new, adata)
@@ -188,7 +193,7 @@ test_that("setting index names", {
     adata$var_names <- names
     expect_equal(attr(adata$var_names, "name"), after)
 
-    new <- adata[, ]
+    new <- adata[,]
     expect_true(new$is_view)
     new$obs_names <- names
     expect_equal(new, adata)
@@ -207,7 +212,7 @@ test_that("setting dim index for obs", {
   orig <- gen_adata(c(5, 5))
   orig$raw <- orig
   curr <- orig$copy()
-  view <- orig[, ]
+  view <- orig[,]
   new_idx <- letters[1:5]
 
   curr$obs_names <- new_idx
@@ -228,7 +233,7 @@ test_that("setting dim index for var", {
   orig <- gen_adata(c(5, 5))
   orig$raw <- orig
   curr <- orig$copy()
-  view <- orig[, ]
+  view <- orig[,]
   new_idx <- letters[1:5]
 
   curr$var_names <- new_idx
@@ -249,7 +254,8 @@ test_that("indices dtypes", {
   adata <- AnnData(
     matrix(
       1:6,
-      nrow = 2, byrow = TRUE,
+      nrow = 2,
+      byrow = TRUE,
       dimnames = list(
         c("A", "B"),
         c("a", "b", "c")
@@ -261,7 +267,12 @@ test_that("indices dtypes", {
 })
 
 test_that("slicing", {
-  orig <- matrix(1:6, nrow = 2, byrow = TRUE, dimnames = list(c("0", "1"), c("0", "1", "2")))
+  orig <- matrix(
+    1:6,
+    nrow = 2,
+    byrow = TRUE,
+    dimnames = list(c("0", "1"), c("0", "1", "2"))
+  )
   adata <- AnnData(orig)
 
   expect_equal(adata[1, 1]$X, orig[1, 1, drop = FALSE])
@@ -282,13 +293,24 @@ test_that("slicing", {
 })
 
 test_that("boolean_slicing", {
-  orig <- matrix(1:6, nrow = 2, byrow = TRUE, dimnames = list(c("0", "1"), c("0", "1", "2")))
+  orig <- matrix(
+    1:6,
+    nrow = 2,
+    byrow = TRUE,
+    dimnames = list(c("0", "1"), c("0", "1", "2"))
+  )
   adata <- AnnData(orig)
 
   obs_selector <- c(TRUE, FALSE)
   vars_selector <- c(TRUE, FALSE, FALSE)
-  expect_equal(adata[obs_selector, ][, vars_selector]$X, orig[1, 1, drop = FALSE])
-  expect_equal(adata[, vars_selector][obs_selector, ]$X, orig[1, 1, drop = FALSE])
+  expect_equal(
+    adata[obs_selector, ][, vars_selector]$X,
+    orig[1, 1, drop = FALSE]
+  )
+  expect_equal(
+    adata[, vars_selector][obs_selector, ]$X,
+    orig[1, 1, drop = FALSE]
+  )
   expect_equal(adata[obs_selector, ][, 1]$X, orig[1, 1, drop = FALSE])
   expect_equal(adata[, 1][obs_selector, ]$X, orig[1, 1, drop = FALSE])
   expect_equal(adata[1, ][, vars_selector]$X, orig[1, 1, drop = FALSE])
@@ -296,8 +318,14 @@ test_that("boolean_slicing", {
 
   obs_selector <- c(TRUE, FALSE)
   vars_selector <- c(TRUE, TRUE, FALSE)
-  expect_equal(adata[obs_selector, ][, vars_selector]$X, orig[1, 1:2, drop = FALSE])
-  expect_equal(adata[, vars_selector][obs_selector, ]$X, orig[1, 1:2, drop = FALSE])
+  expect_equal(
+    adata[obs_selector, ][, vars_selector]$X,
+    orig[1, 1:2, drop = FALSE]
+  )
+  expect_equal(
+    adata[, vars_selector][obs_selector, ]$X,
+    orig[1, 1:2, drop = FALSE]
+  )
   expect_equal(adata[obs_selector, ][, 1:2]$X, orig[1, 1:2, drop = FALSE])
   expect_equal(adata[, 1:2][obs_selector, ]$X, orig[1, 1:2, drop = FALSE])
   expect_equal(adata[1, ][, vars_selector]$X, orig[1, 1:2, drop = FALSE])
@@ -305,8 +333,14 @@ test_that("boolean_slicing", {
 
   obs_selector <- c(TRUE, TRUE)
   vars_selector <- c(TRUE, TRUE, FALSE)
-  expect_equal(adata[obs_selector, ][, vars_selector]$X, orig[, 1:2, drop = FALSE])
-  expect_equal(adata[, vars_selector][obs_selector, ]$X, orig[, 1:2, drop = FALSE])
+  expect_equal(
+    adata[obs_selector, ][, vars_selector]$X,
+    orig[, 1:2, drop = FALSE]
+  )
+  expect_equal(
+    adata[, vars_selector][obs_selector, ]$X,
+    orig[, 1:2, drop = FALSE]
+  )
   expect_equal(adata[obs_selector, ][, 1:2]$X, orig[, 1:2, drop = FALSE])
   expect_equal(adata[, 1:2][obs_selector, ]$X, orig[, 1:2, drop = FALSE])
   expect_equal(adata[1:2, ][, vars_selector]$X, orig[, 1:2, drop = FALSE])
@@ -336,7 +370,12 @@ test_that("oob boolean slicing", {
 })
 
 test_that("slicing strings", {
-  orig <- matrix(1:6, byrow = TRUE, nrow = 2, dimnames = list(c("A", "B"), c("a", "b", "c")))
+  orig <- matrix(
+    1:6,
+    byrow = TRUE,
+    nrow = 2,
+    dimnames = list(c("A", "B"), c("a", "b", "c"))
+  )
   adata <- AnnData(orig)
 
   expect_equal(adata["A", "a"]$X, orig[1, 1, drop = FALSE])
