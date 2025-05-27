@@ -42,17 +42,17 @@ jobs:
         with:
           python-version: ${{ matrix.config.python }}
 
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::rcmdcheck
+          needs: check
+
       - name: Pre-install Python dependencies
         if: matrix.config.os == 'macos-latest'
         run: |
           reticulate::install_miniconda()
           reticulate::py_install(c("anndata", "scanpy"), pip = TRUE)
         shell: Rscript {0}
-
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::rcmdcheck
-          needs: check
 
       - uses: r-lib/actions/check-r-package@v2
         with:
