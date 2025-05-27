@@ -12,7 +12,6 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-
 ```
 
 We've found that by using anndata for R, interacting with other anndata-based Python packages becomes super easy!
