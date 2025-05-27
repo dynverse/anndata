@@ -30,7 +30,25 @@ This release updates uses the new package dependency management system in reticu
   - Ubuntu, R release
   - Ubuntu, R oldrelease
 
-── R CMD check results ───────────────────────────── anndata 0.8.0 ────
+── R CMD check results ───────────────────────────────────── anndata 0.8.0 ────
 Duration: 34.9s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+
+## Reverse dependencies
+
+```r
+revdepcheck::revdep_check(num_workers = 4)
+```
+
+    ── INIT ────────────────────────────────────────────── Computing revdeps ──
+    ── INSTALL ────────────────────────────────────────────────── 2 versions ──
+    Installing CRAN version of anndata
+    also installing the dependencies ‘rprojroot’, ‘Rcpp’, ‘RcppTOML’, ‘here’, ‘jsonlite’, ‘png’, ‘rappdirs’, ‘rlang’, ‘withr’, ‘assertthat’, ‘R6’, ‘reticulate’
+
+    Installing DEV version of anndata
+    Installing 15 packages: rprojroot, Rcpp, withr, rlang, rappdirs, png, jsonlite, here, RcppTOML, glue, cli, reticulate, R6, lifecycle, assertthat
+    ── CHECK ──────────────────────────────────────────────────── 6 packages ──
+    OK: 6
+    BROKEN: 0
+    Total time: 1 hour

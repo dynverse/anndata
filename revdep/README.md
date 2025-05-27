@@ -1,41 +1,49 @@
 # Platform
 
-|field    |value                                    |
-|:--------|:----------------------------------------|
-|version  |R version 4.1.3 (2022-03-10)             |
-|os       |Fedora Linux 35 (Workstation Edition)    |
-|system   |x86_64, linux-gnu                        |
-|ui       |RStudio                                  |
-|language |(EN)                                     |
-|collate  |en_GB.UTF-8                              |
-|ctype    |en_GB.UTF-8                              |
-|tz       |Europe/Brussels                          |
-|date     |2022-08-23                               |
-|rstudio  |2022.02.3+492 Prairie Trillium (desktop) |
-|pandoc   |2.14.0.3 @ /usr/bin/pandoc               |
+|field    |value                                 |
+|:--------|:-------------------------------------|
+|version  |R version 4.4.3 (2025-02-28)          |
+|os       |Fedora Linux 40 (Workstation Edition) |
+|system   |x86_64, linux-gnu                     |
+|ui       |X11                                   |
+|language |(EN)                                  |
+|collate  |en_GB.UTF-8                           |
+|ctype    |en_GB.UTF-8                           |
+|tz       |Europe/Brussels                       |
+|date     |2025-05-27                            |
+|pandoc   |3.1.3 @ /usr/bin/pandoc               |
 
 # Dependencies
 
-|package    |old     |new     |Δ  |
-|:----------|:-------|:-------|:--|
-|anndata    |0.7.5.3 |0.7.5.3 |NA |
-|assertthat |0.2.1   |0.2.1   |NA |
-|here       |1.0.1   |1.0.1   |NA |
-|jsonlite   |1.8.0   |1.8.0   |NA |
-|png        |0.1-7   |0.1-7   |NA |
-|R6         |2.5.1   |2.5.1   |NA |
-|rappdirs   |0.3.3   |0.3.3   |NA |
-|Rcpp       |1.0.9   |1.0.9   |NA |
-|RcppTOML   |0.1.7   |0.1.7   |NA |
-|reticulate |1.25    |1.25    |NA |
-|rprojroot  |2.0.3   |2.0.3   |NA |
-|withr      |2.5.0   |2.5.0   |NA |
+|package    |old     |new    |Δ  |
+|:----------|:-------|:------|:--|
+|anndata    |0.7.5.6 |0.8.0  |*  |
+|assertthat |0.2.1   |0.2.1  |   |
+|cli        |NA      |3.6.5  |*  |
+|glue       |NA      |1.8.0  |*  |
+|here       |1.0.1   |1.0.1  |   |
+|jsonlite   |2.0.0   |2.0.0  |   |
+|lifecycle  |NA      |1.0.4  |*  |
+|png        |0.1-8   |0.1-8  |   |
+|R6         |2.6.1   |2.6.1  |   |
+|rappdirs   |0.3.3   |0.3.3  |   |
+|Rcpp       |1.0.14  |1.0.14 |   |
+|RcppTOML   |0.2.3   |0.2.3  |   |
+|reticulate |1.42.0  |1.42.0 |   |
+|rlang      |1.1.6   |1.1.6  |   |
+|rprojroot  |2.0.4   |2.0.4  |   |
+|withr      |3.0.2   |3.0.2  |   |
 
 # Revdeps
 
-## Failed to check (1)
+## Failed to check (6)
 
-|package |version |error |warning |note |
-|:-------|:-------|:-----|:-------|:----|
-|dyngen  |1.0.3   |1     |        |1    |
+|package       |version |error |warning |note |
+|:-------------|:-------|:-----|:-------|:----|
+|BgeeDB        |?       |      |        |     |
+|dyngen        |?       |      |        |     |
+|laminr        |?       |      |        |     |
+|SCORPIUS      |?       |      |        |     |
+|singleCellTK  |?       |      |        |     |
+|zellkonverter |?       |      |        |     |
 
