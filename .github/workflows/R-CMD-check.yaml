@@ -50,7 +50,6 @@ jobs:
       - name: Pre-install Python dependencies
         if: matrix.config.os == 'macos-latest'
         run: |
-          reticulate::install_miniconda()
           reticulate::py_install(c("anndata", "scanpy"), pip = TRUE)
         shell: Rscript {0}
 
