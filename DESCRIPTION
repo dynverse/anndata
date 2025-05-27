@@ -7,25 +7,25 @@ Authors@R:
              family = "Angerer",
              role = "ccp",
              email = "phil.angerer@gmail.com",
-             comment = c(ORCID = "0000-0002-0369-2888", github = "flying-sheep")),
+             comment = c(ORCID = "0000-0002-0369-2888")),
       person(given = "Alex",
              family = "Wolf",
              role = "ccp",
              email = "f.alex.wolf@gmx.de",
-             comment = c(ORCID = "0000-0002-8760-7838", github = "falexwolf")),
+             comment = c(ORCID = "0000-0002-8760-7838")),
       person(given = "Isaac",
              family = "Virshup",
              role = "ccp",
-             comment = c(github = "ivirshup")),
+             comment = c(ORCID = "0000-0002-1710-8945")),
       person(given = "Sergei",
              family = "Rybakov",
              role = "ccp",
-             comment = c(github = "Koncopd")),
+             comment = c(ORCID = "0000-0002-4944-6586")),
       person(given = "Robrecht",
              family = "Cannoodt",
              role = c("aut", "cre", "cph"),
              email = "rcannood@gmail.com",
-             comment = c(ORCID = "0000-0003-3641-729X", github = "rcannood")))
+             comment = c(ORCID = "0000-0003-3641-729X")))
 Description: A 'reticulate' wrapper for the Python package 'anndata'.
     Provides a scalable way of keeping track of data and learned
     annotations.  Used to read from and write to the h5ad file format.

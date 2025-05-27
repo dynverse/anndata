@@ -11,6 +11,7 @@
 \alias{py_to_r.pandas.core.indexes.base.Index}
 \alias{py_to_r.collections.abc.KeysView}
 \alias{py_to_r.collections.abc.Mapping}
+\alias{py_to_r.anndata.abc._AbstractCSDataset}
 \title{Convert between Python and R objects}
 \usage{
 \method{[[}{collections.abc.MutableMapping}(x, name) <- value
@@ -30,6 +31,8 @@
 \method{py_to_r}{collections.abc.KeysView}(x)
 
 \method{py_to_r}{collections.abc.Mapping}(x)
+
+\method{py_to_r}{anndata.abc._AbstractCSDataset}(x)
 }
 \arguments{
 \item{x}{A Python object.}

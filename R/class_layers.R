@@ -25,8 +25,9 @@
 #' names(ad$layers)
 #' }
 Layers <- function(
-    parent,
-    vals = NULL) {
+  parent,
+  vals = NULL
+) {
   python_anndata <- reticulate::import("anndata", convert = FALSE)
 
   obj <- python_anndata$Layers(
@@ -141,6 +142,7 @@ LayersR6 <- R6::R6Class(
 #'
 #' @rdname LayersHelpers
 #' @export
+#' @method names LayersR6
 #'
 #' @examples
 #' \dontrun{
@@ -165,30 +167,35 @@ names.LayersR6 <- function(x) {
 }
 
 #' @rdname LayersHelpers
+#' @method length LayersR6
 #' @export
 length.LayersR6 <- function(x) {
   x$length()
 }
 
 #' @rdname LayersHelpers
+#' @method r_to_py LayersR6
 #' @export
 r_to_py.LayersR6 <- function(x, convert = FALSE) {
   x$.get_py_object()
 }
 
 #' @rdname LayersHelpers
+#' @method py_to_r anndata._core.aligned_mapping.LayersBase
 #' @export
 py_to_r.anndata._core.aligned_mapping.LayersBase <- function(x) {
   LayersR6$new(x)
 }
 
 #' @rdname LayersHelpers
+#' @method [ LayersR6
 #' @export
 `[.LayersR6` <- function(x, name) {
   x$get(name)
 }
 
 #' @rdname LayersHelpers
+#' @method [<- LayersR6
 #' @export
 `[<-.LayersR6` <- function(x, name, value) {
   x$set(name, value)
@@ -196,13 +203,14 @@ py_to_r.anndata._core.aligned_mapping.LayersBase <- function(x) {
 }
 
 #' @rdname LayersHelpers
+#' @method [[ LayersR6
 #' @export
 `[[.LayersR6` <- `[.LayersR6`
 
 #' @rdname LayersHelpers
+#' @method [[<- LayersR6
 #' @export
 `[[<-.LayersR6` <- `[<-.LayersR6`
-
 
 #' @rdname all.equal
 #' @method all.equal LayersR6

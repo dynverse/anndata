@@ -10,6 +10,10 @@
 
 * MAJOR CHANGES: Update reticulate package dependency management (PR #36).
 
+* MINOR CHANGES: Clean up roxygen code (PR #36).
+
+* MINOR CHANGES: Use cli for generating errors (PR #36).
+
 # anndata 0.7.5.5
 
 * FUNCTIONALITY: Added initial support for loading AnnData with `backed=TRUE`.

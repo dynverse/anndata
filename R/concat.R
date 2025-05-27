@@ -108,20 +108,31 @@
 #' concat(list(a, b, c), uns_merge = "only")$uns
 #' }
 concat <- function(
-    adatas,
-    axis = 0L,
-    join = "inner",
-    merge = NULL,
-    uns_merge = NULL,
-    label = NULL,
-    keys = NULL,
-    index_unique = NULL,
-    fill_value = NULL,
-    pairwise = FALSE) {
-  assert_that(
-    is.list(adatas),
-    all(sapply(adatas, inherits, "AnnDataR6"))
-  )
+  adatas,
+  axis = 0L,
+  join = "inner",
+  merge = NULL,
+  uns_merge = NULL,
+  label = NULL,
+  keys = NULL,
+  index_unique = NULL,
+  fill_value = NULL,
+  pairwise = FALSE
+) {
+  if (!is.list(adatas)) {
+    cli::cli_abort(c(
+      "Argument {.arg adatas} must be a list of AnnData objects.",
+      "x" = "You provided an object of class {.cls {class(adatas)}}."
+    ))
+  }
+  is_anndata <- sapply(adatas, inherits, "AnnDataR6")
+  if (any(!is_anndata)) {
+    is_not_anndata <- which(!is_anndata)
+    cli::cli_abort(c(
+      "Argument {.arg adatas} must be a list of AnnData objects.",
+      "x" = "You provided an object of class {.cls {class(adatas[[is_not_anndata[1]]])}} at index {.val {is_not_anndata[1]}}."
+    ))
+  }
 
   # get python objects
   adatas2 <- lapply(

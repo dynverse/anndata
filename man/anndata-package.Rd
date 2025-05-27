@@ -120,14 +120,14 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Robrecht Cannoodt \email{rcannood@gmail.com} (\href{https://orcid.org/0000-0003-3641-729X}{ORCID}) (rcannood) [copyright holder]
+\strong{Maintainer}: Robrecht Cannoodt \email{rcannood@gmail.com} (\href{https://orcid.org/0000-0003-3641-729X}{ORCID}) [copyright holder]
 
 Other contributors:
 \itemize{
-  \item Philipp Angerer \email{phil.angerer@gmail.com} (\href{https://orcid.org/0000-0002-0369-2888}{ORCID}) (flying-sheep) [conceptor]
-  \item Alex Wolf \email{f.alex.wolf@gmx.de} (\href{https://orcid.org/0000-0002-8760-7838}{ORCID}) (falexwolf) [conceptor]
-  \item Isaac Virshup (ivirshup) [conceptor]
-  \item Sergei Rybakov (Koncopd) [conceptor]
+  \item Philipp Angerer \email{phil.angerer@gmail.com} (\href{https://orcid.org/0000-0002-0369-2888}{ORCID}) [conceptor]
+  \item Alex Wolf \email{f.alex.wolf@gmx.de} (\href{https://orcid.org/0000-0002-8760-7838}{ORCID}) [conceptor]
+  \item Isaac Virshup (\href{https://orcid.org/0000-0002-1710-8945}{ORCID}) [conceptor]
+  \item Sergei Rybakov (\href{https://orcid.org/0000-0002-4944-6586}{ORCID}) [conceptor]
 }
 
 }
