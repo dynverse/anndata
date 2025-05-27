@@ -13,10 +13,22 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-knitr::opts_chunk$set(eval = reticulate::py_module_available("anndata") && reticulate::py_module_available("scanpy"))
 ```
 
 We've found that by using anndata for R, interacting with other anndata-based Python packages becomes super easy!
+
+```{r check_on_cran, message=FALSE, warning=FALSE, echo=FALSE}
+on_cran <- !identical(Sys.getenv("NOT_CRAN"), "true")
+
+if (on_cran) {
+  knitr::opts_chunk$set(eval = FALSE)
+  knitr::asis_output(paste0(
+    "<span style=\"color: red;\">**WARNING:** The outputs of this vignette are not rendered on CRAN due to package size limitations. ",
+    "Please check the [Demo with scanpy](https://anndata.dynverse.org/articles/scanpy_demo.html) ",
+    "vignette in the package documentation. </span>"
+  ))
+}
+```
 
 ### Set up
 
