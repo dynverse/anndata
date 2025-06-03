@@ -12,21 +12,53 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-
-knitr::opts_chunk$set(eval = reticulate::py_module_available("anndata") && reticulate::py_module_available("scanpy"))
 ```
 
 We've found that by using anndata for R, interacting with other anndata-based Python packages becomes super easy!
 
-### Download and load dataset
-Let's use a 10x dataset from the 10x genomics website.
-You can download it to an anndata object with scanpy as follows:
+```{r check_on_cran, message=FALSE, warning=FALSE, echo=FALSE}
+on_cran <- !identical(Sys.getenv("NOT_CRAN"), "true")
+
+if (on_cran) {
+  knitr::opts_chunk$set(eval = FALSE)
+  knitr::asis_output(paste0(
+    "<span style=\"color: red;\">**WARNING:** The outputs of this vignette are not rendered on CRAN due to package size limitations. ",
+    "Please check the [Demo with scanpy](https://anndata.dynverse.org/articles/scanpy_demo.html) ",
+    "vignette in the package documentation.</span>"
+  ))
+}
+
+is_macos <- Sys.info()[["sysname"]] == "Darwin"
+if (is_macos) {
+  knitr::opts_chunk$set(eval = FALSE)
+  knitr::asis_output(paste0(
+    "<span style=\"color: red;\">**WARNING:** The outputs of this vignette are not rendered on macOS.</span>"
+  ))
+}
+```
+
+### Set up
+
+To use another Python package (e.g. `scanpy`), you need to make sure that it is installed in the same ephemeral Python environment that `anndata` uses. 
+You can let `reticulate` handle this for you by using the `py_require()` function:
+
 ```{r}
 library(anndata)
 library(reticulate)
+py_require("scanpy")
+```
+
+**TIP**: Check out the vignette on setting up Python package environments with reticulate: https://rstudio.github.io/reticulate/articles/python_packages.html. 
+
+### Download and load dataset
+
+Let's use a 10x dataset from the 10x genomics website.
+You can download it to an anndata object with scanpy as follows:
+```{r}
 sc <- import("scanpy")
 
 url <- "https://cf.10xgenomics.com/samples/cell-exp/6.0.0/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma_count_sample_feature_bc_matrix.h5"
+
 ad <- sc$read_10x_h5("dataset.h5", backup_url = url)
 
 ad

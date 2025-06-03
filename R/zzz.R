@@ -1,5 +1,4 @@
-# following advice from https://rstudio.github.io/reticulate/articles/python_dependencies.html#onload-configuration
-# not sure what exactly this does yet, though
+# Based on https://rstudio.github.io/reticulate/articles/package.html
 .onLoad <- function(libname, pkgname) {
-  reticulate::configure_environment(pkgname)
+  reticulate::py_require("anndata")
 }

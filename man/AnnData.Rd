@@ -912,7 +912,9 @@ ad$chunked_X(10)
 \if{html}{\out{<a id="method-AnnDataR6-concatenate"></a>}}
 \if{latex}{\out{\hypertarget{method-AnnDataR6-concatenate}{}}}
 \subsection{Method \code{concatenate()}}{
-Concatenate along the observations axis.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+Use \code{\link[=concat]{concat()}} instead.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AnnDataR6$concatenate(...)}\if{html}{\out{</div>}}
 }

@@ -15,6 +15,7 @@ py_to_r_ifneedbe <- function(x) {
 #' @return An \R object, as converted from the Python object.
 #'
 #' @name r-py-conversion
+#' @method [[<- collections.abc.MutableMapping
 #' @export
 `[[<-.collections.abc.MutableMapping` <- function(x, name, value) {
   if (!is.null(value)) {
@@ -25,6 +26,7 @@ py_to_r_ifneedbe <- function(x) {
 }
 
 #' @name r-py-conversion
+#' @method [[ collections.abc.Mapping
 #' @export
 `[[.collections.abc.Mapping` <- function(x, name) {
   if (name %in% x$keys()) {
@@ -35,14 +37,17 @@ py_to_r_ifneedbe <- function(x) {
 }
 
 #' @name r-py-conversion
+#' @method [<- collections.abc.MutableMapping
 #' @export
 `[<-.collections.abc.MutableMapping` <- `[[<-.collections.abc.MutableMapping`
 #
 #' @name r-py-conversion
+#' @method [ collections.abc.Mapping
 #' @export
 `[.collections.abc.Mapping` <- `[[.collections.abc.Mapping`
 #
 #' @name r-py-conversion
+#' @method names collections.abc.Mapping
 #' @export
 `names.collections.abc.Mapping` <- function(x) {
   python_builtins <- reticulate::import_builtins()
@@ -50,6 +55,7 @@ py_to_r_ifneedbe <- function(x) {
 }
 
 #' @name r-py-conversion
+#' @method py_to_r collections.abc.Set
 #' @export
 `py_to_r.collections.abc.Set` <- function(x) {
   python_builtins <- reticulate::import_builtins()
@@ -57,6 +63,7 @@ py_to_r_ifneedbe <- function(x) {
 }
 
 #' @name r-py-conversion
+#' @method py_to_r pandas.core.indexes.base.Index
 #' @export
 py_to_r.pandas.core.indexes.base.Index <- function(x) {
   python_builtins <- reticulate::import_builtins()
@@ -66,6 +73,7 @@ py_to_r.pandas.core.indexes.base.Index <- function(x) {
 }
 
 #' @name r-py-conversion
+#' @method py_to_r collections.abc.KeysView
 #' @export
 py_to_r.collections.abc.KeysView <- function(x) {
   python_builtins <- reticulate::import_builtins()
@@ -73,8 +81,9 @@ py_to_r.collections.abc.KeysView <- function(x) {
 }
 
 #' @name r-py-conversion
+#' @method py_to_r collections.abc.Mapping
 #' @export
-`py_to_r.collections.abc.Mapping` <- function(x) {
+py_to_r.collections.abc.Mapping <- function(x) {
   python_builtins <- reticulate::import_builtins()
 
   x_list <- python_builtins$dict(x)
@@ -89,6 +98,8 @@ py_to_r.collections.abc.KeysView <- function(x) {
   x_list
 }
 
+#' @name r-py-conversion
+#' @method py_to_r anndata.abc._AbstractCSDataset
 #' @export
 py_to_r.anndata.abc._AbstractCSDataset <- function(x) {
   py_to_r_ifneedbe(x$to_memory())

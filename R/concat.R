@@ -15,7 +15,7 @@
 #' @param uns_merge How the elements of `.uns` are selected. Uses the same set of strategies as the `merge` argument, except applied recursively.
 #' @param label Column in axis annotation (i.e. `.obs` or `.var`) to place batch information in. If it's NULL, no column is added.
 #' @param keys Names for each object being added. These values are used for column values for `label` or appended to the index if `index_unique` is not `NULL`. Defaults to incrementing integer labels.
-#' @param index_unique Whether to make the index unique by using the keys. If provided, this is the delimeter between `{orig_idx}{index_unique}{key}`. When `NULL`, the original indices are kept.
+#' @param index_unique Whether to make the index unique by using the keys. If provided, this is the delimeter between `orig_idx + index_unique + key`. When `NULL`, the original indices are kept.
 #' @param fill_value When `join="outer"`, this is the value that will be used to fill the introduced indices. By default, sparse arrays are padded with zeros, while dense arrays and DataFrames are padded with missing values.
 #' @param pairwise Whether pairwise elements along the concatenated dimension should be included. This is FALSE by default, since the resulting arrays are often not meaningful.
 #'
@@ -108,20 +108,31 @@
 #' concat(list(a, b, c), uns_merge = "only")$uns
 #' }
 concat <- function(
-    adatas,
-    axis = 0L,
-    join = "inner",
-    merge = NULL,
-    uns_merge = NULL,
-    label = NULL,
-    keys = NULL,
-    index_unique = NULL,
-    fill_value = NULL,
-    pairwise = FALSE) {
-  assert_that(
-    is.list(adatas),
-    all(sapply(adatas, inherits, "AnnDataR6"))
-  )
+  adatas,
+  axis = 0L,
+  join = "inner",
+  merge = NULL,
+  uns_merge = NULL,
+  label = NULL,
+  keys = NULL,
+  index_unique = NULL,
+  fill_value = NULL,
+  pairwise = FALSE
+) {
+  if (!is.list(adatas)) {
+    cli::cli_abort(c(
+      "Argument {.arg adatas} must be a list of AnnData objects.",
+      "x" = "You provided an object of class {.cls {class(adatas)}}."
+    ))
+  }
+  is_anndata <- sapply(adatas, inherits, "AnnDataR6")
+  if (any(!is_anndata)) {
+    is_not_anndata <- which(!is_anndata)
+    cli::cli_abort(c(
+      "Argument {.arg adatas} must be a list of AnnData objects.",
+      "x" = "You provided an object of class {.cls {class(adatas[[is_not_anndata[1]]])}} at index {.val {is_not_anndata[1]}}."
+    ))
+  }
 
   # get python objects
   adatas2 <- lapply(

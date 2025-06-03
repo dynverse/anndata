@@ -1,5 +1,6 @@
 context("testing concat()")
 
+skip_on_cran()
 skip_if_no_anndata()
 
 warnings <- reticulate::import("warnings")

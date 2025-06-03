@@ -32,7 +32,7 @@ concat(
 
 \item{keys}{Names for each object being added. These values are used for column values for \code{label} or appended to the index if \code{index_unique} is not \code{NULL}. Defaults to incrementing integer labels.}
 
-\item{index_unique}{Whether to make the index unique by using the keys. If provided, this is the delimeter between \verb{\{orig_idx\}\{index_unique\}\{key\}}. When \code{NULL}, the original indices are kept.}
+\item{index_unique}{Whether to make the index unique by using the keys. If provided, this is the delimeter between \code{orig_idx + index_unique + key}. When \code{NULL}, the original indices are kept.}
 
 \item{fill_value}{When \code{join="outer"}, this is the value that will be used to fill the introduced indices. By default, sparse arrays are padded with zeros, while dense arrays and DataFrames are padded with missing values.}
 

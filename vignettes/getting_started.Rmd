@@ -12,13 +12,25 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-
-knitr::opts_chunk$set(eval = reticulate::py_module_available("anndata"))
 ```
-
 
 The API of anndata for R is very similar to its Python counterpart. 
 Check out `?anndata` for a full list of the functions provided by this package.
+
+```{r check_on_cran, message=FALSE, warning=FALSE, echo=FALSE}
+on_cran <- !identical(Sys.getenv("NOT_CRAN"), "true")
+
+if (on_cran) {
+  knitr::opts_chunk$set(eval = FALSE)
+  knitr::asis_output(paste0(
+    "<span style=\"color: red;\">**WARNING:** The outputs of this vignette are not rendered on CRAN due to package size limitations. ",
+    "Please check the [Getting started](https://anndata.dynverse.org/articles/getting_started.html) ",
+    "vignette in the package documentation. </span>"
+  ))
+}
+```
+
+## Creating an AnnData object
 
 `AnnData()` stores a data matrix `X` together with annotations
 of observations `obs` (`obsm`, `obsp`), variables `var` (`varm`, `varp`),

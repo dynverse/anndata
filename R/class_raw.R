@@ -41,10 +41,11 @@
 #' ad$raw[]
 #' }
 Raw <- function(
-    adata,
-    X = NULL,
-    var = NULL,
-    varm = NULL) {
+  adata,
+  X = NULL,
+  var = NULL,
+  varm = NULL
+) {
   python_anndata <- reticulate::import("anndata", convert = FALSE)
 
   raw <- python_anndata$Raw(
@@ -208,6 +209,7 @@ RawR6 <- R6::R6Class(
 #' @param ... Parameters passed to the underlying function.
 #'
 #' @rdname RawHelpers
+#' @method dimnames RawR6
 #' @export
 #'
 #' @examples
@@ -249,12 +251,14 @@ dimnames.RawR6 <- function(x) {
 }
 
 #' @rdname RawHelpers
+#' @method dim RawR6
 #' @export
 dim.RawR6 <- function(x) {
   x$shape
 }
 
 #' @rdname RawHelpers
+#' @method as.matrix RawR6
 #' @export
 as.matrix.RawR6 <- function(x, ...) {
   mat <- x$X
@@ -263,18 +267,21 @@ as.matrix.RawR6 <- function(x, ...) {
 }
 
 #' @rdname RawHelpers
+#' @method r_to_py RawR6
 #' @export
 r_to_py.RawR6 <- function(x, convert = FALSE) {
   x$.get_py_object()
 }
 
 #' @rdname RawHelpers
+#' @method py_to_r anndata._core.raw.Raw
 #' @export
 py_to_r.anndata._core.raw.Raw <- function(x) {
   RawR6$new(x)
 }
 
 #' @rdname RawHelpers
+#' @method [ RawR6
 #' @export
 `[.RawR6` <- function(x, ...) {
   as.matrix.RawR6(x)[...]

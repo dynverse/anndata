@@ -4,7 +4,11 @@ gen_vstr_recarray <- function(m, n, dtype = NULL) {
   let <- c(letters, LETTERS)
   gen_word <- function(l) paste(sample(let, l, replace = TRUE), collapse = "")
   colnam <- sapply(seq_len(n), function(i) gen_word(5))
-  arr <- matrix(sapply(lengths, gen_word), nrow = m, dimnames = list(NULL, colnam))
+  arr <- matrix(
+    sapply(lengths, gen_word),
+    nrow = m,
+    dimnames = list(NULL, colnam)
+  )
   df <- as.data.frame(arr)
   pd <- reticulate::import("pandas", convert = FALSE)
   df <- pd$DataFrame(arr, columns = colnam)
@@ -32,10 +36,11 @@ gen_typed_df <- function(n, index = NULL) {
 }
 
 gen_adata <- function(
-    shape,
-    obsm_types = c("matrix", "sparseMatrix", "data.frame"),
-    varm_types = c("matrix", "sparseMatrix", "data.frame"),
-    layer_types = c("matrix", "sparseMatrix")) {
+  shape,
+  obsm_types = c("matrix", "sparseMatrix", "data.frame"),
+  varm_types = c("matrix", "sparseMatrix", "data.frame"),
+  layer_types = c("matrix", "sparseMatrix")
+) {
   M <- shape[[1]]
   N <- shape[[2]]
 
@@ -89,7 +94,10 @@ gen_adata <- function(
   )
 
   ad <- AnnData(
-    X = Matrix::Matrix(matrix(rbinom(M * N, 100, 0.005), nrow = M), sparse = TRUE),
+    X = Matrix::Matrix(
+      matrix(rbinom(M * N, 100, 0.005), nrow = M),
+      sparse = TRUE
+    ),
     obs = obs,
     var = var,
     obsm = obsm,
