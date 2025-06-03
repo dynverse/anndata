@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">anndata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.5.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,31 +76,49 @@
 <p>We’ve found that by using anndata for R, interacting with other
 anndata-based Python packages becomes super easy!</p>
 <div class="section level3">
+<h3 id="set-up">Set up<a class="anchor" aria-label="anchor" href="#set-up"></a>
+</h3>
+<p>To use another Python package (e.g. <code>scanpy</code>), you need to
+make sure that it is installed in the same ephemeral Python environment
+that <code>anndata</code> uses. You can let <code>reticulate</code>
+handle this for you by using the <code><a href="https://rstudio.github.io/reticulate/reference/py_require.html" class="external-link">py_require()</a></code> function:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://anndata.dynverse.org">anndata</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/" class="external-link">reticulate</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_require.html" class="external-link">py_require</a></span><span class="op">(</span><span class="st">"scanpy"</span><span class="op">)</span></span></code></pre></div>
+<p><strong>TIP</strong>: Check out the vignette on setting up Python
+package environments with reticulate: <a href="https://rstudio.github.io/reticulate/articles/python_packages.html" class="external-link uri">https://rstudio.github.io/reticulate/articles/python_packages.html</a>.</p>
+</div>
+<div class="section level3">
 <h3 id="download-and-load-dataset">Download and load dataset<a class="anchor" aria-label="anchor" href="#download-and-load-dataset"></a>
 </h3>
 <p>Let’s use a 10x dataset from the 10x genomics website. You can
 download it to an anndata object with scanpy as follows:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://anndata.dynverse.org">anndata</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/" class="external-link">reticulate</a></span><span class="op">)</span></span>
-<span><span class="va">sc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/import.html" class="external-link">import</a></span><span class="op">(</span><span class="st">"scanpy"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/import.html" class="external-link">import</a></span><span class="op">(</span><span class="st">"scanpy"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://cf.10xgenomics.com/samples/cell-exp/6.0.0/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma_count_sample_feature_bc_matrix.h5"</span></span>
+<span></span>
 <span><span class="va">ad</span> <span class="op">&lt;-</span> <span class="va">sc</span><span class="op">$</span><span class="fu">read_10x_h5</span><span class="op">(</span><span class="st">"dataset.h5"</span>, backup_url <span class="op">=</span> <span class="va">url</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ad</span></span></code></pre></div>
+<span><span class="va">ad</span></span>
+<span><span class="co">#&gt; AnnData object with n_obs × n_vars = 5377 × 36601</span></span>
+<span><span class="co">#&gt;     var: 'gene_ids', 'feature_types', 'genome', 'pattern', 'read', 'sequence'</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="preprocessing-dataset">Preprocessing dataset<a class="anchor" aria-label="anchor" href="#preprocessing-dataset"></a>
 </h2>
 <p>The resuling dataset is a wrapper for the Python class but behaves
 very much like an R object:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ad</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">ad</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt; View of AnnData object with n_obs × n_vars = 5 × 3</span></span>
+<span><span class="co">#&gt;     var: 'gene_ids', 'feature_types', 'genome', 'pattern', 'read', 'sequence'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">ad</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1]  5377 36601</span></span></code></pre></div>
 <p>But you can still call scanpy functions on it, for example to perform
 preprocessing.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sc</span><span class="op">$</span><span class="va">pp</span><span class="op">$</span><span class="fu">filter_cells</span><span class="op">(</span><span class="va">ad</span>, min_genes <span class="op">=</span> <span class="fl">200</span><span class="op">)</span></span>
 <span><span class="va">sc</span><span class="op">$</span><span class="va">pp</span><span class="op">$</span><span class="fu">filter_genes</span><span class="op">(</span><span class="va">ad</span>, min_cells <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">sc</span><span class="op">$</span><span class="va">pp</span><span class="op">$</span><span class="fu">normalize_per_cell</span><span class="op">(</span><span class="va">ad</span><span class="op">)</span></span>
@@ -112,9 +130,15 @@ preprocessing.</p>
 <p>You can seamlessly switch back to using your dataset with other R
 functions, for example by calculating the rowMeans of the expression
 matrix.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org" class="external-link">Matrix</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums-methods.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums-methods.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; AAACCCAAGCGCGTTC-1 AAACCCAAGGCAATGC-1 AAACCCAGTATCTTCT-1 AAACCCAGTGACAACG-1 </span></span>
+<span><span class="co">#&gt;         0.05451418         0.13627126         0.12637224         0.13958617 </span></span>
+<span><span class="co">#&gt; AAACCCAGTTGAATCC-1 AAACCCATCGGCTTGG-1 AAACGAAAGAGAGCCT-1 AAACGAAAGCTTAAGA-1 </span></span>
+<span><span class="co">#&gt;         0.05979424         0.11365747         0.05011727         0.14347849 </span></span>
+<span><span class="co">#&gt; AAACGAAAGGCACGAT-1 AAACGAAAGGTAGCCA-1 </span></span>
+<span><span class="co">#&gt;         0.12979302         0.12366312</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -127,7 +151,7 @@ matrix.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
