@@ -4,12 +4,13 @@ home:
   links:
     - text: Python package
       href: "https://anndata.readthedocs.io"
+    - text: Superseded by anndataR
+      href: "https://anndataR.scverse.org"
 
 template:
   bootstrap: 5
   params:
     ganalytics: "G-XSL8ZZLBFK"
-
 
 reference:
  - title: Package documentation
@@ -52,4 +53,3 @@ reference:
    - all.equal.AnnDataR6
    - names.LayersR6
    - r-py-conversion
-
