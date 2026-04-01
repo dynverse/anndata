@@ -22,7 +22,7 @@ set.seed(1)
 
 > **⚠️ This package is superseded by [anndataR](https://anndataR.scverse.org).**
 >
-> `anndataR` provides a pure R implementation of the `AnnData` data structure — no Python
+> `anndataR` provides a pure R implementation of the `AnnData` data structure with no Python
 > required. It reads and writes `.h5ad` files natively and supports conversion to/from
 > `SingleCellExperiment` and `Seurat` objects. New users should install `anndataR` from
 > Bioconductor instead:

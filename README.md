@@ -17,7 +17,7 @@ superseded](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https:/
 > [anndataR](https://anndataR.scverse.org).**
 >
 > `anndataR` provides a pure R implementation of the `AnnData` data
-> structure — no Python required. It reads and writes `.h5ad` files
+> structure with no Python required. It reads and writes `.h5ad` files
 > natively and supports conversion to/from `SingleCellExperiment` and
 > `Seurat` objects. New users should install `anndataR` from
 > Bioconductor instead:
@@ -36,8 +36,7 @@ package.
 ## Installation
 
 > **Note:** New projects should use
-> [anndataR](https://anndataR.scverse.org) instead. See
-> the [migration
+> [anndataR](https://anndataR.scverse.org) instead. See the [migration
 > guide](https://anndata.dynverse.org/articles/migration_to_anndataR.html).
 
 You can install `anndata` for R from CRAN as follows:
@@ -100,7 +99,7 @@ links below:
 ## Future work
 
 This package is no longer under active development as it has been
-superseded by [anndataR](https://anndataR.scverse.org).
-Bug fixes may still be applied, but no new features are planned.
+superseded by [anndataR](https://anndataR.scverse.org). Bug fixes may
+still be applied, but no new features are planned.
 
 ## References
