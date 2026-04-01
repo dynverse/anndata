@@ -6,38 +6,39 @@
 [![CRAN](https://www.r-pkg.org/badges/version/anndata)](https://cran.r-project.org/package=anndata)
 [![CRAN
 Downloads](https://cranlogs.r-pkg.org/badges/anndata)](https://cran.r-project.org/package=anndata)
-[![R-CMD-check](https://github.com/dynverse/anndata/workflows/R-CMD-check/badge.svg)](https://github.com/dynverse/anndata/actions)
+[![R-CMD-check](https://github.com/dynverse/anndata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dynverse/anndata/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://app.codecov.io/gh/dynverse/anndata/branch/main/graph/badge.svg)](https://app.codecov.io/gh/dynverse/anndata?branch=main)
+[![Lifecycle:
+superseded](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#superseded)
 <!-- badges: end -->
 
-[`anndata`](https://anndata.readthedocs.io/en/latest/) is a commonly
-used Python package for keeping track of data and learned annotations,
-and can be used to read from and write to the h5ad file format. It is
-also the main data format used in the scanpy python package (Wolf,
-Angerer, and Theis 2018).
+> **⚠️ This package is superseded by
+> [anndataR](https://anndataR.scverse.org).**
+>
+> `anndataR` provides a pure R implementation of the `AnnData` data
+> structure — no Python required. It reads and writes `.h5ad` files
+> natively and supports conversion to/from `SingleCellExperiment` and
+> `Seurat` objects. New users should install `anndataR` from
+> Bioconductor instead:
+>
+> ``` r
+> BiocManager::install("anndataR")
+> ```
+>
+> Existing users of `anndata` can follow the [migration
+> guide](https://anndata.dynverse.org/articles/migration_to_anndataR.html)
+> for guidance on switching to `anndataR`.
 
-![](https://raw.githubusercontent.com/dynverse/anndata/master/man/readme_files/anndata_for_r.png)
-
-However, using scanpy/anndata in R can be a major hassle. When trying to
-read an h5ad file, R users could approach this problem in one of two
-ways. A) You could read in the file manually (since it’s an H5 file),
-but this involves a lot of manual work and a lot of understanding on how
-the h5ad and H5 file formats work (also, expect major headaches from
-cryptic hdf5r bugs). Or B) interact with scanpy and anndata through
-reticulate, but run into issues converting some of the python objects
-into R.
-
-We recently published
-[`anndata`](https://cran.r-project.org/package=anndata) on CRAN, which
-is a reticulate wrapper for the Python package – with some syntax
-sprinkled on top to make R users feel more at home.
-
-anndata for R is still under active development at
-[github.com/dynverse/anndata](https://github.com/dynverse/anndata). If
-you encounter any issues, feel free to post an issue on GitHub!
+`anndata` for R is a `reticulate` wrapper for the Python `anndata`
+package.
 
 ## Installation
+
+> **Note:** New projects should use
+> [anndataR](https://anndataR.scverse.org) instead. See
+> the [migration
+> guide](https://anndata.dynverse.org/articles/migration_to_anndataR.html).
 
 You can install `anndata` for R from CRAN as follows:
 
@@ -62,16 +63,7 @@ is an example:
 
 ``` r
 library(anndata)
-```
 
-    ## 
-    ## Attaching package: 'anndata'
-
-    ## The following object is masked from 'package:readr':
-    ## 
-    ##     read_csv
-
-``` r
 ad <- read_h5ad("example_formats/pbmc_1k_protein_v3_processed.h5ad")
 
 ad
@@ -84,7 +76,7 @@ ad
     ##     varm: 'PCs'
 
 ``` r
-Matrix::rowMeans(ad$X[1:10,])
+Matrix::rowMeans(ad$X[1:10, ])
 ```
 
     ## AAACCCAAGTGGTCAG-1 AAAGGTATCAACTACG-1 AAAGTCCAGCGTGTCC-1 AACACACTCAAGAGTA-1 
@@ -98,29 +90,17 @@ See `?anndata` for a full list of the functions provided by this
 package. Check out any of the other vignettes by clicking any of the
 links below:
 
--   [Getting
-    started](https://anndata.dynverse.org/articles/getting_started.html)
--   [Demo with
-    scanpy](https://anndata.dynverse.org/articles/scanpy_demo.html)
+- [Getting
+  started](https://anndata.dynverse.org/articles/getting_started.html)
+- [Migrating from anndata to
+  anndataR](https://anndata.dynverse.org/articles/migration_to_anndataR.html)
+- [Demo with
+  scanpy](https://anndata.dynverse.org/articles/scanpy_demo.html)
 
 ## Future work
 
-In some cases, this package may still act more like a Python package
-rather than an R package. Some more helper functions and helper classes
-need to be defined in order to fully encapsulate `AnnData()` objects.
-Examples are `ad$chunked_X(...)`, backed file modes, `read_zarr()` and
-`ad$write_zarr()`.
+This package is no longer under active development as it has been
+superseded by [anndataR](https://anndataR.scverse.org).
+Bug fixes may still be applied, but no new features are planned.
 
 ## References
-
-<div id="refs" class="references csl-bib-body hanging-indent">
-
-<div id="ref-wolf_scanpylargescalesinglecell_2018" class="csl-entry">
-
-Wolf, F Alexander, Philipp Angerer, and Fabian J Theis. 2018. “SCANPY:
-Large-Scale Single-Cell Gene Expression Data Analysis.” *Genome Biology*
-19 (February): 15. <https://doi.org/10.1186/s13059-017-1382-0>.
-
-</div>
-
-</div>
