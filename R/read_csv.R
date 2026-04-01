@@ -1,6 +1,13 @@
 #' @title read_csv
 #'
-#' @description Read `.csv` file.
+#' @description
+#' `r lifecycle::badge('superseded')`
+#' Read `.csv` file.
+#'
+#' @section Superseded:
+#' This function is superseded. Please use [anndataR](https://anndataR.scverse.org)
+#' for reading and working with `AnnData` objects in R.
+#' See `vignette("migration_to_anndataR", package = "anndata")` for migration guidance.
 #'
 #' @details Same as [read_text()] but with default delimiter `','`.
 #'

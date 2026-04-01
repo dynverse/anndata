@@ -1,5 +1,12 @@
 #' Write .loom-formatted hdf5 file.
 #'
+#' `r lifecycle::badge('superseded')`
+#'
+#' @section Superseded:
+#' This function is superseded. Please use [anndataR](https://anndataR.scverse.org)
+#' for reading and working with `AnnData` objects in R.
+#' See `vignette("migration_to_anndataR", package = "anndata")` for migration guidance.
+#'
 #' @param anndata An [AnnData()] object
 #' @param filename The filename.
 #' @param write_obsm_varm Whether or not to also write the varm and obsm.

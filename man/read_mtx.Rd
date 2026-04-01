@@ -12,8 +12,16 @@ read_mtx(filename, dtype = "float32")
 \item{dtype}{Numpy data type.}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 Read \code{.mtx} file.
 }
+\section{Superseded}{
+
+This function is superseded. Please use \href{https://anndataR.scverse.org}{anndataR}
+for reading and working with \code{AnnData} objects in R.
+See \code{vignette("migration_to_anndataR", package = "anndata")} for migration guidance.
+}
+
 \examples{
 \dontrun{
 ad <- read_mtx("matrix.mtx")

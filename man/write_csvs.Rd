@@ -16,8 +16,18 @@ write_csvs(anndata, dirname, skip_data = TRUE, sep = ",")
 \item{sep}{Separator for the data}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
+}
+\details{
 It is not possible to recover the full AnnData from these files. Use \code{\link[=write_h5ad]{write_h5ad()}} for this.
 }
+\section{Superseded}{
+
+This function is superseded. Please use \href{https://anndataR.scverse.org}{anndataR}
+for reading and working with \code{AnnData} objects in R.
+See \code{vignette("migration_to_anndataR", package = "anndata")} for migration guidance.
+}
+
 \examples{
 \dontrun{
 ad <- AnnData(

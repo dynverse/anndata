@@ -12,8 +12,16 @@ read_umi_tools(filename, dtype = "float32")
 \item{dtype}{Numpy data type.}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 Read a gzipped condensed count matrix from umi_tools.
 }
+\section{Superseded}{
+
+This function is superseded. Please use \href{https://anndataR.scverse.org}{anndataR}
+for reading and working with \code{AnnData} objects in R.
+See \code{vignette("migration_to_anndataR", package = "anndata")} for migration guidance.
+}
+
 \examples{
 \dontrun{
 ad <- read_umi_tools("...")

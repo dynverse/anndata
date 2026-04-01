@@ -1,6 +1,13 @@
 #' @title read_mtx
 #'
-#' @description Read `.mtx` file.
+#' @description
+#' `r lifecycle::badge('superseded')`
+#' Read `.mtx` file.
+#'
+#' @section Superseded:
+#' This function is superseded. Please use [anndataR](https://anndataR.scverse.org)
+#' for reading and working with `AnnData` objects in R.
+#' See `vignette("migration_to_anndataR", package = "anndata")` for migration guidance.
 #'
 #' @param filename The filename.
 #' @param dtype Numpy data type.

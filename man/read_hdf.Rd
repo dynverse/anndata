@@ -12,11 +12,19 @@ read_hdf(filename, key)
 \item{key}{Name of dataset in the file.}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 Read \code{.h5} (hdf5) file.
 }
 \details{
 Note: Also looks for fields \code{row_names} and \code{col_names}.
 }
+\section{Superseded}{
+
+This function is superseded. Please use \href{https://anndataR.scverse.org}{anndataR}
+for reading and working with \code{AnnData} objects in R.
+See \code{vignette("migration_to_anndataR", package = "anndata")} for migration guidance.
+}
+
 \examples{
 \dontrun{
 ad <- read_hdf("file.h5")

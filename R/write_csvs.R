@@ -1,6 +1,13 @@
 #' Write annotation to .csv files.
 #'
+#' `r lifecycle::badge('superseded')`
+#'
 #' It is not possible to recover the full AnnData from these files. Use [write_h5ad()] for this.
+#'
+#' @section Superseded:
+#' This function is superseded. Please use [anndataR](https://anndataR.scverse.org)
+#' for reading and working with `AnnData` objects in R.
+#' See `vignette("migration_to_anndataR", package = "anndata")` for migration guidance.
 #'
 #' @param anndata An [AnnData()] object
 #' @param dirname Name of the directory to which to export.

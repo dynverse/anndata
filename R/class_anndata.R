@@ -79,6 +79,12 @@
 #' @param obsp Pairwise annotation of observations, a mutable mapping with array-like values.
 #' @param varp Pairwise annotation of observations, a mutable mapping with array-like values.
 #'
+#' @section Superseded:
+#' `r lifecycle::badge('superseded')`
+#' This function is superseded by [`anndataR::AnnData()`](https://anndataR.scverse.org/reference/AnnData.html)
+#' in the [anndataR](https://anndataR.scverse.org) package.
+#' See `vignette("migration_to_anndataR", package = "anndata")` for migration guidance.
+#'
 #' @export
 #'
 #' @seealso [read_h5ad()] [read_csv()] [read_excel()] [read_hdf()] [read_loom()] [read_mtx()] [read_text()] [read_umi_tools()] [write_h5ad()] [write_csvs()] [write_loom()]

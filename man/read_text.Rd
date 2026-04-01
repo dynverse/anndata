@@ -23,11 +23,19 @@ from enforcing splitting at single white space \code{' '}.}
 \item{dtype}{Numpy data type.}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 Read \code{.txt}, \code{.tab}, \code{.data} (text) file.
 }
 \details{
 Same as \code{\link[=read_csv]{read_csv()}} but with default delimiter \code{NULL}.
 }
+\section{Superseded}{
+
+This function is superseded. Please use \href{https://anndataR.scverse.org}{anndataR}
+for reading and working with \code{AnnData} objects in R.
+See \code{vignette("migration_to_anndataR", package = "anndata")} for migration guidance.
+}
+
 \examples{
 \dontrun{
 ad <- read_text("matrix.tab")

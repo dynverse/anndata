@@ -1,6 +1,13 @@
 #' @title read_hdf
 #'
-#' @description Read `.h5` (hdf5) file.
+#' @description
+#' `r lifecycle::badge('superseded')`
+#' Read `.h5` (hdf5) file.
+#'
+#' @section Superseded:
+#' This function is superseded. Please use [anndataR](https://anndataR.scverse.org)
+#' for reading and working with `AnnData` objects in R.
+#' See `vignette("migration_to_anndataR", package = "anndata")` for migration guidance.
 #'
 #' @details Note: Also looks for fields `row_names` and `col_names`.
 #'

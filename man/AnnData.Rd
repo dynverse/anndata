@@ -113,6 +113,14 @@ AnnDatas always have two inherent dimensions, \code{obs} and \code{var}.
 Additionally, maintaining the dimensionality of the AnnData object allows for
 consistent handling of \code{scipy.sparse} matrices and \code{numpy} arrays.
 }
+\section{Superseded}{
+
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
+This function is superseded by \href{https://anndataR.scverse.org/reference/AnnData.html}{\code{anndataR::AnnData()}}
+in the \href{https://anndataR.scverse.org}{anndataR} package.
+See \code{vignette("migration_to_anndataR", package = "anndata")} for migration guidance.
+}
+
 \examples{
 \dontrun{
 ad <- AnnData(

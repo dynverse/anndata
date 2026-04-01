@@ -21,11 +21,19 @@ read_csv(
 \item{dtype}{Numpy data type.}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 Read \code{.csv} file.
 }
 \details{
 Same as \code{\link[=read_text]{read_text()}} but with default delimiter \code{','}.
 }
+\section{Superseded}{
+
+This function is superseded. Please use \href{https://anndataR.scverse.org}{anndataR}
+for reading and working with \code{AnnData} objects in R.
+See \code{vignette("migration_to_anndataR", package = "anndata")} for migration guidance.
+}
+
 \examples{
 \dontrun{
 ad <- read_csv("matrix.csv")

@@ -39,6 +39,7 @@ concat(
 \item{pairwise}{Whether pairwise elements along the concatenated dimension should be included. This is FALSE by default, since the resulting arrays are often not meaningful.}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 Concatenates AnnData objects along an axis.
 }
 \details{
@@ -48,6 +49,13 @@ warning: This function is marked as experimental for the \code{0.7} release seri
 
 warning: If you use \code{join='outer'} this fills 0s for sparse data when variables are absent in a batch. Use this with care. Dense data is filled with \code{NaN}.
 }
+\section{Superseded}{
+
+This function is superseded. The \href{https://anndataR.scverse.org}{anndataR}
+package supports working with \code{AnnData} objects natively in R without Python.
+See \code{vignette("migration_to_anndataR", package = "anndata")} for migration guidance.
+}
+
 \examples{
 \dontrun{
 # Preparing example objects
