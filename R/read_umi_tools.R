@@ -1,6 +1,13 @@
 #' @title read_umi_tools
 #'
-#' @description Read a gzipped condensed count matrix from umi_tools.
+#' @description
+#' `r lifecycle::badge('superseded')`
+#' Read a gzipped condensed count matrix from umi_tools.
+#'
+#' @section Superseded:
+#' This function is superseded. Please use [anndataR](https://anndataR.scverse.org)
+#' for reading and working with `AnnData` objects in R.
+#' See `vignette("migration_to_anndataR", package = "anndata")` for migration guidance.
 #'
 #' @param filename File name to read from.
 #' @param dtype Numpy data type.

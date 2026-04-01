@@ -39,12 +39,20 @@ read_loom(
 \item{...}{Arguments to loompy.connect}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 Read \code{.loom}-formatted hdf5 file.
 }
 \details{
 This reads the whole file into memory. Beware that you have to explicitly state when you want to read the file as
 sparse data.
 }
+\section{Superseded}{
+
+This function is superseded. Please use \href{https://anndataR.scverse.org}{anndataR}
+for reading and working with \code{AnnData} objects in R.
+See \code{vignette("migration_to_anndataR", package = "anndata")} for migration guidance.
+}
+
 \examples{
 \dontrun{
 ad <- read_loom("dataset.loom")

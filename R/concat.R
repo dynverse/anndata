@@ -1,6 +1,13 @@
 #' @title concat
 #'
-#' @description Concatenates AnnData objects along an axis.
+#' @description
+#' `r lifecycle::badge('superseded')`
+#' Concatenates AnnData objects along an axis.
+#'
+#' @section Superseded:
+#' This function is superseded. The [anndataR](https://anndataR.scverse.org)
+#' package supports working with `AnnData` objects natively in R without Python.
+#' See `vignette("migration_to_anndataR", package = "anndata")` for migration guidance.
 #'
 #' @details See the `concatenation` section in the docs for a more in-depth description.
 #'

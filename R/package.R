@@ -1,16 +1,27 @@
 #' anndata - Annotated Data
 #'
+#' `r lifecycle::badge('superseded')`
+#'
+#' **This package is superseded by [anndataR](https://anndataR.scverse.org).**
+#' `anndataR` provides a pure R implementation of the `AnnData` data structure
+#' with native `h5ad` file reading/writing and conversion to/from
+#' `SingleCellExperiment` and `Seurat` objects. Please consider migrating;
+#' see `vignette("migration_to_anndataR", package = "anndata")` for guidance.
+#'
+#' If you already have Python `anndata` installed, `anndataR`'s `ReticulateAnnData`
+#' backend lets you keep using your existing Python environment while gaining access
+#' to `anndataR`'s unified interface. The native `InMemoryAnnData` and `HDF5AnnData`
+#' backends (no Python required) are preferred for new workflows.
+#'
 #' `anndata` provides a scalable way of keeping track of data
 #' and learned annotations, and can be used to read from and write to the h5ad
 #' file format. `AnnData()` stores a data matrix `X` together with annotations
 #' of observations `obs` (`obsm`, `obsp`), variables `var` (`varm`, `varp`),
 #' and unstructured annotations `uns`.
 #'
-#' This package is, in essense, an R wrapper for the similarly named Python package
+#' This package is an R wrapper for the similarly named Python package
 #' [`anndata`](https://anndata.readthedocs.io/en/latest/), with some added functionality
 #' to support more R-like syntax.
-#' The version number of the anndata R package is synced
-#' with the version number of the python version.
 #'
 #' Check out `?anndata` for a full list of the functions provided by this package.
 #'

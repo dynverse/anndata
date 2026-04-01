@@ -1,7 +1,15 @@
 #' Write .h5ad-formatted hdf5 file.
 #'
+#' `r lifecycle::badge('superseded')`
+#'
 #' Generally, if you have sparse data that are stored as a dense matrix, you can
 #' dramatically improve performance and reduce disk space by converting to a csr_matrix:
+#'
+#' @section Superseded:
+#' This function is superseded by [`anndataR::write_h5ad()`](https://anndataR.scverse.org/reference/write_h5ad.html)
+#' in the [anndataR](https://anndataR.scverse.org) package,
+#' which writes `.h5ad` files natively without requiring Python.
+#' See `vignette("migration_to_anndataR", package = "anndata")` for migration guidance.
 #'
 #' @param anndata An [AnnData()] object
 #' @param filename Filename of data file. Defaults to backing file.

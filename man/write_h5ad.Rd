@@ -25,9 +25,20 @@ Options are \code{"gzip"}, \code{"lzf"} or \code{NULL}.}
 \item{as_dense}{Sparse in AnnData object to write as dense. Currently only supports \code{"X"} and \code{"raw/X"}.}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
+}
+\details{
 Generally, if you have sparse data that are stored as a dense matrix, you can
 dramatically improve performance and reduce disk space by converting to a csr_matrix:
 }
+\section{Superseded}{
+
+This function is superseded by \href{https://anndataR.scverse.org/reference/write_h5ad.html}{\code{anndataR::write_h5ad()}}
+in the \href{https://anndataR.scverse.org}{anndataR} package,
+which writes \code{.h5ad} files natively without requiring Python.
+See \code{vignette("migration_to_anndataR", package = "anndata")} for migration guidance.
+}
+
 \examples{
 \dontrun{
 ad <- AnnData(

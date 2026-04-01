@@ -1,6 +1,13 @@
 #' @title read_text
 #'
-#' @description Read `.txt`, `.tab`, `.data` (text) file.
+#' @description
+#' `r lifecycle::badge('superseded')`
+#' Read `.txt`, `.tab`, `.data` (text) file.
+#'
+#' @section Superseded:
+#' This function is superseded. Please use [anndataR](https://anndataR.scverse.org)
+#' for reading and working with `AnnData` objects in R.
+#' See `vignette("migration_to_anndataR", package = "anndata")` for migration guidance.
 #'
 #' @details Same as [read_csv()] but with default delimiter `NULL`.
 #'

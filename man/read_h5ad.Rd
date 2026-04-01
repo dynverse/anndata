@@ -12,8 +12,17 @@ read_h5ad(filename, backed = NULL)
 \item{backed}{If \code{'r'}, load \code{~anndata.AnnData} in \code{backed} mode instead of fully loading it into memory (\code{memory} mode). If you want to modify backed attributes of the AnnData object, you need to choose \code{'r+'}.}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 Read \code{.h5ad}-formatted hdf5 file.
 }
+\section{Superseded}{
+
+This function is superseded by \href{https://anndataR.scverse.org/reference/read_h5ad.html}{\code{anndataR::read_h5ad()}}
+in the \href{https://anndataR.scverse.org}{anndataR} package,
+which reads \code{.h5ad} files natively without requiring Python.
+See \code{vignette("migration_to_anndataR", package = "anndata")} for migration guidance.
+}
+
 \examples{
 \dontrun{
 ad <- read_h5ad("example_formats/pbmc_1k_protein_v3_processed.h5ad")

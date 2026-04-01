@@ -14,8 +14,15 @@ write_loom(anndata, filename, write_obsm_varm = FALSE)
 \item{write_obsm_varm}{Whether or not to also write the varm and obsm.}
 }
 \description{
-Write .loom-formatted hdf5 file.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 }
+\section{Superseded}{
+
+This function is superseded. Please use \href{https://anndataR.scverse.org}{anndataR}
+for reading and working with \code{AnnData} objects in R.
+See \code{vignette("migration_to_anndataR", package = "anndata")} for migration guidance.
+}
+
 \examples{
 \dontrun{
 ad <- AnnData(

@@ -1,7 +1,7 @@
 Type: Package
 Package: anndata
-Title: 'anndata' for R
-Version: 0.8.0
+Title: 'anndata' for R (Superseded)
+Version: 0.9.0
 Authors@R:
     c(person(given = "Philipp",
              family = "Angerer",
@@ -29,6 +29,10 @@ Authors@R:
 Description: A 'reticulate' wrapper for the Python package 'anndata'.
     Provides a scalable way of keeping track of data and learned
     annotations.  Used to read from and write to the h5ad file format.
+    This package is superseded by 'anndataR'
+    <https://anndataR.scverse.org>, which provides native R backends for
+    the 'AnnData' data structure, along with conversion to/from
+    'SingleCellExperiment' and 'Seurat' objects.
 License: MIT + file LICENSE
 URL: https://anndata.dynverse.org, https://github.com/dynverse/anndata
 BugReports: https://github.com/dynverse/anndata/issues
@@ -49,7 +53,7 @@ Suggests:
     rmarkdown
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Config/reticulate:
   list(
     packages = list(

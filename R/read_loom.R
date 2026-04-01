@@ -1,6 +1,13 @@
 #' @title read_loom
 #'
-#' @description Read `.loom`-formatted hdf5 file.
+#' @description
+#' `r lifecycle::badge('superseded')`
+#' Read `.loom`-formatted hdf5 file.
+#'
+#' @section Superseded:
+#' This function is superseded. Please use [anndataR](https://anndataR.scverse.org)
+#' for reading and working with `AnnData` objects in R.
+#' See `vignette("migration_to_anndataR", package = "anndata")` for migration guidance.
 #'
 #' @details This reads the whole file into memory. Beware that you have to explicitly state when you want to read the file as
 #' sparse data.

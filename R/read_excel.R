@@ -1,6 +1,13 @@
 #' @title read_excel
 #'
-#' @description Read `.xlsx` (Excel) file.
+#' @description
+#' `r lifecycle::badge('superseded')`
+#' Read `.xlsx` (Excel) file.
+#'
+#' @section Superseded:
+#' This function is superseded. Please use [anndataR](https://anndataR.scverse.org)
+#' for reading and working with `AnnData` objects in R.
+#' See `vignette("migration_to_anndataR", package = "anndata")` for migration guidance.
 #'
 #' @details Assumes that the first columns stores the row names and the first row the
 #' column names.

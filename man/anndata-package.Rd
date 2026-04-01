@@ -6,18 +6,29 @@
 \alias{anndata}
 \title{anndata - Annotated Data}
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
+}
+\details{
+\strong{This package is superseded by \href{https://anndataR.scverse.org}{anndataR}.}
+\code{anndataR} provides a pure R implementation of the \code{AnnData} data structure
+with native \code{h5ad} file reading/writing and conversion to/from
+\code{SingleCellExperiment} and \code{Seurat} objects. Please consider migrating;
+see \code{vignette("migration_to_anndataR", package = "anndata")} for guidance.
+
+If you already have Python \code{anndata} installed, \code{anndataR}'s \code{ReticulateAnnData}
+backend lets you keep using your existing Python environment while gaining access
+to \code{anndataR}'s unified interface. The native \code{InMemoryAnnData} and \code{HDF5AnnData}
+backends (no Python required) are preferred for new workflows.
+
 \code{anndata} provides a scalable way of keeping track of data
 and learned annotations, and can be used to read from and write to the h5ad
 file format. \code{AnnData()} stores a data matrix \code{X} together with annotations
 of observations \code{obs} (\code{obsm}, \code{obsp}), variables \code{var} (\code{varm}, \code{varp}),
 and unstructured annotations \code{uns}.
-}
-\details{
-This package is, in essense, an R wrapper for the similarly named Python package
+
+This package is an R wrapper for the similarly named Python package
 \href{https://anndata.readthedocs.io/en/latest/}{\code{anndata}}, with some added functionality
 to support more R-like syntax.
-The version number of the anndata R package is synced
-with the version number of the python version.
 
 Check out \code{?anndata} for a full list of the functions provided by this package.
 }

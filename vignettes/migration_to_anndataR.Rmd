@@ -1,0 +1,178 @@
+---
+title: "Migrating from anndata to anndataR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Migrating from anndata to anndataR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+```{r check_on_cran, message=FALSE, warning=FALSE, echo=FALSE}
+on_cran <- !identical(Sys.getenv("NOT_CRAN"), "true")
+
+if (on_cran) {
+  knitr::opts_chunk$set(eval = FALSE)
+  knitr::asis_output(paste0(
+    "<span style=\"color: red;\">**Note:** The outputs of this vignette are not rendered on CRAN due to package size limitations. ",
+    "Please check the [Migration to anndataR](https://anndata.dynverse.org/articles/migration_to_anndataR.html) ",
+    "vignette in the package documentation.</span>"
+  ))
+}
+```
+
+## Why migrate?
+
+The `anndata` R package (this package) is superseded by
+[anndataR](https://anndataR.scverse.org), available on Bioconductor.
+
+| Feature | `anndata` (CRAN) | `anndataR` (Bioconductor) |
+|---|---|---|
+| **Python dependency** | Required | Optional (only needed for `ReticulateAnnData`) |
+| **h5ad I/O** | Via Python | Native R via `rhdf5` (preferred), or via Python reticulate |
+| **In-memory backend** | Python-backed | Native R (`InMemoryAnnData`) |
+| **HDF5-backed backend** | Python-backed | Native R (`HDF5AnnData`) |
+| **Reticulate-backed backend** | Always | Optional (`ReticulateAnnData`) |
+| **Seurat interop** | Not supported | `as_Seurat()` / `as_AnnData()` |
+| **SingleCellExperiment interop** | Not supported | `as_SingleCellExperiment()` / `as_AnnData()` |
+| **Distribution** | CRAN | Bioconductor |
+
+The preferred backends (`InMemoryAnnData`, `HDF5AnnData`) require no Python.
+For users who already have Python `anndata` installed, the `ReticulateAnnData`
+backend offers a low-friction starting point; see
+[below](#using-reticulateanndata-as-a-stepping-stone).
+
+## Installation
+
+```{r install}
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager")
+}
+BiocManager::install("anndataR")
+
+# Required for native h5ad reading/writing:
+BiocManager::install("rhdf5")
+
+# Optional: SingleCellExperiment conversion
+BiocManager::install("SingleCellExperiment")
+
+# Optional: Seurat conversion
+install.packages("SeuratObject")
+```
+
+## Side-by-side migration guide
+
+### Creating an AnnData object
+
+The `AnnData()` constructor is identical in both packages. The only difference
+is that `anndataR` returns an `InMemoryAnnData` (a pure-R object) whereas
+`anndata` returned an `AnnDataR6` wrapping a Python object.
+
+```{r create}
+library(anndataR)
+
+ad <- AnnData(
+  X = matrix(1:6, nrow = 2),
+  obs = data.frame(group = c("a", "b"), row.names = c("s1", "s2")),
+  var = data.frame(type = c(1L, 2L, 3L), row.names = c("var1", "var2", "var3")),
+  layers = list(spliced = matrix(4:9, nrow = 2)),
+  uns = list(a = 1)
+)
+```
+
+### Reading and writing h5ad files
+
+The function signatures are identical. `anndataR` reads natively without Python.
+
+```{r read-write}
+# Reading
+ad <- read_h5ad("path/to/file.h5ad")                               # InMemoryAnnData (default)
+ad <- read_h5ad("path/to/file.h5ad", as = "HDF5AnnData")           # disk-backed, low memory
+sce <- read_h5ad("path/to/file.h5ad", as = "SingleCellExperiment")
+obj <- read_h5ad("path/to/file.h5ad", as = "Seurat")
+
+# Writing (works identically to anndata)
+write_h5ad(ad, "path/to/output.h5ad")
+```
+
+### Slot access and subsetting
+
+Both packages use the same `$` notation and bracket subsetting syntax.
+
+```{r slots}
+ad$X; ad$obs; ad$var; ad$obsm; ad$varm; ad$obsp; ad$varp; ad$layers; ad$uns
+
+# Subsetting returns an AnnDataView (native R) rather than a Python-backed view
+subset <- ad[1:5, ]
+subset <- ad[, c("var1", "var2")]
+subset <- ad[ad$obs$group == "a", ]
+concrete <- subset$as_InMemoryAnnData()  # materialise to a concrete object
+```
+
+### Interoperability (new in anndataR)
+
+```{r interop}
+# AnnData <-> SingleCellExperiment
+sce <- ad$as_SingleCellExperiment()
+ad  <- as_AnnData(sce)
+
+# AnnData <-> Seurat
+obj <- ad$as_Seurat()
+ad  <- as_AnnData(obj)
+```
+
+### Using ReticulateAnnData as a stepping stone
+
+`anndataR`'s `ReticulateAnnData` backend wraps a Python `anndata.AnnData` object
+via reticulate, implementing the same `AbstractAnnData` interface as the native
+backends. This is the closest equivalent to the old `anndata` R package: you can
+call Python tools (e.g. `scanpy`) on the object while also using all `anndataR`
+slot accessors from R.
+
+```{r reticulate}
+library(reticulate)
+library(anndataR)
+
+# Make scanpy available in the same Python environment that reticulate uses
+py_require("scanpy")
+sc <- import("scanpy")
+
+# Read data with scanpy
+# Note: anndataR will automatically wrap the resulting Python object in a ReticulateAnnData
+url <- "https://cf.10xgenomics.com/samples/cell-exp/6.0.0/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma/SC3_v3_NextGem_DI_CellPlex_CSP_DTC_Sorted_30K_Squamous_Cell_Carcinoma_count_sample_feature_bc_matrix.h5"
+ad <- sc$read_10x_h5("dataset.h5", backup_url = url)
+
+# Use anndataR slot accessors from R
+dim(ad)
+head(ad$obs)
+rowMeans(ad$X[1:10, ])
+
+# Pass back to scanpy for preprocessing
+# Note: anndataR automatically unwraps the Python object when calling scanpy functions.
+sc$pp$filter_cells(ad, min_genes = 200L)
+sc$pp$filter_genes(ad, min_cells = 3L)
+sc$pp$normalize_per_cell(ad)
+sc$pp$log1p(ad)
+
+# Write from R when done
+write_h5ad(ad, "path/to/output.h5ad")
+
+# Migrate to a different anndataR backend
+ad_mem <- ad$as_InMemoryAnnData()
+# ad_hdf5 <- ad$as_HDF5AnnData(path = "path/to/disk_backed.h5ad")
+# sce <- ad$as_SingleCellExperiment()
+# seu <- ad$as_Seurat()
+```
+
+## Getting help with anndataR
+
+- Documentation: <https://anndataR.scverse.org>
+- Vignettes: `browseVignettes("anndataR")`
+- Issue tracker: <https://github.com/scverse/anndataR/issues>
