@@ -30,9 +30,9 @@ Description: A 'reticulate' wrapper for the Python package 'anndata'.
     Provides a scalable way of keeping track of data and learned
     annotations.  Used to read from and write to the h5ad file format.
     This package is superseded by 'anndataR'
-    <https://anndataR.scverse.org>, which provides a pure R
-    implementation of the 'AnnData' data structure without requiring Python,
-    along with conversion to/from 'SingleCellExperiment' and 'Seurat' objects.
+    <https://anndataR.scverse.org>, which provides native R backends for
+    the 'AnnData' data structure, along with conversion to/from
+    'SingleCellExperiment' and 'Seurat' objects.
 License: MIT + file LICENSE
 URL: https://anndata.dynverse.org, https://github.com/dynverse/anndata
 BugReports: https://github.com/dynverse/anndata/issues
