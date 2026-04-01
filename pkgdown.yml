@@ -5,7 +5,7 @@ articles:
   getting_started: getting_started.html
   migration_to_anndataR: migration_to_anndataR.html
   scanpy_demo: scanpy_demo.html
-last_built: 2026-04-01T13:43Z
+last_built: 2026-04-01T13:56Z
 urls:
   reference: https://anndata.dynverse.org/reference
   article: https://anndata.dynverse.org/articles

@@ -19,7 +19,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/dynverse/anndata/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/dynverse/anndata/blob/0.9.0/DESCRIPTION)
 
 Cannoodt R (2026). *anndata: 'anndata' for R (Superseded)*. R package
 version 0.9.0, <https://anndata.dynverse.org>.
