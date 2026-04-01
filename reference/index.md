@@ -4,7 +4,7 @@
 
 - [`anndata-package`](https://anndata.dynverse.org/reference/anndata-package.md)
   [`anndata`](https://anndata.dynverse.org/reference/anndata-package.md)
-  : anndata - Annotated Data
+  **\[superseded\]** : anndata - Annotated Data
 
 ## Creating an AnnData object
 
@@ -13,40 +13,40 @@
 
 ## Concatenating two or more AnnData objects
 
-- [`concat()`](https://anndata.dynverse.org/reference/concat.md) :
-  concat
+- [`concat()`](https://anndata.dynverse.org/reference/concat.md)
+  **\[superseded\]** : concat
 
 ## Reading an AnnData object from a file
 
-- [`read_csv()`](https://anndata.dynverse.org/reference/read_csv.md) :
-  read_csv
+- [`read_csv()`](https://anndata.dynverse.org/reference/read_csv.md)
+  **\[superseded\]** : read_csv
 - [`read_excel()`](https://anndata.dynverse.org/reference/read_excel.md)
-  : read_excel
-- [`read_h5ad()`](https://anndata.dynverse.org/reference/read_h5ad.md) :
-  read_h5ad
-- [`read_hdf()`](https://anndata.dynverse.org/reference/read_hdf.md) :
-  read_hdf
-- [`read_loom()`](https://anndata.dynverse.org/reference/read_loom.md) :
-  read_loom
-- [`read_mtx()`](https://anndata.dynverse.org/reference/read_mtx.md) :
-  read_mtx
-- [`read_text()`](https://anndata.dynverse.org/reference/read_text.md) :
-  read_text
+  **\[superseded\]** : read_excel
+- [`read_h5ad()`](https://anndata.dynverse.org/reference/read_h5ad.md)
+  **\[superseded\]** : read_h5ad
+- [`read_hdf()`](https://anndata.dynverse.org/reference/read_hdf.md)
+  **\[superseded\]** : read_hdf
+- [`read_loom()`](https://anndata.dynverse.org/reference/read_loom.md)
+  **\[superseded\]** : read_loom
+- [`read_mtx()`](https://anndata.dynverse.org/reference/read_mtx.md)
+  **\[superseded\]** : read_mtx
+- [`read_text()`](https://anndata.dynverse.org/reference/read_text.md)
+  **\[superseded\]** : read_text
 - [`read_umi_tools()`](https://anndata.dynverse.org/reference/read_umi_tools.md)
-  : read_umi_tools
-- [`read_zarr()`](https://anndata.dynverse.org/reference/read_zarr.md) :
-  Read from a hierarchical Zarr array store.
+  **\[superseded\]** : read_umi_tools
+- [`read_zarr()`](https://anndata.dynverse.org/reference/read_zarr.md)
+  **\[superseded\]** : Read from a hierarchical Zarr array store.
 
 ## Writing an AnnData object to a file
 
 - [`write_csvs()`](https://anndata.dynverse.org/reference/write_csvs.md)
-  : Write annotation to .csv files.
+  **\[superseded\]** : Write annotation to .csv files.
 - [`write_h5ad()`](https://anndata.dynverse.org/reference/write_h5ad.md)
-  : Write .h5ad-formatted hdf5 file.
+  **\[superseded\]** : Write .h5ad-formatted hdf5 file.
 - [`write_loom()`](https://anndata.dynverse.org/reference/write_loom.md)
-  : Write .loom-formatted hdf5 file.
+  **\[superseded\]** : Write .loom-formatted hdf5 file.
 - [`write_zarr()`](https://anndata.dynverse.org/reference/write_zarr.md)
-  : Write a hierarchical Zarr array store.
+  **\[superseded\]** : Write a hierarchical Zarr array store.
 
 ## Installer
 

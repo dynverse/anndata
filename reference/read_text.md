@@ -1,6 +1,6 @@
 # read_text
 
-Read `.txt`, `.tab`, `.data` (text) file.
+**\[superseded\]** Read `.txt`, `.tab`, `.data` (text) file.
 
 ## Usage
 
@@ -38,6 +38,14 @@ read_text(
 Same as
 [`read_csv()`](https://anndata.dynverse.org/reference/read_csv.md) but
 with default delimiter `NULL`.
+
+## Superseded
+
+This function is superseded. Please use
+[anndataR](https://anndataR.scverse.org) for reading and working with
+`AnnData` objects in R. See
+[`vignette("migration_to_anndataR", package = "anndata")`](https://anndata.dynverse.org/articles/migration_to_anndataR.md)
+for migration guidance.
 
 ## Examples
 

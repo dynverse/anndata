@@ -156,6 +156,14 @@ dimensions, `obs` and `var`. Additionally, maintaining the
 dimensionality of the AnnData object allows for consistent handling of
 `scipy.sparse` matrices and `numpy` arrays.
 
+## Superseded
+
+**\[superseded\]** This function is superseded by
+[`anndataR::AnnData()`](https://anndataR.scverse.org/reference/AnnData.html)
+in the [anndataR](https://anndataR.scverse.org) package. See
+[`vignette("migration_to_anndataR", package = "anndata")`](https://anndata.dynverse.org/articles/migration_to_anndataR.md)
+for migration guidance.
+
 ## See also
 
 [`read_h5ad()`](https://anndata.dynverse.org/reference/read_h5ad.md)

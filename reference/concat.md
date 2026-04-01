@@ -1,6 +1,6 @@
 # concat
 
-Concatenates AnnData objects along an axis.
+**\[superseded\]** Concatenates AnnData objects along an axis.
 
 ## Usage
 
@@ -92,6 +92,14 @@ releases.
 warning: If you use `join='outer'` this fills 0s for sparse data when
 variables are absent in a batch. Use this with care. Dense data is
 filled with `NaN`.
+
+## Superseded
+
+This function is superseded. The
+[anndataR](https://anndataR.scverse.org) package supports working with
+`AnnData` objects natively in R without Python. See
+[`vignette("migration_to_anndataR", package = "anndata")`](https://anndata.dynverse.org/articles/migration_to_anndataR.md)
+for migration guidance.
 
 ## Examples
 

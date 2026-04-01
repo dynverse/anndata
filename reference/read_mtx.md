@@ -1,6 +1,6 @@
 # read_mtx
 
-Read `.mtx` file.
+**\[superseded\]** Read `.mtx` file.
 
 ## Usage
 
@@ -17,6 +17,14 @@ read_mtx(filename, dtype = "float32")
 - dtype:
 
   Numpy data type.
+
+## Superseded
+
+This function is superseded. Please use
+[anndataR](https://anndataR.scverse.org) for reading and working with
+`AnnData` objects in R. See
+[`vignette("migration_to_anndataR", package = "anndata")`](https://anndata.dynverse.org/articles/migration_to_anndataR.md)
+for migration guidance.
 
 ## Examples
 

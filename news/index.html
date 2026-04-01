@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">anndata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,6 +25,7 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/getting_started.html">Getting started</a></li>
+    <li><a class="dropdown-item" href="../articles/migration_to_anndataR.html">Migrating from anndata to anndataR</a></li>
     <li><a class="dropdown-item" href="../articles/scanpy_demo.html">Demo with scanpy</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -40,9 +41,13 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/dynverse/anndata/blob/0.8.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/dynverse/anndata/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.9.0" id="anndata-090">anndata 0.9.0<a class="anchor" aria-label="anchor" href="#anndata-090"></a></h2>
+<ul><li>SUPERSEDED: This package is superseded by <code>anndataR</code> on Bioconductor (<a href="https://anndataR.scverse.org" class="external-link uri">https://anndataR.scverse.org</a>). <code>anndataR</code> provides a pure R implementation of the <code>AnnData</code> data structure without requiring Python, along with native <code>.h5ad</code> file reading/writing and conversion to/from <code>SingleCellExperiment</code> and <code>Seurat</code> objects. A migration guide is available at <code><a href="../articles/migration_to_anndataR.html">vignette("migration_to_anndataR", package = "anndata")</a></code>.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.8.0" id="anndata-080">anndata 0.8.0<a class="anchor" aria-label="anchor" href="#anndata-080"></a></h2><p class="text-muted">CRAN release: 2025-05-27</p>
 <ul><li><p>FUNCTIONALITY: Added support for <code><a href="../reference/read_zarr.html">read_zarr()</a></code> and <code><a href="../reference/write_zarr.html">write_zarr()</a></code> (PR <a href="https://github.com/dynverse/anndata/issues/33" class="external-link">#33</a>).</p></li>

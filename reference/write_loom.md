@@ -1,6 +1,6 @@
 # Write .loom-formatted hdf5 file.
 
-Write .loom-formatted hdf5 file.
+**\[superseded\]**
 
 ## Usage
 
@@ -22,6 +22,14 @@ write_loom(anndata, filename, write_obsm_varm = FALSE)
 - write_obsm_varm:
 
   Whether or not to also write the varm and obsm.
+
+## Superseded
+
+This function is superseded. Please use
+[anndataR](https://anndataR.scverse.org) for reading and working with
+`AnnData` objects in R. See
+[`vignette("migration_to_anndataR", package = "anndata")`](https://anndata.dynverse.org/articles/migration_to_anndataR.md)
+for migration guidance.
 
 ## Examples
 

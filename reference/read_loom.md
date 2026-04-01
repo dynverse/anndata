@@ -1,6 +1,6 @@
 # read_loom
 
-Read `.loom`-formatted hdf5 file.
+**\[superseded\]** Read `.loom`-formatted hdf5 file.
 
 ## Usage
 
@@ -66,6 +66,14 @@ read_loom(
 
 This reads the whole file into memory. Beware that you have to
 explicitly state when you want to read the file as sparse data.
+
+## Superseded
+
+This function is superseded. Please use
+[anndataR](https://anndataR.scverse.org) for reading and working with
+`AnnData` objects in R. See
+[`vignette("migration_to_anndataR", package = "anndata")`](https://anndata.dynverse.org/articles/migration_to_anndataR.md)
+for migration guidance.
 
 ## Examples
 

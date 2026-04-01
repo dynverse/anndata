@@ -1,5 +1,15 @@
 # Changelog
 
+## anndata 0.9.0
+
+- SUPERSEDED: This package is superseded by `anndataR` on Bioconductor
+  (<https://anndataR.scverse.org>). `anndataR` provides a pure R
+  implementation of the `AnnData` data structure without requiring
+  Python, along with native `.h5ad` file reading/writing and conversion
+  to/from `SingleCellExperiment` and `Seurat` objects. A migration guide
+  is available at
+  [`vignette("migration_to_anndataR", package = "anndata")`](https://anndata.dynverse.org/articles/migration_to_anndataR.md).
+
 ## anndata 0.8.0
 
 CRAN release: 2025-05-27

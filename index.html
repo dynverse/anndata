@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>anndata for R • anndata</title>
+<title>anndata for R (Superseded) • anndata</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="anndata for R">
-<meta name="description" content="A reticulate wrapper for the Python package anndata. Provides a scalable way of keeping track of data and learned annotations. Used to read from and write to the h5ad file format.">
-<meta property="og:description" content="A reticulate wrapper for the Python package anndata. Provides a scalable way of keeping track of data and learned annotations. Used to read from and write to the h5ad file format.">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="anndata for R (Superseded)">
+<meta name="description" content="A reticulate wrapper for the Python package anndata. Provides a scalable way of keeping track of data and learned annotations. Used to read from and write to the h5ad file format. This package is superseded by anndataR &lt;https://anndataR.scverse.org&gt;, which provides native R backends for the AnnData data structure, along with conversion to/from SingleCellExperiment and Seurat objects.">
+<meta property="og:description" content="A reticulate wrapper for the Python package anndata. Provides a scalable way of keeping track of data and learned annotations. Used to read from and write to the h5ad file format. This package is superseded by anndataR &lt;https://anndataR.scverse.org&gt;, which provides native R backends for the AnnData data structure, along with conversion to/from SingleCellExperiment and Seurat objects.">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XSL8ZZLBFK"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">anndata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,6 +43,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="articles/getting_started.html">Getting started</a></li>
+    <li><a class="dropdown-item" href="articles/migration_to_anndataR.html">Migrating from anndata to anndataR</a></li>
     <li><a class="dropdown-item" href="articles/scanpy_demo.html">Demo with scanpy</a></li>
   </ul>
 </li>
@@ -65,20 +66,26 @@
 </h1></div>
 <!-- badges: start -->
 
-<p><a href="https://anndata.readthedocs.io/en/latest/" class="external-link"><code>anndata</code></a> is a commonly used Python package for keeping track of data and learned annotations, and can be used to read from and write to the h5ad file format. It is also the main data format used in the scanpy python package (Wolf, Angerer, and Theis 2018).</p>
-<p><img src="https://raw.githubusercontent.com/dynverse/anndata/master/man/readme_files/anndata_for_r.png"></p>
-<p>However, using scanpy/anndata in R can be a major hassle. When trying to read an h5ad file, R users could approach this problem in one of two ways. A) You could read in the file manually (since it’s an H5 file), but this involves a lot of manual work and a lot of understanding on how the h5ad and H5 file formats work (also, expect major headaches from cryptic hdf5r bugs). Or B) interact with scanpy and anndata through reticulate, but run into issues converting some of the python objects into R.</p>
-<p>We recently published <a href="https://cran.r-project.org/package=anndata" class="external-link"><code>anndata</code></a> on CRAN, which is a reticulate wrapper for the Python package – with some syntax sprinkled on top to make R users feel more at home.</p>
-<p>anndata for R is still under active development at <a href="https://github.com/dynverse/anndata" class="external-link">github.com/dynverse/anndata</a>. If you encounter any issues, feel free to post an issue on GitHub!</p>
+<blockquote>
+<p><strong>⚠️ This package is superseded by <a href="https://anndataR.scverse.org" class="external-link">anndataR</a>.</strong></p>
+<p><code>anndataR</code> provides a pure R implementation of the <code>AnnData</code> data structure with no Python required. It reads and writes <code>.h5ad</code> files natively and supports conversion to/from <code>SingleCellExperiment</code> and <code>Seurat</code> objects. New users should install <code>anndataR</code> from Bioconductor instead:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="st">"anndataR"</span><span class="op">)</span></span></code></pre></div>
+<p>Existing users of <code>anndata</code> can follow the <a href="https://anndata.dynverse.org/articles/migration_to_anndataR.html">migration guide</a> for guidance on switching to <code>anndataR</code>.</p>
+</blockquote>
+<p><code>anndata</code> for R is a <code>reticulate</code> wrapper for the Python <code>anndata</code> package.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
+<blockquote>
+<p><strong>Note:</strong> New projects should use <a href="https://anndataR.scverse.org" class="external-link">anndataR</a> instead. See the <a href="https://anndata.dynverse.org/articles/migration_to_anndataR.html">migration guide</a>.</p>
+</blockquote>
 <p>You can install <code>anndata</code> for R from CRAN as follows:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"anndata"</span><span class="op">)</span></span></code></pre></div>
 <p>Normally, reticulate should take care of installing Miniconda and the Python anndata.</p>
 <p>If not, try running:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/install_miniconda.html" class="external-link">install_miniconda</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">anndata</span><span class="fu">::</span><span class="fu"><a href="reference/install_anndata.html">install_anndata</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -86,50 +93,40 @@
 <h2 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
 </h2>
 <p>The API of anndata for R is very similar to its Python counterpart. Here is an example:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://anndata.dynverse.org">anndata</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="do">## Attaching package: 'anndata'</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="do">## The following object is masked from 'package:readr':</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="do">##     read_csv</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ad</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_h5ad.html">read_h5ad</a></span><span class="op">(</span><span class="st">"example_formats/pbmc_1k_protein_v3_processed.h5ad"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://anndata.dynverse.org">anndata</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ad</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_h5ad.html">read_h5ad</a></span><span class="op">(</span><span class="st">"example_formats/pbmc_1k_protein_v3_processed.h5ad"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ad</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="do">## AnnData object with n_obs × n_vars = 713 × 33538</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="do">##     var: 'gene_ids', 'feature_types', 'genome', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="do">##     uns: 'hvgParameters', 'normalizationParameters', 'pca', 'pcaParameters'</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="do">##     obsm: 'X_pca'</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="do">##     varm: 'PCs'</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">Matrix</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums-methods.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">## AAACCCAAGTGGTCAG-1 AAAGGTATCAACTACG-1 AAAGTCCAGCGTGTCC-1 AACACACTCAAGAGTA-1 </span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="do">##         0.06499579         0.06385104         0.06102355         0.06739055 </span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="do">## AACACACTCGACGAGA-1 AACAGGGCAGGAGGTT-1 AACAGGGCAGTGTATC-1 AACAGGGTCAGAATAG-1 </span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="do">##         0.08891241         0.08648681         0.09318970         0.09140243 </span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="do">## AACCTGAAGATGGTCG-1 AACGGGATCGTTATCT-1 </span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="do">##         0.06664118         0.07866523</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="do">## AnnData object with n_obs × n_vars = 713 × 33538</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="do">##     var: 'gene_ids', 'feature_types', 'genome', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="do">##     uns: 'hvgParameters', 'normalizationParameters', 'pca', 'pcaParameters'</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="do">##     obsm: 'X_pca'</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="do">##     varm: 'PCs'</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">Matrix</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums-methods.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">ad</span><span class="op">$</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="do">## AAACCCAAGTGGTCAG-1 AAAGGTATCAACTACG-1 AAAGTCCAGCGTGTCC-1 AACACACTCAAGAGTA-1 </span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="do">##         0.06499579         0.06385104         0.06102355         0.06739055 </span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="do">## AACACACTCGACGAGA-1 AACAGGGCAGGAGGTT-1 AACAGGGCAGTGTATC-1 AACAGGGTCAGAATAG-1 </span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="do">##         0.08891241         0.08648681         0.09318970         0.09140243 </span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="do">## AACCTGAAGATGGTCG-1 AACGGGATCGTTATCT-1 </span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="do">##         0.06664118         0.07866523</span></span></code></pre></div>
 <p>See <code><a href="reference/anndata-package.html">?anndata</a></code> for a full list of the functions provided by this package. Check out any of the other vignettes by clicking any of the links below:</p>
 <ul>
 <li><a href="https://anndata.dynverse.org/articles/getting_started.html">Getting started</a></li>
+<li><a href="https://anndata.dynverse.org/articles/migration_to_anndataR.html">Migrating from anndata to anndataR</a></li>
 <li><a href="https://anndata.dynverse.org/articles/scanpy_demo.html">Demo with scanpy</a></li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="future-work">Future work<a class="anchor" aria-label="anchor" href="#future-work"></a>
 </h2>
-<p>In some cases, this package may still act more like a Python package rather than an R package. Some more helper functions and helper classes need to be defined in order to fully encapsulate <code><a href="reference/AnnData.html">AnnData()</a></code> objects. Examples are <code>ad$chunked_X(...)</code>, backed file modes, <code><a href="reference/read_zarr.html">read_zarr()</a></code> and <code>ad$write_zarr()</code>.</p>
+<p>This package is no longer under active development as it has been superseded by <a href="https://anndataR.scverse.org" class="external-link">anndataR</a>. Bug fixes may still be applied, but no new features are planned.</p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-wolf_scanpylargescalesinglecell_2018" class="csl-entry">
-Wolf, F Alexander, Philipp Angerer, and Fabian J Theis. 2018. “SCANPY: Large-Scale Single-Cell Gene Expression Data Analysis.” <em>Genome Biology</em> 19 (February): 15. <a href="https://doi.org/10.1186/s13059-017-1382-0" class="external-link uri">https://doi.org/10.1186/s13059-017-1382-0</a>.
-</div>
-</div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -139,6 +136,7 @@ Wolf, F Alexander, Philipp Angerer, and Fabian J Theis. 2018. “SCANPY: Large-S
 <li><a href="https://github.com/dynverse/anndata/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/dynverse/anndata/issues" class="external-link">Report a bug</a></li>
 <li><a href="https://anndata.readthedocs.io" class="external-link">Python package</a></li>
+<li><a href="https://anndataR.scverse.org" class="external-link">Superseded by anndataR</a></li>
 </ul>
 </div>
 
@@ -177,8 +175,9 @@ Wolf, F Alexander, Philipp Angerer, and Fabian J Theis. 2018. “SCANPY: Large-S
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=anndata" class="external-link"><img src="https://www.r-pkg.org/badges/version/anndata" alt="CRAN"></a></li>
 <li><a href="https://cran.r-project.org/package=anndata" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/anndata" alt="CRAN Downloads"></a></li>
-<li><a href="https://github.com/dynverse/anndata/actions" class="external-link"><img src="https://github.com/dynverse/anndata/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/dynverse/anndata/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/dynverse/anndata/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://app.codecov.io/gh/dynverse/anndata?branch=main" class="external-link"><img src="https://app.codecov.io/gh/dynverse/anndata/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#superseded" class="external-link"><img src="https://img.shields.io/badge/lifecycle-superseded-blue.svg" alt="Lifecycle: superseded"></a></li>
 </ul>
 </div>
 

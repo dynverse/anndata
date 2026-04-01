@@ -29,7 +29,7 @@ See this blog post for more details."><!-- Global site tag (gtag.js) - Google An
 
     <a class="navbar-brand me-2" href="../index.html">anndata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,6 +41,7 @@ See this blog post for more details."><!-- Global site tag (gtag.js) - Google An
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/getting_started.html">Getting started</a></li>
+    <li><a class="dropdown-item" href="../articles/migration_to_anndataR.html">Migrating from anndata to anndataR</a></li>
     <li><a class="dropdown-item" href="../articles/scanpy_demo.html">Demo with scanpy</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -56,7 +57,7 @@ See this blog post for more details."><!-- Global site tag (gtag.js) - Google An
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Create an Annotated Data Matrix</h1>
-      <small class="dont-index">Source: <a href="https://github.com/dynverse/anndata/blob/0.8.0/R/class_anndata.R" class="external-link"><code>R/class_anndata.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/dynverse/anndata/blob/main/R/class_anndata.R" class="external-link"><code>R/class_anndata.R</code></a></small>
       <div class="d-none name"><code>AnnData.Rd</code></div>
     </div>
 
@@ -193,6 +194,15 @@ and <code>xarray</code>, there is no concept of a one dimensional AnnData object
 AnnDatas always have two inherent dimensions, <code>obs</code> and <code>var</code>.
 Additionally, maintaining the dimensionality of the AnnData object allows for
 consistent handling of <code>scipy.sparse</code> matrices and <code>numpy</code> arrays.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="superseded">Superseded<a class="anchor" aria-label="anchor" href="#superseded"></a></h2>
+
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#superseded" class="external-link"><img src="figures/lifecycle-superseded.svg" alt="[Superseded]"></a>
+This function is superseded by <a href="https://anndataR.scverse.org/reference/AnnData.html" class="external-link"><code>anndataR::AnnData()</code></a>
+in the <a href="https://anndataR.scverse.org" class="external-link">anndataR</a> package.
+See <code><a href="../articles/migration_to_anndataR.html">vignette("migration_to_anndataR", package = "anndata")</a></code> for migration guidance.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

@@ -1,8 +1,6 @@
 # Write annotation to .csv files.
 
-It is not possible to recover the full AnnData from these files. Use
-[`write_h5ad()`](https://anndata.dynverse.org/reference/write_h5ad.md)
-for this.
+**\[superseded\]**
 
 ## Usage
 
@@ -28,6 +26,20 @@ write_csvs(anndata, dirname, skip_data = TRUE, sep = ",")
 - sep:
 
   Separator for the data
+
+## Details
+
+It is not possible to recover the full AnnData from these files. Use
+[`write_h5ad()`](https://anndata.dynverse.org/reference/write_h5ad.md)
+for this.
+
+## Superseded
+
+This function is superseded. Please use
+[anndataR](https://anndataR.scverse.org) for reading and working with
+`AnnData` objects in R. See
+[`vignette("migration_to_anndataR", package = "anndata")`](https://anndata.dynverse.org/articles/migration_to_anndataR.md)
+for migration guidance.
 
 ## Examples
 

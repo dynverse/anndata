@@ -1,6 +1,6 @@
 # Write a hierarchical Zarr array store.
 
-Write a hierarchical Zarr array store.
+**\[superseded\]**
 
 ## Usage
 
@@ -22,6 +22,14 @@ write_zarr(anndata, store, chunks = NULL)
 - chunks:
 
   Chunk shape.
+
+## Superseded
+
+This function is superseded. Please use
+[anndataR](https://anndataR.scverse.org) for reading and working with
+`AnnData` objects in R. See
+[`vignette("migration_to_anndataR", package = "anndata")`](https://anndata.dynverse.org/articles/migration_to_anndataR.md)
+for migration guidance.
 
 ## Examples
 

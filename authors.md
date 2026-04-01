@@ -19,15 +19,15 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/dynverse/anndata/blob/0.8.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/dynverse/anndata/blob/main/DESCRIPTION)
 
-Cannoodt R (2026). *anndata: 'anndata' for R*. R package version 0.8.0,
-<https://anndata.dynverse.org>.
+Cannoodt R (2026). *anndata: 'anndata' for R (Superseded)*. R package
+version 0.9.0, <https://anndata.dynverse.org>.
 
     @Manual{,
-      title = {anndata: 'anndata' for R},
+      title = {anndata: 'anndata' for R (Superseded)},
       author = {Robrecht Cannoodt},
       year = {2026},
-      note = {R package version 0.8.0},
+      note = {R package version 0.9.0},
       url = {https://anndata.dynverse.org},
     }
